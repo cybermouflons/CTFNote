@@ -7,18 +7,19 @@ import {
   MessageFlags,
   Snowflake,
   TextBasedChannel,
+  ThreadChannel,
   TextChannel,
 } from "discord.js";
 import config from "../../config";
 import { Task, getTaskFromId } from "../database/tasks";
 import { CTF, getCtfFromDatabase } from "../database/ctfs";
-import { getTaskChannel } from "./channels";
+import { getTaskThread } from "./channels";
 import { createPad } from "../../plugins/createTask";
 
 export const discordArchiveTaskName = "Discord archive";
 
 export async function sendMessageToChannel(
-  channel: TextChannel,
+  channel: TextChannel | ThreadChannel,
   message: string | null | undefined,
   silent = true
 ) {
@@ -58,7 +59,8 @@ export async function sendMessageToTask(
   guild: Guild,
   task: Task | bigint,
   message: string | null | undefined,
-  ctf: CTF | null = null
+  ctf: CTF | null = null,
+  silent: boolean = true
 ) {
   if (typeof task === "bigint" || typeof task === "number") {
     const t = await getTaskFromId(task);
@@ -71,10 +73,10 @@ export async function sendMessageToTask(
   }
   if (ctf == null) return null;
 
-  const taskChannel = await getTaskChannel(guild, task, ctf);
+  const taskChannel = await getTaskThread(guild, task, ctf);
   if (taskChannel == null) return null;
 
-  return sendMessageToChannel(taskChannel, message);
+  return sendMessageToChannel(taskChannel, message, silent);
 }
 
 async function getMessagesOfCategory(category: CategoryChannel) {
@@ -239,8 +241,8 @@ export async function createPadWithoutLimit(
 ) {
   const MAX_PAD_LENGTH = config.pad.documentMaxLength - 1000 - messages.length; // some margin to be safe
 
-  const pads = [];
-  let currentPadMessages = [];
+  const pads: string[] = [];
+  let currentPadMessages: string[] = [];
   let currentPadLength = 0;
   let padIndex = 1;
 

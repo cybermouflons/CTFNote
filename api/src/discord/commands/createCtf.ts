@@ -62,7 +62,6 @@ export const CreateCtf: Command = {
   name: "create",
   description: "Creates the channels and roles for a CTF",
   type: ApplicationCommandType.ChatInput,
-  defaultMemberPermissions: [PermissionFlagsBits.Administrator],
   run: async (client, interaction) => {
     return createCtfLogic(client, interaction).catch((e) => {
       console.error("Error during create ctf logic: ", e);

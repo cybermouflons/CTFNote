@@ -3,10 +3,14 @@ import {
   ChannelType,
   Collection,
   CommandInteraction,
+  ForumChannel,
   Guild,
+  GuildForumTagData,
   PermissionsBitField,
   Role,
   TextChannel,
+  ThreadChannel,
+  EmbedBuilder,
 } from "discord.js";
 import {
   CTF,
@@ -21,16 +25,12 @@ import {
   getTaskFromId,
   getUserIdsWorkingOnTask,
 } from "../database/tasks";
-import {
-  getTaskTitleFromTopic,
-  sendMessageToChannel,
-  topicDelimiter,
-} from "./messages";
+import { sendMessageToChannel } from "./messages";
 import {
   isChannelOfCtf,
-  isTaskChannelOf,
   isRoleOfCtf,
   isCategoryOfCtf,
+  isTaskThreadOf,
 } from "./comparison";
 import { safeSlugify } from "../../utils/utils";
 
@@ -53,30 +53,8 @@ export interface TaskInput {
   flag: string;
 }
 
-const newPrefix = "New - ";
-const startedPrefix = "Started - ";
-const solvedPrefix = "Solved - ";
-
-export function newCategoryName(ctf: CTF) {
-  return newPrefix + ctf.title;
-}
-
-export function startedCategoryName(ctf: CTF) {
-  return startedPrefix + ctf.title;
-}
-
-export function solvedCategoryName(ctf: CTF) {
-  return solvedPrefix + ctf.title;
-}
-
-export function getCtfNameFromCategoryName(name: string) {
-  // cut off the start up to the first prefix and return the rest of the string
-  for (const prefix of [newPrefix, startedPrefix, solvedPrefix]) {
-    if (name.search(prefix) !== -1)
-      return name.substring(name.search(prefix) + prefix.length, name.length);
-  }
-
-  return name;
+export function categoryName(ctf: CTF) {
+  return ctf.title;
 }
 
 function findAvailableCategoryName(guild: Guild, ctf: CTF | string) {
@@ -115,11 +93,13 @@ async function createCategoryChannel(
       // Set permissions for the allowed role
       {
         id: role.id,
-        allow: [PermissionsBitField.Flags.ViewChannel], // Allow view permission to the allowed role
+        allow: [
+          PermissionsBitField.Flags.ViewChannel,
+          PermissionsBitField.Flags.SendMessagesInThreads,
+        ], // Allow view permission to the allowed role
         deny: [
           PermissionsBitField.Flags.CreatePublicThreads,
           PermissionsBitField.Flags.CreatePrivateThreads,
-          PermissionsBitField.Flags.SendMessagesInThreads,
           PermissionsBitField.Flags.ManageThreads,
         ],
       },
@@ -127,19 +107,118 @@ async function createCategoryChannel(
   });
 }
 
-async function createTaskChannel(
+async function createForumChannel(
   guild: Guild,
-  task: Task,
+  name: string,
   category: CategoryChannel
 ) {
-  const taskName = typeof task === "string" ? task : task.title;
-
   return guild?.channels.create({
-    name: taskName,
-    type: ChannelType.GuildText,
+    name: name,
+    type: ChannelType.GuildForum,
     parent: category.id,
-    topic: taskName + topicDelimiter + " " + (await getTaskLink(task)),
+    availableTags: [
+      {
+        name: "new",
+        emoji: { name: "🆕", id: null },
+      },
+      {
+        name: "started",
+        emoji: { name: "⌛", id: null },
+      },
+      {
+        name: "solved",
+        emoji: { name: "✅", id: null },
+      },
+    ],
   });
+}
+
+async function createTaskChannel(
+  guild: Guild,
+  ctf: CTF,
+  task: Task,
+  type: CategoryType
+) {
+  const taskName = task.title;
+
+  const challsChannel: ForumChannel = getChallsChannelForCtf(guild, ctf);
+
+  // find challs form channel
+  let target_tag: null | string = null;
+  if (type === CategoryType.NEW) {
+    target_tag = "new";
+  } else if (type === CategoryType.STARTED) {
+    target_tag = "started";
+  } else if (type === CategoryType.SOLVED) {
+    target_tag = "solved";
+  }
+
+  const tag_id = challsChannel.availableTags.find(
+    (tag) => tag.name === target_tag
+  )?.id;
+  const tagsToApply: string[] = [];
+  if (tag_id) {
+    tagsToApply.push(tag_id);
+  }
+
+  const taskEmbed = new EmbedBuilder()
+    .setTitle(taskName)
+    .setDescription(task.description)
+    .setURL(await getTaskLink(task, ctf))
+    .addFields({ name: "Files/instances", value: task.files });
+
+  console.log("Applying tags", tagsToApply);
+  const thread = await challsChannel.threads.create({
+    name: taskName,
+    message: {
+      embeds: [taskEmbed],
+    },
+    appliedTags: tagsToApply,
+  });
+  await (await thread?.fetchStarterMessage())?.pin();
+  return thread;
+}
+
+export async function applyTaskTags(task: Task, tags: string[], guild: Guild) {
+  const ctf = await getCtfFromDatabase(task.ctf_id);
+  if (ctf == null) return;
+  const challsChannel: ForumChannel = getChallsChannelForCtf(guild, ctf);
+  // Create new tags if they don't exist
+  if (challsChannel === null || challsChannel === undefined) return;
+  const newTags: GuildForumTagData[] = challsChannel.availableTags;
+  tags?.forEach(async (tag) => {
+    if (!challsChannel.availableTags.find((t) => t.name === tag)) {
+      newTags.push({ name: tag });
+    }
+  });
+  console.log("Setting available tags to", newTags);
+  await challsChannel.setAvailableTags(newTags);
+
+  const tagsToApply: string[] = [];
+  console.log("Task has tags", task.tags);
+  tags?.forEach(async (tag) => {
+    const currTag = challsChannel.availableTags.find((t) => t.name === tag);
+    if (currTag) {
+      tagsToApply.push(currTag.id);
+    }
+  });
+
+  const statusTags = [
+    await getTagByName("new", challsChannel),
+    await getTagByName("started", challsChannel),
+    await getTagByName("solved", challsChannel),
+  ];
+
+  // find task thread
+  const taskThread = await getTaskThread(guild, task, ctf);
+  taskThread?.appliedTags.forEach(async (tag) => {
+    if (statusTags.includes(tag)) {
+      tagsToApply.push(tag);
+    }
+  });
+
+  console.log("Applying tags", tagsToApply);
+  return await taskThread?.setAppliedTags(tagsToApply);
 }
 
 export async function createChannelsAndRolesForCtf(guild: Guild, ctf: CTF) {
@@ -148,32 +227,21 @@ export async function createChannelsAndRolesForCtf(guild: Guild, ctf: CTF) {
     mentionable: true,
   });
 
-  const newCategory = await createCategoryChannel(
+  const ctfCategory = await createCategoryChannel(
     guild,
-    newCategoryName(ctf),
+    categoryName(ctf),
     allowedRole
   );
-  if (newCategory == null) return;
+  if (ctfCategory == null) return;
 
-  const startedCategory = await createCategoryChannel(
-    guild,
-    startedCategoryName(ctf),
-    allowedRole
-  );
-  if (startedCategory == null) return;
-
-  const solvedCategory = await createCategoryChannel(
-    guild,
-    solvedCategoryName(ctf),
-    allowedRole
-  );
-  if (solvedCategory == null) return;
+  const ctfChalls = await createForumChannel(guild, "challenges", ctfCategory);
+  if (ctfChalls == null) return;
 
   // create challenges-talk channel
   await guild?.channels.create({
     name: `challenges-talk`,
     type: ChannelType.GuildText,
-    parent: startedCategory?.id,
+    parent: ctfCategory?.id,
   });
 
   // create voice channels for the ctf from the .env file
@@ -185,7 +253,7 @@ export async function createChannelsAndRolesForCtf(guild: Guild, ctf: CTF) {
         .create({
           name: `voice-${i}`,
           type: ChannelType.GuildVoice,
-          parent: startedCategory.id,
+          parent: ctfCategory.id,
         })
         .catch((err) => {
           console.error("Failed to create one of the voice channels.", err);
@@ -212,19 +280,9 @@ export function getChannelCategoriesForCtf(
   ) as Collection<string, CategoryChannel>;
 }
 
-function getNewCategoriesForCtf(guild: Guild, ctf: CTF) {
+function getCategoryForCtf(guild: Guild, ctf: CTF) {
   const categories = getChannelCategoriesForCtf(guild, ctf);
-  return categories.filter((c) => isCategoryOfCtf(c, newCategoryName(ctf)));
-}
-
-function getStartedCategoriesForCtf(guild: Guild, ctf: CTF) {
-  const categories = getChannelCategoriesForCtf(guild, ctf);
-  return categories.filter((c) => isCategoryOfCtf(c, startedCategoryName(ctf)));
-}
-
-function getSolvedCategoriesForCtf(guild: Guild, ctf: CTF) {
-  const categories = getChannelCategoriesForCtf(guild, ctf);
-  return categories.filter((c) => isCategoryOfCtf(c, solvedCategoryName(ctf)));
+  return categories.filter((c) => isCategoryOfCtf(c, categoryName(ctf)));
 }
 
 export function getTalkChannelForCtf(guild: Guild, ctf: CTF) {
@@ -232,60 +290,17 @@ export function getTalkChannelForCtf(guild: Guild, ctf: CTF) {
     (channel) =>
       channel.type === ChannelType.GuildText &&
       channel.name === `challenges-talk` &&
-      isChannelOfCtf(channel, startedCategoryName(ctf))
+      isChannelOfCtf(channel, ctf)
   ) as TextChannel;
 }
 
-export async function getNotFullCategoryForCtf(
-  guild: Guild,
-  ctf: CTF,
-  type: CategoryType
-) {
-  let categories: Collection<string, CategoryChannel>;
-
-  if (type === CategoryType.NEW) {
-    categories = getNewCategoriesForCtf(guild, ctf);
-  } else if (type === CategoryType.STARTED) {
-    categories = getStartedCategoriesForCtf(guild, ctf);
-  } else if (type === CategoryType.SOLVED) {
-    categories = getSolvedCategoriesForCtf(guild, ctf);
-  } else {
-    return null;
-  }
-
-  if (categories.size === 0) return null;
-
-  categories = categories.sorted(
-    (a, b) => a.createdTimestamp - b.createdTimestamp
-  );
-
-  let category: CategoryChannel | null = null;
-  categories.forEach((c) => {
-    if (
-      c.children.cache.size < config.discord.maxChannelsPerCategory &&
-      !category
-    ) {
-      category = c;
-    }
-  });
-
-  if (category == null) {
-    let categoryTitle = "";
-    if (type === CategoryType.NEW) {
-      categoryTitle = newCategoryName(ctf);
-    } else if (type === CategoryType.STARTED) {
-      categoryTitle = startedCategoryName(ctf);
-    } else if (type === CategoryType.SOLVED) {
-      categoryTitle = solvedCategoryName(ctf);
-    }
-    category = await createCategoryChannel(guild, categoryTitle);
-
-    const position = categories
-      .mapValues((c) => c.position || 0)
-      .reduce((a, b) => Math.max(a, b), 0);
-    category?.setPosition(position + 1);
-  }
-  return category;
+function getChallsChannelForCtf(guild: Guild, ctf: CTF) {
+  return guild.channels.cache.find(
+    (channel) =>
+      channel.type === ChannelType.GuildForum &&
+      channel.name === `challenges` &&
+      isChannelOfCtf(channel, ctf)
+  ) as ForumChannel;
 }
 
 export async function createChannelForTaskInCtf(
@@ -300,17 +315,7 @@ export async function createChannelForTaskInCtf(
     if (ctf == null) return;
   }
 
-  let category: CategoryChannel | null;
-  if (task.flag != "") {
-    category = await getNotFullCategoryForCtf(guild, ctf, CategoryType.SOLVED);
-  } else if ((await getUserIdsWorkingOnTask(task)).length > 0) {
-    category = await getNotFullCategoryForCtf(guild, ctf, CategoryType.STARTED);
-  } else {
-    category = await getNotFullCategoryForCtf(guild, ctf, CategoryType.NEW);
-  }
-  if (category == null) return;
-
-  return handleCreateAndNotify(guild, task, ctf, category, announce);
+  return handleCreateAndNotify(guild, task, ctf, movingType, announce);
 }
 
 async function getTaskLink(task: Task, ctf: CTF | null = null) {
@@ -328,41 +333,15 @@ async function getTaskLink(task: Task, ctf: CTF | null = null) {
   )}/task/${task.id}`;
 }
 
-async function pinTaskLinkToChannel(
-  channel: TextChannel,
-  task: Task,
-  ctf: CTF
-) {
-  const url = await getTaskLink(task, ctf);
-  if (url == "") return;
-
-  const message = await sendMessageToChannel(
-    channel,
-    `CTFNote task: ${url}`,
-    true
-  );
-  if (message == null) return;
-}
-
 async function handleCreateAndNotify(
   guild: Guild,
   task: Task,
   ctf: CTF,
-  category: CategoryChannel,
+  type: CategoryType,
   announce = false
 ) {
-  const taskChannel = await createTaskChannel(guild, task, category);
+  const taskChannel = await createTaskChannel(guild, ctf, task, type);
   if (taskChannel == null) return;
-
-  await pinTaskLinkToChannel(taskChannel, task, ctf);
-  if (task.description != "") {
-    await sendMessageToChannel(taskChannel, "Description:");
-    await sendMessageToChannel(taskChannel, task.description);
-  }
-  if (task.files != "") {
-    await sendMessageToChannel(taskChannel, "Files / Instances:");
-    await sendMessageToChannel(taskChannel, task.files);
-  }
 
   if (announce)
     await sendMessageToChannel(
@@ -388,7 +367,7 @@ export async function createChannelForNewTask(
     movingType = CategoryType.SOLVED;
   }
 
-  const category = await getNotFullCategoryForCtf(guild, ctf, movingType);
+  const category = await getCategoryForCtf(guild, ctf);
   if (category == null) {
     console.error(
       "Could not find a non-full category for new task",
@@ -398,49 +377,53 @@ export async function createChannelForNewTask(
     return;
   }
 
-  return handleCreateAndNotify(guild, newTask, ctf, category, announce);
+  return handleCreateAndNotify(guild, newTask, ctf, movingType, announce);
 }
 
-export async function getTaskChannel(
-  guild: Guild,
-  task: Task,
-  ctf: CTF | null
-) {
+export async function getTaskThread(guild: Guild, task: Task, ctf: CTF | null) {
   if (ctf == null) {
     ctf = await getCtfFromDatabase(task.ctf_id);
     if (ctf == null) return null;
   }
 
-  // to get arround TypeScript's type system
+  // to get around TypeScript's type system
   const c = ctf;
 
-  const taskChannel = guild.channels.cache.find((channel) => {
-    if (isTaskChannelOf(channel, task) && isChannelOfCtf(channel, c)) {
-      return channel;
+  const challsChannel = getChallsChannelForCtf(guild, c);
+  if (!challsChannel) return null;
+
+  const taskChannel = challsChannel.threads.cache.find((thread) => {
+    if (isTaskThreadOf(thread, task)) {
+      return thread;
     }
   });
 
   if (taskChannel == null) return null;
-  return taskChannel as TextChannel;
+  return taskChannel as ThreadChannel;
+}
+
+export async function getTagByName(name: string, channel: ForumChannel) {
+  return channel.availableTags.find((tag) => tag.name === name)?.id;
 }
 
 export async function getCurrentTaskChannelFromDiscord(
   interaction: CommandInteraction
 ) {
   if (interaction.channel == null) return null;
+  console.log(interaction.channel);
 
-  if (interaction.channel.type !== ChannelType.GuildText) return null;
+  if (!interaction.channel.isThread()) return null;
 
-  const category = interaction.channel.parent;
+  const thread = interaction.channel;
+
+  const category = thread.parent?.parent;
+  console.log(category);
   if (category == null) return null;
 
-  const ctf = await getCtfFromDatabase(
-    getCtfNameFromCategoryName(category.name)
-  );
+  const ctf = await getCtfFromDatabase(category.name);
   if (ctf == null) return null;
-  if (interaction.channel.topic == null) return null;
 
-  const name = getTaskTitleFromTopic(interaction.channel.topic);
+  const name = thread.name;
   if (name == null) return null;
 
   const task = await getTaskByCtfIdAndNameFromDatabase(ctf.id, name);
@@ -464,55 +447,42 @@ export async function moveChannel(
     ctf = await getCtfFromDatabase(task.ctf_id);
     if (ctf == null) return;
   }
-  const taskChannel = await getTaskChannel(guild, task, ctf);
-  if (taskChannel == null) {
+  const taskThread = await getTaskThread(guild, task, ctf);
+  if (taskThread == null) {
     console.error("Task channel not found", task, ctf, operation);
     return;
   }
 
-  // if channel is not in 'new' category, skip
-  if (
-    operation === ChannelMovingEvent.START &&
-    !isChannelOfCtf(taskChannel, newCategoryName(ctf))
-  )
-    return;
-
-  // if channel is already in 'solved' category, skip
-  if (
-    operation === ChannelMovingEvent.SOLVED &&
-    isChannelOfCtf(taskChannel, solvedCategoryName(ctf))
-  )
-    return;
-
-  // if channel is not in 'solved' category, skip
-  if (
-    operation === ChannelMovingEvent.UNSOLVED &&
-    !isChannelOfCtf(taskChannel, solvedCategoryName(ctf))
-  )
-    return;
-
-  let targetParent: CategoryChannel | null = null;
+  let newTag: string | null = null;
 
   if (
     operation === ChannelMovingEvent.START ||
     operation === ChannelMovingEvent.UNSOLVED
   ) {
-    targetParent = await getNotFullCategoryForCtf(
-      guild,
-      ctf,
-      CategoryType.STARTED
-    );
+    newTag = "started";
   } else if (operation === ChannelMovingEvent.SOLVED) {
-    targetParent = await getNotFullCategoryForCtf(
-      guild,
-      ctf,
-      CategoryType.SOLVED
-    );
+    newTag = "solved";
   }
 
-  if (targetParent == null) return;
+  if (newTag == null) return;
 
-  await taskChannel.setParent(targetParent);
+  let prevTags = taskThread.appliedTags;
+  const stateTags = [
+    await getTagByName("new", taskThread.parent as ForumChannel),
+    await getTagByName("started", taskThread.parent as ForumChannel),
+    await getTagByName("solved", taskThread.parent as ForumChannel),
+  ];
+  console.log("moving task, previous tags", prevTags);
+  console.log("state tags", stateTags);
+  prevTags = prevTags.filter((tag) => !stateTags.includes(tag));
+  console.log("prevTags after filtering", prevTags);
+
+  const tagId = await getTagByName(newTag, taskThread.parent as ForumChannel);
+  console.log("Changing applied tags of task", task.title, "to", tagId);
+  if (tagId) {
+    prevTags.push(tagId);
+    taskThread.setAppliedTags(prevTags);
+  }
 }
 /*
  * Returns the CTF names of all categories that are currently active in the Discord server.

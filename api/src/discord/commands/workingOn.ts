@@ -44,10 +44,13 @@ async function workingOnLogic(
     const result = await userStartsWorkingOnTask(userId, task.id);
     if (result) {
       await sendStartWorkingOnMessage(guild, userId, task);
+      await interaction.editReply({
+        content: `Δώστου πίεση!!`,
+      });
       return;
     } else {
       await interaction.editReply({
-        content: `You are already working on the task ${task.title}`,
+        content: `Μα ίντα που μου λαλείς ρε αφού υποτίθεται μάσιεσε δαπάνω...`,
       });
       return;
     }
@@ -64,7 +67,7 @@ async function workingOnLogic(
       return;
     } else {
       await interaction.editReply({
-        content: `You are not working on the task ${task.title}`,
+        content: `Ακόμα εν άρκεψες θέλεις να παραιτήσεις μάνι μάνι`,
       });
       return;
     }

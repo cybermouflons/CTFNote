@@ -19,7 +19,7 @@ function buildTask(row: any): Task {
     title: row.title as string,
     description: row.description as string,
     files: row.files as string,
-    tags: undefined,
+    tags: [] as string[],
     flag: row.flag as string,
   };
 }

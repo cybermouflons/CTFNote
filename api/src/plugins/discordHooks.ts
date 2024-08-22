@@ -24,9 +24,10 @@ import {
 } from "../discord/utils/messages";
 import {
   ChannelMovingEvent,
+  applyTaskTags,
   createChannelForNewTask,
   getActiveCtfCategories,
-  getTaskChannel,
+  getTaskThread,
   moveChannel,
   getTalkChannelForCtf,
 } from "../discord/utils/channels";
@@ -80,9 +81,11 @@ export async function handleTaskSolved(
   const ctf = await getCtfFromDatabase(task.ctf_id);
   if (ctf == null) return;
 
+  const taskThread = await getTaskThread(guild, task, ctf);
+
   return sendMessageToChannel(
     getTalkChannelForCtf(guild, ctf),
-    `${task.title} is solved by ${usernamesString}!`
+    `${taskThread} is solved by ${usernamesString}!`
   );
 }
 
@@ -98,6 +101,7 @@ const discordMutationHook = (_build: Build) => (fieldContext: Context<any>) => {
 
   if (
     fieldContext.scope.fieldName !== "updateTask" &&
+    fieldContext.scope.fieldName !== "addTagsForTask" &&
     fieldContext.scope.fieldName !== "createTask" &&
     fieldContext.scope.fieldName !== "deleteTask" &&
     fieldContext.scope.fieldName !== "startWorkingOn" &&
@@ -139,13 +143,13 @@ const discordMutationHook = (_build: Build) => (fieldContext: Context<any>) => {
       if (task == null) return input;
 
       // we have to await this since big imports will cause race conditions with the Discord API
-      await createChannelForNewTask(guild, task, true);
+      await createChannelForNewTask(guild, task, false);
     }
     if (fieldContext.scope.fieldName === "deleteTask") {
       const task = await getTaskFromId(args.input.id);
       if (task == null) return input;
 
-      const channel = await getTaskChannel(guild, task, null);
+      const channel = await getTaskThread(guild, task, null);
       if (channel == null) return input;
 
       channel
@@ -186,15 +190,10 @@ const discordMutationHook = (_build: Build) => (fieldContext: Context<any>) => {
         args.input.patch.title != null &&
         args.input.patch.title != task.title
       ) {
-        const channel = await getTaskChannel(guild, task, null);
+        const channel = await getTaskThread(guild, task, null);
         if (channel == null) return input;
 
-        channel
-          .edit({
-            name: title,
-            topic: channel.topic?.replace(task.title, title),
-          })
-          .catch((err) => console.error("Failed to rename channel.", err));
+        channel.setName(channel.name.replace(task.title, title));
       }
 
       // handle task description change
@@ -207,6 +206,15 @@ const discordMutationHook = (_build: Build) => (fieldContext: Context<any>) => {
           task,
           `Description changed:\n${args.input.patch.description}`
         );
+      }
+    }
+
+    if (fieldContext.scope.fieldName === "addTagsForTask") {
+      console.log("GOT ADD TAGS", args.input);
+      const task = await getTaskFromId(args.input.taskid);
+      console.log("GOT TASK", task);
+      if (task) {
+        applyTaskTags(task, args.input.tags, guild);
       }
     }
 
@@ -244,7 +252,7 @@ const discordMutationHook = (_build: Build) => (fieldContext: Context<any>) => {
       });
     }
     if (fieldContext.scope.fieldName === "createInvitation") {
-      handeInvitation(
+      handleInvitation(
         args.input.invitation.ctfId,
         args.input.invitation.profileId,
         "add"
@@ -254,7 +262,7 @@ const discordMutationHook = (_build: Build) => (fieldContext: Context<any>) => {
     }
 
     if (fieldContext.scope.fieldName === "deleteInvitation") {
-      handeInvitation(args.input.ctfId, args.input.profileId, "remove").catch(
+      handleInvitation(args.input.ctfId, args.input.profileId, "remove").catch(
         (err) => {
           console.error("Failed to delete invitation.", err);
         }
@@ -392,9 +400,13 @@ export async function sendStartWorkingOnMessage(
   const ctf = await getCtfFromDatabase(task.ctf_id);
   if (ctf == null) return;
 
-  return sendMessageToChannel(
-    getTalkChannelForCtf(guild, ctf),
-    `'Ατε ${await convertToUsernameFormat(userId)} μου! Έβαλα σε τζιαι στη λίστα τζείνων που μάχουνται πάνω στο ${task.title}!`
+  const taskThread = await getTaskThread(guild, task, ctf);
+
+  const talkChannel = getTalkChannelForCtf(guild, ctf);
+  console.log("Found talk channel", talkChannel);
+  await sendMessageToChannel(
+    talkChannel,
+    `'Ατε ${await convertToUsernameFormat(userId)} μου! Έβαλα σε τζιαι στη λίστα τζείνων που μάχουνται πάνω στο ${taskThread}!`
   );
 }
 
@@ -437,7 +449,8 @@ export async function handleDeleteCtf(ctfId: string | bigint, guild: Guild) {
 
     guild?.channels.cache.map(async (channel) => {
       if (
-        channel.type === ChannelType.GuildText &&
+        (channel.type === ChannelType.GuildText ||
+          channel.type === ChannelType.GuildForum) &&
         channel.parentId === categoryChannel.id
       ) {
         await channel.delete();
@@ -459,7 +472,7 @@ async function handleResetDiscordId(userId: bigint) {
   await changeDiscordUserRoleForCTF(userId, allCtfs, "remove");
 }
 
-async function handeInvitation(
+async function handleInvitation(
   ctfId: bigint,
   profileId: bigint,
   operation: "add" | "remove"

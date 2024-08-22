@@ -2,6 +2,7 @@ import {
   CategoryChannel,
   ChannelType,
   GuildBasedChannel,
+  ThreadChannel,
   Role,
 } from "discord.js";
 import { CTF } from "../database/ctfs";
@@ -42,6 +43,12 @@ export function isTaskChannelOf(
   if (channel.topic == null) return false;
 
   return getTaskTitleFromTopic(channel.topic) == taskTitle;
+}
+
+export function isTaskThreadOf(thread: ThreadChannel, task: Task | string) {
+  const taskTitle = typeof task === "string" ? task : task.title;
+  if (thread.name == null) return false;
+  return thread.name == taskTitle;
 }
 
 export function isRoleOfCtf(role: Role | string, ctf: CTF | string) {
