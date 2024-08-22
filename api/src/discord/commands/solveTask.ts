@@ -23,7 +23,15 @@ async function solveTaskLogic(client: Client, interaction: CommandInteraction) {
   const task = r.task;
 
   const flag = interaction.options.get("flag", true).value as string;
-  if (flag == null || flag == "") return accessDenied(interaction);
+  const solversArray: string[] = [interaction.user.id];
+  const solversOption = interaction.options.get("solvers", false);
+  if (solversOption && typeof solversOption.value === "string") {
+    solversArray.push(
+      ...solversOption.value.split(" ").map((s: string) => s.trim())
+    );
+  }
+
+  if (!flag) return accessDenied(interaction);
 
   const result = await setFlagForChallengeId(task.id, flag);
   if (result) {
@@ -33,6 +41,7 @@ async function solveTaskLogic(client: Client, interaction: CommandInteraction) {
           Math.floor(Math.random() * motivationalSentences.length)
         ],
     });
+
     let userId: bigint | null | string = await getUserByDiscordId(
       interaction.user.id
     );
@@ -41,7 +50,7 @@ async function solveTaskLogic(client: Client, interaction: CommandInteraction) {
     const guild = interaction.guild;
     if (guild == null) return;
 
-    await handleTaskSolved(guild, task.id, userId).catch((e) => {
+    await handleTaskSolved(guild, task.id, solversArray).catch((e) => {
       console.error("Error while handling task solved: ", e);
     });
     return;
@@ -63,6 +72,12 @@ export const SolveTask: Command = {
       description: "The flag to submit to CTFNote",
       type: ApplicationCommandOptionType.String,
       minLength: 1,
+    },
+    {
+      name: "solvers",
+      required: false,
+      description: "Users assigned as solvers",
+      type: ApplicationCommandOptionType.String,
     },
   ],
   run: async (client, interaction) => {

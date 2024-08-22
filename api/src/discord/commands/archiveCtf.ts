@@ -46,6 +46,7 @@ export async function handleArchiveInteraction(
     `${ctf.title} Discord archive`,
     `Discord archive of ${ctf.title}`,
     "",
+    "",
     padUrl,
     ctf.id
   );

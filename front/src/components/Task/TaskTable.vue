@@ -29,6 +29,13 @@
           <div v-if="props.row.solved" class="blur">{{ props.row.flag }}</div>
           <div v-else>{{ props.row.description || '…' }}</div>
         </q-td>
+
+        <q-td key="files" :props="props">
+          <div v-if="!props.row.solved" class="q-py-xs">
+            {{ props.row.files || '…' }}
+          </div>
+        </q-td>
+
         <q-td key="players" :props="props">
           <task-player-list :task="props.row" />
         </q-td>
@@ -88,6 +95,7 @@ export default defineComponent({
       col('solved', { sortable: true }),
       col('title', { sortable: true }),
       col('description', { label: 'description / flag' }),
+      col('files', { label: 'files / instances' }),
       col('players', { align: 'center' }),
       col('open', {
         label: '',

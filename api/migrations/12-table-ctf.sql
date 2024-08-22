@@ -4,6 +4,8 @@ CREATE TABLE ctfnote.ctf (
   CHECK ("title" <> ''),
   "weight" float NOT NULL default 0,
   "ctf_url" text,
+  "ctf_platform" text NOT NULL,
+  CHECK ("ctf_platform" <> ''),
   "logo_url" text,
   "ctftime_url" text,
   "description" text NOT NULL DEFAULT '',
@@ -20,9 +22,9 @@ CREATE INDEX ON ctfnote.ctf (start_time);
 
 GRANT SELECT ON TABLE ctfnote.ctf TO user_guest;
 
-GRANT INSERT (title, weight, ctf_url, logo_url, ctftime_url, description, start_time, end_time) ON ctfnote.ctf TO user_manager;
+GRANT INSERT (title, weight, ctf_url, ctf_platform, logo_url, ctftime_url, description, start_time, end_time) ON ctfnote.ctf TO user_manager;
 
-GRANT UPDATE (title, weight, ctf_url, logo_url, ctftime_url, description, start_time, end_time) ON ctfnote.ctf TO user_manager;
+GRANT UPDATE (title, weight, ctf_url, ctf_platform, logo_url, ctftime_url, description, start_time, end_time) ON ctfnote.ctf TO user_manager;
 
 GRANT DELETE ON ctfnote.ctf TO user_manager;
 
@@ -37,8 +39,8 @@ CREATE FUNCTION ctfnote_private.create_ctf_secrets ()
 DECLARE
   secrets_id int;
 BEGIN
-  INSERT INTO ctfnote.ctf_secrets (credentials)
-    VALUES ('')
+  INSERT INTO ctfnote.ctf_secrets (username, password, scoreboard_name)
+    VALUES ('', '', '')
   RETURNING
     id INTO secrets_id;
   NEW.secrets_id := secrets_id;
@@ -54,4 +56,3 @@ CREATE TRIGGER on_create_ctf
   BEFORE INSERT ON ctfnote.ctf
   FOR EACH ROW
   EXECUTE PROCEDURE ctfnote_private.create_ctf_secrets ();
-

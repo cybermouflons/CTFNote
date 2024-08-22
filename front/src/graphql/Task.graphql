@@ -1,13 +1,13 @@
 #import "./Profile.graphql"
 
+# Fragments
+
 fragment WorkingOnFragment on WorkOnTask {
   nodeId
   profileId
   active
   taskId
 }
-
-# Fragments
 
 fragment TaskFragment on Task {
   nodeId
@@ -16,6 +16,7 @@ fragment TaskFragment on Task {
   ctfId
   padUrl
   description
+  files
   flag
   solved
   assignedTags {
@@ -51,12 +52,18 @@ mutation updateTask(
   $id: Int!
   $title: String
   $description: String
+  $files: String
   $flag: String
 ) {
   updateTask(
     input: {
       id: $id
-      patch: { title: $title, description: $description, flag: $flag }
+      patch: {
+        title: $title
+        description: $description
+        files: $files
+        flag: $flag
+      }
     }
   ) {
     task {
@@ -70,6 +77,7 @@ mutation createTaskForCtfId(
   $title: String!
   $tags: [String]
   $description: String
+  $files: String
   $flag: String
 ) {
   createTask(
@@ -78,6 +86,7 @@ mutation createTaskForCtfId(
       title: $title
       tags: $tags
       description: $description
+      files: $files
       flag: $flag
     }
   ) {

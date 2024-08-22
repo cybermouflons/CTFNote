@@ -33,6 +33,21 @@
                   </template>
                 </q-input>
               </div>
+              <div class="col">
+                <q-select
+                  v-model.number="form.ctfPlatform"
+                  required
+                  label="CTF Platform"
+                  options-dense
+                  :options="parserOptions"
+                  filled
+                  dense
+                >
+                  <template #prepend>
+                    <q-icon name="platform" />
+                  </template>
+                </q-select>
+              </div>
             </div>
 
             <div class="row q-col-gutter-sm">
@@ -136,9 +151,22 @@
 import { useDialogPluginComponent } from 'quasar';
 import { Ctf } from 'src/ctfnote/models';
 import ctfnote from 'src/ctfnote';
-import { defineComponent, reactive } from 'vue';
+import parsers from 'src/ctfnote/parsers';
+import { defineComponent, reactive, ref } from 'vue';
 import DatetimeInput from '../Utils/DatetimeInput.vue';
 import LogoField from '../Utils/LogoField.vue';
+
+interface Form {
+  title: string;
+  description: string;
+  startTime: Date;
+  endTime: Date;
+  weight: number;
+  ctfUrl: string | null;
+  ctfPlatform: string;
+  ctftimeUrl: string | null;
+  logoUrl: string | null;
+}
 
 export default defineComponent({
   components: { DatetimeInput, LogoField },
@@ -147,31 +175,32 @@ export default defineComponent({
   },
   emits: useDialogPluginComponent.emits,
   setup(props) {
+    const parserOptions = parsers.map((p) => p.name);
     const now = new Date();
-    const form = reactive(
-      Object.assign(
-        {
-          title: '',
-          description: '',
-          startTime: now,
-          endTime: new Date(now.getTime() + 1000 * 60 * 60 * 24),
-          weight: 0,
-          ctfUrl: null,
-          ctftimeUrl: null,
-          logoUrl: null,
-        },
-        props.ctf
-      )
-    );
+    const form = reactive<Form>({
+      title: '',
+      description: '',
+      startTime: now,
+      endTime: new Date(now.getTime() + 1000 * 60 * 60 * 24),
+      weight: 0,
+      ctfUrl: null,
+      ctfPlatform: 'Raw / Other',
+      ctftimeUrl: null,
+      logoUrl: null,
+      ...(props.ctf as Form | null), // Ensure props.ctf matches Form interface or is null
+    });
+
     const { dialogRef, onDialogHide, onDialogOK, onDialogCancel } =
       useDialogPluginComponent();
 
     return {
+      currentParser: ref(parserOptions[0]),
       resolveAndNotify: ctfnote.ui.useNotify().resolveAndNotify,
       updateCtf: ctfnote.ctfs.useUpdateCtf(),
       createCtf: ctfnote.ctfs.useCreateCtf(),
       dialogRef,
       form,
+      parserOptions,
       onDialogHide,
       onDialogOK,
       onCancelClick: onDialogCancel,
@@ -184,8 +213,12 @@ export default defineComponent({
     title() {
       return this.ctf ? `Edit ${this.ctf.title}` : 'Create CTF';
     },
-    checkValidDateRange() {
-      return this.form.endTime && this.form.endTime >= this.form.startTime;
+    checkValidDateRange(): boolean {
+      return (
+        this.form.endTime instanceof Date &&
+        this.form.startTime instanceof Date &&
+        this.form.endTime >= this.form.startTime
+      );
     },
   },
   methods: {

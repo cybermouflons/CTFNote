@@ -6,6 +6,7 @@ import justCTFParser from './justctf';
 import AngstromParser from './angstrom';
 import CINIParser from './cini';
 import HitconParser from './hitcon';
+import RCTFParser from './rctf';
 
 export type ParsedTask = {
   title: string;
@@ -24,6 +25,7 @@ export type Parser = {
 export default [
   RawParser,
   CTFDParser,
+  RCTFParser,
   HTBParser,
   PicoParser,
   justCTFParser,

@@ -3,6 +3,7 @@ CREATE TABLE ctfnote.task (
   "title" text NOT NULL,
   CHECK ("title" <> ''),
   "description" text NOT NULL DEFAULT '',
+  "files" text NOT NULL DEFAULT '',
   "category" text NOT NULL DEFAULT '???',
   "flag" text NOT NULL DEFAULT '',
   "pad_url" text NOT NULL,
@@ -15,7 +16,7 @@ CREATE INDEX ON ctfnote.task (ctf_id);
 
 GRANT SELECT ON TABLE ctfnote.task TO user_guest;
 
-GRANT UPDATE (title, description, category, flag) ON TABLE ctfnote.task TO user_guest;
+GRANT UPDATE (title, description, files, category, flag) ON TABLE ctfnote.task TO user_guest;
 
 GRANT DELETE ON TABLE ctfnote.task TO user_guest;
 
@@ -36,4 +37,3 @@ LANGUAGE SQL
 STABLE;
 
 GRANT EXECUTE ON FUNCTION ctfnote.task_solved (ctfnote.task) TO user_guest;
-

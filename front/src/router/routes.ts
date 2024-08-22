@@ -76,6 +76,12 @@ const ctfRoute: RouteRecordRaw = {
           component: () => import('components/Task/TaskList.vue'),
         },
         {
+          path: 'scoreboard',
+          props: (route) => ({ tasks: route.meta.sdoreboard }),
+          name: 'ctf-scoreboard',
+          component: () => import('components/Scoreboard/ScoreboardTable.vue'),
+        },
+        {
           path: 'guests',
           name: 'ctf-guests',
           component: () => import('components/CTF/Guests.vue'),

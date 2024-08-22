@@ -2,7 +2,7 @@ import { ParsedTask, Parser } from '.';
 import { parseJson, parseJsonStrict } from '../utils';
 
 const justCTFParser: Parser = {
-  name: 'justCTF parser',
+  name: 'justCTF',
   hint: 'paste /api/v1/tasks',
 
   parse(s: string): ParsedTask[] {

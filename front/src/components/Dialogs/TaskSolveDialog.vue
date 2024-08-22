@@ -61,6 +61,7 @@ export default defineComponent({
 
     return {
       dialogRef,
+      // team: ctfnote.profiles.injectTeam(),
       form,
       onDialogHide,
       onDialogOK,
@@ -68,6 +69,28 @@ export default defineComponent({
       notifySuccess: ctfnote.ui.useNotify().notifySuccess,
     };
   },
+  // computed: {
+  //   playersWithActive() {
+  //     return (
+  //       this.players
+  //         .map((p) => ({
+  //           player: p,
+  //           active:
+  //             this.task.workOnTasks.filter(
+  //               (w) => w.profileId == p.id && w.active,
+  //             ).length > 0,
+  //         }))
+  //         // sort by active status (active first)
+  //         .sort((a) => (a.active ? -1 : 1))
+  //     );
+  //   },
+  //   players() {
+  //     return this.team.filter(
+  //       (p) =>
+  //         this.task.workOnTasks.filter((id) => id.profileId == p.id).length > 0,
+  //     );
+  //   },
+  // },
   methods: {
     async submit() {
       this.onDialogOK();

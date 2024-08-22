@@ -2,7 +2,7 @@ import { ParsedTask, Parser } from '.';
 import { parseJson, parseJsonStrict } from '../utils';
 
 const PicoParser: Parser = {
-  name: 'picoCTF parser',
+  name: 'picoCTF',
   hint: 'paste /api/challenges/?page_size=500&page=1&event=XX with XX being the event id of the running ctf',
 
   parse(s: string): ParsedTask[] {

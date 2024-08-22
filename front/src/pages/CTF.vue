@@ -9,6 +9,7 @@
     >
       <q-route-tab :to="ctf.infoLink" label="Info" />
       <q-route-tab :to="ctf.tasksLink" label="Tasks" :disable="!ctf.granted" />
+      <!-- <q-route-tab :to="ctf.scoreboardLink" label="Scoreboard" /> -->
       <q-route-tab v-show="me.isMember" :to="ctf.guestsLink" label="Guests" />
     </q-tabs>
 

@@ -45,6 +45,14 @@
             type="textarea"
           />
 
+          <q-input
+            v-model="form.files"
+            filled
+            dense
+            label="Files / Instances"
+            type="textarea"
+          />
+
           <q-input v-model="form.flag" filled dense label="Flag">
             <template #prepend>
               <q-icon name="flag" />
@@ -80,6 +88,7 @@ export default defineComponent({
       title: props.task?.title ?? '',
       tags: props.task?.assignedTags.map((t) => t.tag) ?? [],
       description: props.task?.description ?? '',
+      files: props.task?.files ?? '',
       flag: props.task?.flag ?? '',
     });
 
@@ -154,6 +163,9 @@ export default defineComponent({
         }
         if (this.form.description !== this.task.description) {
           patch.description = this.form.description;
+        }
+        if (this.form.files !== this.task.files) {
+          patch.files = this.form.files;
         }
         if (this.form.flag !== this.task.flag) {
           patch.flag = this.form.flag;

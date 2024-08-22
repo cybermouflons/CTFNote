@@ -5,11 +5,12 @@ CREATE FUNCTION migration.migrate_task("id" int)
 DECLARE
 	ret ctfnote.ctf.id%TYPE;
 BEGIN
-	INSERT INTO ctfnote.task(title, description, category, flag, pad_url,
+	INSERT INTO ctfnote.task(title, description, files, category, flag, pad_url,
 		ctf_id)
 	SELECT
 		migration.task.title                     as title,
 		COALESCE(migration.task.description, '') as description,
+        COALESCE(migration.task.files, '')       as files,
 		COALESCE(migration.task.category, '?')   as category,
 
 		(CASE WHEN migration.task.solved THEN

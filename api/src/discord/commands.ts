@@ -6,6 +6,7 @@ import { LinkUser } from "./commands/linkUser";
 import { StartWorking, StopWorking } from "./commands/workingOn";
 import { DeleteCtf } from "./commands/deleteCtf";
 import { Register } from "./commands/register";
+import { Creds } from "./commands/creds";
 
 export const Commands: Command[] = [
   ArchiveCtf,
@@ -16,4 +17,5 @@ export const Commands: Command[] = [
   StopWorking,
   DeleteCtf,
   Register,
+  Creds,
 ];

@@ -2987,6 +2987,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@kurkle/color@npm:^0.3.0":
+  version: 0.3.2
+  resolution: "@kurkle/color@npm:0.3.2"
+  checksum: 10/079c4b7688061070f1d570cee4cf0e7c4085867b940688ff80356a56825a5ace7077257c9ec5863eb344a8eae78379388ab57cdf9d75c491389fad56f411cd43
+  languageName: node
+  linkType: hard
+
 "@leichtgewicht/ip-codec@npm:^2.0.1":
   version: 2.0.4
   resolution: "@leichtgewicht/ip-codec@npm:2.0.4"
@@ -5777,6 +5784,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chart.js@npm:^4.4.4":
+  version: 4.4.4
+  resolution: "chart.js@npm:4.4.4"
+  dependencies:
+    "@kurkle/color": "npm:^0.3.0"
+  checksum: 10/77221dce07606c67686b31b14c3e8c56d71fadc93a5d754ef1f0abc870160253c31751edd9962a0f5bd929824ca69458b914b6c90c8a0c1e9a547d276e9ca9b0
+  languageName: node
+  linkType: hard
+
 "chokidar@npm:3.6.0":
   version: 3.6.0
   resolution: "chokidar@npm:3.6.0"
@@ -6649,6 +6665,7 @@ __metadata:
     apollo-upload-client: "npm:^17.0.0"
     autoprefixer: "npm:^10.4.19"
     babel-loader: "npm:^9.1.3"
+    chart.js: "npm:^4.4.4"
     color-hash: "npm:^2.0.2"
     core-js: "npm:^3.36.1"
     eslint: "npm:^8.57.0"
@@ -6668,6 +6685,7 @@ __metadata:
     typescript: "npm:^5.4.3"
     typescript-eslint: "npm:^7.3.1"
     vue: "npm:^3.4.21"
+    vue-chartjs: "npm:^5.3.1"
     vue-router: "npm:^4.3.0"
     webpack: "npm:^5.91.0"
   languageName: unknown
@@ -13966,6 +13984,16 @@ __metadata:
   version: 1.1.2
   resolution: "vary@npm:1.1.2"
   checksum: 10/31389debef15a480849b8331b220782230b9815a8e0dbb7b9a8369559aed2e9a7800cd904d4371ea74f4c3527db456dc8e7ac5befce5f0d289014dbdf47b2242
+  languageName: node
+  linkType: hard
+
+"vue-chartjs@npm:^5.3.1":
+  version: 5.3.1
+  resolution: "vue-chartjs@npm:5.3.1"
+  peerDependencies:
+    chart.js: ^4.1.1
+    vue: ^3.0.0-0 || ^2.7.0
+  checksum: 10/14584c8fcdf4fe49c5bf192d92df44bff649d58e7d716b8c03f48084d00a41dc6429ac6bea11f0d4beec3c29994202d3c8a21d8ff6609713a207d5bf2caf04a8
   languageName: node
   linkType: hard
 

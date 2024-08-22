@@ -29,7 +29,7 @@ interface Events {
 }
 
 const CINIParser: Parser = {
-  name: 'Cybersecurity National Lab (CINI) platform and ECSC 2024 (Turin) parser',
+  name: 'CINI',
   hint: 'paste platform /api/challenges',
 
   parse(s: string): ParsedTask[] {

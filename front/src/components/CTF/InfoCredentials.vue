@@ -17,7 +17,14 @@
     </div>
     <div class="row">
       <div class="col col-auto hide-last-newline">
-        <q-markdown no-html :src="ctf.credentials" class="blur" />
+        <q-markdown no-html :src="'CTF url: ' + ctf.ctfUrl" class="blur" />
+        <q-markdown no-html :src="'username: ' + ctf.username" class="blur" />
+        <q-markdown no-html :src="'password: ' + ctf.password" class="blur" />
+        <q-markdown
+          no-html
+          :src="'scoreboard name: ' + ctf.scoreboardName"
+          class="blur"
+        />
       </div>
     </div>
   </div>
@@ -44,13 +51,13 @@ export default defineComponent({
     editCredentials() {
       this.$q
         .dialog({
-          title: 'Edit credentials',
+          title: 'Edit username',
           color: 'primary',
           class: 'compact-dialog',
           prompt: {
-            model: this.ctf.credentials ?? '',
+            model: this.ctf.username ?? '',
             type: 'textarea',
-            label: 'Credentials (Markdown)',
+            label: 'Username',
             filled: true,
           },
           ok: {
@@ -62,15 +69,64 @@ export default defineComponent({
             flat: true,
           },
         })
-        .onOk((credentials: string) => {
-          const opts = {
-            message: 'Credentials updated!',
-            icon: 'key',
-          };
-          void this.resolveAndNotify(
-            this.updateCtfCredentials(this.ctf, credentials),
-            opts
-          );
+        .onOk((username: string) => {
+          this.$q
+            .dialog({
+              title: 'Edit password',
+              color: 'primary',
+              class: 'compact-dialog',
+              prompt: {
+                model: this.ctf.password ?? '',
+                type: 'textarea',
+                label: 'Password',
+                filled: true,
+              },
+              ok: {
+                label: 'Save',
+                color: 'positive',
+              },
+              cancel: {
+                label: 'Cancel',
+                flat: true,
+              },
+            })
+            .onOk((password: string) => {
+              this.$q
+                .dialog({
+                  title: 'Edit scoreboard name',
+                  color: 'primary',
+                  class: 'compact-dialog',
+                  prompt: {
+                    model: this.ctf.scoreboardName ?? '',
+                    type: 'textarea',
+                    label: 'scoreboard Name',
+                    filled: true,
+                  },
+                  ok: {
+                    label: 'Save',
+                    color: 'positive',
+                  },
+                  cancel: {
+                    label: 'Cancel',
+                    flat: true,
+                  },
+                })
+                .onOk((scoreboardName: string) => {
+                  const opts = {
+                    message: 'Credentials updated!',
+                    icon: 'key',
+                  };
+                  void this.resolveAndNotify(
+                    this.updateCtfCredentials(
+                      this.ctf,
+                      username,
+                      password,
+                      scoreboardName
+                    ),
+                    opts
+                  );
+                });
+            });
         });
     },
   },

@@ -2,7 +2,7 @@ import { ParsedTask, Parser } from '.';
 import { parseJsonStrict } from '../utils';
 
 const HitconParser: Parser = {
-  name: 'HITCONCTF parser',
+  name: 'HITCONCTF',
   hint: 'paste hitcon /dashboard/challenge_data',
   parse(s): ParsedTask[] {
     const tasks: ParsedTask[] = [];

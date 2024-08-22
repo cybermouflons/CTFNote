@@ -72,6 +72,7 @@ export default makeExtendSchemaPlugin((build) => {
         title: String!
         tags: [String]
         description: String
+        files: String
         flag: String
       }
 
@@ -88,7 +89,7 @@ export default makeExtendSchemaPlugin((build) => {
       Mutation: {
         createTask: async (
           _query,
-          { input: { title, description, tags, flag, ctfId } },
+          { input: { title, description, files, tags, flag, ctfId } },
           { pgClient },
           resolveInfo
         ) => {
@@ -113,12 +114,14 @@ export default makeExtendSchemaPlugin((build) => {
 
           const padUrl = `${config.pad.showUrl}${padPath}`;
 
+          console.log("ctfId", ctfId);
+
           return await savepointWrapper(pgClient, async () => {
             const {
               rows: [newTask],
             } = await pgClient.query(
-              `SELECT * FROM ctfnote_private.create_task($1, $2, $3, $4, $5)`,
-              [title, description ?? "", flag ?? "", padUrl, ctfId]
+              `SELECT * FROM ctfnote_private.create_task($1, $2, $3, $4, $5, $6)`,
+              [title, description ?? "", files ?? "", flag ?? "", padUrl, ctfId]
             );
             const [row] =
               await resolveInfo.graphile.selectGraphQLResultFromTable(

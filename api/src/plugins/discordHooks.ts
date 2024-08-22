@@ -18,13 +18,17 @@ import {
   getTaskByCtfIdAndNameFromDatabase,
   getTaskFromId,
 } from "../discord/database/tasks";
-import { sendMessageToTask } from "../discord/utils/messages";
+import {
+  sendMessageToTask,
+  sendMessageToChannel,
+} from "../discord/utils/messages";
 import {
   ChannelMovingEvent,
   createChannelForNewTask,
   getActiveCtfCategories,
   getTaskChannel,
   moveChannel,
+  getTalkChannelForCtf,
 } from "../discord/utils/channels";
 import { isCategoryOfCtf } from "../discord/utils/comparison";
 import { GraphQLResolveInfoWithMessages } from "@graphile/operation-hooks";
@@ -60,17 +64,25 @@ export async function convertToUsernameFormat(userId: bigint | string) {
 export async function handleTaskSolved(
   guild: Guild,
   id: bigint,
-  userId: bigint | string
+  userIds: string | string[] | bigint | bigint[]
 ) {
   const task = await getTaskFromId(id);
   if (task == null) return;
 
   await moveChannel(guild, task, null, ChannelMovingEvent.SOLVED);
 
-  return sendMessageToTask(
-    guild,
-    id,
-    `${task.title} is solved by ${await convertToUsernameFormat(userId)}!`
+  const userIdArray = Array.isArray(userIds) ? userIds : [userIds];
+  const userNames = await Promise.all(
+    userIdArray.map(async (userId) => convertToUsernameFormat(userId))
+  );
+  const usernamesString = userNames.join(", ");
+
+  const ctf = await getCtfFromDatabase(task.ctf_id);
+  if (ctf == null) return;
+
+  return sendMessageToChannel(
+    getTalkChannelForCtf(guild, ctf),
+    `${task.title} is solved by ${usernamesString}!`
   );
 }
 
@@ -160,7 +172,7 @@ const discordMutationHook = (_build: Build) => (fieldContext: Context<any>) => {
         if (args.input.patch.flag !== "") {
           const userId = context.jwtClaims.user_id;
 
-          handleTaskSolved(guild, args.input.id, userId);
+          handleTaskSolved(guild, task.id, userId);
         } else {
           const task = await getTaskFromId(args.input.id);
           if (task == null) return input;
@@ -201,15 +213,18 @@ const discordMutationHook = (_build: Build) => (fieldContext: Context<any>) => {
     if (fieldContext.scope.fieldName === "startWorkingOn") {
       //send a message to the channel that the user started working on the task
       const userId = context.jwtClaims.user_id;
-      const taskId = args.input.taskId;
-      moveChannel(guild, taskId, null, ChannelMovingEvent.START).then(() => {
-        sendStartWorkingOnMessage(guild, userId, taskId).catch((err) => {
-          console.error(
-            "Failed sending 'started working on' notification.",
-            err
-          );
-        });
-      });
+      const task = args.input;
+      console.log("task", task);
+      moveChannel(guild, task.taskId, null, ChannelMovingEvent.START).then(
+        () => {
+          sendStartWorkingOnMessage(guild, userId, task).catch((err) => {
+            console.error(
+              "Failed sending 'started working on' notification.",
+              err
+            );
+          });
+        }
+      );
     }
     if (
       fieldContext.scope.fieldName === "stopWorkingOn" ||
@@ -367,11 +382,19 @@ export async function sendStartWorkingOnMessage(
   userId: bigint,
   task: Task | bigint
 ) {
+  if (typeof task === "bigint" || typeof task === "number") {
+    const t = await getTaskFromId(task);
+    if (t == null) return null;
+    task = t;
+  }
   await moveChannel(guild, task, null, ChannelMovingEvent.START);
-  return sendMessageToTask(
-    guild,
-    task,
-    `${await convertToUsernameFormat(userId)} is working on this task!`
+
+  const ctf = await getCtfFromDatabase(task.ctf_id);
+  if (ctf == null) return;
+
+  return sendMessageToChannel(
+    getTalkChannelForCtf(guild, ctf),
+    `'Ατε ${await convertToUsernameFormat(userId)} μου! Έβαλα σε τζιαι στη λίστα τζείνων που μάχουνται πάνω στο ${task.title}!`
   );
 }
 

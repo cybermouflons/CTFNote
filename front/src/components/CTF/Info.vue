@@ -99,6 +99,23 @@
           <info-credentials :ctf="ctf" />
         </div>
       </template>
+
+      <!--
+      <template v-if="$q.screen.gt.xs">
+        <q-separator vertical class="q-mx-md" />
+        <div class="col">
+          <info-placement :ctf="ctf" />
+        </div>
+      </template>
+
+      <template v-if="$q.screen.xs">
+        <q-separator />
+        <div class="col">
+          <info-placement :ctf="ctf" />
+        </div>
+      </template>
+
+      -->
     </div>
   </div>
 </template>
@@ -113,6 +130,7 @@ import BtnEdit from './BtnEdit.vue';
 import CardAdminMenu from './CardAdminMenu.vue';
 import CtfTimeLink from './CtfTimeLink.vue';
 import InfoCredentials from './InfoCredentials.vue';
+// import InfoPlacement from './InfoPlacement.vue';
 import LogoLink from './LogoLink.vue';
 import WeightBadge from './WeightBadge.vue';
 
@@ -123,6 +141,7 @@ export default defineComponent({
     CardAdminMenu,
     CtfTimeLink,
     InfoCredentials,
+    //    InfoPlacement,
     LogoLink,
     WeightBadge,
   },

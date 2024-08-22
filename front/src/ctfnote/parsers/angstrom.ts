@@ -2,7 +2,7 @@ import { ParsedTask, Parser } from '.';
 import { parseJson, parseJsonStrict } from '../utils';
 
 const AngstromParser: Parser = {
-  name: 'ångstromCTF parser',
+  name: 'ångstromCTF',
   hint: 'paste api.angstromctf.com/competitions/XX/challenges with XX being the event id',
 
   parse(s: string): ParsedTask[] {

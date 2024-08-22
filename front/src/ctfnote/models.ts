@@ -47,6 +47,7 @@ export type Task = {
   padUrl: string;
   slug: string;
   description: string;
+  files: string;
   flag: string;
   solved: boolean;
   assignedTags: Tag[];
@@ -76,10 +77,13 @@ export type Ctf = {
   guestsLink: RouteLocationRaw;
   granted: boolean;
   ctfUrl: string | null;
+  ctfPlatform: string;
   ctftimeUrl: string | null;
   logoUrl: string | null;
 
-  credentials: string | null;
+  username: string | null;
+  password: string | null;
+  scoreboardName: string | null;
   tasks: Task[];
   invitations: CtfInvitation[];
   discordEventLink: string | null;
@@ -131,4 +135,11 @@ export type WorkingOn = {
   taskId: Id<Task>;
   profileId: Id<Profile>;
   active: boolean;
+};
+
+export type Scoreboard = {
+  ctfId: Id<Ctf>;
+  teamName: string;
+  score: number;
+  rank: number;
 };

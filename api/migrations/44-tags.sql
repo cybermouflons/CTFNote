@@ -21,7 +21,7 @@ GRANT INSERT ON TABLE ctfnote.assigned_tags TO user_guest;
 
 GRANT DELETE ON TABLE ctfnote.assigned_tags TO user_guest;
 
-CREATE FUNCTION tag_lower_case() 
+CREATE FUNCTION tag_lower_case()
   RETURNS TRIGGER
 AS
 $$
@@ -39,11 +39,11 @@ CREATE TRIGGER ensure_tag_lower_case
    EXECUTE PROCEDURE tag_lower_case();
 
 --- Remove category from create_task
-CREATE OR REPLACE FUNCTION ctfnote_private.create_task (title text, description text, flag text, pad_url text, ctf_id int)
+CREATE OR REPLACE FUNCTION ctfnote_private.create_task (title text, description text, files text, flag text, pad_url text, ctf_id int)
   RETURNS ctfnote.task
   AS $$
-  INSERT INTO ctfnote.task (title, description, flag, pad_url, ctf_id)
-    VALUES (title, description, flag, pad_url, ctf_id)
+  INSERT INTO ctfnote.task (title, description, files, flag, pad_url, ctf_id)
+    VALUES (title, description, files, flag, pad_url, ctf_id)
   RETURNING
 *;
 
@@ -51,7 +51,7 @@ $$
 LANGUAGE SQL
 SECURITY DEFINER;
 
-GRANT EXECUTE ON FUNCTION ctfnote_private.create_task (text, text,  text, text, int) TO user_guest;
+GRANT EXECUTE ON FUNCTION ctfnote_private.create_task (text, text, text, text, text, int) TO user_guest;
 
 
 --- Add custom logic for inserting tags
@@ -62,7 +62,7 @@ CREATE OR REPLACE FUNCTION ctfnote.add_tags_for_task (tags text ARRAY, taskId in
     t text;
   BEGIN
     DELETE FROM ctfnote.assigned_tags WHERE task_id = taskId;
-    FOREACH t IN ARRAY $1 
+    FOREACH t IN ARRAY $1
     LOOP
       INSERT INTO ctfnote.tag (tag) VALUES (t) ON CONFLICT DO NOTHING;
 
@@ -128,13 +128,13 @@ BEGIN
     SELECT category, id FROM ctfnote.task
   LOOP
     IF _e.category != '' AND _e.category IS NOT NULL THEN
-      INSERT INTO ctfnote.tag (tag) 
+      INSERT INTO ctfnote.tag (tag)
         SELECT _e.category
         ON CONFLICT (tag) DO NOTHING;
-      
+
       SELECT id INTO _tagid FROM ctfnote.tag
         WHERE tag = lower(_e.category);
-      
+
       INSERT INTO ctfnote.assigned_tags (tag_id, task_id)
         VALUES (_tagid, _e.id);
     END IF;

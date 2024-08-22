@@ -1,7 +1,7 @@
 import { ParsedTask, Parser } from '.';
 
 const RawParser: Parser = {
-  name: 'Raw parser',
+  name: 'Raw / Other',
   hint: 'name | tag 1 | tag 2 | tag 3',
   parse(s): ParsedTask[] {
     const tasks: ParsedTask[] = [];

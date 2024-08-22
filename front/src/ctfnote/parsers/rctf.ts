@@ -1,18 +1,18 @@
 import { ParsedTask, Parser } from '.';
 import { parseJson, parseJsonStrict } from '../utils';
 
-interface CTFdTags {
+interface RCTFTags {
   value: string;
 }
 
-const CTFDParser: Parser = {
-  name: 'CTFd',
-  hint: 'paste /api/v1/challenges',
+const RCTFParser: Parser = {
+  name: 'RCTF',
+  hint: 'paste /api/v1/challs',
 
   parse(s: string): ParsedTask[] {
     const tasks = [];
     const data = parseJsonStrict<{
-      data: { name: string; category: string; tags: CTFdTags[] }[];
+      data: { name: string; category: string; tags: RCTFTags[] }[];
     }>(s);
     if (!Array.isArray(data?.data)) {
       return [];
@@ -36,4 +36,4 @@ const CTFDParser: Parser = {
   },
 };
 
-export default CTFDParser;
+export default RCTFParser;

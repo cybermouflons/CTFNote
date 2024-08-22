@@ -12,6 +12,7 @@ BEGIN
 		migration."ctf"."title"                     as title,
 		COALESCE(migration."ctf"."weight", 0)       as weight,
 		migration."ctf"."ctfUrl"                    as ctf_url,
+        migration."ctf"."ctfPlatform"               as ctf_platform,
 		migration."ctf"."logoUrl"                   as logo_url,
 		migration."ctf"."ctfTimeUrl"                as ctftime_url,
 		COALESCE(migration."ctf"."description", '') as description,
@@ -23,7 +24,9 @@ BEGIN
 
 	-- Secrets
 	UPDATE ctfnote.ctf_secrets
-	SET  credentials = COALESCE(migration.ctf.credentials, '')
+	SET username = COALESCE(migration.ctf_secrets.username, ''),
+        password = COALESCE(migration.ctf_secrets.password, ''),
+        scoreboard_name = COALESCE(migration.ctf_secrets.scoreboard_name, '')
 	FROM migration.ctf
 	WHERE ctf_secrets.id = ret AND migration.ctf.id = migrate_ctf.id;
 

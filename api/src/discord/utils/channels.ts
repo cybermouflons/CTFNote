@@ -227,7 +227,7 @@ function getSolvedCategoriesForCtf(guild: Guild, ctf: CTF) {
   return categories.filter((c) => isCategoryOfCtf(c, solvedCategoryName(ctf)));
 }
 
-function getTalkChannelForCtf(guild: Guild, ctf: CTF) {
+export function getTalkChannelForCtf(guild: Guild, ctf: CTF) {
   return guild.channels.cache.find(
     (channel) =>
       channel.type === ChannelType.GuildText &&
@@ -355,7 +355,14 @@ async function handleCreateAndNotify(
   if (taskChannel == null) return;
 
   await pinTaskLinkToChannel(taskChannel, task, ctf);
-  await sendMessageToChannel(taskChannel, task.description);
+  if (task.description != "") {
+    await sendMessageToChannel(taskChannel, "Description:");
+    await sendMessageToChannel(taskChannel, task.description);
+  }
+  if (task.files != "") {
+    await sendMessageToChannel(taskChannel, "Files / Instances:");
+    await sendMessageToChannel(taskChannel, task.files);
+  }
 
   if (announce)
     await sendMessageToChannel(
@@ -453,7 +460,6 @@ export async function moveChannel(
     if (t == null) return;
     task = t;
   }
-
   if (ctf == null) {
     ctf = await getCtfFromDatabase(task.ctf_id);
     if (ctf == null) return;

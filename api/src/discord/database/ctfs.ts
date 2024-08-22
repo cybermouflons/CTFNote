@@ -6,6 +6,7 @@ export interface CTF {
   title: string;
   weight: number;
   ctf_url: string;
+  ctf_platform: string;
   logo_url: string;
   ctftime_url: string;
   description: string;
@@ -21,6 +22,7 @@ function buildCtf(row: any): CTF {
     title: row.title as string,
     weight: row.weight as number,
     ctf_url: row.ctf_url as string,
+    ctf_platform: row.ctf_platform as string,
     logo_url: row.logo_url as string,
     ctftime_url: row.ctftime_url as string,
     description: row.description as string,
@@ -28,6 +30,33 @@ function buildCtf(row: any): CTF {
     end_time: row.end_time as Date,
     secrets_id: row.secrets_id as bigint,
   };
+}
+
+export async function getCtfSecretsFromDatabase(
+  ctfId: bigint,
+  pgClient: PoolClient | null = null
+): Promise<{ username: string; password: string; scoreboardName: string }[]> {
+  const useRequestClient = pgClient != null;
+  if (pgClient == null) pgClient = await connectToDatabase();
+
+  try {
+    const query = `SELECT username, password, scoreboard_name FROM ctfnote.ctf_secrets WHERE id = $1`;
+    const values = [ctfId];
+    const queryResult = await pgClient.query(query, values);
+
+    return queryResult.rows.map((row) => {
+      return {
+        username: row.username,
+        password: row.password,
+        scoreboardName: row.scoreboard_name,
+      };
+    });
+  } catch (error) {
+    console.error("Failed to fetch CTF secrets from the database:", error);
+    return [];
+  } finally {
+    if (!useRequestClient) pgClient.release();
+  }
 }
 
 export async function getCTFNamesFromDatabase(): Promise<string[]> {
@@ -79,7 +108,7 @@ export async function getCtfFromDatabase(
     //make a query to get all the challenges from a ctf
 
     let query =
-      "SELECT id, title, weight, ctf_url, logo_url, ctftime_url, description, start_time, end_time, secrets_id FROM ctfnote.ctf";
+      "SELECT id, title, weight, ctf_url, ctf_platform, logo_url, ctftime_url, description, start_time, end_time, secrets_id FROM ctfnote.ctf";
 
     if (typeof ctfName === "string") {
       query += " WHERE title = $1";
@@ -121,6 +150,7 @@ export async function getNameFromUserId(userId: bigint): Promise<string> {
 export async function createTask(
   title: string,
   description: string,
+  files: string,
   flag: string,
   padUrl: string,
   ctfId: bigint
@@ -129,10 +159,10 @@ export async function createTask(
 
   try {
     const query = `
-            INSERT INTO ctfnote.task (title, description, flag, pad_url, ctf_id)
-            VALUES ($1, $2, $3, $4, $5)
+            INSERT INTO ctfnote.task (title, description, files, flag, pad_url, ctf_id)
+            VALUES ($1, $2, $3, $4, $5, $6)
         `;
-    const values = [title, description, flag, padUrl, ctfId];
+    const values = [title, description, files, flag, padUrl, ctfId];
     await pgClient.query(query, values);
   } catch (error) {
     console.error("Failed to create a task in the database:", error);

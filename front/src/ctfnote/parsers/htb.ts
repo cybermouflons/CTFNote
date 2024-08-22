@@ -30,7 +30,7 @@ const challengeCategories: { [index: number]: string } = {
 };
 
 const HTBParser: Parser = {
-  name: 'HTB parser',
+  name: 'HTB',
   hint: 'paste https://ctf.hackthebox.com/api/ctf/<ctfid> from the network tab',
 
   parse(s: string): ParsedTask[] {

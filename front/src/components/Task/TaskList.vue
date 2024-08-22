@@ -185,7 +185,7 @@ export default defineComponent({
       }
 
       // Filter using needle on title and description
-      const fields = ['title', 'description'] as const;
+      const fields = ['title', 'description', 'files'] as const;
 
       const checkField = (f: (typeof fields)[number]): boolean =>
         task[f]?.toLowerCase().includes(needle) ?? false;
