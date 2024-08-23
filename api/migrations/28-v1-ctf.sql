@@ -26,7 +26,8 @@ BEGIN
 	UPDATE ctfnote.ctf_secrets
 	SET username = COALESCE(migration.ctf_secrets.username, ''),
         password = COALESCE(migration.ctf_secrets.password, ''),
-        scoreboard_name = COALESCE(migration.ctf_secrets.scoreboard_name, '')
+        scoreboard_name = COALESCE(migration.ctf_secrets.scoreboard_name, ''),
+				extra_info = COALESCE(migration.ctf_secrets.extra_info, '')
 	FROM migration.ctf
 	WHERE ctf_secrets.id = ret AND migration.ctf.id = migrate_ctf.id;
 

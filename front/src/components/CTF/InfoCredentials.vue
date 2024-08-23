@@ -25,6 +25,7 @@
           :src="'scoreboard name: ' + ctf.scoreboardName"
           class="blur"
         />
+        <q-markdown no-html :src="'extra info: ' + ctf.extraInfo" class="blur" />
       </div>
     </div>
   </div>
@@ -112,19 +113,42 @@ export default defineComponent({
                   },
                 })
                 .onOk((scoreboardName: string) => {
-                  const opts = {
-                    message: 'Credentials updated!',
-                    icon: 'key',
-                  };
-                  void this.resolveAndNotify(
-                    this.updateCtfCredentials(
-                      this.ctf,
-                      username,
-                      password,
-                      scoreboardName
-                    ),
-                    opts
-                  );
+                  this.$q
+                    .dialog({
+                      title: 'Edit extra info',
+                      color: 'primary',
+                      class: 'compact-dialog',
+                      prompt: {
+                        model: this.ctf.extraInfo ?? '',
+                        type: 'textarea',
+                        label: 'Extra Info',
+                        filled: true,
+                      },
+                      ok: {
+                        label: 'Save',
+                        color: 'positive',
+                      },
+                      cancel: {
+                        label: 'Cancel',
+                        flat: true,
+                      },
+                    })
+                    .onOk((extraInfo: string) => {
+                      const opts = {
+                        message: 'Credentials updated!',
+                        icon: 'key',
+                      };
+                      void this.resolveAndNotify(
+                        this.updateCtfCredentials(
+                          this.ctf,
+                          username,
+                          password,
+                          scoreboardName,
+                          extraInfo
+                        ),
+                        opts
+                      );
+                    });
                 });
             });
         });

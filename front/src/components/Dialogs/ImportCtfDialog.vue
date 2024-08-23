@@ -106,7 +106,7 @@ export default defineComponent({
     const parserOptions = parsers.map((p) => p.name);
     const form = reactive<Form>({
       ctfPlatform: 'Raw / Other',
-      ctftimeUrl: null,
+      ctftimeUrl: 'https://ctftime.org/event/{event_id}/',
       ...(props.ctf as Form | null), // Ensure props.ctf matches Form interface or is null
     });
 
@@ -135,6 +135,7 @@ export default defineComponent({
   },
   methods: {
     async submit() {
+      if (!this.form.ctftimeUrl) return;
       const id = parseCtftimeId(this.form.ctftimeUrl);
       if (id === null) return;
       const success = await this.resolveAndNotify(
@@ -145,7 +146,7 @@ export default defineComponent({
       }
     },
     validate() {
-      if (this.form && parseCtftimeId(this.form.ctftimeUrl) === null)
+      if (this.form && !this.form.ctftimeUrl && (this.form.ctftimeUrl) === null)
         return 'Invalid url or id';
     },
   },

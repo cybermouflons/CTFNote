@@ -7,6 +7,7 @@ import { StartWorking, StopWorking } from "./commands/workingOn";
 import { DeleteCtf } from "./commands/deleteCtf";
 import { Register } from "./commands/register";
 import { Creds } from "./commands/creds";
+import { AddTask } from "./commands/addTask";
 
 export const Commands: Command[] = [
   ArchiveCtf,
@@ -18,4 +19,5 @@ export const Commands: Command[] = [
   DeleteCtf,
   Register,
   Creds,
+  AddTask
 ];

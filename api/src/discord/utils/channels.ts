@@ -140,6 +140,8 @@ async function createTaskChannel(
 ) {
   const taskName = task.title;
 
+  const challsChannel: ForumChannel = getChallsChannelForCtf(guild, ctf);
+
   let target_tag: null | string = null;
   if (type === CategoryType.NEW) {
     target_tag = "new";
@@ -159,11 +161,11 @@ async function createTaskChannel(
 
   const taskEmbed = new EmbedBuilder()
     .setTitle(`${taskName} (CTFNote link)`)
-    .setDescription(task.description)
+    .setDescription(task.description ? task.description : "No description available")
     .setURL(await getTaskLink(task, ctf))
     .addFields({
       name: "Files/instances",
-      value: task.files ? task.files : "No description available",
+      value: task.files ? task.files : "No files/instances available",
     });
 
   console.log("Applying tags", tagsToApply);

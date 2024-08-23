@@ -2958,6 +2958,18 @@
             "deprecationReason": null
           },
           {
+            "name": "extraInfo",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": null,
             "args": [],
@@ -3066,6 +3078,18 @@
         "description": "Represents an update to a `CtfSecret`. Fields that are set will be updated.",
         "fields": null,
         "inputFields": [
+          {
+            "name": "extraInfo",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "password",
             "description": null,

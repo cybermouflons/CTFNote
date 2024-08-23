@@ -109,6 +109,7 @@ export function buildCtf(ctf: CtfFragment): Ctf {
     username: null,
     password: null,
     scoreboardName: null,
+    extraInfo: null,
     slug,
     infoLink,
     tasksLink,
@@ -127,6 +128,7 @@ export function buildFullCtf(data: FullCtfResponse): Ctf {
     username: data.ctf.secrets?.username ?? null,
     password: data.ctf.secrets?.password ?? null,
     scoreboardName: data.ctf.secrets?.scoreboardName ?? null,
+    extraInfo: data.ctf.secrets?.extraInfo ?? null,
     tasks: data.ctf.tasks.nodes.map(buildTask),
     invitations: data.ctf.invitations.nodes.map(buildInvitation),
   };
@@ -287,8 +289,9 @@ export function useUpdateCtfCredentials() {
     ctf: Ctf,
     username: string,
     password: string,
-    scoreboardName: string
-  ) => mutate({ ctfId: ctf.id, username, password, scoreboardName });
+    scoreboardName: string,
+    extraInfo: string
+  ) => mutate({ ctfId: ctf.id, username, password, scoreboardName, extraInfo });
 }
 
 export function useImportCtf() {

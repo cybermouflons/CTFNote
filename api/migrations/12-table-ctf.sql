@@ -39,8 +39,8 @@ CREATE FUNCTION ctfnote_private.create_ctf_secrets ()
 DECLARE
   secrets_id int;
 BEGIN
-  INSERT INTO ctfnote.ctf_secrets (username, password, scoreboard_name)
-    VALUES ('', '', '')
+  INSERT INTO ctfnote.ctf_secrets (username, password, scoreboard_name, extra_info)
+    VALUES ('', '', '', '')
   RETURNING
     id INTO secrets_id;
   NEW.secrets_id := secrets_id;

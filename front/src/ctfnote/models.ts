@@ -84,6 +84,7 @@ export type Ctf = {
   username: string | null;
   password: string | null;
   scoreboardName: string | null;
+  extraInfo: string | null;
   tasks: Task[];
   invitations: CtfInvitation[];
   discordEventLink: string | null;

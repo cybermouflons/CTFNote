@@ -35,25 +35,19 @@ function buildCtf(row: any): CTF {
 export async function getCtfSecretsFromDatabase(
   ctfId: bigint,
   pgClient: PoolClient | null = null
-): Promise<{ username: string; password: string; scoreboardName: string }[]> {
+): Promise<{ username: string; password: string; scoreboardName: string; extraInfo: string }> {
   const useRequestClient = pgClient != null;
   if (pgClient == null) pgClient = await connectToDatabase();
 
   try {
-    const query = `SELECT username, password, scoreboard_name FROM ctfnote.ctf_secrets WHERE id = $1`;
+    const query = `SELECT username, password, scoreboard_name, extra_info FROM ctfnote.ctf_secrets WHERE id = $1`;
     const values = [ctfId];
     const queryResult = await pgClient.query(query, values);
 
-    return queryResult.rows.map((row) => {
-      return {
-        username: row.username,
-        password: row.password,
-        scoreboardName: row.scoreboard_name,
-      };
-    });
+    return queryResult.rows[0];
   } catch (error) {
     console.error("Failed to fetch CTF secrets from the database:", error);
-    return [];
+    return { username: "", password: "", scoreboardName: "", extraInfo: "" };
   } finally {
     if (!useRequestClient) pgClient.release();
   }
