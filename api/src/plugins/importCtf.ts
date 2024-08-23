@@ -27,6 +27,7 @@ export default makeExtendSchemaPlugin((build) => {
     typeDefs: gql`
       input ImportCtfInput {
         ctftimeId: Int!
+        ctfPlatform: String!
       }
 
       type ImportCtfPayload {
@@ -42,7 +43,7 @@ export default makeExtendSchemaPlugin((build) => {
       Mutation: {
         importCtf: async (
           _query,
-          { input: { ctftimeId } },
+          { input: { ctftimeId, ctfPlatform } },
           { pgClient },
           resolveInfo
         ) => {
@@ -55,18 +56,20 @@ export default makeExtendSchemaPlugin((build) => {
                                 title,
                                 weight,
                                 ctf_url,
+                                ctf_platform,
                                 logo_url,
                                 ctftime_url,
                                 description,
                                 start_time,
                                 end_time
-                                ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+                                ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
                                 RETURNING *;
                                 `,
               [
                 ctf.title,
                 ctf.weight,
                 ctf.url,
+                ctfPlatform,
                 ctf.logo,
                 ctf.ctftime_url,
                 ctf.description,

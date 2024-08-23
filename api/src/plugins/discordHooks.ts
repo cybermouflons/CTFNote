@@ -387,7 +387,7 @@ const discordMutationHook = (_build: Build) => (fieldContext: Context<any>) => {
 
 export async function sendStartWorkingOnMessage(
   guild: Guild,
-  userId: bigint,
+  userId: bigint | string,
   task: Task | bigint
 ) {
   if (typeof task === "bigint" || typeof task === "number") {
@@ -412,7 +412,7 @@ export async function sendStartWorkingOnMessage(
 
 export async function sendStopWorkingOnMessage(
   guild: Guild,
-  userId: bigint,
+  userId: bigint | string,
   task: Task | bigint,
   cancel = false
 ) {

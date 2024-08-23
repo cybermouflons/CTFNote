@@ -77,7 +77,7 @@ export type Ctf = {
   guestsLink: RouteLocationRaw;
   granted: boolean;
   ctfUrl: string | null;
-  ctfPlatform: string;
+  ctfPlatform: string | null;
   ctftimeUrl: string | null;
   logoUrl: string | null;
 

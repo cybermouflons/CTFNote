@@ -123,8 +123,8 @@ mutation deleteCtfbyId($id: Int!) {
   }
 }
 
-mutation importctf($id: Int!) {
-  importCtf(input: { ctftimeId: $id }) {
+mutation importctf($id: Int!, $ctfPlatform: String!) {
+  importCtf(input: { ctftimeId: $id, ctfPlatform: $ctfPlatform }) {
     ctf {
       ...CtfFragment
     }

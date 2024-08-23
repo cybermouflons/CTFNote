@@ -294,7 +294,7 @@ export function useUpdateCtfCredentials() {
 export function useImportCtf() {
   const { mutate } = useImportctfMutation({});
 
-  return async (id: number) => mutate({ id });
+  return async (id: number, ctfPlatform: string) => mutate({ id, ctfPlatform });
 }
 
 export function useInviteUserToCtf() {

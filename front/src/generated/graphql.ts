@@ -3,15 +3,9 @@ import * as VueApolloComposable from '@vue/apollo-composable';
 import * as VueCompositionApi from 'vue';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>;
-};
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>;
-};
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 export type ReactiveFunction<TParam> = () => TParam;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -109,7 +103,7 @@ export enum AssignedTagsOrderBy {
   TagIdAsc = 'TAG_ID_ASC',
   TagIdDesc = 'TAG_ID_DESC',
   TaskIdAsc = 'TASK_ID_ASC',
-  TaskIdDesc = 'TASK_ID_DESC',
+  TaskIdDesc = 'TASK_ID_DESC'
 }
 
 /** All input for the `cancelWorkingOn` mutation. */
@@ -140,6 +134,7 @@ export type CancelWorkingOnPayload = {
   /** An edge for our `WorkOnTask`. May be used by Relay 1. */
   workOnTaskEdge?: Maybe<WorkOnTasksEdge>;
 };
+
 
 /** The output of our `cancelWorkingOn` mutation. */
 export type CancelWorkingOnPayloadWorkOnTaskEdgeArgs = {
@@ -206,6 +201,7 @@ export type CreateAssignedTagPayload = {
   task?: Maybe<Task>;
 };
 
+
 /** The output of our create `AssignedTag` mutation. */
 export type CreateAssignedTagPayloadAssignedTagEdgeArgs = {
   orderBy?: InputMaybe<Array<AssignedTagsOrderBy>>;
@@ -239,6 +235,7 @@ export type CreateCtfPayload = {
   /** Reads a single `CtfSecret` that is related to this `Ctf`. */
   secrets?: Maybe<CtfSecret>;
 };
+
 
 /** The output of our create `Ctf` mutation. */
 export type CreateCtfPayloadCtfEdgeArgs = {
@@ -300,6 +297,7 @@ export type CreateInvitationPayload = {
   query?: Maybe<Query>;
 };
 
+
 /** The output of our create `Invitation` mutation. */
 export type CreateInvitationPayloadInvitationEdgeArgs = {
   orderBy?: InputMaybe<Array<InvitationsOrderBy>>;
@@ -355,6 +353,7 @@ export type CreateTagPayload = {
   tagEdge?: Maybe<TagsEdge>;
 };
 
+
 /** The output of our create `Tag` mutation. */
 export type CreateTagPayloadTagEdgeArgs = {
   orderBy?: InputMaybe<Array<TagsOrderBy>>;
@@ -406,6 +405,7 @@ export type CreateWorkOnTaskPayload = {
   workOnTaskEdge?: Maybe<WorkOnTasksEdge>;
 };
 
+
 /** The output of our create `WorkOnTask` mutation. */
 export type CreateWorkOnTaskPayloadWorkOnTaskEdgeArgs = {
   orderBy?: InputMaybe<Array<WorkOnTasksOrderBy>>;
@@ -428,8 +428,6 @@ export type Ctf = Node & {
   nodeId: Scalars['ID'];
   /** Reads and enables pagination through a set of `Profile`. */
   profilesByInvitationCtfIdAndProfileId: CtfProfilesByInvitationCtfIdAndProfileIdManyToManyConnection;
-  /** Reads and enables pagination through a set of `Scoreboard`. */
-  scoreboards: ScoreboardsConnection;
   /** Reads a single `CtfSecret` that is related to this `Ctf`. */
   secrets?: Maybe<CtfSecret>;
   secretsId: Scalars['Int'];
@@ -440,6 +438,7 @@ export type Ctf = Node & {
   weight: Scalars['Float'];
 };
 
+
 export type CtfInvitationsArgs = {
   after?: InputMaybe<Scalars['Cursor']>;
   before?: InputMaybe<Scalars['Cursor']>;
@@ -449,6 +448,7 @@ export type CtfInvitationsArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<InvitationsOrderBy>>;
 };
+
 
 export type CtfProfilesByInvitationCtfIdAndProfileIdArgs = {
   after?: InputMaybe<Scalars['Cursor']>;
@@ -461,15 +461,6 @@ export type CtfProfilesByInvitationCtfIdAndProfileIdArgs = {
   orderBy?: InputMaybe<Array<ProfilesOrderBy>>;
 };
 
-export type CtfScoreboardsArgs = {
-  after?: InputMaybe<Scalars['Cursor']>;
-  before?: InputMaybe<Scalars['Cursor']>;
-  condition?: InputMaybe<ScoreboardCondition>;
-  first?: InputMaybe<Scalars['Int']>;
-  last?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<Array<ScoreboardsOrderBy>>;
-};
 
 export type CtfTasksArgs = {
   after?: InputMaybe<Scalars['Cursor']>;
@@ -569,6 +560,7 @@ export type CtfSecret = Node & {
   username?: Maybe<Scalars['String']>;
 };
 
+
 export type CtfSecretCtfsBySecretsIdArgs = {
   after?: InputMaybe<Scalars['Cursor']>;
   before?: InputMaybe<Scalars['Cursor']>;
@@ -624,7 +616,7 @@ export enum CtfSecretsOrderBy {
   IdDesc = 'ID_DESC',
   Natural = 'NATURAL',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
-  PrimaryKeyDesc = 'PRIMARY_KEY_DESC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
 
 /** A connection to a list of `Ctf` values. */
@@ -663,7 +655,7 @@ export enum CtfsOrderBy {
   StartTimeAsc = 'START_TIME_ASC',
   StartTimeDesc = 'START_TIME_DESC',
   TitleAsc = 'TITLE_ASC',
-  TitleDesc = 'TITLE_DESC',
+  TitleDesc = 'TITLE_DESC'
 }
 
 /** All input for the `deleteAssignedTagByNodeId` mutation. */
@@ -709,6 +701,7 @@ export type DeleteAssignedTagPayload = {
   task?: Maybe<Task>;
 };
 
+
 /** The output of our delete `AssignedTag` mutation. */
 export type DeleteAssignedTagPayloadAssignedTagEdgeArgs = {
   orderBy?: InputMaybe<Array<AssignedTagsOrderBy>>;
@@ -753,6 +746,7 @@ export type DeleteCtfPayload = {
   /** Reads a single `CtfSecret` that is related to this `Ctf`. */
   secrets?: Maybe<CtfSecret>;
 };
+
 
 /** The output of our delete `Ctf` mutation. */
 export type DeleteCtfPayloadCtfEdgeArgs = {
@@ -802,6 +796,7 @@ export type DeleteInvitationPayload = {
   query?: Maybe<Query>;
 };
 
+
 /** The output of our delete `Invitation` mutation. */
 export type DeleteInvitationPayloadInvitationEdgeArgs = {
   orderBy?: InputMaybe<Array<InvitationsOrderBy>>;
@@ -846,6 +841,7 @@ export type DeleteTaskPayload = {
   /** An edge for our `Task`. May be used by Relay 1. */
   taskEdge?: Maybe<TasksEdge>;
 };
+
 
 /** The output of our delete `Task` mutation. */
 export type DeleteTaskPayloadTaskEdgeArgs = {
@@ -918,12 +914,14 @@ export type DeleteWorkOnTaskPayload = {
   workOnTaskEdge?: Maybe<WorkOnTasksEdge>;
 };
 
+
 /** The output of our delete `WorkOnTask` mutation. */
 export type DeleteWorkOnTaskPayloadWorkOnTaskEdgeArgs = {
   orderBy?: InputMaybe<Array<WorkOnTasksOrderBy>>;
 };
 
 export type ImportCtfInput = {
+  ctfPlatform: Scalars['String'];
   ctftimeId: Scalars['Int'];
 };
 
@@ -997,7 +995,7 @@ export enum InvitationsOrderBy {
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC',
   ProfileIdAsc = 'PROFILE_ID_ASC',
-  ProfileIdDesc = 'PROFILE_ID_DESC',
+  ProfileIdDesc = 'PROFILE_ID_DESC'
 }
 
 export type ListenPayload = {
@@ -1114,245 +1112,294 @@ export type Mutation = {
   uploadCtfLogo: Scalars['String'];
 };
 
+
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationAddTagsForTaskArgs = {
   input: AddTagsForTaskInput;
 };
+
 
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCancelWorkingOnArgs = {
   input: CancelWorkingOnInput;
 };
 
+
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationChangePasswordArgs = {
   input: ChangePasswordInput;
 };
+
 
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateAssignedTagArgs = {
   input: CreateAssignedTagInput;
 };
 
+
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateCtfArgs = {
   input: CreateCtfInput;
 };
+
 
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateInvitationArgs = {
   input: CreateInvitationInput;
 };
 
+
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateInvitationLinkArgs = {
   input: CreateInvitationLinkInput;
 };
+
 
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateResetPasswordLinkArgs = {
   input: CreateResetPasswordLinkInput;
 };
 
+
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateTagArgs = {
   input: CreateTagInput;
 };
+
 
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateTaskArgs = {
   input?: InputMaybe<CreateTaskInput>;
 };
 
+
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateWorkOnTaskArgs = {
   input: CreateWorkOnTaskInput;
 };
+
 
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteAssignedTagArgs = {
   input: DeleteAssignedTagInput;
 };
 
+
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteAssignedTagByNodeIdArgs = {
   input: DeleteAssignedTagByNodeIdInput;
 };
+
 
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteCtfArgs = {
   input: DeleteCtfInput;
 };
 
+
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteCtfByNodeIdArgs = {
   input: DeleteCtfByNodeIdInput;
 };
+
 
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteInvitationArgs = {
   input: DeleteInvitationInput;
 };
 
+
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteInvitationByNodeIdArgs = {
   input: DeleteInvitationByNodeIdInput;
 };
+
 
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteTaskArgs = {
   input: DeleteTaskInput;
 };
 
+
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteTaskByNodeIdArgs = {
   input: DeleteTaskByNodeIdInput;
 };
+
 
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteUserArgs = {
   input: DeleteUserInput;
 };
 
+
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteWorkOnTaskArgs = {
   input: DeleteWorkOnTaskInput;
 };
+
 
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteWorkOnTaskByNodeIdArgs = {
   input: DeleteWorkOnTaskByNodeIdInput;
 };
 
+
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationImportCtfArgs = {
   input?: InputMaybe<ImportCtfInput>;
 };
+
 
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationLoginArgs = {
   input: LoginInput;
 };
 
+
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationRegisterArgs = {
   input: RegisterInput;
 };
+
 
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationRegisterWithPasswordArgs = {
   input: RegisterWithPasswordInput;
 };
 
+
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationRegisterWithTokenArgs = {
   input: RegisterWithTokenInput;
 };
+
 
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationResetDiscordIdArgs = {
   input: ResetDiscordIdInput;
 };
 
+
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationResetPasswordArgs = {
   input: ResetPasswordInput;
 };
+
 
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationResetProfileTokenArgs = {
   input: ResetProfileTokenInput;
 };
 
+
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationSetDiscordEventLinkArgs = {
   input: SetDiscordEventLinkInput;
 };
+
 
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationStartWorkingOnArgs = {
   input: StartWorkingOnInput;
 };
 
+
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationStopWorkingOnArgs = {
   input: StopWorkingOnInput;
 };
+
 
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateCtfArgs = {
   input: UpdateCtfInput;
 };
 
+
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateCtfByNodeIdArgs = {
   input: UpdateCtfByNodeIdInput;
 };
+
 
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateCtfSecretArgs = {
   input: UpdateCtfSecretInput;
 };
 
+
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateCtfSecretByNodeIdArgs = {
   input: UpdateCtfSecretByNodeIdInput;
 };
+
 
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateLastActiveArgs = {
   input: UpdateLastActiveInput;
 };
 
+
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateProfileArgs = {
   input: UpdateProfileInput;
 };
+
 
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateProfileByDiscordIdArgs = {
   input: UpdateProfileByDiscordIdInput;
 };
 
+
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateProfileByNodeIdArgs = {
   input: UpdateProfileByNodeIdInput;
 };
+
 
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateProfileByUsernameArgs = {
   input: UpdateProfileByUsernameInput;
 };
 
+
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateSettingByNodeIdArgs = {
   input: UpdateSettingByNodeIdInput;
 };
+
 
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateTaskArgs = {
   input: UpdateTaskInput;
 };
 
+
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateTaskByNodeIdArgs = {
   input: UpdateTaskByNodeIdInput;
 };
+
 
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateUserRoleArgs = {
   input: UpdateUserRoleInput;
 };
 
+
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateWorkOnTaskArgs = {
   input: UpdateWorkOnTaskInput;
 };
 
+
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateWorkOnTaskByNodeIdArgs = {
   input: UpdateWorkOnTaskByNodeIdInput;
 };
+
 
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUploadCtfLogoArgs = {
@@ -1399,6 +1446,7 @@ export type Profile = Node & {
   workOnTasks: WorkOnTasksConnection;
 };
 
+
 export type ProfileCtfsByInvitationProfileIdAndCtfIdArgs = {
   after?: InputMaybe<Scalars['Cursor']>;
   before?: InputMaybe<Scalars['Cursor']>;
@@ -1410,6 +1458,7 @@ export type ProfileCtfsByInvitationProfileIdAndCtfIdArgs = {
   orderBy?: InputMaybe<Array<CtfsOrderBy>>;
 };
 
+
 export type ProfileInvitationsArgs = {
   after?: InputMaybe<Scalars['Cursor']>;
   before?: InputMaybe<Scalars['Cursor']>;
@@ -1419,6 +1468,7 @@ export type ProfileInvitationsArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<InvitationsOrderBy>>;
 };
+
 
 export type ProfileTasksByWorkOnTaskProfileIdAndTaskIdArgs = {
   after?: InputMaybe<Scalars['Cursor']>;
@@ -1430,6 +1480,7 @@ export type ProfileTasksByWorkOnTaskProfileIdAndTaskIdArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<TasksOrderBy>>;
 };
+
 
 export type ProfileWorkOnTasksArgs = {
   after?: InputMaybe<Scalars['Cursor']>;
@@ -1549,7 +1600,7 @@ export enum ProfilesOrderBy {
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC',
   UsernameAsc = 'USERNAME_ASC',
-  UsernameDesc = 'USERNAME_DESC',
+  UsernameDesc = 'USERNAME_DESC'
 }
 
 export type PublicProfile = {
@@ -1592,7 +1643,7 @@ export type PublicProfilesEdge = {
 
 /** Methods to use when ordering `PublicProfile`. */
 export enum PublicProfilesOrderBy {
-  Natural = 'NATURAL',
+  Natural = 'NATURAL'
 }
 
 /** The root query type which gives access points into the data universe. */
@@ -1645,8 +1696,6 @@ export type Query = Node & {
    * which can only query top level fields if they are in a particular form.
    */
   query: Query;
-  /** Reads and enables pagination through a set of `Scoreboard`. */
-  scoreboards?: Maybe<ScoreboardsConnection>;
   /** Reads a single `Setting` using its globally unique `ID`. */
   settingByNodeId?: Maybe<Setting>;
   /** Reads and enables pagination through a set of `Setting`. */
@@ -1671,16 +1720,19 @@ export type Query = Node & {
   workOnTasks?: Maybe<WorkOnTasksConnection>;
 };
 
+
 /** The root query type which gives access points into the data universe. */
 export type QueryAssignedTagArgs = {
   tagId: Scalars['Int'];
   taskId: Scalars['Int'];
 };
 
+
 /** The root query type which gives access points into the data universe. */
 export type QueryAssignedTagByNodeIdArgs = {
   nodeId: Scalars['ID'];
 };
+
 
 /** The root query type which gives access points into the data universe. */
 export type QueryAssignedTagsArgs = {
@@ -1693,25 +1745,30 @@ export type QueryAssignedTagsArgs = {
   orderBy?: InputMaybe<Array<AssignedTagsOrderBy>>;
 };
 
+
 /** The root query type which gives access points into the data universe. */
 export type QueryCtfArgs = {
   id: Scalars['Int'];
 };
+
 
 /** The root query type which gives access points into the data universe. */
 export type QueryCtfByNodeIdArgs = {
   nodeId: Scalars['ID'];
 };
 
+
 /** The root query type which gives access points into the data universe. */
 export type QueryCtfSecretArgs = {
   id: Scalars['Int'];
 };
 
+
 /** The root query type which gives access points into the data universe. */
 export type QueryCtfSecretByNodeIdArgs = {
   nodeId: Scalars['ID'];
 };
+
 
 /** The root query type which gives access points into the data universe. */
 export type QueryCtfSecretsArgs = {
@@ -1723,6 +1780,7 @@ export type QueryCtfSecretsArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<CtfSecretsOrderBy>>;
 };
+
 
 /** The root query type which gives access points into the data universe. */
 export type QueryCtfsArgs = {
@@ -1736,6 +1794,7 @@ export type QueryCtfsArgs = {
   orderBy?: InputMaybe<Array<CtfsOrderBy>>;
 };
 
+
 /** The root query type which gives access points into the data universe. */
 export type QueryGuestsArgs = {
   after?: InputMaybe<Scalars['Cursor']>;
@@ -1744,6 +1803,7 @@ export type QueryGuestsArgs = {
   last?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
 };
+
 
 /** The root query type which gives access points into the data universe. */
 export type QueryIncomingCtfArgs = {
@@ -1754,16 +1814,19 @@ export type QueryIncomingCtfArgs = {
   offset?: InputMaybe<Scalars['Int']>;
 };
 
+
 /** The root query type which gives access points into the data universe. */
 export type QueryInvitationArgs = {
   ctfId: Scalars['Int'];
   profileId: Scalars['Int'];
 };
 
+
 /** The root query type which gives access points into the data universe. */
 export type QueryInvitationByNodeIdArgs = {
   nodeId: Scalars['ID'];
 };
+
 
 /** The root query type which gives access points into the data universe. */
 export type QueryInvitationsArgs = {
@@ -1776,10 +1839,12 @@ export type QueryInvitationsArgs = {
   orderBy?: InputMaybe<Array<InvitationsOrderBy>>;
 };
 
+
 /** The root query type which gives access points into the data universe. */
 export type QueryNodeArgs = {
   nodeId: Scalars['ID'];
 };
+
 
 /** The root query type which gives access points into the data universe. */
 export type QueryPastCtfArgs = {
@@ -1790,25 +1855,30 @@ export type QueryPastCtfArgs = {
   offset?: InputMaybe<Scalars['Int']>;
 };
 
+
 /** The root query type which gives access points into the data universe. */
 export type QueryProfileArgs = {
   id: Scalars['Int'];
 };
+
 
 /** The root query type which gives access points into the data universe. */
 export type QueryProfileByDiscordIdArgs = {
   discordId: Scalars['String'];
 };
 
+
 /** The root query type which gives access points into the data universe. */
 export type QueryProfileByNodeIdArgs = {
   nodeId: Scalars['ID'];
 };
 
+
 /** The root query type which gives access points into the data universe. */
 export type QueryProfileByUsernameArgs = {
   username: Scalars['String'];
 };
+
 
 /** The root query type which gives access points into the data universe. */
 export type QueryProfilesArgs = {
@@ -1822,6 +1892,7 @@ export type QueryProfilesArgs = {
   orderBy?: InputMaybe<Array<ProfilesOrderBy>>;
 };
 
+
 /** The root query type which gives access points into the data universe. */
 export type QueryPublicProfilesArgs = {
   after?: InputMaybe<Scalars['Cursor']>;
@@ -1832,21 +1903,12 @@ export type QueryPublicProfilesArgs = {
   orderBy?: InputMaybe<Array<PublicProfilesOrderBy>>;
 };
 
-/** The root query type which gives access points into the data universe. */
-export type QueryScoreboardsArgs = {
-  after?: InputMaybe<Scalars['Cursor']>;
-  before?: InputMaybe<Scalars['Cursor']>;
-  condition?: InputMaybe<ScoreboardCondition>;
-  first?: InputMaybe<Scalars['Int']>;
-  last?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<Array<ScoreboardsOrderBy>>;
-};
 
 /** The root query type which gives access points into the data universe. */
 export type QuerySettingByNodeIdArgs = {
   nodeId: Scalars['ID'];
 };
+
 
 /** The root query type which gives access points into the data universe. */
 export type QuerySettingsArgs = {
@@ -1858,20 +1920,24 @@ export type QuerySettingsArgs = {
   orderBy?: InputMaybe<Array<SettingsOrderBy>>;
 };
 
+
 /** The root query type which gives access points into the data universe. */
 export type QueryTagArgs = {
   id: Scalars['Int'];
 };
+
 
 /** The root query type which gives access points into the data universe. */
 export type QueryTagByNodeIdArgs = {
   nodeId: Scalars['ID'];
 };
 
+
 /** The root query type which gives access points into the data universe. */
 export type QueryTagByTagArgs = {
   tag: Scalars['String'];
 };
+
 
 /** The root query type which gives access points into the data universe. */
 export type QueryTagsArgs = {
@@ -1885,15 +1951,18 @@ export type QueryTagsArgs = {
   orderBy?: InputMaybe<Array<TagsOrderBy>>;
 };
 
+
 /** The root query type which gives access points into the data universe. */
 export type QueryTaskArgs = {
   id: Scalars['Int'];
 };
 
+
 /** The root query type which gives access points into the data universe. */
 export type QueryTaskByNodeIdArgs = {
   nodeId: Scalars['ID'];
 };
+
 
 /** The root query type which gives access points into the data universe. */
 export type QueryTasksArgs = {
@@ -1907,6 +1976,7 @@ export type QueryTasksArgs = {
   orderBy?: InputMaybe<Array<TasksOrderBy>>;
 };
 
+
 /** The root query type which gives access points into the data universe. */
 export type QueryUsersArgs = {
   after?: InputMaybe<Scalars['Cursor']>;
@@ -1917,16 +1987,19 @@ export type QueryUsersArgs = {
   orderBy?: InputMaybe<Array<UsersOrderBy>>;
 };
 
+
 /** The root query type which gives access points into the data universe. */
 export type QueryWorkOnTaskArgs = {
   profileId: Scalars['Int'];
   taskId: Scalars['Int'];
 };
 
+
 /** The root query type which gives access points into the data universe. */
 export type QueryWorkOnTaskByNodeIdArgs = {
   nodeId: Scalars['ID'];
 };
+
 
 /** The root query type which gives access points into the data universe. */
 export type QueryWorkOnTasksArgs = {
@@ -2091,55 +2164,7 @@ export enum Role {
   UserFriend = 'USER_FRIEND',
   UserGuest = 'USER_GUEST',
   UserManager = 'USER_MANAGER',
-  UserMember = 'USER_MEMBER',
-}
-
-export type Scoreboard = {
-  __typename?: 'Scoreboard';
-  /** Reads a single `Ctf` that is related to this `Scoreboard`. */
-  ctf?: Maybe<Ctf>;
-  ctfId?: Maybe<Scalars['Int']>;
-  rank: Scalars['Int'];
-  score: Scalars['Int'];
-  teamName: Scalars['String'];
-};
-
-/**
- * A condition to be used against `Scoreboard` object types. All fields are tested
- * for equality and combined with a logical ‘and.’
- */
-export type ScoreboardCondition = {
-  /** Checks for equality with the object’s `ctfId` field. */
-  ctfId?: InputMaybe<Scalars['Int']>;
-};
-
-/** A connection to a list of `Scoreboard` values. */
-export type ScoreboardsConnection = {
-  __typename?: 'ScoreboardsConnection';
-  /** A list of edges which contains the `Scoreboard` and cursor to aid in pagination. */
-  edges: Array<ScoreboardsEdge>;
-  /** A list of `Scoreboard` objects. */
-  nodes: Array<Scoreboard>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `Scoreboard` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `Scoreboard` edge in the connection. */
-export type ScoreboardsEdge = {
-  __typename?: 'ScoreboardsEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `Scoreboard` at the end of the edge. */
-  node: Scoreboard;
-};
-
-/** Methods to use when ordering `Scoreboard`. */
-export enum ScoreboardsOrderBy {
-  CtfIdAsc = 'CTF_ID_ASC',
-  CtfIdDesc = 'CTF_ID_DESC',
-  Natural = 'NATURAL',
+  UserMember = 'USER_MEMBER'
 }
 
 /** All input for the `setDiscordEventLink` mutation. */
@@ -2215,7 +2240,7 @@ export type SettingsEdge = {
 export enum SettingsOrderBy {
   Natural = 'NATURAL',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
-  PrimaryKeyDesc = 'PRIMARY_KEY_DESC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
 
 /** All input for the `startWorkingOn` mutation. */
@@ -2246,6 +2271,7 @@ export type StartWorkingOnPayload = {
   /** An edge for our `WorkOnTask`. May be used by Relay 1. */
   workOnTaskEdge?: Maybe<WorkOnTasksEdge>;
 };
+
 
 /** The output of our `startWorkingOn` mutation. */
 export type StartWorkingOnPayloadWorkOnTaskEdgeArgs = {
@@ -2281,6 +2307,7 @@ export type StopWorkingOnPayload = {
   workOnTaskEdge?: Maybe<WorkOnTasksEdge>;
 };
 
+
 /** The output of our `stopWorkingOn` mutation. */
 export type StopWorkingOnPayloadWorkOnTaskEdgeArgs = {
   orderBy?: InputMaybe<Array<WorkOnTasksOrderBy>>;
@@ -2301,6 +2328,7 @@ export type Subscription = {
   listen: ListenPayload;
 };
 
+
 /** The root subscription type: contains realtime events you can subscribe to with the `subscription` operation. */
 export type SubscriptionListenArgs = {
   topic: Scalars['String'];
@@ -2318,6 +2346,7 @@ export type Tag = Node & {
   tasksByAssignedTagTagIdAndTaskId: TagTasksByAssignedTagTagIdAndTaskIdManyToManyConnection;
 };
 
+
 export type TagAssignedTagsArgs = {
   after?: InputMaybe<Scalars['Cursor']>;
   before?: InputMaybe<Scalars['Cursor']>;
@@ -2327,6 +2356,7 @@ export type TagAssignedTagsArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<AssignedTagsOrderBy>>;
 };
+
 
 export type TagTasksByAssignedTagTagIdAndTaskIdArgs = {
   after?: InputMaybe<Scalars['Cursor']>;
@@ -2417,7 +2447,7 @@ export enum TagsOrderBy {
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC',
   TagAsc = 'TAG_ASC',
-  TagDesc = 'TAG_DESC',
+  TagDesc = 'TAG_DESC'
 }
 
 export type Task = Node & {
@@ -2444,6 +2474,7 @@ export type Task = Node & {
   workOnTasks: WorkOnTasksConnection;
 };
 
+
 export type TaskAssignedTagsArgs = {
   after?: InputMaybe<Scalars['Cursor']>;
   before?: InputMaybe<Scalars['Cursor']>;
@@ -2453,6 +2484,7 @@ export type TaskAssignedTagsArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<AssignedTagsOrderBy>>;
 };
+
 
 export type TaskProfilesByWorkOnTaskTaskIdAndProfileIdArgs = {
   after?: InputMaybe<Scalars['Cursor']>;
@@ -2465,6 +2497,7 @@ export type TaskProfilesByWorkOnTaskTaskIdAndProfileIdArgs = {
   orderBy?: InputMaybe<Array<ProfilesOrderBy>>;
 };
 
+
 export type TaskTagsByAssignedTagTaskIdAndTagIdArgs = {
   after?: InputMaybe<Scalars['Cursor']>;
   before?: InputMaybe<Scalars['Cursor']>;
@@ -2475,6 +2508,7 @@ export type TaskTagsByAssignedTagTaskIdAndTagIdArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<TagsOrderBy>>;
 };
+
 
 export type TaskWorkOnTasksArgs = {
   after?: InputMaybe<Scalars['Cursor']>;
@@ -2593,7 +2627,7 @@ export enum TasksOrderBy {
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC',
   TitleAsc = 'TITLE_ASC',
-  TitleDesc = 'TITLE_DESC',
+  TitleDesc = 'TITLE_DESC'
 }
 
 /** All input for the `updateCtfByNodeId` mutation. */
@@ -2638,6 +2672,7 @@ export type UpdateCtfPayload = {
   /** Reads a single `CtfSecret` that is related to this `Ctf`. */
   secrets?: Maybe<CtfSecret>;
 };
+
 
 /** The output of our update `Ctf` mutation. */
 export type UpdateCtfPayloadCtfEdgeArgs = {
@@ -2684,6 +2719,7 @@ export type UpdateCtfSecretPayload = {
   /** Our root query field type. Allows us to run any query from our mutation payload. */
   query?: Maybe<Query>;
 };
+
 
 /** The output of our update `CtfSecret` mutation. */
 export type UpdateCtfSecretPayloadCtfSecretEdgeArgs = {
@@ -2776,6 +2812,7 @@ export type UpdateProfilePayload = {
   query?: Maybe<Query>;
 };
 
+
 /** The output of our update `Profile` mutation. */
 export type UpdateProfilePayloadProfileEdgeArgs = {
   orderBy?: InputMaybe<Array<ProfilesOrderBy>>;
@@ -2809,6 +2846,7 @@ export type UpdateSettingPayload = {
   /** An edge for our `Setting`. May be used by Relay 1. */
   settingEdge?: Maybe<SettingsEdge>;
 };
+
 
 /** The output of our update `Setting` mutation. */
 export type UpdateSettingPayloadSettingEdgeArgs = {
@@ -2857,6 +2895,7 @@ export type UpdateTaskPayload = {
   /** An edge for our `Task`. May be used by Relay 1. */
   taskEdge?: Maybe<TasksEdge>;
 };
+
 
 /** The output of our update `Task` mutation. */
 export type UpdateTaskPayloadTaskEdgeArgs = {
@@ -2933,6 +2972,7 @@ export type UpdateWorkOnTaskPayload = {
   workOnTaskEdge?: Maybe<WorkOnTasksEdge>;
 };
 
+
 /** The output of our update `WorkOnTask` mutation. */
 export type UpdateWorkOnTaskPayloadWorkOnTaskEdgeArgs = {
   orderBy?: InputMaybe<Array<WorkOnTasksOrderBy>>;
@@ -2978,7 +3018,7 @@ export type UsersEdge = {
 
 /** Methods to use when ordering `User`. */
 export enum UsersOrderBy {
-  Natural = 'NATURAL',
+  Natural = 'NATURAL'
 }
 
 export type WorkOnTask = Node & {
@@ -3049,184 +3089,85 @@ export enum WorkOnTasksOrderBy {
   ProfileIdAsc = 'PROFILE_ID_ASC',
   ProfileIdDesc = 'PROFILE_ID_DESC',
   TaskIdAsc = 'TASK_ID_ASC',
-  TaskIdDesc = 'TASK_ID_DESC',
+  TaskIdDesc = 'TASK_ID_DESC'
 }
 
-export type UserFragment = {
-  __typename?: 'User';
-  nodeId?: string | null;
-  login?: string | null;
-  role?: Role | null;
-  id?: number | null;
-  profile?: {
-    __typename?: 'Profile';
-    id: number;
-    username: string;
-    lastactive: string;
-    color?: string | null;
-    description: string;
-    role?: Role | null;
-    discordId?: string | null;
-    nodeId: string;
-  } | null;
-};
+export type UserFragment = { __typename?: 'User', nodeId?: string | null, login?: string | null, role?: Role | null, id?: number | null, profile?: { __typename?: 'Profile', id: number, username: string, lastactive: string, color?: string | null, description: string, role?: Role | null, discordId?: string | null, nodeId: string } | null };
 
-export type GetUsersQueryVariables = Exact<{ [key: string]: never }>;
+export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type GetUsersQuery = {
-  __typename?: 'Query';
-  users?: {
-    __typename?: 'UsersConnection';
-    nodes: Array<{
-      __typename?: 'User';
-      nodeId?: string | null;
-      login?: string | null;
-      role?: Role | null;
-      id?: number | null;
-      profile?: {
-        __typename?: 'Profile';
-        id: number;
-        username: string;
-        lastactive: string;
-        color?: string | null;
-        description: string;
-        role?: Role | null;
-        discordId?: string | null;
-        nodeId: string;
-      } | null;
-    }>;
-  } | null;
-};
+
+export type GetUsersQuery = { __typename?: 'Query', users?: { __typename?: 'UsersConnection', nodes: Array<{ __typename?: 'User', nodeId?: string | null, login?: string | null, role?: Role | null, id?: number | null, profile?: { __typename?: 'Profile', id: number, username: string, lastactive: string, color?: string | null, description: string, role?: Role | null, discordId?: string | null, nodeId: string } | null }> } | null };
 
 export type CreateInvitationTokenMutationVariables = Exact<{
   role: Role;
 }>;
 
-export type CreateInvitationTokenMutation = {
-  __typename?: 'Mutation';
-  createInvitationLink?: {
-    __typename?: 'CreateInvitationLinkPayload';
-    invitationLinkResponse?: {
-      __typename?: 'InvitationLinkResponse';
-      token?: string | null;
-    } | null;
-  } | null;
-};
+
+export type CreateInvitationTokenMutation = { __typename?: 'Mutation', createInvitationLink?: { __typename?: 'CreateInvitationLinkPayload', invitationLinkResponse?: { __typename?: 'InvitationLinkResponse', token?: string | null } | null } | null };
 
 export type CreateResetPasswordTokenMutationVariables = Exact<{
   userId: Scalars['Int'];
 }>;
 
-export type CreateResetPasswordTokenMutation = {
-  __typename?: 'Mutation';
-  createResetPasswordLink?: {
-    __typename?: 'CreateResetPasswordLinkPayload';
-    resetPasswordLinkResponse?: {
-      __typename?: 'ResetPasswordLinkResponse';
-      token?: string | null;
-    } | null;
-  } | null;
-};
+
+export type CreateResetPasswordTokenMutation = { __typename?: 'Mutation', createResetPasswordLink?: { __typename?: 'CreateResetPasswordLinkPayload', resetPasswordLinkResponse?: { __typename?: 'ResetPasswordLinkResponse', token?: string | null } | null } | null };
 
 export type DeleteUserByIdMutationVariables = Exact<{
   userId: Scalars['Int'];
 }>;
 
-export type DeleteUserByIdMutation = {
-  __typename?: 'Mutation';
-  deleteUser?: {
-    __typename?: 'DeleteUserPayload';
-    userResponse?: {
-      __typename?: 'UserResponse';
-      id?: number | null;
-      login?: string | null;
-      role?: Role | null;
-    } | null;
-  } | null;
-};
+
+export type DeleteUserByIdMutation = { __typename?: 'Mutation', deleteUser?: { __typename?: 'DeleteUserPayload', userResponse?: { __typename?: 'UserResponse', id?: number | null, login?: string | null, role?: Role | null } | null } | null };
 
 export type UpdateRoleForUserIdMutationVariables = Exact<{
   userId: Scalars['Int'];
   role: Role;
 }>;
 
-export type UpdateRoleForUserIdMutation = {
-  __typename?: 'Mutation';
-  updateUserRole?: {
-    __typename?: 'UpdateUserRolePayload';
-    role?: Role | null;
-  } | null;
-};
 
-export type MeQueryVariables = Exact<{ [key: string]: never }>;
+export type UpdateRoleForUserIdMutation = { __typename?: 'Mutation', updateUserRole?: { __typename?: 'UpdateUserRolePayload', role?: Role | null } | null };
 
-export type MeQuery = {
-  __typename?: 'Query';
-  me?: {
-    __typename?: 'Profile';
-    id: number;
-    username: string;
-    lastactive: string;
-    color?: string | null;
-    description: string;
-    role?: Role | null;
-    discordId?: string | null;
-    nodeId: string;
-  } | null;
-};
+export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type NewTokenQueryVariables = Exact<{ [key: string]: never }>;
 
-export type NewTokenQuery = { __typename?: 'Query'; newToken?: string | null };
+export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'Profile', id: number, username: string, lastactive: string, color?: string | null, description: string, role?: Role | null, discordId?: string | null, nodeId: string } | null };
 
-export type ProfileTokenQueryVariables = Exact<{ [key: string]: never }>;
+export type NewTokenQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type ProfileTokenQuery = {
-  __typename?: 'Query';
-  profileToken?: string | null;
-};
 
-export type ResetProfileTokenMutationVariables = Exact<{
-  [key: string]: never;
-}>;
+export type NewTokenQuery = { __typename?: 'Query', newToken?: string | null };
 
-export type ResetProfileTokenMutation = {
-  __typename?: 'Mutation';
-  resetProfileToken?: {
-    __typename?: 'ResetProfileTokenPayload';
-    string?: string | null;
-  } | null;
-};
+export type ProfileTokenQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type ResetDiscordIdMutationVariables = Exact<{ [key: string]: never }>;
 
-export type ResetDiscordIdMutation = {
-  __typename?: 'Mutation';
-  resetDiscordId?: {
-    __typename?: 'ResetDiscordIdPayload';
-    string?: string | null;
-  } | null;
-};
+export type ProfileTokenQuery = { __typename?: 'Query', profileToken?: string | null };
+
+export type ResetProfileTokenMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ResetProfileTokenMutation = { __typename?: 'Mutation', resetProfileToken?: { __typename?: 'ResetProfileTokenPayload', string?: string | null } | null };
+
+export type ResetDiscordIdMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ResetDiscordIdMutation = { __typename?: 'Mutation', resetDiscordId?: { __typename?: 'ResetDiscordIdPayload', string?: string | null } | null };
 
 export type LoginMutationVariables = Exact<{
   login: Scalars['String'];
   password: Scalars['String'];
 }>;
 
-export type LoginMutation = {
-  __typename?: 'Mutation';
-  login?: { __typename?: 'LoginPayload'; jwt?: string | null } | null;
-};
+
+export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'LoginPayload', jwt?: string | null } | null };
 
 export type RegisterMutationVariables = Exact<{
   login: Scalars['String'];
   password: Scalars['String'];
 }>;
 
-export type RegisterMutation = {
-  __typename?: 'Mutation';
-  register?: { __typename?: 'RegisterPayload'; jwt?: string | null } | null;
-};
+
+export type RegisterMutation = { __typename?: 'Mutation', register?: { __typename?: 'RegisterPayload', jwt?: string | null } | null };
 
 export type RegisterWithTokenMutationVariables = Exact<{
   login: Scalars['String'];
@@ -3234,13 +3175,8 @@ export type RegisterWithTokenMutationVariables = Exact<{
   token: Scalars['String'];
 }>;
 
-export type RegisterWithTokenMutation = {
-  __typename?: 'Mutation';
-  registerWithToken?: {
-    __typename?: 'RegisterWithTokenPayload';
-    jwt?: string | null;
-  } | null;
-};
+
+export type RegisterWithTokenMutation = { __typename?: 'Mutation', registerWithToken?: { __typename?: 'RegisterWithTokenPayload', jwt?: string | null } | null };
 
 export type RegisterWithPasswordMutationVariables = Exact<{
   login: Scalars['String'];
@@ -3248,370 +3184,50 @@ export type RegisterWithPasswordMutationVariables = Exact<{
   ctfnotePassword: Scalars['String'];
 }>;
 
-export type RegisterWithPasswordMutation = {
-  __typename?: 'Mutation';
-  registerWithPassword?: {
-    __typename?: 'RegisterWithPasswordPayload';
-    jwt?: string | null;
-  } | null;
-};
+
+export type RegisterWithPasswordMutation = { __typename?: 'Mutation', registerWithPassword?: { __typename?: 'RegisterWithPasswordPayload', jwt?: string | null } | null };
 
 export type ResetPasswordMutationVariables = Exact<{
   password: Scalars['String'];
   token: Scalars['String'];
 }>;
 
-export type ResetPasswordMutation = {
-  __typename?: 'Mutation';
-  resetPassword?: {
-    __typename?: 'ResetPasswordPayload';
-    jwt?: string | null;
-  } | null;
-};
 
-export type CtfFragment = {
-  __typename?: 'Ctf';
-  nodeId: string;
-  id: number;
-  granted?: boolean | null;
-  ctfUrl?: string | null;
-  ctfPlatform: string;
-  ctftimeUrl?: string | null;
-  description: string;
-  endTime: string;
-  logoUrl?: string | null;
-  startTime: string;
-  weight: number;
-  title: string;
-  discordEventLink?: string | null;
-};
+export type ResetPasswordMutation = { __typename?: 'Mutation', resetPassword?: { __typename?: 'ResetPasswordPayload', jwt?: string | null } | null };
 
-export type FullCtfFragment = {
-  __typename?: 'Ctf';
-  nodeId: string;
-  id: number;
-  granted?: boolean | null;
-  ctfUrl?: string | null;
-  ctfPlatform: string;
-  ctftimeUrl?: string | null;
-  description: string;
-  endTime: string;
-  logoUrl?: string | null;
-  startTime: string;
-  weight: number;
-  title: string;
-  discordEventLink?: string | null;
-  tasks: {
-    __typename?: 'TasksConnection';
-    nodes: Array<{
-      __typename?: 'Task';
-      nodeId: string;
-      id: number;
-      title: string;
-      ctfId: number;
-      padUrl: string;
-      description: string;
-      files: string;
-      flag: string;
-      solved?: boolean | null;
-      assignedTags: {
-        __typename?: 'AssignedTagsConnection';
-        nodes: Array<{
-          __typename?: 'AssignedTag';
-          nodeId: string;
-          taskId: number;
-          tagId: number;
-          tag?: {
-            __typename?: 'Tag';
-            nodeId: string;
-            id: number;
-            tag: string;
-          } | null;
-        }>;
-      };
-      workOnTasks: {
-        __typename?: 'WorkOnTasksConnection';
-        nodes: Array<{
-          __typename?: 'WorkOnTask';
-          nodeId: string;
-          profileId: number;
-          active: boolean;
-          taskId: number;
-        }>;
-      };
-    }>;
-  };
-  secrets?: {
-    __typename?: 'CtfSecret';
-    nodeId: string;
-    username?: string | null;
-    password?: string | null;
-    scoreboardName?: string | null;
-  } | null;
-  invitations: {
-    __typename?: 'InvitationsConnection';
-    nodes: Array<{
-      __typename?: 'Invitation';
-      nodeId: string;
-      ctfId: number;
-      profileId: number;
-    }>;
-  };
-};
+export type CtfFragment = { __typename?: 'Ctf', nodeId: string, id: number, granted?: boolean | null, ctfUrl?: string | null, ctfPlatform: string, ctftimeUrl?: string | null, description: string, endTime: string, logoUrl?: string | null, startTime: string, weight: number, title: string, discordEventLink?: string | null };
 
-export type CtfsQueryVariables = Exact<{ [key: string]: never }>;
+export type FullCtfFragment = { __typename?: 'Ctf', nodeId: string, id: number, granted?: boolean | null, ctfUrl?: string | null, ctfPlatform: string, ctftimeUrl?: string | null, description: string, endTime: string, logoUrl?: string | null, startTime: string, weight: number, title: string, discordEventLink?: string | null, tasks: { __typename?: 'TasksConnection', nodes: Array<{ __typename?: 'Task', nodeId: string, id: number, title: string, ctfId: number, padUrl: string, description: string, files: string, flag: string, solved?: boolean | null, assignedTags: { __typename?: 'AssignedTagsConnection', nodes: Array<{ __typename?: 'AssignedTag', nodeId: string, taskId: number, tagId: number, tag?: { __typename?: 'Tag', nodeId: string, id: number, tag: string } | null }> }, workOnTasks: { __typename?: 'WorkOnTasksConnection', nodes: Array<{ __typename?: 'WorkOnTask', nodeId: string, profileId: number, active: boolean, taskId: number }> } }> }, secrets?: { __typename?: 'CtfSecret', nodeId: string, username?: string | null, password?: string | null, scoreboardName?: string | null } | null, invitations: { __typename?: 'InvitationsConnection', nodes: Array<{ __typename?: 'Invitation', nodeId: string, ctfId: number, profileId: number }> } };
 
-export type CtfsQuery = {
-  __typename?: 'Query';
-  ctfs?: {
-    __typename?: 'CtfsConnection';
-    nodes: Array<{
-      __typename?: 'Ctf';
-      nodeId: string;
-      id: number;
-      granted?: boolean | null;
-      ctfUrl?: string | null;
-      ctfPlatform: string;
-      ctftimeUrl?: string | null;
-      description: string;
-      endTime: string;
-      logoUrl?: string | null;
-      startTime: string;
-      weight: number;
-      title: string;
-      discordEventLink?: string | null;
-    }>;
-  } | null;
-};
+export type CtfsQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type SubscribeToCtfSubscriptionVariables = Exact<{
-  [key: string]: never;
-}>;
 
-export type SubscribeToCtfSubscription = {
-  __typename?: 'Subscription';
-  listen: {
-    __typename?: 'ListenPayload';
-    relatedNodeId?: string | null;
-    relatedNode?:
-      | { __typename?: 'AssignedTag'; nodeId: string }
-      | {
-          __typename?: 'Ctf';
-          nodeId: string;
-          id: number;
-          granted?: boolean | null;
-          ctfUrl?: string | null;
-          ctfPlatform: string;
-          ctftimeUrl?: string | null;
-          description: string;
-          endTime: string;
-          logoUrl?: string | null;
-          startTime: string;
-          weight: number;
-          title: string;
-          discordEventLink?: string | null;
-          tasks: {
-            __typename?: 'TasksConnection';
-            nodes: Array<{
-              __typename?: 'Task';
-              nodeId: string;
-              id: number;
-              title: string;
-              ctfId: number;
-              padUrl: string;
-              description: string;
-              files: string;
-              flag: string;
-              solved?: boolean | null;
-              assignedTags: {
-                __typename?: 'AssignedTagsConnection';
-                nodes: Array<{
-                  __typename?: 'AssignedTag';
-                  nodeId: string;
-                  taskId: number;
-                  tagId: number;
-                  tag?: {
-                    __typename?: 'Tag';
-                    nodeId: string;
-                    id: number;
-                    tag: string;
-                  } | null;
-                }>;
-              };
-              workOnTasks: {
-                __typename?: 'WorkOnTasksConnection';
-                nodes: Array<{
-                  __typename?: 'WorkOnTask';
-                  nodeId: string;
-                  profileId: number;
-                  active: boolean;
-                  taskId: number;
-                }>;
-              };
-            }>;
-          };
-          secrets?: {
-            __typename?: 'CtfSecret';
-            nodeId: string;
-            username?: string | null;
-            password?: string | null;
-            scoreboardName?: string | null;
-          } | null;
-          invitations: {
-            __typename?: 'InvitationsConnection';
-            nodes: Array<{
-              __typename?: 'Invitation';
-              nodeId: string;
-              ctfId: number;
-              profileId: number;
-            }>;
-          };
-        }
-      | { __typename?: 'CtfSecret'; nodeId: string }
-      | { __typename?: 'Invitation'; nodeId: string }
-      | { __typename?: 'Profile'; nodeId: string }
-      | { __typename?: 'Query'; nodeId: string }
-      | { __typename?: 'Setting'; nodeId: string }
-      | { __typename?: 'Tag'; nodeId: string }
-      | { __typename?: 'Task'; nodeId: string }
-      | { __typename?: 'WorkOnTask'; nodeId: string }
-      | null;
-  };
-};
+export type CtfsQuery = { __typename?: 'Query', ctfs?: { __typename?: 'CtfsConnection', nodes: Array<{ __typename?: 'Ctf', nodeId: string, id: number, granted?: boolean | null, ctfUrl?: string | null, ctfPlatform: string, ctftimeUrl?: string | null, description: string, endTime: string, logoUrl?: string | null, startTime: string, weight: number, title: string, discordEventLink?: string | null }> } | null };
+
+export type SubscribeToCtfSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SubscribeToCtfSubscription = { __typename?: 'Subscription', listen: { __typename?: 'ListenPayload', relatedNodeId?: string | null, relatedNode?: { __typename?: 'AssignedTag', nodeId: string } | { __typename?: 'Ctf', nodeId: string, id: number, granted?: boolean | null, ctfUrl?: string | null, ctfPlatform: string, ctftimeUrl?: string | null, description: string, endTime: string, logoUrl?: string | null, startTime: string, weight: number, title: string, discordEventLink?: string | null, tasks: { __typename?: 'TasksConnection', nodes: Array<{ __typename?: 'Task', nodeId: string, id: number, title: string, ctfId: number, padUrl: string, description: string, files: string, flag: string, solved?: boolean | null, assignedTags: { __typename?: 'AssignedTagsConnection', nodes: Array<{ __typename?: 'AssignedTag', nodeId: string, taskId: number, tagId: number, tag?: { __typename?: 'Tag', nodeId: string, id: number, tag: string } | null }> }, workOnTasks: { __typename?: 'WorkOnTasksConnection', nodes: Array<{ __typename?: 'WorkOnTask', nodeId: string, profileId: number, active: boolean, taskId: number }> } }> }, secrets?: { __typename?: 'CtfSecret', nodeId: string, username?: string | null, password?: string | null, scoreboardName?: string | null } | null, invitations: { __typename?: 'InvitationsConnection', nodes: Array<{ __typename?: 'Invitation', nodeId: string, ctfId: number, profileId: number }> } } | { __typename?: 'CtfSecret', nodeId: string } | { __typename?: 'Invitation', nodeId: string } | { __typename?: 'Profile', nodeId: string } | { __typename?: 'Query', nodeId: string } | { __typename?: 'Setting', nodeId: string } | { __typename?: 'Tag', nodeId: string } | { __typename?: 'Task', nodeId: string } | { __typename?: 'WorkOnTask', nodeId: string } | null } };
 
 export type GetFullCtfQueryVariables = Exact<{
   id: Scalars['Int'];
 }>;
 
-export type GetFullCtfQuery = {
-  __typename?: 'Query';
-  ctf?: {
-    __typename?: 'Ctf';
-    nodeId: string;
-    id: number;
-    granted?: boolean | null;
-    ctfUrl?: string | null;
-    ctfPlatform: string;
-    ctftimeUrl?: string | null;
-    description: string;
-    endTime: string;
-    logoUrl?: string | null;
-    startTime: string;
-    weight: number;
-    title: string;
-    discordEventLink?: string | null;
-    tasks: {
-      __typename?: 'TasksConnection';
-      nodes: Array<{
-        __typename?: 'Task';
-        nodeId: string;
-        id: number;
-        title: string;
-        ctfId: number;
-        padUrl: string;
-        description: string;
-        files: string;
-        flag: string;
-        solved?: boolean | null;
-        assignedTags: {
-          __typename?: 'AssignedTagsConnection';
-          nodes: Array<{
-            __typename?: 'AssignedTag';
-            nodeId: string;
-            taskId: number;
-            tagId: number;
-            tag?: {
-              __typename?: 'Tag';
-              nodeId: string;
-              id: number;
-              tag: string;
-            } | null;
-          }>;
-        };
-        workOnTasks: {
-          __typename?: 'WorkOnTasksConnection';
-          nodes: Array<{
-            __typename?: 'WorkOnTask';
-            nodeId: string;
-            profileId: number;
-            active: boolean;
-            taskId: number;
-          }>;
-        };
-      }>;
-    };
-    secrets?: {
-      __typename?: 'CtfSecret';
-      nodeId: string;
-      username?: string | null;
-      password?: string | null;
-      scoreboardName?: string | null;
-    } | null;
-    invitations: {
-      __typename?: 'InvitationsConnection';
-      nodes: Array<{
-        __typename?: 'Invitation';
-        nodeId: string;
-        ctfId: number;
-        profileId: number;
-      }>;
-    };
-  } | null;
-};
 
-export type IncomingCtfsQueryVariables = Exact<{ [key: string]: never }>;
+export type GetFullCtfQuery = { __typename?: 'Query', ctf?: { __typename?: 'Ctf', nodeId: string, id: number, granted?: boolean | null, ctfUrl?: string | null, ctfPlatform: string, ctftimeUrl?: string | null, description: string, endTime: string, logoUrl?: string | null, startTime: string, weight: number, title: string, discordEventLink?: string | null, tasks: { __typename?: 'TasksConnection', nodes: Array<{ __typename?: 'Task', nodeId: string, id: number, title: string, ctfId: number, padUrl: string, description: string, files: string, flag: string, solved?: boolean | null, assignedTags: { __typename?: 'AssignedTagsConnection', nodes: Array<{ __typename?: 'AssignedTag', nodeId: string, taskId: number, tagId: number, tag?: { __typename?: 'Tag', nodeId: string, id: number, tag: string } | null }> }, workOnTasks: { __typename?: 'WorkOnTasksConnection', nodes: Array<{ __typename?: 'WorkOnTask', nodeId: string, profileId: number, active: boolean, taskId: number }> } }> }, secrets?: { __typename?: 'CtfSecret', nodeId: string, username?: string | null, password?: string | null, scoreboardName?: string | null } | null, invitations: { __typename?: 'InvitationsConnection', nodes: Array<{ __typename?: 'Invitation', nodeId: string, ctfId: number, profileId: number }> } } | null };
 
-export type IncomingCtfsQuery = {
-  __typename?: 'Query';
-  incomingCtf?: {
-    __typename?: 'CtfsConnection';
-    nodes: Array<{
-      __typename?: 'Ctf';
-      nodeId: string;
-      id: number;
-      granted?: boolean | null;
-      ctfUrl?: string | null;
-      ctfPlatform: string;
-      ctftimeUrl?: string | null;
-      description: string;
-      endTime: string;
-      logoUrl?: string | null;
-      startTime: string;
-      weight: number;
-      title: string;
-      discordEventLink?: string | null;
-    }>;
-  } | null;
-};
+export type IncomingCtfsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type IncomingCtfsQuery = { __typename?: 'Query', incomingCtf?: { __typename?: 'CtfsConnection', nodes: Array<{ __typename?: 'Ctf', nodeId: string, id: number, granted?: boolean | null, ctfUrl?: string | null, ctfPlatform: string, ctftimeUrl?: string | null, description: string, endTime: string, logoUrl?: string | null, startTime: string, weight: number, title: string, discordEventLink?: string | null }> } | null };
 
 export type PastCtfsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
 }>;
 
-export type PastCtfsQuery = {
-  __typename?: 'Query';
-  pastCtf?: {
-    __typename?: 'CtfsConnection';
-    totalCount: number;
-    nodes: Array<{
-      __typename?: 'Ctf';
-      nodeId: string;
-      id: number;
-      granted?: boolean | null;
-      ctfUrl?: string | null;
-      ctfPlatform: string;
-      ctftimeUrl?: string | null;
-      description: string;
-      endTime: string;
-      logoUrl?: string | null;
-      startTime: string;
-      weight: number;
-      title: string;
-      discordEventLink?: string | null;
-    }>;
-  } | null;
-};
+
+export type PastCtfsQuery = { __typename?: 'Query', pastCtf?: { __typename?: 'CtfsConnection', totalCount: number, nodes: Array<{ __typename?: 'Ctf', nodeId: string, id: number, granted?: boolean | null, ctfUrl?: string | null, ctfPlatform: string, ctftimeUrl?: string | null, description: string, endTime: string, logoUrl?: string | null, startTime: string, weight: number, title: string, discordEventLink?: string | null }> } | null };
 
 export type CreateCtfMutationVariables = Exact<{
   title: Scalars['String'];
@@ -3625,67 +3241,23 @@ export type CreateCtfMutationVariables = Exact<{
   description?: InputMaybe<Scalars['String']>;
 }>;
 
-export type CreateCtfMutation = {
-  __typename?: 'Mutation';
-  createCtf?: {
-    __typename?: 'CreateCtfPayload';
-    ctf?: {
-      __typename?: 'Ctf';
-      nodeId: string;
-      id: number;
-      granted?: boolean | null;
-      ctfUrl?: string | null;
-      ctfPlatform: string;
-      ctftimeUrl?: string | null;
-      description: string;
-      endTime: string;
-      logoUrl?: string | null;
-      startTime: string;
-      weight: number;
-      title: string;
-      discordEventLink?: string | null;
-    } | null;
-  } | null;
-};
+
+export type CreateCtfMutation = { __typename?: 'Mutation', createCtf?: { __typename?: 'CreateCtfPayload', ctf?: { __typename?: 'Ctf', nodeId: string, id: number, granted?: boolean | null, ctfUrl?: string | null, ctfPlatform: string, ctftimeUrl?: string | null, description: string, endTime: string, logoUrl?: string | null, startTime: string, weight: number, title: string, discordEventLink?: string | null } | null } | null };
 
 export type DeleteCtfbyIdMutationVariables = Exact<{
   id: Scalars['Int'];
 }>;
 
-export type DeleteCtfbyIdMutation = {
-  __typename?: 'Mutation';
-  deleteCtf?: {
-    __typename?: 'DeleteCtfPayload';
-    deletedCtfNodeId?: string | null;
-  } | null;
-};
+
+export type DeleteCtfbyIdMutation = { __typename?: 'Mutation', deleteCtf?: { __typename?: 'DeleteCtfPayload', deletedCtfNodeId?: string | null } | null };
 
 export type ImportctfMutationVariables = Exact<{
   id: Scalars['Int'];
+  ctfPlatform: Scalars['String'];
 }>;
 
-export type ImportctfMutation = {
-  __typename?: 'Mutation';
-  importCtf?: {
-    __typename?: 'ImportCtfPayload';
-    ctf?: {
-      __typename?: 'Ctf';
-      nodeId: string;
-      id: number;
-      granted?: boolean | null;
-      ctfUrl?: string | null;
-      ctfPlatform: string;
-      ctftimeUrl?: string | null;
-      description: string;
-      endTime: string;
-      logoUrl?: string | null;
-      startTime: string;
-      weight: number;
-      title: string;
-      discordEventLink?: string | null;
-    } | null;
-  } | null;
-};
+
+export type ImportctfMutation = { __typename?: 'Mutation', importCtf?: { __typename?: 'ImportCtfPayload', ctf?: { __typename?: 'Ctf', nodeId: string, id: number, granted?: boolean | null, ctfUrl?: string | null, ctfPlatform: string, ctftimeUrl?: string | null, description: string, endTime: string, logoUrl?: string | null, startTime: string, weight: number, title: string, discordEventLink?: string | null } | null } | null };
 
 export type UpdateCtfByIdMutationVariables = Exact<{
   id: Scalars['Int'];
@@ -3700,776 +3272,138 @@ export type UpdateCtfByIdMutationVariables = Exact<{
   description?: InputMaybe<Scalars['String']>;
 }>;
 
-export type UpdateCtfByIdMutation = {
-  __typename?: 'Mutation';
-  updateCtf?: {
-    __typename?: 'UpdateCtfPayload';
-    ctf?: {
-      __typename?: 'Ctf';
-      nodeId: string;
-      id: number;
-      granted?: boolean | null;
-      ctfUrl?: string | null;
-      ctfPlatform: string;
-      ctftimeUrl?: string | null;
-      description: string;
-      endTime: string;
-      logoUrl?: string | null;
-      startTime: string;
-      weight: number;
-      title: string;
-      discordEventLink?: string | null;
-    } | null;
-  } | null;
-};
+
+export type UpdateCtfByIdMutation = { __typename?: 'Mutation', updateCtf?: { __typename?: 'UpdateCtfPayload', ctf?: { __typename?: 'Ctf', nodeId: string, id: number, granted?: boolean | null, ctfUrl?: string | null, ctfPlatform: string, ctftimeUrl?: string | null, description: string, endTime: string, logoUrl?: string | null, startTime: string, weight: number, title: string, discordEventLink?: string | null } | null } | null };
 
 export type SetDiscordEventLinkMutationVariables = Exact<{
   id: Scalars['Int'];
   link: Scalars['String'];
 }>;
 
-export type SetDiscordEventLinkMutation = {
-  __typename?: 'Mutation';
-  setDiscordEventLink?: {
-    __typename?: 'SetDiscordEventLinkPayload';
-    clientMutationId?: string | null;
-  } | null;
-};
 
-export type SubscribeToCtfCreatedSubscriptionVariables = Exact<{
-  [key: string]: never;
-}>;
+export type SetDiscordEventLinkMutation = { __typename?: 'Mutation', setDiscordEventLink?: { __typename?: 'SetDiscordEventLinkPayload', clientMutationId?: string | null } | null };
 
-export type SubscribeToCtfCreatedSubscription = {
-  __typename?: 'Subscription';
-  listen: {
-    __typename?: 'ListenPayload';
-    relatedNodeId?: string | null;
-    relatedNode?:
-      | { __typename?: 'AssignedTag' }
-      | {
-          __typename?: 'Ctf';
-          nodeId: string;
-          id: number;
-          granted?: boolean | null;
-          ctfUrl?: string | null;
-          ctfPlatform: string;
-          ctftimeUrl?: string | null;
-          description: string;
-          endTime: string;
-          logoUrl?: string | null;
-          startTime: string;
-          weight: number;
-          title: string;
-          discordEventLink?: string | null;
-        }
-      | { __typename?: 'CtfSecret' }
-      | { __typename?: 'Invitation' }
-      | { __typename?: 'Profile' }
-      | { __typename?: 'Query' }
-      | { __typename?: 'Setting' }
-      | { __typename?: 'Tag' }
-      | { __typename?: 'Task' }
-      | { __typename?: 'WorkOnTask' }
-      | null;
-  };
-};
+export type SubscribeToCtfCreatedSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
-export type SubscribeToCtfDeletedSubscriptionVariables = Exact<{
-  [key: string]: never;
-}>;
 
-export type SubscribeToCtfDeletedSubscription = {
-  __typename?: 'Subscription';
-  listen: {
-    __typename?: 'ListenPayload';
-    relatedNodeId?: string | null;
-    relatedNode?:
-      | { __typename?: 'AssignedTag' }
-      | {
-          __typename?: 'Ctf';
-          nodeId: string;
-          id: number;
-          granted?: boolean | null;
-          ctfUrl?: string | null;
-          ctfPlatform: string;
-          ctftimeUrl?: string | null;
-          description: string;
-          endTime: string;
-          logoUrl?: string | null;
-          startTime: string;
-          weight: number;
-          title: string;
-          discordEventLink?: string | null;
-        }
-      | { __typename?: 'CtfSecret' }
-      | { __typename?: 'Invitation' }
-      | { __typename?: 'Profile' }
-      | { __typename?: 'Query' }
-      | { __typename?: 'Setting' }
-      | { __typename?: 'Tag' }
-      | { __typename?: 'Task' }
-      | { __typename?: 'WorkOnTask' }
-      | null;
-  };
-};
+export type SubscribeToCtfCreatedSubscription = { __typename?: 'Subscription', listen: { __typename?: 'ListenPayload', relatedNodeId?: string | null, relatedNode?: { __typename?: 'AssignedTag' } | { __typename?: 'Ctf', nodeId: string, id: number, granted?: boolean | null, ctfUrl?: string | null, ctfPlatform: string, ctftimeUrl?: string | null, description: string, endTime: string, logoUrl?: string | null, startTime: string, weight: number, title: string, discordEventLink?: string | null } | { __typename?: 'CtfSecret' } | { __typename?: 'Invitation' } | { __typename?: 'Profile' } | { __typename?: 'Query' } | { __typename?: 'Setting' } | { __typename?: 'Tag' } | { __typename?: 'Task' } | { __typename?: 'WorkOnTask' } | null } };
 
-export type SubscribeToFlagSubscriptionVariables = Exact<{
-  [key: string]: never;
-}>;
+export type SubscribeToCtfDeletedSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
-export type SubscribeToFlagSubscription = {
-  __typename?: 'Subscription';
-  listen: {
-    __typename?: 'ListenPayload';
-    relatedNodeId?: string | null;
-    relatedNode?:
-      | { __typename?: 'AssignedTag' }
-      | { __typename?: 'Ctf' }
-      | { __typename?: 'CtfSecret' }
-      | { __typename?: 'Invitation' }
-      | { __typename?: 'Profile' }
-      | { __typename?: 'Query' }
-      | { __typename?: 'Setting' }
-      | { __typename?: 'Tag' }
-      | {
-          __typename?: 'Task';
-          nodeId: string;
-          id: number;
-          title: string;
-          ctfId: number;
-          padUrl: string;
-          description: string;
-          files: string;
-          flag: string;
-          solved?: boolean | null;
-          assignedTags: {
-            __typename?: 'AssignedTagsConnection';
-            nodes: Array<{
-              __typename?: 'AssignedTag';
-              nodeId: string;
-              taskId: number;
-              tagId: number;
-              tag?: {
-                __typename?: 'Tag';
-                nodeId: string;
-                id: number;
-                tag: string;
-              } | null;
-            }>;
-          };
-          workOnTasks: {
-            __typename?: 'WorkOnTasksConnection';
-            nodes: Array<{
-              __typename?: 'WorkOnTask';
-              nodeId: string;
-              profileId: number;
-              active: boolean;
-              taskId: number;
-            }>;
-          };
-        }
-      | { __typename?: 'WorkOnTask' }
-      | null;
-  };
-};
 
-export type InvitationFragment = {
-  __typename?: 'Invitation';
-  nodeId: string;
-  ctfId: number;
-  profileId: number;
-};
+export type SubscribeToCtfDeletedSubscription = { __typename?: 'Subscription', listen: { __typename?: 'ListenPayload', relatedNodeId?: string | null, relatedNode?: { __typename?: 'AssignedTag' } | { __typename?: 'Ctf', nodeId: string, id: number, granted?: boolean | null, ctfUrl?: string | null, ctfPlatform: string, ctftimeUrl?: string | null, description: string, endTime: string, logoUrl?: string | null, startTime: string, weight: number, title: string, discordEventLink?: string | null } | { __typename?: 'CtfSecret' } | { __typename?: 'Invitation' } | { __typename?: 'Profile' } | { __typename?: 'Query' } | { __typename?: 'Setting' } | { __typename?: 'Tag' } | { __typename?: 'Task' } | { __typename?: 'WorkOnTask' } | null } };
+
+export type SubscribeToFlagSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SubscribeToFlagSubscription = { __typename?: 'Subscription', listen: { __typename?: 'ListenPayload', relatedNodeId?: string | null, relatedNode?: { __typename?: 'AssignedTag' } | { __typename?: 'Ctf' } | { __typename?: 'CtfSecret' } | { __typename?: 'Invitation' } | { __typename?: 'Profile' } | { __typename?: 'Query' } | { __typename?: 'Setting' } | { __typename?: 'Tag' } | { __typename?: 'Task', nodeId: string, id: number, title: string, ctfId: number, padUrl: string, description: string, files: string, flag: string, solved?: boolean | null, assignedTags: { __typename?: 'AssignedTagsConnection', nodes: Array<{ __typename?: 'AssignedTag', nodeId: string, taskId: number, tagId: number, tag?: { __typename?: 'Tag', nodeId: string, id: number, tag: string } | null }> }, workOnTasks: { __typename?: 'WorkOnTasksConnection', nodes: Array<{ __typename?: 'WorkOnTask', nodeId: string, profileId: number, active: boolean, taskId: number }> } } | { __typename?: 'WorkOnTask' } | null } };
+
+export type InvitationFragment = { __typename?: 'Invitation', nodeId: string, ctfId: number, profileId: number };
 
 export type InviteUserToCtfMutationVariables = Exact<{
   ctfId: Scalars['Int'];
   profileId: Scalars['Int'];
 }>;
 
-export type InviteUserToCtfMutation = {
-  __typename?: 'Mutation';
-  createInvitation?: {
-    __typename?: 'CreateInvitationPayload';
-    invitation?: {
-      __typename?: 'Invitation';
-      nodeId: string;
-      ctfId: number;
-      profileId: number;
-    } | null;
-  } | null;
-};
+
+export type InviteUserToCtfMutation = { __typename?: 'Mutation', createInvitation?: { __typename?: 'CreateInvitationPayload', invitation?: { __typename?: 'Invitation', nodeId: string, ctfId: number, profileId: number } | null } | null };
 
 export type UninviteUserToCtfMutationVariables = Exact<{
   ctfId: Scalars['Int'];
   profileId: Scalars['Int'];
 }>;
 
-export type UninviteUserToCtfMutation = {
-  __typename?: 'Mutation';
-  deleteInvitation?: {
-    __typename?: 'DeleteInvitationPayload';
-    deletedInvitationNodeId?: string | null;
-  } | null;
-};
 
-export type PublicProfileFragment = {
-  __typename?: 'PublicProfile';
-  id?: number | null;
-  username?: string | null;
-  color?: string | null;
-  description?: string | null;
-  role?: Role | null;
-  nodeId?: string | null;
-};
+export type UninviteUserToCtfMutation = { __typename?: 'Mutation', deleteInvitation?: { __typename?: 'DeleteInvitationPayload', deletedInvitationNodeId?: string | null } | null };
 
-export type ProfileFragment = {
-  __typename?: 'Profile';
-  id: number;
-  username: string;
-  lastactive: string;
-  color?: string | null;
-  description: string;
-  role?: Role | null;
-  discordId?: string | null;
-  nodeId: string;
-};
+export type PublicProfileFragment = { __typename?: 'PublicProfile', id?: number | null, username?: string | null, color?: string | null, description?: string | null, role?: Role | null, nodeId?: string | null };
 
-export type RestrictedProfileFragment = {
-  __typename?: 'Profile';
-  id: number;
-  username: string;
-  color?: string | null;
-  description: string;
-  role?: Role | null;
-  nodeId: string;
-};
+export type ProfileFragment = { __typename?: 'Profile', id: number, username: string, lastactive: string, color?: string | null, description: string, role?: Role | null, discordId?: string | null, nodeId: string };
+
+export type RestrictedProfileFragment = { __typename?: 'Profile', id: number, username: string, color?: string | null, description: string, role?: Role | null, nodeId: string };
 
 export type UpdatePasswordMutationVariables = Exact<{
   oldPassword: Scalars['String'];
   newPassword: Scalars['String'];
 }>;
 
-export type UpdatePasswordMutation = {
-  __typename?: 'Mutation';
-  changePassword?: {
-    __typename?: 'ChangePasswordPayload';
-    changePasswordResponse?: {
-      __typename?: 'ChangePasswordResponse';
-      ok?: boolean | null;
-    } | null;
-  } | null;
-};
+
+export type UpdatePasswordMutation = { __typename?: 'Mutation', changePassword?: { __typename?: 'ChangePasswordPayload', changePasswordResponse?: { __typename?: 'ChangePasswordResponse', ok?: boolean | null } | null } | null };
 
 export type UpdateProfileMutationVariables = Exact<{
   id: Scalars['Int'];
   patch: ProfilePatch;
 }>;
 
-export type UpdateProfileMutation = {
-  __typename?: 'Mutation';
-  updateProfile?: {
-    __typename?: 'UpdateProfilePayload';
-    profile?: {
-      __typename?: 'Profile';
-      id: number;
-      username: string;
-      lastactive: string;
-      color?: string | null;
-      description: string;
-      role?: Role | null;
-      discordId?: string | null;
-      nodeId: string;
-    } | null;
-  } | null;
-};
 
-export type GetTeamQueryVariables = Exact<{ [key: string]: never }>;
+export type UpdateProfileMutation = { __typename?: 'Mutation', updateProfile?: { __typename?: 'UpdateProfilePayload', profile?: { __typename?: 'Profile', id: number, username: string, lastactive: string, color?: string | null, description: string, role?: Role | null, discordId?: string | null, nodeId: string } | null } | null };
 
-export type GetTeamQuery = {
-  __typename?: 'Query';
-  publicProfiles?: {
-    __typename?: 'PublicProfilesConnection';
-    nodes: Array<{
-      __typename?: 'PublicProfile';
-      id?: number | null;
-      username?: string | null;
-      color?: string | null;
-      description?: string | null;
-      role?: Role | null;
-      nodeId?: string | null;
-    }>;
-  } | null;
-};
+export type GetTeamQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type GetTeamAdminQueryVariables = Exact<{ [key: string]: never }>;
 
-export type GetTeamAdminQuery = {
-  __typename?: 'Query';
-  profiles?: {
-    __typename?: 'ProfilesConnection';
-    nodes: Array<{
-      __typename?: 'Profile';
-      id: number;
-      username: string;
-      lastactive: string;
-      color?: string | null;
-      description: string;
-      role?: Role | null;
-      discordId?: string | null;
-      nodeId: string;
-    }>;
-  } | null;
-};
+export type GetTeamQuery = { __typename?: 'Query', publicProfiles?: { __typename?: 'PublicProfilesConnection', nodes: Array<{ __typename?: 'PublicProfile', id?: number | null, username?: string | null, color?: string | null, description?: string | null, role?: Role | null, nodeId?: string | null }> } | null };
 
-export type PublicProfileSubscriptionPayloadSubscriptionVariables = Exact<{
-  [key: string]: never;
-}>;
+export type GetTeamAdminQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type PublicProfileSubscriptionPayloadSubscription = {
-  __typename?: 'Subscription';
-  currentProfileUpdated?: {
-    __typename?: 'PublicProfileSubscriptionPayload';
-    publicProfile?: {
-      __typename?: 'PublicProfile';
-      id?: number | null;
-      username?: string | null;
-      color?: string | null;
-      description?: string | null;
-      role?: Role | null;
-      nodeId?: string | null;
-    } | null;
-  } | null;
-};
 
-export type SubscribeToProfileSubscriptionVariables = Exact<{
-  [key: string]: never;
-}>;
+export type GetTeamAdminQuery = { __typename?: 'Query', profiles?: { __typename?: 'ProfilesConnection', nodes: Array<{ __typename?: 'Profile', id: number, username: string, lastactive: string, color?: string | null, description: string, role?: Role | null, discordId?: string | null, nodeId: string }> } | null };
 
-export type SubscribeToProfileSubscription = {
-  __typename?: 'Subscription';
-  listen: {
-    __typename?: 'ListenPayload';
-    relatedNode?:
-      | { __typename?: 'AssignedTag'; nodeId: string }
-      | { __typename?: 'Ctf'; nodeId: string }
-      | { __typename?: 'CtfSecret'; nodeId: string }
-      | { __typename?: 'Invitation'; nodeId: string }
-      | {
-          __typename?: 'Profile';
-          nodeId: string;
-          id: number;
-          username: string;
-          lastactive: string;
-          color?: string | null;
-          description: string;
-          role?: Role | null;
-          discordId?: string | null;
-        }
-      | { __typename?: 'Query'; nodeId: string }
-      | { __typename?: 'Setting'; nodeId: string }
-      | { __typename?: 'Tag'; nodeId: string }
-      | { __typename?: 'Task'; nodeId: string }
-      | { __typename?: 'WorkOnTask'; nodeId: string }
-      | null;
-  };
-};
+export type PublicProfileSubscriptionPayloadSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
-export type SubscribeToProfileCreatedSubscriptionVariables = Exact<{
-  [key: string]: never;
-}>;
 
-export type SubscribeToProfileCreatedSubscription = {
-  __typename?: 'Subscription';
-  listen: {
-    __typename?: 'ListenPayload';
-    relatedNodeId?: string | null;
-    relatedNode?:
-      | { __typename?: 'AssignedTag'; nodeId: string }
-      | { __typename?: 'Ctf'; nodeId: string }
-      | { __typename?: 'CtfSecret'; nodeId: string }
-      | { __typename?: 'Invitation'; nodeId: string }
-      | {
-          __typename?: 'Profile';
-          nodeId: string;
-          id: number;
-          username: string;
-          lastactive: string;
-          color?: string | null;
-          description: string;
-          role?: Role | null;
-          discordId?: string | null;
-        }
-      | { __typename?: 'Query'; nodeId: string }
-      | { __typename?: 'Setting'; nodeId: string }
-      | { __typename?: 'Tag'; nodeId: string }
-      | { __typename?: 'Task'; nodeId: string }
-      | { __typename?: 'WorkOnTask'; nodeId: string }
-      | null;
-  };
-};
+export type PublicProfileSubscriptionPayloadSubscription = { __typename?: 'Subscription', currentProfileUpdated?: { __typename?: 'PublicProfileSubscriptionPayload', publicProfile?: { __typename?: 'PublicProfile', id?: number | null, username?: string | null, color?: string | null, description?: string | null, role?: Role | null, nodeId?: string | null } | null } | null };
 
-export type SubscribeToProfileDeletedSubscriptionVariables = Exact<{
-  [key: string]: never;
-}>;
+export type SubscribeToProfileSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
-export type SubscribeToProfileDeletedSubscription = {
-  __typename?: 'Subscription';
-  listen: {
-    __typename?: 'ListenPayload';
-    relatedNodeId?: string | null;
-    relatedNode?:
-      | { __typename?: 'AssignedTag'; nodeId: string }
-      | { __typename?: 'Ctf'; nodeId: string }
-      | { __typename?: 'CtfSecret'; nodeId: string }
-      | { __typename?: 'Invitation'; nodeId: string }
-      | {
-          __typename?: 'Profile';
-          nodeId: string;
-          id: number;
-          username: string;
-          lastactive: string;
-          color?: string | null;
-          description: string;
-          role?: Role | null;
-          discordId?: string | null;
-        }
-      | { __typename?: 'Query'; nodeId: string }
-      | { __typename?: 'Setting'; nodeId: string }
-      | { __typename?: 'Tag'; nodeId: string }
-      | { __typename?: 'Task'; nodeId: string }
-      | { __typename?: 'WorkOnTask'; nodeId: string }
-      | null;
-  };
-};
+
+export type SubscribeToProfileSubscription = { __typename?: 'Subscription', listen: { __typename?: 'ListenPayload', relatedNode?: { __typename?: 'AssignedTag', nodeId: string } | { __typename?: 'Ctf', nodeId: string } | { __typename?: 'CtfSecret', nodeId: string } | { __typename?: 'Invitation', nodeId: string } | { __typename?: 'Profile', nodeId: string, id: number, username: string, lastactive: string, color?: string | null, description: string, role?: Role | null, discordId?: string | null } | { __typename?: 'Query', nodeId: string } | { __typename?: 'Setting', nodeId: string } | { __typename?: 'Tag', nodeId: string } | { __typename?: 'Task', nodeId: string } | { __typename?: 'WorkOnTask', nodeId: string } | null } };
+
+export type SubscribeToProfileCreatedSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SubscribeToProfileCreatedSubscription = { __typename?: 'Subscription', listen: { __typename?: 'ListenPayload', relatedNodeId?: string | null, relatedNode?: { __typename?: 'AssignedTag', nodeId: string } | { __typename?: 'Ctf', nodeId: string } | { __typename?: 'CtfSecret', nodeId: string } | { __typename?: 'Invitation', nodeId: string } | { __typename?: 'Profile', nodeId: string, id: number, username: string, lastactive: string, color?: string | null, description: string, role?: Role | null, discordId?: string | null } | { __typename?: 'Query', nodeId: string } | { __typename?: 'Setting', nodeId: string } | { __typename?: 'Tag', nodeId: string } | { __typename?: 'Task', nodeId: string } | { __typename?: 'WorkOnTask', nodeId: string } | null } };
+
+export type SubscribeToProfileDeletedSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SubscribeToProfileDeletedSubscription = { __typename?: 'Subscription', listen: { __typename?: 'ListenPayload', relatedNodeId?: string | null, relatedNode?: { __typename?: 'AssignedTag', nodeId: string } | { __typename?: 'Ctf', nodeId: string } | { __typename?: 'CtfSecret', nodeId: string } | { __typename?: 'Invitation', nodeId: string } | { __typename?: 'Profile', nodeId: string, id: number, username: string, lastactive: string, color?: string | null, description: string, role?: Role | null, discordId?: string | null } | { __typename?: 'Query', nodeId: string } | { __typename?: 'Setting', nodeId: string } | { __typename?: 'Tag', nodeId: string } | { __typename?: 'Task', nodeId: string } | { __typename?: 'WorkOnTask', nodeId: string } | null } };
 
 export type SearchCtFsQueryVariables = Exact<{
   search: Scalars['String'];
 }>;
 
-export type SearchCtFsQuery = {
-  __typename?: 'Query';
-  ctfs?: {
-    __typename?: 'CtfsConnection';
-    nodes: Array<{
-      __typename?: 'Ctf';
-      nodeId: string;
-      id: number;
-      granted?: boolean | null;
-      ctfUrl?: string | null;
-      ctfPlatform: string;
-      ctftimeUrl?: string | null;
-      description: string;
-      endTime: string;
-      logoUrl?: string | null;
-      startTime: string;
-      weight: number;
-      title: string;
-      discordEventLink?: string | null;
-    }>;
-  } | null;
-};
+
+export type SearchCtFsQuery = { __typename?: 'Query', ctfs?: { __typename?: 'CtfsConnection', nodes: Array<{ __typename?: 'Ctf', nodeId: string, id: number, granted?: boolean | null, ctfUrl?: string | null, ctfPlatform: string, ctftimeUrl?: string | null, description: string, endTime: string, logoUrl?: string | null, startTime: string, weight: number, title: string, discordEventLink?: string | null }> } | null };
 
 export type SearchTasksQueryVariables = Exact<{
   search: Scalars['String'];
 }>;
 
-export type SearchTasksQuery = {
-  __typename?: 'Query';
-  tasks?: {
-    __typename?: 'TasksConnection';
-    nodes: Array<{
-      __typename?: 'Task';
-      nodeId: string;
-      id: number;
-      title: string;
-      ctfId: number;
-      padUrl: string;
-      description: string;
-      files: string;
-      flag: string;
-      solved?: boolean | null;
-      ctf?: {
-        __typename?: 'Ctf';
-        nodeId: string;
-        id: number;
-        granted?: boolean | null;
-        ctfUrl?: string | null;
-        ctfPlatform: string;
-        ctftimeUrl?: string | null;
-        description: string;
-        endTime: string;
-        logoUrl?: string | null;
-        startTime: string;
-        weight: number;
-        title: string;
-        discordEventLink?: string | null;
-      } | null;
-      assignedTags: {
-        __typename?: 'AssignedTagsConnection';
-        nodes: Array<{
-          __typename?: 'AssignedTag';
-          nodeId: string;
-          taskId: number;
-          tagId: number;
-          tag?: {
-            __typename?: 'Tag';
-            nodeId: string;
-            id: number;
-            tag: string;
-          } | null;
-        }>;
-      };
-      workOnTasks: {
-        __typename?: 'WorkOnTasksConnection';
-        nodes: Array<{
-          __typename?: 'WorkOnTask';
-          nodeId: string;
-          profileId: number;
-          active: boolean;
-          taskId: number;
-        }>;
-      };
-    }>;
-  } | null;
-};
+
+export type SearchTasksQuery = { __typename?: 'Query', tasks?: { __typename?: 'TasksConnection', nodes: Array<{ __typename?: 'Task', nodeId: string, id: number, title: string, ctfId: number, padUrl: string, description: string, files: string, flag: string, solved?: boolean | null, ctf?: { __typename?: 'Ctf', nodeId: string, id: number, granted?: boolean | null, ctfUrl?: string | null, ctfPlatform: string, ctftimeUrl?: string | null, description: string, endTime: string, logoUrl?: string | null, startTime: string, weight: number, title: string, discordEventLink?: string | null } | null, assignedTags: { __typename?: 'AssignedTagsConnection', nodes: Array<{ __typename?: 'AssignedTag', nodeId: string, taskId: number, tagId: number, tag?: { __typename?: 'Tag', nodeId: string, id: number, tag: string } | null }> }, workOnTasks: { __typename?: 'WorkOnTasksConnection', nodes: Array<{ __typename?: 'WorkOnTask', nodeId: string, profileId: number, active: boolean, taskId: number }> } }> } | null };
 
 export type SearchTagsQueryVariables = Exact<{
   search: Scalars['String'];
 }>;
 
-export type SearchTagsQuery = {
-  __typename?: 'Query';
-  tags?: {
-    __typename?: 'TagsConnection';
-    nodes: Array<{
-      __typename?: 'Tag';
-      tasksByAssignedTagTagIdAndTaskId: {
-        __typename?: 'TagTasksByAssignedTagTagIdAndTaskIdManyToManyConnection';
-        nodes: Array<{
-          __typename?: 'Task';
-          nodeId: string;
-          id: number;
-          title: string;
-          ctfId: number;
-          padUrl: string;
-          description: string;
-          files: string;
-          flag: string;
-          solved?: boolean | null;
-          ctf?: {
-            __typename?: 'Ctf';
-            nodeId: string;
-            id: number;
-            granted?: boolean | null;
-            ctfUrl?: string | null;
-            ctfPlatform: string;
-            ctftimeUrl?: string | null;
-            description: string;
-            endTime: string;
-            logoUrl?: string | null;
-            startTime: string;
-            weight: number;
-            title: string;
-            discordEventLink?: string | null;
-          } | null;
-          assignedTags: {
-            __typename?: 'AssignedTagsConnection';
-            nodes: Array<{
-              __typename?: 'AssignedTag';
-              nodeId: string;
-              taskId: number;
-              tagId: number;
-              tag?: {
-                __typename?: 'Tag';
-                nodeId: string;
-                id: number;
-                tag: string;
-              } | null;
-            }>;
-          };
-          workOnTasks: {
-            __typename?: 'WorkOnTasksConnection';
-            nodes: Array<{
-              __typename?: 'WorkOnTask';
-              nodeId: string;
-              profileId: number;
-              active: boolean;
-              taskId: number;
-            }>;
-          };
-        }>;
-      };
-    }>;
-  } | null;
-};
+
+export type SearchTagsQuery = { __typename?: 'Query', tags?: { __typename?: 'TagsConnection', nodes: Array<{ __typename?: 'Tag', tasksByAssignedTagTagIdAndTaskId: { __typename?: 'TagTasksByAssignedTagTagIdAndTaskIdManyToManyConnection', nodes: Array<{ __typename?: 'Task', nodeId: string, id: number, title: string, ctfId: number, padUrl: string, description: string, files: string, flag: string, solved?: boolean | null, ctf?: { __typename?: 'Ctf', nodeId: string, id: number, granted?: boolean | null, ctfUrl?: string | null, ctfPlatform: string, ctftimeUrl?: string | null, description: string, endTime: string, logoUrl?: string | null, startTime: string, weight: number, title: string, discordEventLink?: string | null } | null, assignedTags: { __typename?: 'AssignedTagsConnection', nodes: Array<{ __typename?: 'AssignedTag', nodeId: string, taskId: number, tagId: number, tag?: { __typename?: 'Tag', nodeId: string, id: number, tag: string } | null }> }, workOnTasks: { __typename?: 'WorkOnTasksConnection', nodes: Array<{ __typename?: 'WorkOnTask', nodeId: string, profileId: number, active: boolean, taskId: number }> } }> } }> } | null };
 
 export type SearchAllQueryVariables = Exact<{
   search: Scalars['String'];
 }>;
 
-export type SearchAllQuery = {
-  __typename?: 'Query';
-  tags?: {
-    __typename?: 'TagsConnection';
-    nodes: Array<{
-      __typename?: 'Tag';
-      tasksByAssignedTagTagIdAndTaskId: {
-        __typename?: 'TagTasksByAssignedTagTagIdAndTaskIdManyToManyConnection';
-        nodes: Array<{
-          __typename?: 'Task';
-          nodeId: string;
-          id: number;
-          title: string;
-          ctfId: number;
-          padUrl: string;
-          description: string;
-          files: string;
-          flag: string;
-          solved?: boolean | null;
-          ctf?: {
-            __typename?: 'Ctf';
-            nodeId: string;
-            id: number;
-            granted?: boolean | null;
-            ctfUrl?: string | null;
-            ctfPlatform: string;
-            ctftimeUrl?: string | null;
-            description: string;
-            endTime: string;
-            logoUrl?: string | null;
-            startTime: string;
-            weight: number;
-            title: string;
-            discordEventLink?: string | null;
-          } | null;
-          assignedTags: {
-            __typename?: 'AssignedTagsConnection';
-            nodes: Array<{
-              __typename?: 'AssignedTag';
-              nodeId: string;
-              taskId: number;
-              tagId: number;
-              tag?: {
-                __typename?: 'Tag';
-                nodeId: string;
-                id: number;
-                tag: string;
-              } | null;
-            }>;
-          };
-          workOnTasks: {
-            __typename?: 'WorkOnTasksConnection';
-            nodes: Array<{
-              __typename?: 'WorkOnTask';
-              nodeId: string;
-              profileId: number;
-              active: boolean;
-              taskId: number;
-            }>;
-          };
-        }>;
-      };
-    }>;
-  } | null;
-  tasks?: {
-    __typename?: 'TasksConnection';
-    nodes: Array<{
-      __typename?: 'Task';
-      nodeId: string;
-      id: number;
-      title: string;
-      ctfId: number;
-      padUrl: string;
-      description: string;
-      files: string;
-      flag: string;
-      solved?: boolean | null;
-      ctf?: {
-        __typename?: 'Ctf';
-        nodeId: string;
-        id: number;
-        granted?: boolean | null;
-        ctfUrl?: string | null;
-        ctfPlatform: string;
-        ctftimeUrl?: string | null;
-        description: string;
-        endTime: string;
-        logoUrl?: string | null;
-        startTime: string;
-        weight: number;
-        title: string;
-        discordEventLink?: string | null;
-      } | null;
-      assignedTags: {
-        __typename?: 'AssignedTagsConnection';
-        nodes: Array<{
-          __typename?: 'AssignedTag';
-          nodeId: string;
-          taskId: number;
-          tagId: number;
-          tag?: {
-            __typename?: 'Tag';
-            nodeId: string;
-            id: number;
-            tag: string;
-          } | null;
-        }>;
-      };
-      workOnTasks: {
-        __typename?: 'WorkOnTasksConnection';
-        nodes: Array<{
-          __typename?: 'WorkOnTask';
-          nodeId: string;
-          profileId: number;
-          active: boolean;
-          taskId: number;
-        }>;
-      };
-    }>;
-  } | null;
-  ctfs?: {
-    __typename?: 'CtfsConnection';
-    nodes: Array<{
-      __typename?: 'Ctf';
-      nodeId: string;
-      id: number;
-      granted?: boolean | null;
-      ctfUrl?: string | null;
-      ctfPlatform: string;
-      ctftimeUrl?: string | null;
-      description: string;
-      endTime: string;
-      logoUrl?: string | null;
-      startTime: string;
-      weight: number;
-      title: string;
-      discordEventLink?: string | null;
-    }>;
-  } | null;
-};
 
-export type CtfSecretFragment = {
-  __typename?: 'CtfSecret';
-  nodeId: string;
-  username?: string | null;
-  password?: string | null;
-  scoreboardName?: string | null;
-};
+export type SearchAllQuery = { __typename?: 'Query', tags?: { __typename?: 'TagsConnection', nodes: Array<{ __typename?: 'Tag', tasksByAssignedTagTagIdAndTaskId: { __typename?: 'TagTasksByAssignedTagTagIdAndTaskIdManyToManyConnection', nodes: Array<{ __typename?: 'Task', nodeId: string, id: number, title: string, ctfId: number, padUrl: string, description: string, files: string, flag: string, solved?: boolean | null, ctf?: { __typename?: 'Ctf', nodeId: string, id: number, granted?: boolean | null, ctfUrl?: string | null, ctfPlatform: string, ctftimeUrl?: string | null, description: string, endTime: string, logoUrl?: string | null, startTime: string, weight: number, title: string, discordEventLink?: string | null } | null, assignedTags: { __typename?: 'AssignedTagsConnection', nodes: Array<{ __typename?: 'AssignedTag', nodeId: string, taskId: number, tagId: number, tag?: { __typename?: 'Tag', nodeId: string, id: number, tag: string } | null }> }, workOnTasks: { __typename?: 'WorkOnTasksConnection', nodes: Array<{ __typename?: 'WorkOnTask', nodeId: string, profileId: number, active: boolean, taskId: number }> } }> } }> } | null, tasks?: { __typename?: 'TasksConnection', nodes: Array<{ __typename?: 'Task', nodeId: string, id: number, title: string, ctfId: number, padUrl: string, description: string, files: string, flag: string, solved?: boolean | null, ctf?: { __typename?: 'Ctf', nodeId: string, id: number, granted?: boolean | null, ctfUrl?: string | null, ctfPlatform: string, ctftimeUrl?: string | null, description: string, endTime: string, logoUrl?: string | null, startTime: string, weight: number, title: string, discordEventLink?: string | null } | null, assignedTags: { __typename?: 'AssignedTagsConnection', nodes: Array<{ __typename?: 'AssignedTag', nodeId: string, taskId: number, tagId: number, tag?: { __typename?: 'Tag', nodeId: string, id: number, tag: string } | null }> }, workOnTasks: { __typename?: 'WorkOnTasksConnection', nodes: Array<{ __typename?: 'WorkOnTask', nodeId: string, profileId: number, active: boolean, taskId: number }> } }> } | null, ctfs?: { __typename?: 'CtfsConnection', nodes: Array<{ __typename?: 'Ctf', nodeId: string, id: number, granted?: boolean | null, ctfUrl?: string | null, ctfPlatform: string, ctftimeUrl?: string | null, description: string, endTime: string, logoUrl?: string | null, startTime: string, weight: number, title: string, discordEventLink?: string | null }> } | null };
+
+export type CtfSecretFragment = { __typename?: 'CtfSecret', nodeId: string, username?: string | null, password?: string | null, scoreboardName?: string | null };
 
 export type GetCredentialsForCtfIdQueryVariables = Exact<{
   ctfId: Scalars['Int'];
 }>;
 
-export type GetCredentialsForCtfIdQuery = {
-  __typename?: 'Query';
-  ctfSecret?: {
-    __typename?: 'CtfSecret';
-    nodeId: string;
-    username?: string | null;
-    password?: string | null;
-    scoreboardName?: string | null;
-  } | null;
-};
+
+export type GetCredentialsForCtfIdQuery = { __typename?: 'Query', ctfSecret?: { __typename?: 'CtfSecret', nodeId: string, username?: string | null, password?: string | null, scoreboardName?: string | null } | null };
 
 export type UpdateCredentialsForCtfIdMutationVariables = Exact<{
   ctfId: Scalars['Int'];
@@ -4478,421 +3412,94 @@ export type UpdateCredentialsForCtfIdMutationVariables = Exact<{
   scoreboardName?: InputMaybe<Scalars['String']>;
 }>;
 
-export type UpdateCredentialsForCtfIdMutation = {
-  __typename?: 'Mutation';
-  updateCtfSecret?: {
-    __typename?: 'UpdateCtfSecretPayload';
-    ctfSecret?: {
-      __typename?: 'CtfSecret';
-      nodeId: string;
-      username?: string | null;
-      password?: string | null;
-      scoreboardName?: string | null;
-    } | null;
-  } | null;
-};
 
-export type SettingsInfoFragment = {
-  __typename?: 'Setting';
-  nodeId: string;
-  registrationAllowed: boolean;
-  registrationPasswordAllowed: boolean;
-  style: string;
-  discordIntegrationEnabled: boolean;
-};
+export type UpdateCredentialsForCtfIdMutation = { __typename?: 'Mutation', updateCtfSecret?: { __typename?: 'UpdateCtfSecretPayload', ctfSecret?: { __typename?: 'CtfSecret', nodeId: string, username?: string | null, password?: string | null, scoreboardName?: string | null } | null } | null };
 
-export type AdminSettingsInfoFragment = {
-  __typename?: 'Setting';
-  nodeId: string;
-  registrationPassword: string;
-  registrationDefaultRole: Role;
-  icalPassword?: string | null;
-  registrationAllowed: boolean;
-  registrationPasswordAllowed: boolean;
-  style: string;
-  discordIntegrationEnabled: boolean;
-};
+export type SettingsInfoFragment = { __typename?: 'Setting', nodeId: string, registrationAllowed: boolean, registrationPasswordAllowed: boolean, style: string, discordIntegrationEnabled: boolean };
 
-export type GetSettingsQueryVariables = Exact<{ [key: string]: never }>;
+export type AdminSettingsInfoFragment = { __typename?: 'Setting', nodeId: string, registrationPassword: string, registrationDefaultRole: Role, icalPassword?: string | null, registrationAllowed: boolean, registrationPasswordAllowed: boolean, style: string, discordIntegrationEnabled: boolean };
 
-export type GetSettingsQuery = {
-  __typename?: 'Query';
-  settings?: {
-    __typename?: 'SettingsConnection';
-    nodes: Array<{
-      __typename?: 'Setting';
-      nodeId: string;
-      registrationAllowed: boolean;
-      registrationPasswordAllowed: boolean;
-      style: string;
-      discordIntegrationEnabled: boolean;
-    }>;
-  } | null;
-};
+export type GetSettingsQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type GetIcalPasswordQueryVariables = Exact<{ [key: string]: never }>;
 
-export type GetIcalPasswordQuery = {
-  __typename?: 'Query';
-  settings?: {
-    __typename?: 'SettingsConnection';
-    nodes: Array<{
-      __typename?: 'Setting';
-      nodeId: string;
-      icalPassword?: string | null;
-    }>;
-  } | null;
-};
+export type GetSettingsQuery = { __typename?: 'Query', settings?: { __typename?: 'SettingsConnection', nodes: Array<{ __typename?: 'Setting', nodeId: string, registrationAllowed: boolean, registrationPasswordAllowed: boolean, style: string, discordIntegrationEnabled: boolean }> } | null };
 
-export type GetAdminSettingsQueryVariables = Exact<{ [key: string]: never }>;
+export type GetIcalPasswordQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type GetAdminSettingsQuery = {
-  __typename?: 'Query';
-  settings?: {
-    __typename?: 'SettingsConnection';
-    nodes: Array<{
-      __typename?: 'Setting';
-      nodeId: string;
-      registrationPassword: string;
-      registrationDefaultRole: Role;
-      icalPassword?: string | null;
-      registrationAllowed: boolean;
-      registrationPasswordAllowed: boolean;
-      style: string;
-      discordIntegrationEnabled: boolean;
-    }>;
-  } | null;
-};
+
+export type GetIcalPasswordQuery = { __typename?: 'Query', settings?: { __typename?: 'SettingsConnection', nodes: Array<{ __typename?: 'Setting', nodeId: string, icalPassword?: string | null }> } | null };
+
+export type GetAdminSettingsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAdminSettingsQuery = { __typename?: 'Query', settings?: { __typename?: 'SettingsConnection', nodes: Array<{ __typename?: 'Setting', nodeId: string, registrationPassword: string, registrationDefaultRole: Role, icalPassword?: string | null, registrationAllowed: boolean, registrationPasswordAllowed: boolean, style: string, discordIntegrationEnabled: boolean }> } | null };
 
 export type UpdateSettingsMutationVariables = Exact<{
   nodeId: Scalars['ID'];
   patch: SettingPatch;
 }>;
 
-export type UpdateSettingsMutation = {
-  __typename?: 'Mutation';
-  updateSettingByNodeId?: {
-    __typename?: 'UpdateSettingPayload';
-    setting?: {
-      __typename?: 'Setting';
-      nodeId: string;
-      registrationPassword: string;
-      registrationDefaultRole: Role;
-      icalPassword?: string | null;
-      registrationAllowed: boolean;
-      registrationPasswordAllowed: boolean;
-      style: string;
-      discordIntegrationEnabled: boolean;
-    } | null;
-  } | null;
-};
 
-export type TagFragment = {
-  __typename?: 'Tag';
-  nodeId: string;
-  id: number;
-  tag: string;
-};
+export type UpdateSettingsMutation = { __typename?: 'Mutation', updateSettingByNodeId?: { __typename?: 'UpdateSettingPayload', setting?: { __typename?: 'Setting', nodeId: string, registrationPassword: string, registrationDefaultRole: Role, icalPassword?: string | null, registrationAllowed: boolean, registrationPasswordAllowed: boolean, style: string, discordIntegrationEnabled: boolean } | null } | null };
 
-export type GetTagsQueryVariables = Exact<{ [key: string]: never }>;
+export type TagFragment = { __typename?: 'Tag', nodeId: string, id: number, tag: string };
 
-export type GetTagsQuery = {
-  __typename?: 'Query';
-  tags?: {
-    __typename?: 'TagsConnection';
-    nodes: Array<{
-      __typename?: 'Tag';
-      nodeId: string;
-      id: number;
-      tag: string;
-    }>;
-  } | null;
-};
+export type GetTagsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetTagsQuery = { __typename?: 'Query', tags?: { __typename?: 'TagsConnection', nodes: Array<{ __typename?: 'Tag', nodeId: string, id: number, tag: string }> } | null };
 
 export type GetTagByIdQueryVariables = Exact<{
   id: Scalars['Int'];
 }>;
 
-export type GetTagByIdQuery = {
-  __typename?: 'Query';
-  tag?: { __typename?: 'Tag'; tag: string; id: number } | null;
-};
 
-export type AssignedTagsFragment = {
-  __typename?: 'AssignedTag';
-  nodeId: string;
-  taskId: number;
-  tagId: number;
-  tag?: { __typename?: 'Tag'; nodeId: string; id: number; tag: string } | null;
-};
+export type GetTagByIdQuery = { __typename?: 'Query', tag?: { __typename?: 'Tag', tag: string, id: number } | null };
 
-export type TaskForTagsFragementFragment = {
-  __typename?: 'AssignedTag';
-  nodeId: string;
-  taskId: number;
-  tagId: number;
-  task?: {
-    __typename?: 'Task';
-    nodeId: string;
-    id: number;
-    title: string;
-    ctfId: number;
-    padUrl: string;
-    description: string;
-    files: string;
-    flag: string;
-    solved?: boolean | null;
-    assignedTags: {
-      __typename?: 'AssignedTagsConnection';
-      nodes: Array<{
-        __typename?: 'AssignedTag';
-        nodeId: string;
-        taskId: number;
-        tagId: number;
-        tag?: {
-          __typename?: 'Tag';
-          nodeId: string;
-          id: number;
-          tag: string;
-        } | null;
-      }>;
-    };
-    workOnTasks: {
-      __typename?: 'WorkOnTasksConnection';
-      nodes: Array<{
-        __typename?: 'WorkOnTask';
-        nodeId: string;
-        profileId: number;
-        active: boolean;
-        taskId: number;
-      }>;
-    };
-  } | null;
-};
+export type AssignedTagsFragment = { __typename?: 'AssignedTag', nodeId: string, taskId: number, tagId: number, tag?: { __typename?: 'Tag', nodeId: string, id: number, tag: string } | null };
+
+export type TaskForTagsFragementFragment = { __typename?: 'AssignedTag', nodeId: string, taskId: number, tagId: number, task?: { __typename?: 'Task', nodeId: string, id: number, title: string, ctfId: number, padUrl: string, description: string, files: string, flag: string, solved?: boolean | null, assignedTags: { __typename?: 'AssignedTagsConnection', nodes: Array<{ __typename?: 'AssignedTag', nodeId: string, taskId: number, tagId: number, tag?: { __typename?: 'Tag', nodeId: string, id: number, tag: string } | null }> }, workOnTasks: { __typename?: 'WorkOnTasksConnection', nodes: Array<{ __typename?: 'WorkOnTask', nodeId: string, profileId: number, active: boolean, taskId: number }> } } | null };
 
 export type AddTagsForTaskMutationVariables = Exact<{
   tags?: InputMaybe<Array<Scalars['String']> | Scalars['String']>;
   taskId: Scalars['Int'];
 }>;
 
-export type AddTagsForTaskMutation = {
-  __typename?: 'Mutation';
-  addTagsForTask?: {
-    __typename?: 'AddTagsForTaskPayload';
-    clientMutationId?: string | null;
-  } | null;
-};
 
-export type SubscribeToTagSubscriptionVariables = Exact<{
-  [key: string]: never;
-}>;
+export type AddTagsForTaskMutation = { __typename?: 'Mutation', addTagsForTask?: { __typename?: 'AddTagsForTaskPayload', clientMutationId?: string | null } | null };
 
-export type SubscribeToTagSubscription = {
-  __typename?: 'Subscription';
-  listen: {
-    __typename?: 'ListenPayload';
-    relatedNodeId?: string | null;
-    relatedNode?:
-      | { __typename?: 'AssignedTag'; nodeId: string }
-      | { __typename?: 'Ctf'; nodeId: string }
-      | { __typename?: 'CtfSecret'; nodeId: string }
-      | { __typename?: 'Invitation'; nodeId: string }
-      | { __typename?: 'Profile'; nodeId: string }
-      | { __typename?: 'Query'; nodeId: string }
-      | { __typename?: 'Setting'; nodeId: string }
-      | { __typename?: 'Tag'; nodeId: string; id: number; tag: string }
-      | { __typename?: 'Task'; nodeId: string }
-      | { __typename?: 'WorkOnTask'; nodeId: string }
-      | null;
-  };
-};
+export type SubscribeToTagSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
-export type SubscribeToTagCreatedSubscriptionVariables = Exact<{
-  [key: string]: never;
-}>;
 
-export type SubscribeToTagCreatedSubscription = {
-  __typename?: 'Subscription';
-  listen: {
-    __typename?: 'ListenPayload';
-    relatedNodeId?: string | null;
-    relatedNode?:
-      | { __typename?: 'AssignedTag'; nodeId: string }
-      | { __typename?: 'Ctf'; nodeId: string }
-      | { __typename?: 'CtfSecret'; nodeId: string }
-      | { __typename?: 'Invitation'; nodeId: string }
-      | { __typename?: 'Profile'; nodeId: string }
-      | { __typename?: 'Query'; nodeId: string }
-      | { __typename?: 'Setting'; nodeId: string }
-      | { __typename?: 'Tag'; nodeId: string; id: number; tag: string }
-      | { __typename?: 'Task'; nodeId: string }
-      | { __typename?: 'WorkOnTask'; nodeId: string }
-      | null;
-  };
-};
+export type SubscribeToTagSubscription = { __typename?: 'Subscription', listen: { __typename?: 'ListenPayload', relatedNodeId?: string | null, relatedNode?: { __typename?: 'AssignedTag', nodeId: string } | { __typename?: 'Ctf', nodeId: string } | { __typename?: 'CtfSecret', nodeId: string } | { __typename?: 'Invitation', nodeId: string } | { __typename?: 'Profile', nodeId: string } | { __typename?: 'Query', nodeId: string } | { __typename?: 'Setting', nodeId: string } | { __typename?: 'Tag', nodeId: string, id: number, tag: string } | { __typename?: 'Task', nodeId: string } | { __typename?: 'WorkOnTask', nodeId: string } | null } };
 
-export type SubscribeToTagDeletedSubscriptionVariables = Exact<{
-  [key: string]: never;
-}>;
+export type SubscribeToTagCreatedSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
-export type SubscribeToTagDeletedSubscription = {
-  __typename?: 'Subscription';
-  listen: {
-    __typename?: 'ListenPayload';
-    relatedNodeId?: string | null;
-    relatedNode?:
-      | { __typename?: 'AssignedTag'; nodeId: string }
-      | { __typename?: 'Ctf'; nodeId: string }
-      | { __typename?: 'CtfSecret'; nodeId: string }
-      | { __typename?: 'Invitation'; nodeId: string }
-      | { __typename?: 'Profile'; nodeId: string }
-      | { __typename?: 'Query'; nodeId: string }
-      | { __typename?: 'Setting'; nodeId: string }
-      | { __typename?: 'Tag'; nodeId: string; id: number; tag: string }
-      | { __typename?: 'Task'; nodeId: string }
-      | { __typename?: 'WorkOnTask'; nodeId: string }
-      | null;
-  };
-};
 
-export type WorkingOnFragment = {
-  __typename?: 'WorkOnTask';
-  nodeId: string;
-  profileId: number;
-  active: boolean;
-  taskId: number;
-};
+export type SubscribeToTagCreatedSubscription = { __typename?: 'Subscription', listen: { __typename?: 'ListenPayload', relatedNodeId?: string | null, relatedNode?: { __typename?: 'AssignedTag', nodeId: string } | { __typename?: 'Ctf', nodeId: string } | { __typename?: 'CtfSecret', nodeId: string } | { __typename?: 'Invitation', nodeId: string } | { __typename?: 'Profile', nodeId: string } | { __typename?: 'Query', nodeId: string } | { __typename?: 'Setting', nodeId: string } | { __typename?: 'Tag', nodeId: string, id: number, tag: string } | { __typename?: 'Task', nodeId: string } | { __typename?: 'WorkOnTask', nodeId: string } | null } };
 
-export type TaskFragment = {
-  __typename?: 'Task';
-  nodeId: string;
-  id: number;
-  title: string;
-  ctfId: number;
-  padUrl: string;
-  description: string;
-  files: string;
-  flag: string;
-  solved?: boolean | null;
-  assignedTags: {
-    __typename?: 'AssignedTagsConnection';
-    nodes: Array<{
-      __typename?: 'AssignedTag';
-      nodeId: string;
-      taskId: number;
-      tagId: number;
-      tag?: {
-        __typename?: 'Tag';
-        nodeId: string;
-        id: number;
-        tag: string;
-      } | null;
-    }>;
-  };
-  workOnTasks: {
-    __typename?: 'WorkOnTasksConnection';
-    nodes: Array<{
-      __typename?: 'WorkOnTask';
-      nodeId: string;
-      profileId: number;
-      active: boolean;
-      taskId: number;
-    }>;
-  };
-};
+export type SubscribeToTagDeletedSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SubscribeToTagDeletedSubscription = { __typename?: 'Subscription', listen: { __typename?: 'ListenPayload', relatedNodeId?: string | null, relatedNode?: { __typename?: 'AssignedTag', nodeId: string } | { __typename?: 'Ctf', nodeId: string } | { __typename?: 'CtfSecret', nodeId: string } | { __typename?: 'Invitation', nodeId: string } | { __typename?: 'Profile', nodeId: string } | { __typename?: 'Query', nodeId: string } | { __typename?: 'Setting', nodeId: string } | { __typename?: 'Tag', nodeId: string, id: number, tag: string } | { __typename?: 'Task', nodeId: string } | { __typename?: 'WorkOnTask', nodeId: string } | null } };
+
+export type WorkingOnFragment = { __typename?: 'WorkOnTask', nodeId: string, profileId: number, active: boolean, taskId: number };
+
+export type TaskFragment = { __typename?: 'Task', nodeId: string, id: number, title: string, ctfId: number, padUrl: string, description: string, files: string, flag: string, solved?: boolean | null, assignedTags: { __typename?: 'AssignedTagsConnection', nodes: Array<{ __typename?: 'AssignedTag', nodeId: string, taskId: number, tagId: number, tag?: { __typename?: 'Tag', nodeId: string, id: number, tag: string } | null }> }, workOnTasks: { __typename?: 'WorkOnTasksConnection', nodes: Array<{ __typename?: 'WorkOnTask', nodeId: string, profileId: number, active: boolean, taskId: number }> } };
 
 export type GetTasksForCtfIdQueryVariables = Exact<{
   ctfId: Scalars['Int'];
 }>;
 
-export type GetTasksForCtfIdQuery = {
-  __typename?: 'Query';
-  tasks?: {
-    __typename?: 'TasksConnection';
-    nodes: Array<{
-      __typename?: 'Task';
-      nodeId: string;
-      id: number;
-      title: string;
-      ctfId: number;
-      padUrl: string;
-      description: string;
-      files: string;
-      flag: string;
-      solved?: boolean | null;
-      assignedTags: {
-        __typename?: 'AssignedTagsConnection';
-        nodes: Array<{
-          __typename?: 'AssignedTag';
-          nodeId: string;
-          taskId: number;
-          tagId: number;
-          tag?: {
-            __typename?: 'Tag';
-            nodeId: string;
-            id: number;
-            tag: string;
-          } | null;
-        }>;
-      };
-      workOnTasks: {
-        __typename?: 'WorkOnTasksConnection';
-        nodes: Array<{
-          __typename?: 'WorkOnTask';
-          nodeId: string;
-          profileId: number;
-          active: boolean;
-          taskId: number;
-        }>;
-      };
-    }>;
-  } | null;
-};
+
+export type GetTasksForCtfIdQuery = { __typename?: 'Query', tasks?: { __typename?: 'TasksConnection', nodes: Array<{ __typename?: 'Task', nodeId: string, id: number, title: string, ctfId: number, padUrl: string, description: string, files: string, flag: string, solved?: boolean | null, assignedTags: { __typename?: 'AssignedTagsConnection', nodes: Array<{ __typename?: 'AssignedTag', nodeId: string, taskId: number, tagId: number, tag?: { __typename?: 'Tag', nodeId: string, id: number, tag: string } | null }> }, workOnTasks: { __typename?: 'WorkOnTasksConnection', nodes: Array<{ __typename?: 'WorkOnTask', nodeId: string, profileId: number, active: boolean, taskId: number }> } }> } | null };
 
 export type TaskByIdQueryVariables = Exact<{
   id: Scalars['Int'];
 }>;
 
-export type TaskByIdQuery = {
-  __typename?: 'Query';
-  task?: {
-    __typename?: 'Task';
-    nodeId: string;
-    id: number;
-    title: string;
-    ctfId: number;
-    padUrl: string;
-    description: string;
-    files: string;
-    flag: string;
-    solved?: boolean | null;
-    assignedTags: {
-      __typename?: 'AssignedTagsConnection';
-      nodes: Array<{
-        __typename?: 'AssignedTag';
-        nodeId: string;
-        taskId: number;
-        tagId: number;
-        tag?: {
-          __typename?: 'Tag';
-          nodeId: string;
-          id: number;
-          tag: string;
-        } | null;
-      }>;
-    };
-    workOnTasks: {
-      __typename?: 'WorkOnTasksConnection';
-      nodes: Array<{
-        __typename?: 'WorkOnTask';
-        nodeId: string;
-        profileId: number;
-        active: boolean;
-        taskId: number;
-      }>;
-    };
-  } | null;
-};
+
+export type TaskByIdQuery = { __typename?: 'Query', task?: { __typename?: 'Task', nodeId: string, id: number, title: string, ctfId: number, padUrl: string, description: string, files: string, flag: string, solved?: boolean | null, assignedTags: { __typename?: 'AssignedTagsConnection', nodes: Array<{ __typename?: 'AssignedTag', nodeId: string, taskId: number, tagId: number, tag?: { __typename?: 'Tag', nodeId: string, id: number, tag: string } | null }> }, workOnTasks: { __typename?: 'WorkOnTasksConnection', nodes: Array<{ __typename?: 'WorkOnTask', nodeId: string, profileId: number, active: boolean, taskId: number }> } } | null };
 
 export type UpdateTaskMutationVariables = Exact<{
   id: Scalars['Int'];
@@ -4902,518 +3509,243 @@ export type UpdateTaskMutationVariables = Exact<{
   flag?: InputMaybe<Scalars['String']>;
 }>;
 
-export type UpdateTaskMutation = {
-  __typename?: 'Mutation';
-  updateTask?: {
-    __typename?: 'UpdateTaskPayload';
-    task?: {
-      __typename?: 'Task';
-      nodeId: string;
-      id: number;
-      title: string;
-      ctfId: number;
-      padUrl: string;
-      description: string;
-      files: string;
-      flag: string;
-      solved?: boolean | null;
-      assignedTags: {
-        __typename?: 'AssignedTagsConnection';
-        nodes: Array<{
-          __typename?: 'AssignedTag';
-          nodeId: string;
-          taskId: number;
-          tagId: number;
-          tag?: {
-            __typename?: 'Tag';
-            nodeId: string;
-            id: number;
-            tag: string;
-          } | null;
-        }>;
-      };
-      workOnTasks: {
-        __typename?: 'WorkOnTasksConnection';
-        nodes: Array<{
-          __typename?: 'WorkOnTask';
-          nodeId: string;
-          profileId: number;
-          active: boolean;
-          taskId: number;
-        }>;
-      };
-    } | null;
-  } | null;
-};
+
+export type UpdateTaskMutation = { __typename?: 'Mutation', updateTask?: { __typename?: 'UpdateTaskPayload', task?: { __typename?: 'Task', nodeId: string, id: number, title: string, ctfId: number, padUrl: string, description: string, files: string, flag: string, solved?: boolean | null, assignedTags: { __typename?: 'AssignedTagsConnection', nodes: Array<{ __typename?: 'AssignedTag', nodeId: string, taskId: number, tagId: number, tag?: { __typename?: 'Tag', nodeId: string, id: number, tag: string } | null }> }, workOnTasks: { __typename?: 'WorkOnTasksConnection', nodes: Array<{ __typename?: 'WorkOnTask', nodeId: string, profileId: number, active: boolean, taskId: number }> } } | null } | null };
 
 export type CreateTaskForCtfIdMutationVariables = Exact<{
   ctfId: Scalars['Int'];
   title: Scalars['String'];
-  tags?: InputMaybe<
-    Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>
-  >;
+  tags?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
   description?: InputMaybe<Scalars['String']>;
   files?: InputMaybe<Scalars['String']>;
   flag?: InputMaybe<Scalars['String']>;
 }>;
 
-export type CreateTaskForCtfIdMutation = {
-  __typename?: 'Mutation';
-  createTask?: {
-    __typename?: 'CreateTaskPayload';
-    task?: {
-      __typename?: 'Task';
-      nodeId: string;
-      id: number;
-      title: string;
-      ctfId: number;
-      padUrl: string;
-      description: string;
-      files: string;
-      flag: string;
-      solved?: boolean | null;
-      assignedTags: {
-        __typename?: 'AssignedTagsConnection';
-        nodes: Array<{
-          __typename?: 'AssignedTag';
-          nodeId: string;
-          taskId: number;
-          tagId: number;
-          tag?: {
-            __typename?: 'Tag';
-            nodeId: string;
-            id: number;
-            tag: string;
-          } | null;
-        }>;
-      };
-      workOnTasks: {
-        __typename?: 'WorkOnTasksConnection';
-        nodes: Array<{
-          __typename?: 'WorkOnTask';
-          nodeId: string;
-          profileId: number;
-          active: boolean;
-          taskId: number;
-        }>;
-      };
-    } | null;
-  } | null;
-};
+
+export type CreateTaskForCtfIdMutation = { __typename?: 'Mutation', createTask?: { __typename?: 'CreateTaskPayload', task?: { __typename?: 'Task', nodeId: string, id: number, title: string, ctfId: number, padUrl: string, description: string, files: string, flag: string, solved?: boolean | null, assignedTags: { __typename?: 'AssignedTagsConnection', nodes: Array<{ __typename?: 'AssignedTag', nodeId: string, taskId: number, tagId: number, tag?: { __typename?: 'Tag', nodeId: string, id: number, tag: string } | null }> }, workOnTasks: { __typename?: 'WorkOnTasksConnection', nodes: Array<{ __typename?: 'WorkOnTask', nodeId: string, profileId: number, active: boolean, taskId: number }> } } | null } | null };
 
 export type DeleteTaskMutationVariables = Exact<{
   id: Scalars['Int'];
 }>;
 
-export type DeleteTaskMutation = {
-  __typename?: 'Mutation';
-  deleteTask?: {
-    __typename?: 'DeleteTaskPayload';
-    deletedTaskNodeId?: string | null;
-  } | null;
-};
+
+export type DeleteTaskMutation = { __typename?: 'Mutation', deleteTask?: { __typename?: 'DeleteTaskPayload', deletedTaskNodeId?: string | null } | null };
 
 export type StartWorkingOnMutationVariables = Exact<{
   taskId: Scalars['Int'];
 }>;
 
-export type StartWorkingOnMutation = {
-  __typename?: 'Mutation';
-  startWorkingOn?: {
-    __typename?: 'StartWorkingOnPayload';
-    task?: {
-      __typename?: 'Task';
-      nodeId: string;
-      id: number;
-      title: string;
-      ctfId: number;
-      padUrl: string;
-      description: string;
-      files: string;
-      flag: string;
-      solved?: boolean | null;
-      assignedTags: {
-        __typename?: 'AssignedTagsConnection';
-        nodes: Array<{
-          __typename?: 'AssignedTag';
-          nodeId: string;
-          taskId: number;
-          tagId: number;
-          tag?: {
-            __typename?: 'Tag';
-            nodeId: string;
-            id: number;
-            tag: string;
-          } | null;
-        }>;
-      };
-      workOnTasks: {
-        __typename?: 'WorkOnTasksConnection';
-        nodes: Array<{
-          __typename?: 'WorkOnTask';
-          nodeId: string;
-          profileId: number;
-          active: boolean;
-          taskId: number;
-        }>;
-      };
-    } | null;
-  } | null;
-};
+
+export type StartWorkingOnMutation = { __typename?: 'Mutation', startWorkingOn?: { __typename?: 'StartWorkingOnPayload', task?: { __typename?: 'Task', nodeId: string, id: number, title: string, ctfId: number, padUrl: string, description: string, files: string, flag: string, solved?: boolean | null, assignedTags: { __typename?: 'AssignedTagsConnection', nodes: Array<{ __typename?: 'AssignedTag', nodeId: string, taskId: number, tagId: number, tag?: { __typename?: 'Tag', nodeId: string, id: number, tag: string } | null }> }, workOnTasks: { __typename?: 'WorkOnTasksConnection', nodes: Array<{ __typename?: 'WorkOnTask', nodeId: string, profileId: number, active: boolean, taskId: number }> } } | null } | null };
 
 export type StopWorkingOnMutationVariables = Exact<{
   taskId: Scalars['Int'];
 }>;
 
-export type StopWorkingOnMutation = {
-  __typename?: 'Mutation';
-  stopWorkingOn?: {
-    __typename?: 'StopWorkingOnPayload';
-    task?: {
-      __typename?: 'Task';
-      nodeId: string;
-      id: number;
-      title: string;
-      ctfId: number;
-      padUrl: string;
-      description: string;
-      files: string;
-      flag: string;
-      solved?: boolean | null;
-      assignedTags: {
-        __typename?: 'AssignedTagsConnection';
-        nodes: Array<{
-          __typename?: 'AssignedTag';
-          nodeId: string;
-          taskId: number;
-          tagId: number;
-          tag?: {
-            __typename?: 'Tag';
-            nodeId: string;
-            id: number;
-            tag: string;
-          } | null;
-        }>;
-      };
-      workOnTasks: {
-        __typename?: 'WorkOnTasksConnection';
-        nodes: Array<{
-          __typename?: 'WorkOnTask';
-          nodeId: string;
-          profileId: number;
-          active: boolean;
-          taskId: number;
-        }>;
-      };
-    } | null;
-  } | null;
-};
+
+export type StopWorkingOnMutation = { __typename?: 'Mutation', stopWorkingOn?: { __typename?: 'StopWorkingOnPayload', task?: { __typename?: 'Task', nodeId: string, id: number, title: string, ctfId: number, padUrl: string, description: string, files: string, flag: string, solved?: boolean | null, assignedTags: { __typename?: 'AssignedTagsConnection', nodes: Array<{ __typename?: 'AssignedTag', nodeId: string, taskId: number, tagId: number, tag?: { __typename?: 'Tag', nodeId: string, id: number, tag: string } | null }> }, workOnTasks: { __typename?: 'WorkOnTasksConnection', nodes: Array<{ __typename?: 'WorkOnTask', nodeId: string, profileId: number, active: boolean, taskId: number }> } } | null } | null };
 
 export type CancelWorkingOnMutationVariables = Exact<{
   taskId: Scalars['Int'];
 }>;
 
-export type CancelWorkingOnMutation = {
-  __typename?: 'Mutation';
-  cancelWorkingOn?: {
-    __typename?: 'CancelWorkingOnPayload';
-    task?: {
-      __typename?: 'Task';
-      nodeId: string;
-      id: number;
-      title: string;
-      ctfId: number;
-      padUrl: string;
-      description: string;
-      files: string;
-      flag: string;
-      solved?: boolean | null;
-      assignedTags: {
-        __typename?: 'AssignedTagsConnection';
-        nodes: Array<{
-          __typename?: 'AssignedTag';
-          nodeId: string;
-          taskId: number;
-          tagId: number;
-          tag?: {
-            __typename?: 'Tag';
-            nodeId: string;
-            id: number;
-            tag: string;
-          } | null;
-        }>;
-      };
-      workOnTasks: {
-        __typename?: 'WorkOnTasksConnection';
-        nodes: Array<{
-          __typename?: 'WorkOnTask';
-          nodeId: string;
-          profileId: number;
-          active: boolean;
-          taskId: number;
-        }>;
-      };
-    } | null;
-  } | null;
-};
 
-export type SubscribeToTaskSubscriptionVariables = Exact<{
-  [key: string]: never;
-}>;
+export type CancelWorkingOnMutation = { __typename?: 'Mutation', cancelWorkingOn?: { __typename?: 'CancelWorkingOnPayload', task?: { __typename?: 'Task', nodeId: string, id: number, title: string, ctfId: number, padUrl: string, description: string, files: string, flag: string, solved?: boolean | null, assignedTags: { __typename?: 'AssignedTagsConnection', nodes: Array<{ __typename?: 'AssignedTag', nodeId: string, taskId: number, tagId: number, tag?: { __typename?: 'Tag', nodeId: string, id: number, tag: string } | null }> }, workOnTasks: { __typename?: 'WorkOnTasksConnection', nodes: Array<{ __typename?: 'WorkOnTask', nodeId: string, profileId: number, active: boolean, taskId: number }> } } | null } | null };
 
-export type SubscribeToTaskSubscription = {
-  __typename?: 'Subscription';
-  listen: {
-    __typename?: 'ListenPayload';
-    relatedNode?:
-      | { __typename?: 'AssignedTag'; nodeId: string }
-      | { __typename?: 'Ctf'; nodeId: string }
-      | { __typename?: 'CtfSecret'; nodeId: string }
-      | { __typename?: 'Invitation'; nodeId: string }
-      | { __typename?: 'Profile'; nodeId: string }
-      | { __typename?: 'Query'; nodeId: string }
-      | { __typename?: 'Setting'; nodeId: string }
-      | { __typename?: 'Tag'; nodeId: string }
-      | {
-          __typename?: 'Task';
-          nodeId: string;
-          id: number;
-          title: string;
-          ctfId: number;
-          padUrl: string;
-          description: string;
-          files: string;
-          flag: string;
-          solved?: boolean | null;
-          assignedTags: {
-            __typename?: 'AssignedTagsConnection';
-            nodes: Array<{
-              __typename?: 'AssignedTag';
-              nodeId: string;
-              taskId: number;
-              tagId: number;
-              tag?: {
-                __typename?: 'Tag';
-                nodeId: string;
-                id: number;
-                tag: string;
-              } | null;
-            }>;
-          };
-          workOnTasks: {
-            __typename?: 'WorkOnTasksConnection';
-            nodes: Array<{
-              __typename?: 'WorkOnTask';
-              nodeId: string;
-              profileId: number;
-              active: boolean;
-              taskId: number;
-            }>;
-          };
-        }
-      | { __typename?: 'WorkOnTask'; nodeId: string }
-      | null;
-  };
-};
+export type SubscribeToTaskSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SubscribeToTaskSubscription = { __typename?: 'Subscription', listen: { __typename?: 'ListenPayload', relatedNode?: { __typename?: 'AssignedTag', nodeId: string } | { __typename?: 'Ctf', nodeId: string } | { __typename?: 'CtfSecret', nodeId: string } | { __typename?: 'Invitation', nodeId: string } | { __typename?: 'Profile', nodeId: string } | { __typename?: 'Query', nodeId: string } | { __typename?: 'Setting', nodeId: string } | { __typename?: 'Tag', nodeId: string } | { __typename?: 'Task', nodeId: string, id: number, title: string, ctfId: number, padUrl: string, description: string, files: string, flag: string, solved?: boolean | null, assignedTags: { __typename?: 'AssignedTagsConnection', nodes: Array<{ __typename?: 'AssignedTag', nodeId: string, taskId: number, tagId: number, tag?: { __typename?: 'Tag', nodeId: string, id: number, tag: string } | null }> }, workOnTasks: { __typename?: 'WorkOnTasksConnection', nodes: Array<{ __typename?: 'WorkOnTask', nodeId: string, profileId: number, active: boolean, taskId: number }> } } | { __typename?: 'WorkOnTask', nodeId: string } | null } };
 
 export type UploadLogoMutationVariables = Exact<{
   logo: Scalars['Upload'];
 }>;
 
-export type UploadLogoMutation = {
-  __typename?: 'Mutation';
-  uploadCtfLogo: string;
-};
+
+export type UploadLogoMutation = { __typename?: 'Mutation', uploadCtfLogo: string };
 
 export const ProfileFragmentDoc = gql`
-  fragment ProfileFragment on Profile {
-    id
-    username
-    lastactive
-    color
-    description
-    role
-    discordId
-    nodeId
-  }
-`;
+    fragment ProfileFragment on Profile {
+  id
+  username
+  lastactive
+  color
+  description
+  role
+  discordId
+  nodeId
+}
+    `;
 export const UserFragmentDoc = gql`
-  fragment UserFragment on User {
-    nodeId
-    login
-    role
-    id
-    profile {
-      ...ProfileFragment
-    }
+    fragment UserFragment on User {
+  nodeId
+  login
+  role
+  id
+  profile {
+    ...ProfileFragment
   }
-  ${ProfileFragmentDoc}
-`;
+}
+    ${ProfileFragmentDoc}`;
 export const CtfFragmentDoc = gql`
-  fragment CtfFragment on Ctf {
-    nodeId
-    id
-    granted
-    ctfUrl
-    ctfPlatform
-    ctftimeUrl
-    description
-    endTime
-    logoUrl
-    startTime
-    weight
-    title
-    discordEventLink
-  }
-`;
+    fragment CtfFragment on Ctf {
+  nodeId
+  id
+  granted
+  ctfUrl
+  ctfPlatform
+  ctftimeUrl
+  description
+  endTime
+  logoUrl
+  startTime
+  weight
+  title
+  discordEventLink
+}
+    `;
 export const TagFragmentDoc = gql`
-  fragment TagFragment on Tag {
-    nodeId
-    id
-    tag
-  }
-`;
+    fragment TagFragment on Tag {
+  nodeId
+  id
+  tag
+}
+    `;
 export const AssignedTagsFragmentDoc = gql`
-  fragment AssignedTagsFragment on AssignedTag {
-    nodeId
-    taskId
-    tagId
-    tag {
-      ...TagFragment
-    }
+    fragment AssignedTagsFragment on AssignedTag {
+  nodeId
+  taskId
+  tagId
+  tag {
+    ...TagFragment
   }
-  ${TagFragmentDoc}
-`;
+}
+    ${TagFragmentDoc}`;
 export const WorkingOnFragmentDoc = gql`
-  fragment WorkingOnFragment on WorkOnTask {
-    nodeId
-    profileId
-    active
-    taskId
-  }
-`;
+    fragment WorkingOnFragment on WorkOnTask {
+  nodeId
+  profileId
+  active
+  taskId
+}
+    `;
 export const TaskFragmentDoc = gql`
-  fragment TaskFragment on Task {
-    nodeId
-    id
-    title
-    ctfId
-    padUrl
-    description
-    files
-    flag
-    solved
-    assignedTags {
-      nodes {
-        ...AssignedTagsFragment
-      }
-    }
-    workOnTasks {
-      nodes {
-        ...WorkingOnFragment
-      }
+    fragment TaskFragment on Task {
+  nodeId
+  id
+  title
+  ctfId
+  padUrl
+  description
+  files
+  flag
+  solved
+  assignedTags {
+    nodes {
+      ...AssignedTagsFragment
     }
   }
-  ${AssignedTagsFragmentDoc}
-  ${WorkingOnFragmentDoc}
-`;
+  workOnTasks {
+    nodes {
+      ...WorkingOnFragment
+    }
+  }
+}
+    ${AssignedTagsFragmentDoc}
+${WorkingOnFragmentDoc}`;
 export const CtfSecretFragmentDoc = gql`
-  fragment CtfSecretFragment on CtfSecret {
-    nodeId
-    username
-    password
-    scoreboardName
-  }
-`;
+    fragment CtfSecretFragment on CtfSecret {
+  nodeId
+  username
+  password
+  scoreboardName
+}
+    `;
 export const InvitationFragmentDoc = gql`
-  fragment InvitationFragment on Invitation {
-    nodeId
-    ctfId
-    profileId
-  }
-`;
+    fragment InvitationFragment on Invitation {
+  nodeId
+  ctfId
+  profileId
+}
+    `;
 export const FullCtfFragmentDoc = gql`
-  fragment FullCtfFragment on Ctf {
-    ...CtfFragment
-    tasks {
-      nodes {
-        ...TaskFragment
-      }
-    }
-    secrets {
-      ...CtfSecretFragment
-    }
-    invitations {
-      nodes {
-        ...InvitationFragment
-      }
-    }
-  }
-  ${CtfFragmentDoc}
-  ${TaskFragmentDoc}
-  ${CtfSecretFragmentDoc}
-  ${InvitationFragmentDoc}
-`;
-export const PublicProfileFragmentDoc = gql`
-  fragment PublicProfileFragment on PublicProfile {
-    id
-    username
-    color
-    description
-    role
-    nodeId
-  }
-`;
-export const RestrictedProfileFragmentDoc = gql`
-  fragment RestrictedProfile on Profile {
-    id
-    username
-    color
-    description
-    role
-    nodeId
-  }
-`;
-export const SettingsInfoFragmentDoc = gql`
-  fragment SettingsInfo on Setting {
-    nodeId
-    registrationAllowed
-    registrationPasswordAllowed
-    style
-    discordIntegrationEnabled
-  }
-`;
-export const AdminSettingsInfoFragmentDoc = gql`
-  fragment AdminSettingsInfo on Setting {
-    nodeId
-    ...SettingsInfo
-    registrationPassword
-    registrationDefaultRole
-    icalPassword
-  }
-  ${SettingsInfoFragmentDoc}
-`;
-export const TaskForTagsFragementFragmentDoc = gql`
-  fragment TaskForTagsFragement on AssignedTag {
-    nodeId
-    taskId
-    tagId
-    task {
+    fragment FullCtfFragment on Ctf {
+  ...CtfFragment
+  tasks {
+    nodes {
       ...TaskFragment
     }
   }
-  ${TaskFragmentDoc}
-`;
-export const GetUsersDocument = gql`
-  query getUsers {
-    users {
-      nodes {
-        ...UserFragment
-      }
+  secrets {
+    ...CtfSecretFragment
+  }
+  invitations {
+    nodes {
+      ...InvitationFragment
     }
   }
-  ${UserFragmentDoc}
-`;
+}
+    ${CtfFragmentDoc}
+${TaskFragmentDoc}
+${CtfSecretFragmentDoc}
+${InvitationFragmentDoc}`;
+export const PublicProfileFragmentDoc = gql`
+    fragment PublicProfileFragment on PublicProfile {
+  id
+  username
+  color
+  description
+  role
+  nodeId
+}
+    `;
+export const RestrictedProfileFragmentDoc = gql`
+    fragment RestrictedProfile on Profile {
+  id
+  username
+  color
+  description
+  role
+  nodeId
+}
+    `;
+export const SettingsInfoFragmentDoc = gql`
+    fragment SettingsInfo on Setting {
+  nodeId
+  registrationAllowed
+  registrationPasswordAllowed
+  style
+  discordIntegrationEnabled
+}
+    `;
+export const AdminSettingsInfoFragmentDoc = gql`
+    fragment AdminSettingsInfo on Setting {
+  nodeId
+  ...SettingsInfo
+  registrationPassword
+  registrationDefaultRole
+  icalPassword
+}
+    ${SettingsInfoFragmentDoc}`;
+export const TaskForTagsFragementFragmentDoc = gql`
+    fragment TaskForTagsFragement on AssignedTag {
+  nodeId
+  taskId
+  tagId
+  task {
+    ...TaskFragment
+  }
+}
+    ${TaskFragmentDoc}`;
+export const GetUsersDocument = gql`
+    query getUsers {
+  users {
+    nodes {
+      ...UserFragment
+    }
+  }
+}
+    ${UserFragmentDoc}`;
 
 /**
  * __useGetUsersQuery__
@@ -5427,60 +3759,22 @@ export const GetUsersDocument = gql`
  * @example
  * const { result, loading, error } = useGetUsersQuery();
  */
-export function useGetUsersQuery(
-  options:
-    | VueApolloComposable.UseQueryOptions<GetUsersQuery, GetUsersQueryVariables>
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          GetUsersQuery,
-          GetUsersQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          GetUsersQuery,
-          GetUsersQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useQuery<GetUsersQuery, GetUsersQueryVariables>(
-    GetUsersDocument,
-    {},
-    options,
-  );
+export function useGetUsersQuery(options: VueApolloComposable.UseQueryOptions<GetUsersQuery, GetUsersQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetUsersQuery, GetUsersQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetUsersQuery, GetUsersQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<GetUsersQuery, GetUsersQueryVariables>(GetUsersDocument, {}, options);
 }
-export function useGetUsersLazyQuery(
-  options:
-    | VueApolloComposable.UseQueryOptions<GetUsersQuery, GetUsersQueryVariables>
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          GetUsersQuery,
-          GetUsersQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          GetUsersQuery,
-          GetUsersQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useLazyQuery<
-    GetUsersQuery,
-    GetUsersQueryVariables
-  >(GetUsersDocument, {}, options);
+export function useGetUsersLazyQuery(options: VueApolloComposable.UseQueryOptions<GetUsersQuery, GetUsersQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetUsersQuery, GetUsersQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetUsersQuery, GetUsersQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<GetUsersQuery, GetUsersQueryVariables>(GetUsersDocument, {}, options);
 }
-export type GetUsersQueryCompositionFunctionResult =
-  VueApolloComposable.UseQueryReturn<GetUsersQuery, GetUsersQueryVariables>;
+export type GetUsersQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetUsersQuery, GetUsersQueryVariables>;
 export const CreateInvitationTokenDocument = gql`
-  mutation createInvitationToken($role: Role!) {
-    createInvitationLink(input: { role: $role }) {
-      invitationLinkResponse {
-        token
-      }
+    mutation createInvitationToken($role: Role!) {
+  createInvitationLink(input: {role: $role}) {
+    invitationLinkResponse {
+      token
     }
   }
-`;
+}
+    `;
 
 /**
  * __useCreateInvitationTokenMutation__
@@ -5499,38 +3793,19 @@ export const CreateInvitationTokenDocument = gql`
  *   },
  * });
  */
-export function useCreateInvitationTokenMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        CreateInvitationTokenMutation,
-        CreateInvitationTokenMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          CreateInvitationTokenMutation,
-          CreateInvitationTokenMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    CreateInvitationTokenMutation,
-    CreateInvitationTokenMutationVariables
-  >(CreateInvitationTokenDocument, options);
+export function useCreateInvitationTokenMutation(options: VueApolloComposable.UseMutationOptions<CreateInvitationTokenMutation, CreateInvitationTokenMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<CreateInvitationTokenMutation, CreateInvitationTokenMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<CreateInvitationTokenMutation, CreateInvitationTokenMutationVariables>(CreateInvitationTokenDocument, options);
 }
-export type CreateInvitationTokenMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    CreateInvitationTokenMutation,
-    CreateInvitationTokenMutationVariables
-  >;
+export type CreateInvitationTokenMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<CreateInvitationTokenMutation, CreateInvitationTokenMutationVariables>;
 export const CreateResetPasswordTokenDocument = gql`
-  mutation createResetPasswordToken($userId: Int!) {
-    createResetPasswordLink(input: { userId: $userId }) {
-      resetPasswordLinkResponse {
-        token
-      }
+    mutation createResetPasswordToken($userId: Int!) {
+  createResetPasswordLink(input: {userId: $userId}) {
+    resetPasswordLinkResponse {
+      token
     }
   }
-`;
+}
+    `;
 
 /**
  * __useCreateResetPasswordTokenMutation__
@@ -5549,40 +3824,21 @@ export const CreateResetPasswordTokenDocument = gql`
  *   },
  * });
  */
-export function useCreateResetPasswordTokenMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        CreateResetPasswordTokenMutation,
-        CreateResetPasswordTokenMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          CreateResetPasswordTokenMutation,
-          CreateResetPasswordTokenMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    CreateResetPasswordTokenMutation,
-    CreateResetPasswordTokenMutationVariables
-  >(CreateResetPasswordTokenDocument, options);
+export function useCreateResetPasswordTokenMutation(options: VueApolloComposable.UseMutationOptions<CreateResetPasswordTokenMutation, CreateResetPasswordTokenMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<CreateResetPasswordTokenMutation, CreateResetPasswordTokenMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<CreateResetPasswordTokenMutation, CreateResetPasswordTokenMutationVariables>(CreateResetPasswordTokenDocument, options);
 }
-export type CreateResetPasswordTokenMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    CreateResetPasswordTokenMutation,
-    CreateResetPasswordTokenMutationVariables
-  >;
+export type CreateResetPasswordTokenMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<CreateResetPasswordTokenMutation, CreateResetPasswordTokenMutationVariables>;
 export const DeleteUserByIdDocument = gql`
-  mutation deleteUserById($userId: Int!) {
-    deleteUser(input: { userId: $userId }) {
-      userResponse {
-        id
-        login
-        role
-      }
+    mutation deleteUserById($userId: Int!) {
+  deleteUser(input: {userId: $userId}) {
+    userResponse {
+      id
+      login
+      role
     }
   }
-`;
+}
+    `;
 
 /**
  * __useDeleteUserByIdMutation__
@@ -5601,36 +3857,17 @@ export const DeleteUserByIdDocument = gql`
  *   },
  * });
  */
-export function useDeleteUserByIdMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        DeleteUserByIdMutation,
-        DeleteUserByIdMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          DeleteUserByIdMutation,
-          DeleteUserByIdMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    DeleteUserByIdMutation,
-    DeleteUserByIdMutationVariables
-  >(DeleteUserByIdDocument, options);
+export function useDeleteUserByIdMutation(options: VueApolloComposable.UseMutationOptions<DeleteUserByIdMutation, DeleteUserByIdMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<DeleteUserByIdMutation, DeleteUserByIdMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<DeleteUserByIdMutation, DeleteUserByIdMutationVariables>(DeleteUserByIdDocument, options);
 }
-export type DeleteUserByIdMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    DeleteUserByIdMutation,
-    DeleteUserByIdMutationVariables
-  >;
+export type DeleteUserByIdMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<DeleteUserByIdMutation, DeleteUserByIdMutationVariables>;
 export const UpdateRoleForUserIdDocument = gql`
-  mutation updateRoleForUserId($userId: Int!, $role: Role!) {
-    updateUserRole(input: { userId: $userId, role: $role }) {
-      role
-    }
+    mutation updateRoleForUserId($userId: Int!, $role: Role!) {
+  updateUserRole(input: {userId: $userId, role: $role}) {
+    role
   }
-`;
+}
+    `;
 
 /**
  * __useUpdateRoleForUserIdMutation__
@@ -5650,37 +3887,17 @@ export const UpdateRoleForUserIdDocument = gql`
  *   },
  * });
  */
-export function useUpdateRoleForUserIdMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        UpdateRoleForUserIdMutation,
-        UpdateRoleForUserIdMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          UpdateRoleForUserIdMutation,
-          UpdateRoleForUserIdMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    UpdateRoleForUserIdMutation,
-    UpdateRoleForUserIdMutationVariables
-  >(UpdateRoleForUserIdDocument, options);
+export function useUpdateRoleForUserIdMutation(options: VueApolloComposable.UseMutationOptions<UpdateRoleForUserIdMutation, UpdateRoleForUserIdMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<UpdateRoleForUserIdMutation, UpdateRoleForUserIdMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<UpdateRoleForUserIdMutation, UpdateRoleForUserIdMutationVariables>(UpdateRoleForUserIdDocument, options);
 }
-export type UpdateRoleForUserIdMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    UpdateRoleForUserIdMutation,
-    UpdateRoleForUserIdMutationVariables
-  >;
+export type UpdateRoleForUserIdMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<UpdateRoleForUserIdMutation, UpdateRoleForUserIdMutationVariables>;
 export const MeDocument = gql`
-  query Me {
-    me {
-      ...ProfileFragment
-    }
+    query Me {
+  me {
+    ...ProfileFragment
   }
-  ${ProfileFragmentDoc}
-`;
+}
+    ${ProfileFragmentDoc}`;
 
 /**
  * __useMeQuery__
@@ -5694,45 +3911,18 @@ export const MeDocument = gql`
  * @example
  * const { result, loading, error } = useMeQuery();
  */
-export function useMeQuery(
-  options:
-    | VueApolloComposable.UseQueryOptions<MeQuery, MeQueryVariables>
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<MeQuery, MeQueryVariables>
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<MeQuery, MeQueryVariables>
-      > = {},
-) {
-  return VueApolloComposable.useQuery<MeQuery, MeQueryVariables>(
-    MeDocument,
-    {},
-    options,
-  );
+export function useMeQuery(options: VueApolloComposable.UseQueryOptions<MeQuery, MeQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<MeQuery, MeQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<MeQuery, MeQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<MeQuery, MeQueryVariables>(MeDocument, {}, options);
 }
-export function useMeLazyQuery(
-  options:
-    | VueApolloComposable.UseQueryOptions<MeQuery, MeQueryVariables>
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<MeQuery, MeQueryVariables>
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<MeQuery, MeQueryVariables>
-      > = {},
-) {
-  return VueApolloComposable.useLazyQuery<MeQuery, MeQueryVariables>(
-    MeDocument,
-    {},
-    options,
-  );
+export function useMeLazyQuery(options: VueApolloComposable.UseQueryOptions<MeQuery, MeQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<MeQuery, MeQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<MeQuery, MeQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<MeQuery, MeQueryVariables>(MeDocument, {}, options);
 }
-export type MeQueryCompositionFunctionResult =
-  VueApolloComposable.UseQueryReturn<MeQuery, MeQueryVariables>;
+export type MeQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<MeQuery, MeQueryVariables>;
 export const NewTokenDocument = gql`
-  query newToken {
-    newToken
-  }
-`;
+    query newToken {
+  newToken
+}
+    `;
 
 /**
  * __useNewTokenQuery__
@@ -5746,56 +3936,18 @@ export const NewTokenDocument = gql`
  * @example
  * const { result, loading, error } = useNewTokenQuery();
  */
-export function useNewTokenQuery(
-  options:
-    | VueApolloComposable.UseQueryOptions<NewTokenQuery, NewTokenQueryVariables>
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          NewTokenQuery,
-          NewTokenQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          NewTokenQuery,
-          NewTokenQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useQuery<NewTokenQuery, NewTokenQueryVariables>(
-    NewTokenDocument,
-    {},
-    options,
-  );
+export function useNewTokenQuery(options: VueApolloComposable.UseQueryOptions<NewTokenQuery, NewTokenQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<NewTokenQuery, NewTokenQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<NewTokenQuery, NewTokenQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<NewTokenQuery, NewTokenQueryVariables>(NewTokenDocument, {}, options);
 }
-export function useNewTokenLazyQuery(
-  options:
-    | VueApolloComposable.UseQueryOptions<NewTokenQuery, NewTokenQueryVariables>
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          NewTokenQuery,
-          NewTokenQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          NewTokenQuery,
-          NewTokenQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useLazyQuery<
-    NewTokenQuery,
-    NewTokenQueryVariables
-  >(NewTokenDocument, {}, options);
+export function useNewTokenLazyQuery(options: VueApolloComposable.UseQueryOptions<NewTokenQuery, NewTokenQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<NewTokenQuery, NewTokenQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<NewTokenQuery, NewTokenQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<NewTokenQuery, NewTokenQueryVariables>(NewTokenDocument, {}, options);
 }
-export type NewTokenQueryCompositionFunctionResult =
-  VueApolloComposable.UseQueryReturn<NewTokenQuery, NewTokenQueryVariables>;
+export type NewTokenQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<NewTokenQuery, NewTokenQueryVariables>;
 export const ProfileTokenDocument = gql`
-  query profileToken {
-    profileToken
-  }
-`;
+    query profileToken {
+  profileToken
+}
+    `;
 
 /**
  * __useProfileTokenQuery__
@@ -5809,66 +3961,20 @@ export const ProfileTokenDocument = gql`
  * @example
  * const { result, loading, error } = useProfileTokenQuery();
  */
-export function useProfileTokenQuery(
-  options:
-    | VueApolloComposable.UseQueryOptions<
-        ProfileTokenQuery,
-        ProfileTokenQueryVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          ProfileTokenQuery,
-          ProfileTokenQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          ProfileTokenQuery,
-          ProfileTokenQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useQuery<
-    ProfileTokenQuery,
-    ProfileTokenQueryVariables
-  >(ProfileTokenDocument, {}, options);
+export function useProfileTokenQuery(options: VueApolloComposable.UseQueryOptions<ProfileTokenQuery, ProfileTokenQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<ProfileTokenQuery, ProfileTokenQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<ProfileTokenQuery, ProfileTokenQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<ProfileTokenQuery, ProfileTokenQueryVariables>(ProfileTokenDocument, {}, options);
 }
-export function useProfileTokenLazyQuery(
-  options:
-    | VueApolloComposable.UseQueryOptions<
-        ProfileTokenQuery,
-        ProfileTokenQueryVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          ProfileTokenQuery,
-          ProfileTokenQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          ProfileTokenQuery,
-          ProfileTokenQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useLazyQuery<
-    ProfileTokenQuery,
-    ProfileTokenQueryVariables
-  >(ProfileTokenDocument, {}, options);
+export function useProfileTokenLazyQuery(options: VueApolloComposable.UseQueryOptions<ProfileTokenQuery, ProfileTokenQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<ProfileTokenQuery, ProfileTokenQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<ProfileTokenQuery, ProfileTokenQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<ProfileTokenQuery, ProfileTokenQueryVariables>(ProfileTokenDocument, {}, options);
 }
-export type ProfileTokenQueryCompositionFunctionResult =
-  VueApolloComposable.UseQueryReturn<
-    ProfileTokenQuery,
-    ProfileTokenQueryVariables
-  >;
+export type ProfileTokenQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<ProfileTokenQuery, ProfileTokenQueryVariables>;
 export const ResetProfileTokenDocument = gql`
-  mutation resetProfileToken {
-    resetProfileToken(input: {}) {
-      string
-    }
+    mutation resetProfileToken {
+  resetProfileToken(input: {}) {
+    string
   }
-`;
+}
+    `;
 
 /**
  * __useResetProfileTokenMutation__
@@ -5883,36 +3989,17 @@ export const ResetProfileTokenDocument = gql`
  * @example
  * const { mutate, loading, error, onDone } = useResetProfileTokenMutation();
  */
-export function useResetProfileTokenMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        ResetProfileTokenMutation,
-        ResetProfileTokenMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          ResetProfileTokenMutation,
-          ResetProfileTokenMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    ResetProfileTokenMutation,
-    ResetProfileTokenMutationVariables
-  >(ResetProfileTokenDocument, options);
+export function useResetProfileTokenMutation(options: VueApolloComposable.UseMutationOptions<ResetProfileTokenMutation, ResetProfileTokenMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<ResetProfileTokenMutation, ResetProfileTokenMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<ResetProfileTokenMutation, ResetProfileTokenMutationVariables>(ResetProfileTokenDocument, options);
 }
-export type ResetProfileTokenMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    ResetProfileTokenMutation,
-    ResetProfileTokenMutationVariables
-  >;
+export type ResetProfileTokenMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<ResetProfileTokenMutation, ResetProfileTokenMutationVariables>;
 export const ResetDiscordIdDocument = gql`
-  mutation resetDiscordId {
-    resetDiscordId(input: {}) {
-      string
-    }
+    mutation resetDiscordId {
+  resetDiscordId(input: {}) {
+    string
   }
-`;
+}
+    `;
 
 /**
  * __useResetDiscordIdMutation__
@@ -5927,36 +4014,17 @@ export const ResetDiscordIdDocument = gql`
  * @example
  * const { mutate, loading, error, onDone } = useResetDiscordIdMutation();
  */
-export function useResetDiscordIdMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        ResetDiscordIdMutation,
-        ResetDiscordIdMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          ResetDiscordIdMutation,
-          ResetDiscordIdMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    ResetDiscordIdMutation,
-    ResetDiscordIdMutationVariables
-  >(ResetDiscordIdDocument, options);
+export function useResetDiscordIdMutation(options: VueApolloComposable.UseMutationOptions<ResetDiscordIdMutation, ResetDiscordIdMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<ResetDiscordIdMutation, ResetDiscordIdMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<ResetDiscordIdMutation, ResetDiscordIdMutationVariables>(ResetDiscordIdDocument, options);
 }
-export type ResetDiscordIdMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    ResetDiscordIdMutation,
-    ResetDiscordIdMutationVariables
-  >;
+export type ResetDiscordIdMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<ResetDiscordIdMutation, ResetDiscordIdMutationVariables>;
 export const LoginDocument = gql`
-  mutation Login($login: String!, $password: String!) {
-    login(input: { login: $login, password: $password }) {
-      jwt
-    }
+    mutation Login($login: String!, $password: String!) {
+  login(input: {login: $login, password: $password}) {
+    jwt
   }
-`;
+}
+    `;
 
 /**
  * __useLoginMutation__
@@ -5976,33 +4044,17 @@ export const LoginDocument = gql`
  *   },
  * });
  */
-export function useLoginMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        LoginMutation,
-        LoginMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          LoginMutation,
-          LoginMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<LoginMutation, LoginMutationVariables>(
-    LoginDocument,
-    options,
-  );
+export function useLoginMutation(options: VueApolloComposable.UseMutationOptions<LoginMutation, LoginMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<LoginMutation, LoginMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, options);
 }
-export type LoginMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<LoginMutation, LoginMutationVariables>;
+export type LoginMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<LoginMutation, LoginMutationVariables>;
 export const RegisterDocument = gql`
-  mutation Register($login: String!, $password: String!) {
-    register(input: { login: $login, password: $password }) {
-      jwt
-    }
+    mutation Register($login: String!, $password: String!) {
+  register(input: {login: $login, password: $password}) {
+    jwt
   }
-`;
+}
+    `;
 
 /**
  * __useRegisterMutation__
@@ -6022,42 +4074,17 @@ export const RegisterDocument = gql`
  *   },
  * });
  */
-export function useRegisterMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        RegisterMutation,
-        RegisterMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          RegisterMutation,
-          RegisterMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    RegisterMutation,
-    RegisterMutationVariables
-  >(RegisterDocument, options);
+export function useRegisterMutation(options: VueApolloComposable.UseMutationOptions<RegisterMutation, RegisterMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<RegisterMutation, RegisterMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, options);
 }
-export type RegisterMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    RegisterMutation,
-    RegisterMutationVariables
-  >;
+export type RegisterMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<RegisterMutation, RegisterMutationVariables>;
 export const RegisterWithTokenDocument = gql`
-  mutation RegisterWithToken(
-    $login: String!
-    $password: String!
-    $token: String!
-  ) {
-    registerWithToken(
-      input: { login: $login, password: $password, token: $token }
-    ) {
-      jwt
-    }
+    mutation RegisterWithToken($login: String!, $password: String!, $token: String!) {
+  registerWithToken(input: {login: $login, password: $password, token: $token}) {
+    jwt
   }
-`;
+}
+    `;
 
 /**
  * __useRegisterWithTokenMutation__
@@ -6078,46 +4105,19 @@ export const RegisterWithTokenDocument = gql`
  *   },
  * });
  */
-export function useRegisterWithTokenMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        RegisterWithTokenMutation,
-        RegisterWithTokenMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          RegisterWithTokenMutation,
-          RegisterWithTokenMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    RegisterWithTokenMutation,
-    RegisterWithTokenMutationVariables
-  >(RegisterWithTokenDocument, options);
+export function useRegisterWithTokenMutation(options: VueApolloComposable.UseMutationOptions<RegisterWithTokenMutation, RegisterWithTokenMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<RegisterWithTokenMutation, RegisterWithTokenMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<RegisterWithTokenMutation, RegisterWithTokenMutationVariables>(RegisterWithTokenDocument, options);
 }
-export type RegisterWithTokenMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    RegisterWithTokenMutation,
-    RegisterWithTokenMutationVariables
-  >;
+export type RegisterWithTokenMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<RegisterWithTokenMutation, RegisterWithTokenMutationVariables>;
 export const RegisterWithPasswordDocument = gql`
-  mutation RegisterWithPassword(
-    $login: String!
-    $password: String!
-    $ctfnotePassword: String!
+    mutation RegisterWithPassword($login: String!, $password: String!, $ctfnotePassword: String!) {
+  registerWithPassword(
+    input: {login: $login, password: $password, ctfnotePassword: $ctfnotePassword}
   ) {
-    registerWithPassword(
-      input: {
-        login: $login
-        password: $password
-        ctfnotePassword: $ctfnotePassword
-      }
-    ) {
-      jwt
-    }
+    jwt
   }
-`;
+}
+    `;
 
 /**
  * __useRegisterWithPasswordMutation__
@@ -6138,36 +4138,17 @@ export const RegisterWithPasswordDocument = gql`
  *   },
  * });
  */
-export function useRegisterWithPasswordMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        RegisterWithPasswordMutation,
-        RegisterWithPasswordMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          RegisterWithPasswordMutation,
-          RegisterWithPasswordMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    RegisterWithPasswordMutation,
-    RegisterWithPasswordMutationVariables
-  >(RegisterWithPasswordDocument, options);
+export function useRegisterWithPasswordMutation(options: VueApolloComposable.UseMutationOptions<RegisterWithPasswordMutation, RegisterWithPasswordMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<RegisterWithPasswordMutation, RegisterWithPasswordMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<RegisterWithPasswordMutation, RegisterWithPasswordMutationVariables>(RegisterWithPasswordDocument, options);
 }
-export type RegisterWithPasswordMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    RegisterWithPasswordMutation,
-    RegisterWithPasswordMutationVariables
-  >;
+export type RegisterWithPasswordMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<RegisterWithPasswordMutation, RegisterWithPasswordMutationVariables>;
 export const ResetPasswordDocument = gql`
-  mutation ResetPassword($password: String!, $token: String!) {
-    resetPassword(input: { password: $password, token: $token }) {
-      jwt
-    }
+    mutation ResetPassword($password: String!, $token: String!) {
+  resetPassword(input: {password: $password, token: $token}) {
+    jwt
   }
-`;
+}
+    `;
 
 /**
  * __useResetPasswordMutation__
@@ -6187,39 +4168,19 @@ export const ResetPasswordDocument = gql`
  *   },
  * });
  */
-export function useResetPasswordMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        ResetPasswordMutation,
-        ResetPasswordMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          ResetPasswordMutation,
-          ResetPasswordMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    ResetPasswordMutation,
-    ResetPasswordMutationVariables
-  >(ResetPasswordDocument, options);
+export function useResetPasswordMutation(options: VueApolloComposable.UseMutationOptions<ResetPasswordMutation, ResetPasswordMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<ResetPasswordMutation, ResetPasswordMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<ResetPasswordMutation, ResetPasswordMutationVariables>(ResetPasswordDocument, options);
 }
-export type ResetPasswordMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    ResetPasswordMutation,
-    ResetPasswordMutationVariables
-  >;
+export type ResetPasswordMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<ResetPasswordMutation, ResetPasswordMutationVariables>;
 export const CtfsDocument = gql`
-  query Ctfs {
-    ctfs {
-      nodes {
-        ...CtfFragment
-      }
+    query Ctfs {
+  ctfs {
+    nodes {
+      ...CtfFragment
     }
   }
-  ${CtfFragmentDoc}
-`;
+}
+    ${CtfFragmentDoc}`;
 
 /**
  * __useCtfsQuery__
@@ -6233,54 +4194,26 @@ export const CtfsDocument = gql`
  * @example
  * const { result, loading, error } = useCtfsQuery();
  */
-export function useCtfsQuery(
-  options:
-    | VueApolloComposable.UseQueryOptions<CtfsQuery, CtfsQueryVariables>
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<CtfsQuery, CtfsQueryVariables>
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<CtfsQuery, CtfsQueryVariables>
-      > = {},
-) {
-  return VueApolloComposable.useQuery<CtfsQuery, CtfsQueryVariables>(
-    CtfsDocument,
-    {},
-    options,
-  );
+export function useCtfsQuery(options: VueApolloComposable.UseQueryOptions<CtfsQuery, CtfsQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<CtfsQuery, CtfsQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<CtfsQuery, CtfsQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<CtfsQuery, CtfsQueryVariables>(CtfsDocument, {}, options);
 }
-export function useCtfsLazyQuery(
-  options:
-    | VueApolloComposable.UseQueryOptions<CtfsQuery, CtfsQueryVariables>
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<CtfsQuery, CtfsQueryVariables>
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<CtfsQuery, CtfsQueryVariables>
-      > = {},
-) {
-  return VueApolloComposable.useLazyQuery<CtfsQuery, CtfsQueryVariables>(
-    CtfsDocument,
-    {},
-    options,
-  );
+export function useCtfsLazyQuery(options: VueApolloComposable.UseQueryOptions<CtfsQuery, CtfsQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<CtfsQuery, CtfsQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<CtfsQuery, CtfsQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<CtfsQuery, CtfsQueryVariables>(CtfsDocument, {}, options);
 }
-export type CtfsQueryCompositionFunctionResult =
-  VueApolloComposable.UseQueryReturn<CtfsQuery, CtfsQueryVariables>;
+export type CtfsQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<CtfsQuery, CtfsQueryVariables>;
 export const SubscribeToCtfDocument = gql`
-  subscription subscribeToCtf {
-    listen(topic: "update:ctfs") {
-      relatedNodeId
-      relatedNode {
-        nodeId
-        ... on Ctf {
-          ...FullCtfFragment
-        }
+    subscription subscribeToCtf {
+  listen(topic: "update:ctfs") {
+    relatedNodeId
+    relatedNode {
+      nodeId
+      ... on Ctf {
+        ...FullCtfFragment
       }
     }
   }
-  ${FullCtfFragmentDoc}
-`;
+}
+    ${FullCtfFragmentDoc}`;
 
 /**
  * __useSubscribeToCtfSubscription__
@@ -6294,43 +4227,17 @@ export const SubscribeToCtfDocument = gql`
  * @example
  * const { result, loading, error } = useSubscribeToCtfSubscription();
  */
-export function useSubscribeToCtfSubscription(
-  options:
-    | VueApolloComposable.UseSubscriptionOptions<
-        SubscribeToCtfSubscription,
-        SubscribeToCtfSubscriptionVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseSubscriptionOptions<
-          SubscribeToCtfSubscription,
-          SubscribeToCtfSubscriptionVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseSubscriptionOptions<
-          SubscribeToCtfSubscription,
-          SubscribeToCtfSubscriptionVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useSubscription<
-    SubscribeToCtfSubscription,
-    SubscribeToCtfSubscriptionVariables
-  >(SubscribeToCtfDocument, {}, options);
+export function useSubscribeToCtfSubscription(options: VueApolloComposable.UseSubscriptionOptions<SubscribeToCtfSubscription, SubscribeToCtfSubscriptionVariables> | VueCompositionApi.Ref<VueApolloComposable.UseSubscriptionOptions<SubscribeToCtfSubscription, SubscribeToCtfSubscriptionVariables>> | ReactiveFunction<VueApolloComposable.UseSubscriptionOptions<SubscribeToCtfSubscription, SubscribeToCtfSubscriptionVariables>> = {}) {
+  return VueApolloComposable.useSubscription<SubscribeToCtfSubscription, SubscribeToCtfSubscriptionVariables>(SubscribeToCtfDocument, {}, options);
 }
-export type SubscribeToCtfSubscriptionCompositionFunctionResult =
-  VueApolloComposable.UseSubscriptionReturn<
-    SubscribeToCtfSubscription,
-    SubscribeToCtfSubscriptionVariables
-  >;
+export type SubscribeToCtfSubscriptionCompositionFunctionResult = VueApolloComposable.UseSubscriptionReturn<SubscribeToCtfSubscription, SubscribeToCtfSubscriptionVariables>;
 export const GetFullCtfDocument = gql`
-  query GetFullCtf($id: Int!) {
-    ctf(id: $id) {
-      ...FullCtfFragment
-    }
+    query GetFullCtf($id: Int!) {
+  ctf(id: $id) {
+    ...FullCtfFragment
   }
-  ${FullCtfFragmentDoc}
-`;
+}
+    ${FullCtfFragmentDoc}`;
 
 /**
  * __useGetFullCtfQuery__
@@ -6347,74 +4254,22 @@ export const GetFullCtfDocument = gql`
  *   id: // value for 'id'
  * });
  */
-export function useGetFullCtfQuery(
-  variables:
-    | GetFullCtfQueryVariables
-    | VueCompositionApi.Ref<GetFullCtfQueryVariables>
-    | ReactiveFunction<GetFullCtfQueryVariables>,
-  options:
-    | VueApolloComposable.UseQueryOptions<
-        GetFullCtfQuery,
-        GetFullCtfQueryVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          GetFullCtfQuery,
-          GetFullCtfQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          GetFullCtfQuery,
-          GetFullCtfQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useQuery<
-    GetFullCtfQuery,
-    GetFullCtfQueryVariables
-  >(GetFullCtfDocument, variables, options);
+export function useGetFullCtfQuery(variables: GetFullCtfQueryVariables | VueCompositionApi.Ref<GetFullCtfQueryVariables> | ReactiveFunction<GetFullCtfQueryVariables>, options: VueApolloComposable.UseQueryOptions<GetFullCtfQuery, GetFullCtfQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetFullCtfQuery, GetFullCtfQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetFullCtfQuery, GetFullCtfQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<GetFullCtfQuery, GetFullCtfQueryVariables>(GetFullCtfDocument, variables, options);
 }
-export function useGetFullCtfLazyQuery(
-  variables:
-    | GetFullCtfQueryVariables
-    | VueCompositionApi.Ref<GetFullCtfQueryVariables>
-    | ReactiveFunction<GetFullCtfQueryVariables>,
-  options:
-    | VueApolloComposable.UseQueryOptions<
-        GetFullCtfQuery,
-        GetFullCtfQueryVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          GetFullCtfQuery,
-          GetFullCtfQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          GetFullCtfQuery,
-          GetFullCtfQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useLazyQuery<
-    GetFullCtfQuery,
-    GetFullCtfQueryVariables
-  >(GetFullCtfDocument, variables, options);
+export function useGetFullCtfLazyQuery(variables: GetFullCtfQueryVariables | VueCompositionApi.Ref<GetFullCtfQueryVariables> | ReactiveFunction<GetFullCtfQueryVariables>, options: VueApolloComposable.UseQueryOptions<GetFullCtfQuery, GetFullCtfQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetFullCtfQuery, GetFullCtfQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetFullCtfQuery, GetFullCtfQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<GetFullCtfQuery, GetFullCtfQueryVariables>(GetFullCtfDocument, variables, options);
 }
-export type GetFullCtfQueryCompositionFunctionResult =
-  VueApolloComposable.UseQueryReturn<GetFullCtfQuery, GetFullCtfQueryVariables>;
+export type GetFullCtfQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetFullCtfQuery, GetFullCtfQueryVariables>;
 export const IncomingCtfsDocument = gql`
-  query IncomingCtfs {
-    incomingCtf {
-      nodes {
-        ...CtfFragment
-      }
+    query IncomingCtfs {
+  incomingCtf {
+    nodes {
+      ...CtfFragment
     }
   }
-  ${CtfFragmentDoc}
-`;
+}
+    ${CtfFragmentDoc}`;
 
 /**
  * __useIncomingCtfsQuery__
@@ -6428,70 +4283,23 @@ export const IncomingCtfsDocument = gql`
  * @example
  * const { result, loading, error } = useIncomingCtfsQuery();
  */
-export function useIncomingCtfsQuery(
-  options:
-    | VueApolloComposable.UseQueryOptions<
-        IncomingCtfsQuery,
-        IncomingCtfsQueryVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          IncomingCtfsQuery,
-          IncomingCtfsQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          IncomingCtfsQuery,
-          IncomingCtfsQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useQuery<
-    IncomingCtfsQuery,
-    IncomingCtfsQueryVariables
-  >(IncomingCtfsDocument, {}, options);
+export function useIncomingCtfsQuery(options: VueApolloComposable.UseQueryOptions<IncomingCtfsQuery, IncomingCtfsQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<IncomingCtfsQuery, IncomingCtfsQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<IncomingCtfsQuery, IncomingCtfsQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<IncomingCtfsQuery, IncomingCtfsQueryVariables>(IncomingCtfsDocument, {}, options);
 }
-export function useIncomingCtfsLazyQuery(
-  options:
-    | VueApolloComposable.UseQueryOptions<
-        IncomingCtfsQuery,
-        IncomingCtfsQueryVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          IncomingCtfsQuery,
-          IncomingCtfsQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          IncomingCtfsQuery,
-          IncomingCtfsQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useLazyQuery<
-    IncomingCtfsQuery,
-    IncomingCtfsQueryVariables
-  >(IncomingCtfsDocument, {}, options);
+export function useIncomingCtfsLazyQuery(options: VueApolloComposable.UseQueryOptions<IncomingCtfsQuery, IncomingCtfsQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<IncomingCtfsQuery, IncomingCtfsQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<IncomingCtfsQuery, IncomingCtfsQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<IncomingCtfsQuery, IncomingCtfsQueryVariables>(IncomingCtfsDocument, {}, options);
 }
-export type IncomingCtfsQueryCompositionFunctionResult =
-  VueApolloComposable.UseQueryReturn<
-    IncomingCtfsQuery,
-    IncomingCtfsQueryVariables
-  >;
+export type IncomingCtfsQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<IncomingCtfsQuery, IncomingCtfsQueryVariables>;
 export const PastCtfsDocument = gql`
-  query PastCtfs($first: Int, $offset: Int) {
-    pastCtf(first: $first, offset: $offset) {
-      nodes {
-        ...CtfFragment
-      }
-      totalCount
+    query PastCtfs($first: Int, $offset: Int) {
+  pastCtf(first: $first, offset: $offset) {
+    nodes {
+      ...CtfFragment
     }
+    totalCount
   }
-  ${CtfFragmentDoc}
-`;
+}
+    ${CtfFragmentDoc}`;
 
 /**
  * __usePastCtfsQuery__
@@ -6509,93 +4317,24 @@ export const PastCtfsDocument = gql`
  *   offset: // value for 'offset'
  * });
  */
-export function usePastCtfsQuery(
-  variables:
-    | PastCtfsQueryVariables
-    | VueCompositionApi.Ref<PastCtfsQueryVariables>
-    | ReactiveFunction<PastCtfsQueryVariables> = {},
-  options:
-    | VueApolloComposable.UseQueryOptions<PastCtfsQuery, PastCtfsQueryVariables>
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          PastCtfsQuery,
-          PastCtfsQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          PastCtfsQuery,
-          PastCtfsQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useQuery<PastCtfsQuery, PastCtfsQueryVariables>(
-    PastCtfsDocument,
-    variables,
-    options,
-  );
+export function usePastCtfsQuery(variables: PastCtfsQueryVariables | VueCompositionApi.Ref<PastCtfsQueryVariables> | ReactiveFunction<PastCtfsQueryVariables> = {}, options: VueApolloComposable.UseQueryOptions<PastCtfsQuery, PastCtfsQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<PastCtfsQuery, PastCtfsQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<PastCtfsQuery, PastCtfsQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<PastCtfsQuery, PastCtfsQueryVariables>(PastCtfsDocument, variables, options);
 }
-export function usePastCtfsLazyQuery(
-  variables:
-    | PastCtfsQueryVariables
-    | VueCompositionApi.Ref<PastCtfsQueryVariables>
-    | ReactiveFunction<PastCtfsQueryVariables> = {},
-  options:
-    | VueApolloComposable.UseQueryOptions<PastCtfsQuery, PastCtfsQueryVariables>
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          PastCtfsQuery,
-          PastCtfsQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          PastCtfsQuery,
-          PastCtfsQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useLazyQuery<
-    PastCtfsQuery,
-    PastCtfsQueryVariables
-  >(PastCtfsDocument, variables, options);
+export function usePastCtfsLazyQuery(variables: PastCtfsQueryVariables | VueCompositionApi.Ref<PastCtfsQueryVariables> | ReactiveFunction<PastCtfsQueryVariables> = {}, options: VueApolloComposable.UseQueryOptions<PastCtfsQuery, PastCtfsQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<PastCtfsQuery, PastCtfsQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<PastCtfsQuery, PastCtfsQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<PastCtfsQuery, PastCtfsQueryVariables>(PastCtfsDocument, variables, options);
 }
-export type PastCtfsQueryCompositionFunctionResult =
-  VueApolloComposable.UseQueryReturn<PastCtfsQuery, PastCtfsQueryVariables>;
+export type PastCtfsQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<PastCtfsQuery, PastCtfsQueryVariables>;
 export const CreateCtfDocument = gql`
-  mutation createCtf(
-    $title: String!
-    $startTime: Datetime!
-    $endTime: Datetime!
-    $weight: Float
-    $ctfUrl: String
-    $ctfPlatform: String!
-    $ctftimeUrl: String
-    $logoUrl: String
-    $description: String
+    mutation createCtf($title: String!, $startTime: Datetime!, $endTime: Datetime!, $weight: Float, $ctfUrl: String, $ctfPlatform: String!, $ctftimeUrl: String, $logoUrl: String, $description: String) {
+  createCtf(
+    input: {ctf: {title: $title, weight: $weight, ctfUrl: $ctfUrl, ctfPlatform: $ctfPlatform, ctftimeUrl: $ctftimeUrl, logoUrl: $logoUrl, startTime: $startTime, endTime: $endTime, description: $description}}
   ) {
-    createCtf(
-      input: {
-        ctf: {
-          title: $title
-          weight: $weight
-          ctfUrl: $ctfUrl
-          ctfPlatform: $ctfPlatform
-          ctftimeUrl: $ctftimeUrl
-          logoUrl: $logoUrl
-          startTime: $startTime
-          endTime: $endTime
-          description: $description
-        }
-      }
-    ) {
-      ctf {
-        ...CtfFragment
-      }
+    ctf {
+      ...CtfFragment
     }
   }
-  ${CtfFragmentDoc}
-`;
+}
+    ${CtfFragmentDoc}`;
 
 /**
  * __useCreateCtfMutation__
@@ -6622,36 +4361,17 @@ export const CreateCtfDocument = gql`
  *   },
  * });
  */
-export function useCreateCtfMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        CreateCtfMutation,
-        CreateCtfMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          CreateCtfMutation,
-          CreateCtfMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    CreateCtfMutation,
-    CreateCtfMutationVariables
-  >(CreateCtfDocument, options);
+export function useCreateCtfMutation(options: VueApolloComposable.UseMutationOptions<CreateCtfMutation, CreateCtfMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<CreateCtfMutation, CreateCtfMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<CreateCtfMutation, CreateCtfMutationVariables>(CreateCtfDocument, options);
 }
-export type CreateCtfMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    CreateCtfMutation,
-    CreateCtfMutationVariables
-  >;
+export type CreateCtfMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<CreateCtfMutation, CreateCtfMutationVariables>;
 export const DeleteCtfbyIdDocument = gql`
-  mutation deleteCtfbyId($id: Int!) {
-    deleteCtf(input: { id: $id }) {
-      deletedCtfNodeId
-    }
+    mutation deleteCtfbyId($id: Int!) {
+  deleteCtf(input: {id: $id}) {
+    deletedCtfNodeId
   }
-`;
+}
+    `;
 
 /**
  * __useDeleteCtfbyIdMutation__
@@ -6670,39 +4390,19 @@ export const DeleteCtfbyIdDocument = gql`
  *   },
  * });
  */
-export function useDeleteCtfbyIdMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        DeleteCtfbyIdMutation,
-        DeleteCtfbyIdMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          DeleteCtfbyIdMutation,
-          DeleteCtfbyIdMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    DeleteCtfbyIdMutation,
-    DeleteCtfbyIdMutationVariables
-  >(DeleteCtfbyIdDocument, options);
+export function useDeleteCtfbyIdMutation(options: VueApolloComposable.UseMutationOptions<DeleteCtfbyIdMutation, DeleteCtfbyIdMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<DeleteCtfbyIdMutation, DeleteCtfbyIdMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<DeleteCtfbyIdMutation, DeleteCtfbyIdMutationVariables>(DeleteCtfbyIdDocument, options);
 }
-export type DeleteCtfbyIdMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    DeleteCtfbyIdMutation,
-    DeleteCtfbyIdMutationVariables
-  >;
+export type DeleteCtfbyIdMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<DeleteCtfbyIdMutation, DeleteCtfbyIdMutationVariables>;
 export const ImportctfDocument = gql`
-  mutation importctf($id: Int!) {
-    importCtf(input: { ctftimeId: $id }) {
-      ctf {
-        ...CtfFragment
-      }
+    mutation importctf($id: Int!, $ctfPlatform: String!) {
+  importCtf(input: {ctftimeId: $id, ctfPlatform: $ctfPlatform}) {
+    ctf {
+      ...CtfFragment
     }
   }
-  ${CtfFragmentDoc}
-`;
+}
+    ${CtfFragmentDoc}`;
 
 /**
  * __useImportctfMutation__
@@ -6718,68 +4418,25 @@ export const ImportctfDocument = gql`
  * const { mutate, loading, error, onDone } = useImportctfMutation({
  *   variables: {
  *     id: // value for 'id'
+ *     ctfPlatform: // value for 'ctfPlatform'
  *   },
  * });
  */
-export function useImportctfMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        ImportctfMutation,
-        ImportctfMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          ImportctfMutation,
-          ImportctfMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    ImportctfMutation,
-    ImportctfMutationVariables
-  >(ImportctfDocument, options);
+export function useImportctfMutation(options: VueApolloComposable.UseMutationOptions<ImportctfMutation, ImportctfMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<ImportctfMutation, ImportctfMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<ImportctfMutation, ImportctfMutationVariables>(ImportctfDocument, options);
 }
-export type ImportctfMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    ImportctfMutation,
-    ImportctfMutationVariables
-  >;
+export type ImportctfMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<ImportctfMutation, ImportctfMutationVariables>;
 export const UpdateCtfByIdDocument = gql`
-  mutation updateCtfById(
-    $id: Int!
-    $title: String
-    $weight: Float
-    $ctfUrl: String
-    $ctfPlatform: String
-    $ctftimeUrl: String
-    $logoUrl: String
-    $startTime: Datetime
-    $endTime: Datetime
-    $description: String
+    mutation updateCtfById($id: Int!, $title: String, $weight: Float, $ctfUrl: String, $ctfPlatform: String, $ctftimeUrl: String, $logoUrl: String, $startTime: Datetime, $endTime: Datetime, $description: String) {
+  updateCtf(
+    input: {id: $id, patch: {title: $title, weight: $weight, ctfUrl: $ctfUrl, ctfPlatform: $ctfPlatform, ctftimeUrl: $ctftimeUrl, logoUrl: $logoUrl, startTime: $startTime, endTime: $endTime, description: $description}}
   ) {
-    updateCtf(
-      input: {
-        id: $id
-        patch: {
-          title: $title
-          weight: $weight
-          ctfUrl: $ctfUrl
-          ctfPlatform: $ctfPlatform
-          ctftimeUrl: $ctftimeUrl
-          logoUrl: $logoUrl
-          startTime: $startTime
-          endTime: $endTime
-          description: $description
-        }
-      }
-    ) {
-      ctf {
-        ...CtfFragment
-      }
+    ctf {
+      ...CtfFragment
     }
   }
-  ${CtfFragmentDoc}
-`;
+}
+    ${CtfFragmentDoc}`;
 
 /**
  * __useUpdateCtfByIdMutation__
@@ -6807,36 +4464,17 @@ export const UpdateCtfByIdDocument = gql`
  *   },
  * });
  */
-export function useUpdateCtfByIdMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        UpdateCtfByIdMutation,
-        UpdateCtfByIdMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          UpdateCtfByIdMutation,
-          UpdateCtfByIdMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    UpdateCtfByIdMutation,
-    UpdateCtfByIdMutationVariables
-  >(UpdateCtfByIdDocument, options);
+export function useUpdateCtfByIdMutation(options: VueApolloComposable.UseMutationOptions<UpdateCtfByIdMutation, UpdateCtfByIdMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<UpdateCtfByIdMutation, UpdateCtfByIdMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<UpdateCtfByIdMutation, UpdateCtfByIdMutationVariables>(UpdateCtfByIdDocument, options);
 }
-export type UpdateCtfByIdMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    UpdateCtfByIdMutation,
-    UpdateCtfByIdMutationVariables
-  >;
+export type UpdateCtfByIdMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<UpdateCtfByIdMutation, UpdateCtfByIdMutationVariables>;
 export const SetDiscordEventLinkDocument = gql`
-  mutation setDiscordEventLink($id: Int!, $link: String!) {
-    setDiscordEventLink(input: { ctfId: $id, link: $link }) {
-      clientMutationId
-    }
+    mutation setDiscordEventLink($id: Int!, $link: String!) {
+  setDiscordEventLink(input: {ctfId: $id, link: $link}) {
+    clientMutationId
   }
-`;
+}
+    `;
 
 /**
  * __useSetDiscordEventLinkMutation__
@@ -6856,42 +4494,22 @@ export const SetDiscordEventLinkDocument = gql`
  *   },
  * });
  */
-export function useSetDiscordEventLinkMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        SetDiscordEventLinkMutation,
-        SetDiscordEventLinkMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          SetDiscordEventLinkMutation,
-          SetDiscordEventLinkMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    SetDiscordEventLinkMutation,
-    SetDiscordEventLinkMutationVariables
-  >(SetDiscordEventLinkDocument, options);
+export function useSetDiscordEventLinkMutation(options: VueApolloComposable.UseMutationOptions<SetDiscordEventLinkMutation, SetDiscordEventLinkMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<SetDiscordEventLinkMutation, SetDiscordEventLinkMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<SetDiscordEventLinkMutation, SetDiscordEventLinkMutationVariables>(SetDiscordEventLinkDocument, options);
 }
-export type SetDiscordEventLinkMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    SetDiscordEventLinkMutation,
-    SetDiscordEventLinkMutationVariables
-  >;
+export type SetDiscordEventLinkMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<SetDiscordEventLinkMutation, SetDiscordEventLinkMutationVariables>;
 export const SubscribeToCtfCreatedDocument = gql`
-  subscription subscribeToCtfCreated {
-    listen(topic: "created:ctfs") {
-      relatedNodeId
-      relatedNode {
-        ... on Ctf {
-          ...CtfFragment
-        }
+    subscription subscribeToCtfCreated {
+  listen(topic: "created:ctfs") {
+    relatedNodeId
+    relatedNode {
+      ... on Ctf {
+        ...CtfFragment
       }
     }
   }
-  ${CtfFragmentDoc}
-`;
+}
+    ${CtfFragmentDoc}`;
 
 /**
  * __useSubscribeToCtfCreatedSubscription__
@@ -6905,48 +4523,22 @@ export const SubscribeToCtfCreatedDocument = gql`
  * @example
  * const { result, loading, error } = useSubscribeToCtfCreatedSubscription();
  */
-export function useSubscribeToCtfCreatedSubscription(
-  options:
-    | VueApolloComposable.UseSubscriptionOptions<
-        SubscribeToCtfCreatedSubscription,
-        SubscribeToCtfCreatedSubscriptionVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseSubscriptionOptions<
-          SubscribeToCtfCreatedSubscription,
-          SubscribeToCtfCreatedSubscriptionVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseSubscriptionOptions<
-          SubscribeToCtfCreatedSubscription,
-          SubscribeToCtfCreatedSubscriptionVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useSubscription<
-    SubscribeToCtfCreatedSubscription,
-    SubscribeToCtfCreatedSubscriptionVariables
-  >(SubscribeToCtfCreatedDocument, {}, options);
+export function useSubscribeToCtfCreatedSubscription(options: VueApolloComposable.UseSubscriptionOptions<SubscribeToCtfCreatedSubscription, SubscribeToCtfCreatedSubscriptionVariables> | VueCompositionApi.Ref<VueApolloComposable.UseSubscriptionOptions<SubscribeToCtfCreatedSubscription, SubscribeToCtfCreatedSubscriptionVariables>> | ReactiveFunction<VueApolloComposable.UseSubscriptionOptions<SubscribeToCtfCreatedSubscription, SubscribeToCtfCreatedSubscriptionVariables>> = {}) {
+  return VueApolloComposable.useSubscription<SubscribeToCtfCreatedSubscription, SubscribeToCtfCreatedSubscriptionVariables>(SubscribeToCtfCreatedDocument, {}, options);
 }
-export type SubscribeToCtfCreatedSubscriptionCompositionFunctionResult =
-  VueApolloComposable.UseSubscriptionReturn<
-    SubscribeToCtfCreatedSubscription,
-    SubscribeToCtfCreatedSubscriptionVariables
-  >;
+export type SubscribeToCtfCreatedSubscriptionCompositionFunctionResult = VueApolloComposable.UseSubscriptionReturn<SubscribeToCtfCreatedSubscription, SubscribeToCtfCreatedSubscriptionVariables>;
 export const SubscribeToCtfDeletedDocument = gql`
-  subscription subscribeToCtfDeleted {
-    listen(topic: "deleted:ctfs") {
-      relatedNodeId
-      relatedNode {
-        ... on Ctf {
-          ...CtfFragment
-        }
+    subscription subscribeToCtfDeleted {
+  listen(topic: "deleted:ctfs") {
+    relatedNodeId
+    relatedNode {
+      ... on Ctf {
+        ...CtfFragment
       }
     }
   }
-  ${CtfFragmentDoc}
-`;
+}
+    ${CtfFragmentDoc}`;
 
 /**
  * __useSubscribeToCtfDeletedSubscription__
@@ -6960,48 +4552,22 @@ export const SubscribeToCtfDeletedDocument = gql`
  * @example
  * const { result, loading, error } = useSubscribeToCtfDeletedSubscription();
  */
-export function useSubscribeToCtfDeletedSubscription(
-  options:
-    | VueApolloComposable.UseSubscriptionOptions<
-        SubscribeToCtfDeletedSubscription,
-        SubscribeToCtfDeletedSubscriptionVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseSubscriptionOptions<
-          SubscribeToCtfDeletedSubscription,
-          SubscribeToCtfDeletedSubscriptionVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseSubscriptionOptions<
-          SubscribeToCtfDeletedSubscription,
-          SubscribeToCtfDeletedSubscriptionVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useSubscription<
-    SubscribeToCtfDeletedSubscription,
-    SubscribeToCtfDeletedSubscriptionVariables
-  >(SubscribeToCtfDeletedDocument, {}, options);
+export function useSubscribeToCtfDeletedSubscription(options: VueApolloComposable.UseSubscriptionOptions<SubscribeToCtfDeletedSubscription, SubscribeToCtfDeletedSubscriptionVariables> | VueCompositionApi.Ref<VueApolloComposable.UseSubscriptionOptions<SubscribeToCtfDeletedSubscription, SubscribeToCtfDeletedSubscriptionVariables>> | ReactiveFunction<VueApolloComposable.UseSubscriptionOptions<SubscribeToCtfDeletedSubscription, SubscribeToCtfDeletedSubscriptionVariables>> = {}) {
+  return VueApolloComposable.useSubscription<SubscribeToCtfDeletedSubscription, SubscribeToCtfDeletedSubscriptionVariables>(SubscribeToCtfDeletedDocument, {}, options);
 }
-export type SubscribeToCtfDeletedSubscriptionCompositionFunctionResult =
-  VueApolloComposable.UseSubscriptionReturn<
-    SubscribeToCtfDeletedSubscription,
-    SubscribeToCtfDeletedSubscriptionVariables
-  >;
+export type SubscribeToCtfDeletedSubscriptionCompositionFunctionResult = VueApolloComposable.UseSubscriptionReturn<SubscribeToCtfDeletedSubscription, SubscribeToCtfDeletedSubscriptionVariables>;
 export const SubscribeToFlagDocument = gql`
-  subscription subscribeToFlag {
-    listen(topic: "task-solved:tasks") {
-      relatedNodeId
-      relatedNode {
-        ... on Task {
-          ...TaskFragment
-        }
+    subscription subscribeToFlag {
+  listen(topic: "task-solved:tasks") {
+    relatedNodeId
+    relatedNode {
+      ... on Task {
+        ...TaskFragment
       }
     }
   }
-  ${TaskFragmentDoc}
-`;
+}
+    ${TaskFragmentDoc}`;
 
 /**
  * __useSubscribeToFlagSubscription__
@@ -7015,47 +4581,19 @@ export const SubscribeToFlagDocument = gql`
  * @example
  * const { result, loading, error } = useSubscribeToFlagSubscription();
  */
-export function useSubscribeToFlagSubscription(
-  options:
-    | VueApolloComposable.UseSubscriptionOptions<
-        SubscribeToFlagSubscription,
-        SubscribeToFlagSubscriptionVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseSubscriptionOptions<
-          SubscribeToFlagSubscription,
-          SubscribeToFlagSubscriptionVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseSubscriptionOptions<
-          SubscribeToFlagSubscription,
-          SubscribeToFlagSubscriptionVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useSubscription<
-    SubscribeToFlagSubscription,
-    SubscribeToFlagSubscriptionVariables
-  >(SubscribeToFlagDocument, {}, options);
+export function useSubscribeToFlagSubscription(options: VueApolloComposable.UseSubscriptionOptions<SubscribeToFlagSubscription, SubscribeToFlagSubscriptionVariables> | VueCompositionApi.Ref<VueApolloComposable.UseSubscriptionOptions<SubscribeToFlagSubscription, SubscribeToFlagSubscriptionVariables>> | ReactiveFunction<VueApolloComposable.UseSubscriptionOptions<SubscribeToFlagSubscription, SubscribeToFlagSubscriptionVariables>> = {}) {
+  return VueApolloComposable.useSubscription<SubscribeToFlagSubscription, SubscribeToFlagSubscriptionVariables>(SubscribeToFlagDocument, {}, options);
 }
-export type SubscribeToFlagSubscriptionCompositionFunctionResult =
-  VueApolloComposable.UseSubscriptionReturn<
-    SubscribeToFlagSubscription,
-    SubscribeToFlagSubscriptionVariables
-  >;
+export type SubscribeToFlagSubscriptionCompositionFunctionResult = VueApolloComposable.UseSubscriptionReturn<SubscribeToFlagSubscription, SubscribeToFlagSubscriptionVariables>;
 export const InviteUserToCtfDocument = gql`
-  mutation inviteUserToCtf($ctfId: Int!, $profileId: Int!) {
-    createInvitation(
-      input: { invitation: { ctfId: $ctfId, profileId: $profileId } }
-    ) {
-      invitation {
-        ...InvitationFragment
-      }
+    mutation inviteUserToCtf($ctfId: Int!, $profileId: Int!) {
+  createInvitation(input: {invitation: {ctfId: $ctfId, profileId: $profileId}}) {
+    invitation {
+      ...InvitationFragment
     }
   }
-  ${InvitationFragmentDoc}
-`;
+}
+    ${InvitationFragmentDoc}`;
 
 /**
  * __useInviteUserToCtfMutation__
@@ -7075,36 +4613,17 @@ export const InviteUserToCtfDocument = gql`
  *   },
  * });
  */
-export function useInviteUserToCtfMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        InviteUserToCtfMutation,
-        InviteUserToCtfMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          InviteUserToCtfMutation,
-          InviteUserToCtfMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    InviteUserToCtfMutation,
-    InviteUserToCtfMutationVariables
-  >(InviteUserToCtfDocument, options);
+export function useInviteUserToCtfMutation(options: VueApolloComposable.UseMutationOptions<InviteUserToCtfMutation, InviteUserToCtfMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<InviteUserToCtfMutation, InviteUserToCtfMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<InviteUserToCtfMutation, InviteUserToCtfMutationVariables>(InviteUserToCtfDocument, options);
 }
-export type InviteUserToCtfMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    InviteUserToCtfMutation,
-    InviteUserToCtfMutationVariables
-  >;
+export type InviteUserToCtfMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<InviteUserToCtfMutation, InviteUserToCtfMutationVariables>;
 export const UninviteUserToCtfDocument = gql`
-  mutation uninviteUserToCtf($ctfId: Int!, $profileId: Int!) {
-    deleteInvitation(input: { ctfId: $ctfId, profileId: $profileId }) {
-      deletedInvitationNodeId
-    }
+    mutation uninviteUserToCtf($ctfId: Int!, $profileId: Int!) {
+  deleteInvitation(input: {ctfId: $ctfId, profileId: $profileId}) {
+    deletedInvitationNodeId
   }
-`;
+}
+    `;
 
 /**
  * __useUninviteUserToCtfMutation__
@@ -7124,40 +4643,19 @@ export const UninviteUserToCtfDocument = gql`
  *   },
  * });
  */
-export function useUninviteUserToCtfMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        UninviteUserToCtfMutation,
-        UninviteUserToCtfMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          UninviteUserToCtfMutation,
-          UninviteUserToCtfMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    UninviteUserToCtfMutation,
-    UninviteUserToCtfMutationVariables
-  >(UninviteUserToCtfDocument, options);
+export function useUninviteUserToCtfMutation(options: VueApolloComposable.UseMutationOptions<UninviteUserToCtfMutation, UninviteUserToCtfMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<UninviteUserToCtfMutation, UninviteUserToCtfMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<UninviteUserToCtfMutation, UninviteUserToCtfMutationVariables>(UninviteUserToCtfDocument, options);
 }
-export type UninviteUserToCtfMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    UninviteUserToCtfMutation,
-    UninviteUserToCtfMutationVariables
-  >;
+export type UninviteUserToCtfMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<UninviteUserToCtfMutation, UninviteUserToCtfMutationVariables>;
 export const UpdatePasswordDocument = gql`
-  mutation updatePassword($oldPassword: String!, $newPassword: String!) {
-    changePassword(
-      input: { oldpassword: $oldPassword, newpassword: $newPassword }
-    ) {
-      changePasswordResponse {
-        ok
-      }
+    mutation updatePassword($oldPassword: String!, $newPassword: String!) {
+  changePassword(input: {oldpassword: $oldPassword, newpassword: $newPassword}) {
+    changePasswordResponse {
+      ok
     }
   }
-`;
+}
+    `;
 
 /**
  * __useUpdatePasswordMutation__
@@ -7177,39 +4675,19 @@ export const UpdatePasswordDocument = gql`
  *   },
  * });
  */
-export function useUpdatePasswordMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        UpdatePasswordMutation,
-        UpdatePasswordMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          UpdatePasswordMutation,
-          UpdatePasswordMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    UpdatePasswordMutation,
-    UpdatePasswordMutationVariables
-  >(UpdatePasswordDocument, options);
+export function useUpdatePasswordMutation(options: VueApolloComposable.UseMutationOptions<UpdatePasswordMutation, UpdatePasswordMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<UpdatePasswordMutation, UpdatePasswordMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<UpdatePasswordMutation, UpdatePasswordMutationVariables>(UpdatePasswordDocument, options);
 }
-export type UpdatePasswordMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    UpdatePasswordMutation,
-    UpdatePasswordMutationVariables
-  >;
+export type UpdatePasswordMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<UpdatePasswordMutation, UpdatePasswordMutationVariables>;
 export const UpdateProfileDocument = gql`
-  mutation updateProfile($id: Int!, $patch: ProfilePatch!) {
-    updateProfile(input: { id: $id, patch: $patch }) {
-      profile {
-        ...ProfileFragment
-      }
+    mutation updateProfile($id: Int!, $patch: ProfilePatch!) {
+  updateProfile(input: {id: $id, patch: $patch}) {
+    profile {
+      ...ProfileFragment
     }
   }
-  ${ProfileFragmentDoc}
-`;
+}
+    ${ProfileFragmentDoc}`;
 
 /**
  * __useUpdateProfileMutation__
@@ -7229,39 +4707,19 @@ export const UpdateProfileDocument = gql`
  *   },
  * });
  */
-export function useUpdateProfileMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        UpdateProfileMutation,
-        UpdateProfileMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          UpdateProfileMutation,
-          UpdateProfileMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    UpdateProfileMutation,
-    UpdateProfileMutationVariables
-  >(UpdateProfileDocument, options);
+export function useUpdateProfileMutation(options: VueApolloComposable.UseMutationOptions<UpdateProfileMutation, UpdateProfileMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<UpdateProfileMutation, UpdateProfileMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<UpdateProfileMutation, UpdateProfileMutationVariables>(UpdateProfileDocument, options);
 }
-export type UpdateProfileMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    UpdateProfileMutation,
-    UpdateProfileMutationVariables
-  >;
+export type UpdateProfileMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<UpdateProfileMutation, UpdateProfileMutationVariables>;
 export const GetTeamDocument = gql`
-  query getTeam {
-    publicProfiles {
-      nodes {
-        ...PublicProfileFragment
-      }
+    query getTeam {
+  publicProfiles {
+    nodes {
+      ...PublicProfileFragment
     }
   }
-  ${PublicProfileFragmentDoc}
-`;
+}
+    ${PublicProfileFragmentDoc}`;
 
 /**
  * __useGetTeamQuery__
@@ -7275,50 +4733,22 @@ export const GetTeamDocument = gql`
  * @example
  * const { result, loading, error } = useGetTeamQuery();
  */
-export function useGetTeamQuery(
-  options:
-    | VueApolloComposable.UseQueryOptions<GetTeamQuery, GetTeamQueryVariables>
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<GetTeamQuery, GetTeamQueryVariables>
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<GetTeamQuery, GetTeamQueryVariables>
-      > = {},
-) {
-  return VueApolloComposable.useQuery<GetTeamQuery, GetTeamQueryVariables>(
-    GetTeamDocument,
-    {},
-    options,
-  );
+export function useGetTeamQuery(options: VueApolloComposable.UseQueryOptions<GetTeamQuery, GetTeamQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetTeamQuery, GetTeamQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetTeamQuery, GetTeamQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<GetTeamQuery, GetTeamQueryVariables>(GetTeamDocument, {}, options);
 }
-export function useGetTeamLazyQuery(
-  options:
-    | VueApolloComposable.UseQueryOptions<GetTeamQuery, GetTeamQueryVariables>
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<GetTeamQuery, GetTeamQueryVariables>
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<GetTeamQuery, GetTeamQueryVariables>
-      > = {},
-) {
-  return VueApolloComposable.useLazyQuery<GetTeamQuery, GetTeamQueryVariables>(
-    GetTeamDocument,
-    {},
-    options,
-  );
+export function useGetTeamLazyQuery(options: VueApolloComposable.UseQueryOptions<GetTeamQuery, GetTeamQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetTeamQuery, GetTeamQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetTeamQuery, GetTeamQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<GetTeamQuery, GetTeamQueryVariables>(GetTeamDocument, {}, options);
 }
-export type GetTeamQueryCompositionFunctionResult =
-  VueApolloComposable.UseQueryReturn<GetTeamQuery, GetTeamQueryVariables>;
+export type GetTeamQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetTeamQuery, GetTeamQueryVariables>;
 export const GetTeamAdminDocument = gql`
-  query getTeamAdmin {
-    profiles {
-      nodes {
-        ...ProfileFragment
-      }
+    query getTeamAdmin {
+  profiles {
+    nodes {
+      ...ProfileFragment
     }
   }
-  ${ProfileFragmentDoc}
-`;
+}
+    ${ProfileFragmentDoc}`;
 
 /**
  * __useGetTeamAdminQuery__
@@ -7332,69 +4762,22 @@ export const GetTeamAdminDocument = gql`
  * @example
  * const { result, loading, error } = useGetTeamAdminQuery();
  */
-export function useGetTeamAdminQuery(
-  options:
-    | VueApolloComposable.UseQueryOptions<
-        GetTeamAdminQuery,
-        GetTeamAdminQueryVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          GetTeamAdminQuery,
-          GetTeamAdminQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          GetTeamAdminQuery,
-          GetTeamAdminQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useQuery<
-    GetTeamAdminQuery,
-    GetTeamAdminQueryVariables
-  >(GetTeamAdminDocument, {}, options);
+export function useGetTeamAdminQuery(options: VueApolloComposable.UseQueryOptions<GetTeamAdminQuery, GetTeamAdminQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetTeamAdminQuery, GetTeamAdminQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetTeamAdminQuery, GetTeamAdminQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<GetTeamAdminQuery, GetTeamAdminQueryVariables>(GetTeamAdminDocument, {}, options);
 }
-export function useGetTeamAdminLazyQuery(
-  options:
-    | VueApolloComposable.UseQueryOptions<
-        GetTeamAdminQuery,
-        GetTeamAdminQueryVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          GetTeamAdminQuery,
-          GetTeamAdminQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          GetTeamAdminQuery,
-          GetTeamAdminQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useLazyQuery<
-    GetTeamAdminQuery,
-    GetTeamAdminQueryVariables
-  >(GetTeamAdminDocument, {}, options);
+export function useGetTeamAdminLazyQuery(options: VueApolloComposable.UseQueryOptions<GetTeamAdminQuery, GetTeamAdminQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetTeamAdminQuery, GetTeamAdminQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetTeamAdminQuery, GetTeamAdminQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<GetTeamAdminQuery, GetTeamAdminQueryVariables>(GetTeamAdminDocument, {}, options);
 }
-export type GetTeamAdminQueryCompositionFunctionResult =
-  VueApolloComposable.UseQueryReturn<
-    GetTeamAdminQuery,
-    GetTeamAdminQueryVariables
-  >;
+export type GetTeamAdminQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetTeamAdminQuery, GetTeamAdminQueryVariables>;
 export const PublicProfileSubscriptionPayloadDocument = gql`
-  subscription PublicProfileSubscriptionPayload {
-    currentProfileUpdated {
-      publicProfile {
-        ...PublicProfileFragment
-      }
+    subscription PublicProfileSubscriptionPayload {
+  currentProfileUpdated {
+    publicProfile {
+      ...PublicProfileFragment
     }
   }
-  ${PublicProfileFragmentDoc}
-`;
+}
+    ${PublicProfileFragmentDoc}`;
 
 /**
  * __usePublicProfileSubscriptionPayload__
@@ -7408,48 +4791,22 @@ export const PublicProfileSubscriptionPayloadDocument = gql`
  * @example
  * const { result, loading, error } = usePublicProfileSubscriptionPayload();
  */
-export function usePublicProfileSubscriptionPayload(
-  options:
-    | VueApolloComposable.UseSubscriptionOptions<
-        PublicProfileSubscriptionPayloadSubscription,
-        PublicProfileSubscriptionPayloadSubscriptionVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseSubscriptionOptions<
-          PublicProfileSubscriptionPayloadSubscription,
-          PublicProfileSubscriptionPayloadSubscriptionVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseSubscriptionOptions<
-          PublicProfileSubscriptionPayloadSubscription,
-          PublicProfileSubscriptionPayloadSubscriptionVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useSubscription<
-    PublicProfileSubscriptionPayloadSubscription,
-    PublicProfileSubscriptionPayloadSubscriptionVariables
-  >(PublicProfileSubscriptionPayloadDocument, {}, options);
+export function usePublicProfileSubscriptionPayload(options: VueApolloComposable.UseSubscriptionOptions<PublicProfileSubscriptionPayloadSubscription, PublicProfileSubscriptionPayloadSubscriptionVariables> | VueCompositionApi.Ref<VueApolloComposable.UseSubscriptionOptions<PublicProfileSubscriptionPayloadSubscription, PublicProfileSubscriptionPayloadSubscriptionVariables>> | ReactiveFunction<VueApolloComposable.UseSubscriptionOptions<PublicProfileSubscriptionPayloadSubscription, PublicProfileSubscriptionPayloadSubscriptionVariables>> = {}) {
+  return VueApolloComposable.useSubscription<PublicProfileSubscriptionPayloadSubscription, PublicProfileSubscriptionPayloadSubscriptionVariables>(PublicProfileSubscriptionPayloadDocument, {}, options);
 }
-export type PublicProfileSubscriptionPayloadCompositionFunctionResult =
-  VueApolloComposable.UseSubscriptionReturn<
-    PublicProfileSubscriptionPayloadSubscription,
-    PublicProfileSubscriptionPayloadSubscriptionVariables
-  >;
+export type PublicProfileSubscriptionPayloadCompositionFunctionResult = VueApolloComposable.UseSubscriptionReturn<PublicProfileSubscriptionPayloadSubscription, PublicProfileSubscriptionPayloadSubscriptionVariables>;
 export const SubscribeToProfileDocument = gql`
-  subscription subscribeToProfile {
-    listen(topic: "update:profiles") {
-      relatedNode {
-        nodeId
-        ... on Profile {
-          ...ProfileFragment
-        }
+    subscription subscribeToProfile {
+  listen(topic: "update:profiles") {
+    relatedNode {
+      nodeId
+      ... on Profile {
+        ...ProfileFragment
       }
     }
   }
-  ${ProfileFragmentDoc}
-`;
+}
+    ${ProfileFragmentDoc}`;
 
 /**
  * __useSubscribeToProfileSubscription__
@@ -7463,49 +4820,23 @@ export const SubscribeToProfileDocument = gql`
  * @example
  * const { result, loading, error } = useSubscribeToProfileSubscription();
  */
-export function useSubscribeToProfileSubscription(
-  options:
-    | VueApolloComposable.UseSubscriptionOptions<
-        SubscribeToProfileSubscription,
-        SubscribeToProfileSubscriptionVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseSubscriptionOptions<
-          SubscribeToProfileSubscription,
-          SubscribeToProfileSubscriptionVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseSubscriptionOptions<
-          SubscribeToProfileSubscription,
-          SubscribeToProfileSubscriptionVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useSubscription<
-    SubscribeToProfileSubscription,
-    SubscribeToProfileSubscriptionVariables
-  >(SubscribeToProfileDocument, {}, options);
+export function useSubscribeToProfileSubscription(options: VueApolloComposable.UseSubscriptionOptions<SubscribeToProfileSubscription, SubscribeToProfileSubscriptionVariables> | VueCompositionApi.Ref<VueApolloComposable.UseSubscriptionOptions<SubscribeToProfileSubscription, SubscribeToProfileSubscriptionVariables>> | ReactiveFunction<VueApolloComposable.UseSubscriptionOptions<SubscribeToProfileSubscription, SubscribeToProfileSubscriptionVariables>> = {}) {
+  return VueApolloComposable.useSubscription<SubscribeToProfileSubscription, SubscribeToProfileSubscriptionVariables>(SubscribeToProfileDocument, {}, options);
 }
-export type SubscribeToProfileSubscriptionCompositionFunctionResult =
-  VueApolloComposable.UseSubscriptionReturn<
-    SubscribeToProfileSubscription,
-    SubscribeToProfileSubscriptionVariables
-  >;
+export type SubscribeToProfileSubscriptionCompositionFunctionResult = VueApolloComposable.UseSubscriptionReturn<SubscribeToProfileSubscription, SubscribeToProfileSubscriptionVariables>;
 export const SubscribeToProfileCreatedDocument = gql`
-  subscription subscribeToProfileCreated {
-    listen(topic: "created:profiles") {
-      relatedNodeId
-      relatedNode {
-        nodeId
-        ... on Profile {
-          ...ProfileFragment
-        }
+    subscription subscribeToProfileCreated {
+  listen(topic: "created:profiles") {
+    relatedNodeId
+    relatedNode {
+      nodeId
+      ... on Profile {
+        ...ProfileFragment
       }
     }
   }
-  ${ProfileFragmentDoc}
-`;
+}
+    ${ProfileFragmentDoc}`;
 
 /**
  * __useSubscribeToProfileCreatedSubscription__
@@ -7519,49 +4850,23 @@ export const SubscribeToProfileCreatedDocument = gql`
  * @example
  * const { result, loading, error } = useSubscribeToProfileCreatedSubscription();
  */
-export function useSubscribeToProfileCreatedSubscription(
-  options:
-    | VueApolloComposable.UseSubscriptionOptions<
-        SubscribeToProfileCreatedSubscription,
-        SubscribeToProfileCreatedSubscriptionVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseSubscriptionOptions<
-          SubscribeToProfileCreatedSubscription,
-          SubscribeToProfileCreatedSubscriptionVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseSubscriptionOptions<
-          SubscribeToProfileCreatedSubscription,
-          SubscribeToProfileCreatedSubscriptionVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useSubscription<
-    SubscribeToProfileCreatedSubscription,
-    SubscribeToProfileCreatedSubscriptionVariables
-  >(SubscribeToProfileCreatedDocument, {}, options);
+export function useSubscribeToProfileCreatedSubscription(options: VueApolloComposable.UseSubscriptionOptions<SubscribeToProfileCreatedSubscription, SubscribeToProfileCreatedSubscriptionVariables> | VueCompositionApi.Ref<VueApolloComposable.UseSubscriptionOptions<SubscribeToProfileCreatedSubscription, SubscribeToProfileCreatedSubscriptionVariables>> | ReactiveFunction<VueApolloComposable.UseSubscriptionOptions<SubscribeToProfileCreatedSubscription, SubscribeToProfileCreatedSubscriptionVariables>> = {}) {
+  return VueApolloComposable.useSubscription<SubscribeToProfileCreatedSubscription, SubscribeToProfileCreatedSubscriptionVariables>(SubscribeToProfileCreatedDocument, {}, options);
 }
-export type SubscribeToProfileCreatedSubscriptionCompositionFunctionResult =
-  VueApolloComposable.UseSubscriptionReturn<
-    SubscribeToProfileCreatedSubscription,
-    SubscribeToProfileCreatedSubscriptionVariables
-  >;
+export type SubscribeToProfileCreatedSubscriptionCompositionFunctionResult = VueApolloComposable.UseSubscriptionReturn<SubscribeToProfileCreatedSubscription, SubscribeToProfileCreatedSubscriptionVariables>;
 export const SubscribeToProfileDeletedDocument = gql`
-  subscription subscribeToProfileDeleted {
-    listen(topic: "deleted:profiles") {
-      relatedNodeId
-      relatedNode {
-        nodeId
-        ... on Profile {
-          ...ProfileFragment
-        }
+    subscription subscribeToProfileDeleted {
+  listen(topic: "deleted:profiles") {
+    relatedNodeId
+    relatedNode {
+      nodeId
+      ... on Profile {
+        ...ProfileFragment
       }
     }
   }
-  ${ProfileFragmentDoc}
-`;
+}
+    ${ProfileFragmentDoc}`;
 
 /**
  * __useSubscribeToProfileDeletedSubscription__
@@ -7575,45 +4880,19 @@ export const SubscribeToProfileDeletedDocument = gql`
  * @example
  * const { result, loading, error } = useSubscribeToProfileDeletedSubscription();
  */
-export function useSubscribeToProfileDeletedSubscription(
-  options:
-    | VueApolloComposable.UseSubscriptionOptions<
-        SubscribeToProfileDeletedSubscription,
-        SubscribeToProfileDeletedSubscriptionVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseSubscriptionOptions<
-          SubscribeToProfileDeletedSubscription,
-          SubscribeToProfileDeletedSubscriptionVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseSubscriptionOptions<
-          SubscribeToProfileDeletedSubscription,
-          SubscribeToProfileDeletedSubscriptionVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useSubscription<
-    SubscribeToProfileDeletedSubscription,
-    SubscribeToProfileDeletedSubscriptionVariables
-  >(SubscribeToProfileDeletedDocument, {}, options);
+export function useSubscribeToProfileDeletedSubscription(options: VueApolloComposable.UseSubscriptionOptions<SubscribeToProfileDeletedSubscription, SubscribeToProfileDeletedSubscriptionVariables> | VueCompositionApi.Ref<VueApolloComposable.UseSubscriptionOptions<SubscribeToProfileDeletedSubscription, SubscribeToProfileDeletedSubscriptionVariables>> | ReactiveFunction<VueApolloComposable.UseSubscriptionOptions<SubscribeToProfileDeletedSubscription, SubscribeToProfileDeletedSubscriptionVariables>> = {}) {
+  return VueApolloComposable.useSubscription<SubscribeToProfileDeletedSubscription, SubscribeToProfileDeletedSubscriptionVariables>(SubscribeToProfileDeletedDocument, {}, options);
 }
-export type SubscribeToProfileDeletedSubscriptionCompositionFunctionResult =
-  VueApolloComposable.UseSubscriptionReturn<
-    SubscribeToProfileDeletedSubscription,
-    SubscribeToProfileDeletedSubscriptionVariables
-  >;
+export type SubscribeToProfileDeletedSubscriptionCompositionFunctionResult = VueApolloComposable.UseSubscriptionReturn<SubscribeToProfileDeletedSubscription, SubscribeToProfileDeletedSubscriptionVariables>;
 export const SearchCtFsDocument = gql`
-  query SearchCTFs($search: String!) {
-    ctfs(filter: { title: { includesInsensitive: $search } }) {
-      nodes {
-        ...CtfFragment
-      }
+    query SearchCTFs($search: String!) {
+  ctfs(filter: {title: {includesInsensitive: $search}}) {
+    nodes {
+      ...CtfFragment
     }
   }
-  ${CtfFragmentDoc}
-`;
+}
+    ${CtfFragmentDoc}`;
 
 /**
  * __useSearchCtFsQuery__
@@ -7630,78 +4909,26 @@ export const SearchCtFsDocument = gql`
  *   search: // value for 'search'
  * });
  */
-export function useSearchCtFsQuery(
-  variables:
-    | SearchCtFsQueryVariables
-    | VueCompositionApi.Ref<SearchCtFsQueryVariables>
-    | ReactiveFunction<SearchCtFsQueryVariables>,
-  options:
-    | VueApolloComposable.UseQueryOptions<
-        SearchCtFsQuery,
-        SearchCtFsQueryVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          SearchCtFsQuery,
-          SearchCtFsQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          SearchCtFsQuery,
-          SearchCtFsQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useQuery<
-    SearchCtFsQuery,
-    SearchCtFsQueryVariables
-  >(SearchCtFsDocument, variables, options);
+export function useSearchCtFsQuery(variables: SearchCtFsQueryVariables | VueCompositionApi.Ref<SearchCtFsQueryVariables> | ReactiveFunction<SearchCtFsQueryVariables>, options: VueApolloComposable.UseQueryOptions<SearchCtFsQuery, SearchCtFsQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<SearchCtFsQuery, SearchCtFsQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<SearchCtFsQuery, SearchCtFsQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<SearchCtFsQuery, SearchCtFsQueryVariables>(SearchCtFsDocument, variables, options);
 }
-export function useSearchCtFsLazyQuery(
-  variables:
-    | SearchCtFsQueryVariables
-    | VueCompositionApi.Ref<SearchCtFsQueryVariables>
-    | ReactiveFunction<SearchCtFsQueryVariables>,
-  options:
-    | VueApolloComposable.UseQueryOptions<
-        SearchCtFsQuery,
-        SearchCtFsQueryVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          SearchCtFsQuery,
-          SearchCtFsQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          SearchCtFsQuery,
-          SearchCtFsQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useLazyQuery<
-    SearchCtFsQuery,
-    SearchCtFsQueryVariables
-  >(SearchCtFsDocument, variables, options);
+export function useSearchCtFsLazyQuery(variables: SearchCtFsQueryVariables | VueCompositionApi.Ref<SearchCtFsQueryVariables> | ReactiveFunction<SearchCtFsQueryVariables>, options: VueApolloComposable.UseQueryOptions<SearchCtFsQuery, SearchCtFsQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<SearchCtFsQuery, SearchCtFsQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<SearchCtFsQuery, SearchCtFsQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<SearchCtFsQuery, SearchCtFsQueryVariables>(SearchCtFsDocument, variables, options);
 }
-export type SearchCtFsQueryCompositionFunctionResult =
-  VueApolloComposable.UseQueryReturn<SearchCtFsQuery, SearchCtFsQueryVariables>;
+export type SearchCtFsQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<SearchCtFsQuery, SearchCtFsQueryVariables>;
 export const SearchTasksDocument = gql`
-  query SearchTasks($search: String!) {
-    tasks(filter: { title: { includesInsensitive: $search } }) {
-      nodes {
-        ...TaskFragment
-        ctf {
-          ...CtfFragment
-        }
+    query SearchTasks($search: String!) {
+  tasks(filter: {title: {includesInsensitive: $search}}) {
+    nodes {
+      ...TaskFragment
+      ctf {
+        ...CtfFragment
       }
     }
   }
-  ${TaskFragmentDoc}
-  ${CtfFragmentDoc}
-`;
+}
+    ${TaskFragmentDoc}
+${CtfFragmentDoc}`;
 
 /**
  * __useSearchTasksQuery__
@@ -7718,85 +4945,30 @@ export const SearchTasksDocument = gql`
  *   search: // value for 'search'
  * });
  */
-export function useSearchTasksQuery(
-  variables:
-    | SearchTasksQueryVariables
-    | VueCompositionApi.Ref<SearchTasksQueryVariables>
-    | ReactiveFunction<SearchTasksQueryVariables>,
-  options:
-    | VueApolloComposable.UseQueryOptions<
-        SearchTasksQuery,
-        SearchTasksQueryVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          SearchTasksQuery,
-          SearchTasksQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          SearchTasksQuery,
-          SearchTasksQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useQuery<
-    SearchTasksQuery,
-    SearchTasksQueryVariables
-  >(SearchTasksDocument, variables, options);
+export function useSearchTasksQuery(variables: SearchTasksQueryVariables | VueCompositionApi.Ref<SearchTasksQueryVariables> | ReactiveFunction<SearchTasksQueryVariables>, options: VueApolloComposable.UseQueryOptions<SearchTasksQuery, SearchTasksQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<SearchTasksQuery, SearchTasksQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<SearchTasksQuery, SearchTasksQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<SearchTasksQuery, SearchTasksQueryVariables>(SearchTasksDocument, variables, options);
 }
-export function useSearchTasksLazyQuery(
-  variables:
-    | SearchTasksQueryVariables
-    | VueCompositionApi.Ref<SearchTasksQueryVariables>
-    | ReactiveFunction<SearchTasksQueryVariables>,
-  options:
-    | VueApolloComposable.UseQueryOptions<
-        SearchTasksQuery,
-        SearchTasksQueryVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          SearchTasksQuery,
-          SearchTasksQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          SearchTasksQuery,
-          SearchTasksQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useLazyQuery<
-    SearchTasksQuery,
-    SearchTasksQueryVariables
-  >(SearchTasksDocument, variables, options);
+export function useSearchTasksLazyQuery(variables: SearchTasksQueryVariables | VueCompositionApi.Ref<SearchTasksQueryVariables> | ReactiveFunction<SearchTasksQueryVariables>, options: VueApolloComposable.UseQueryOptions<SearchTasksQuery, SearchTasksQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<SearchTasksQuery, SearchTasksQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<SearchTasksQuery, SearchTasksQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<SearchTasksQuery, SearchTasksQueryVariables>(SearchTasksDocument, variables, options);
 }
-export type SearchTasksQueryCompositionFunctionResult =
-  VueApolloComposable.UseQueryReturn<
-    SearchTasksQuery,
-    SearchTasksQueryVariables
-  >;
+export type SearchTasksQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<SearchTasksQuery, SearchTasksQueryVariables>;
 export const SearchTagsDocument = gql`
-  query SearchTags($search: String!) {
-    tags(filter: { tag: { includesInsensitive: $search } }) {
-      nodes {
-        tasksByAssignedTagTagIdAndTaskId {
-          nodes {
-            ...TaskFragment
-            ctf {
-              ...CtfFragment
-            }
+    query SearchTags($search: String!) {
+  tags(filter: {tag: {includesInsensitive: $search}}) {
+    nodes {
+      tasksByAssignedTagTagIdAndTaskId {
+        nodes {
+          ...TaskFragment
+          ctf {
+            ...CtfFragment
           }
         }
       }
     }
   }
-  ${TaskFragmentDoc}
-  ${CtfFragmentDoc}
-`;
+}
+    ${TaskFragmentDoc}
+${CtfFragmentDoc}`;
 
 /**
  * __useSearchTagsQuery__
@@ -7813,95 +4985,43 @@ export const SearchTagsDocument = gql`
  *   search: // value for 'search'
  * });
  */
-export function useSearchTagsQuery(
-  variables:
-    | SearchTagsQueryVariables
-    | VueCompositionApi.Ref<SearchTagsQueryVariables>
-    | ReactiveFunction<SearchTagsQueryVariables>,
-  options:
-    | VueApolloComposable.UseQueryOptions<
-        SearchTagsQuery,
-        SearchTagsQueryVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          SearchTagsQuery,
-          SearchTagsQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          SearchTagsQuery,
-          SearchTagsQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useQuery<
-    SearchTagsQuery,
-    SearchTagsQueryVariables
-  >(SearchTagsDocument, variables, options);
+export function useSearchTagsQuery(variables: SearchTagsQueryVariables | VueCompositionApi.Ref<SearchTagsQueryVariables> | ReactiveFunction<SearchTagsQueryVariables>, options: VueApolloComposable.UseQueryOptions<SearchTagsQuery, SearchTagsQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<SearchTagsQuery, SearchTagsQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<SearchTagsQuery, SearchTagsQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<SearchTagsQuery, SearchTagsQueryVariables>(SearchTagsDocument, variables, options);
 }
-export function useSearchTagsLazyQuery(
-  variables:
-    | SearchTagsQueryVariables
-    | VueCompositionApi.Ref<SearchTagsQueryVariables>
-    | ReactiveFunction<SearchTagsQueryVariables>,
-  options:
-    | VueApolloComposable.UseQueryOptions<
-        SearchTagsQuery,
-        SearchTagsQueryVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          SearchTagsQuery,
-          SearchTagsQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          SearchTagsQuery,
-          SearchTagsQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useLazyQuery<
-    SearchTagsQuery,
-    SearchTagsQueryVariables
-  >(SearchTagsDocument, variables, options);
+export function useSearchTagsLazyQuery(variables: SearchTagsQueryVariables | VueCompositionApi.Ref<SearchTagsQueryVariables> | ReactiveFunction<SearchTagsQueryVariables>, options: VueApolloComposable.UseQueryOptions<SearchTagsQuery, SearchTagsQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<SearchTagsQuery, SearchTagsQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<SearchTagsQuery, SearchTagsQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<SearchTagsQuery, SearchTagsQueryVariables>(SearchTagsDocument, variables, options);
 }
-export type SearchTagsQueryCompositionFunctionResult =
-  VueApolloComposable.UseQueryReturn<SearchTagsQuery, SearchTagsQueryVariables>;
+export type SearchTagsQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<SearchTagsQuery, SearchTagsQueryVariables>;
 export const SearchAllDocument = gql`
-  query SearchAll($search: String!) {
-    tags(filter: { tag: { includesInsensitive: $search } }) {
-      nodes {
-        tasksByAssignedTagTagIdAndTaskId {
-          nodes {
-            ...TaskFragment
-            ctf {
-              ...CtfFragment
-            }
+    query SearchAll($search: String!) {
+  tags(filter: {tag: {includesInsensitive: $search}}) {
+    nodes {
+      tasksByAssignedTagTagIdAndTaskId {
+        nodes {
+          ...TaskFragment
+          ctf {
+            ...CtfFragment
           }
         }
       }
     }
-    tasks(filter: { title: { includesInsensitive: $search } }) {
-      nodes {
-        ...TaskFragment
-        ctf {
-          ...CtfFragment
-        }
-      }
-    }
-    ctfs(filter: { title: { includesInsensitive: $search } }) {
-      nodes {
+  }
+  tasks(filter: {title: {includesInsensitive: $search}}) {
+    nodes {
+      ...TaskFragment
+      ctf {
         ...CtfFragment
       }
     }
   }
-  ${TaskFragmentDoc}
-  ${CtfFragmentDoc}
-`;
+  ctfs(filter: {title: {includesInsensitive: $search}}) {
+    nodes {
+      ...CtfFragment
+    }
+  }
+}
+    ${TaskFragmentDoc}
+${CtfFragmentDoc}`;
 
 /**
  * __useSearchAllQuery__
@@ -7918,73 +5038,20 @@ export const SearchAllDocument = gql`
  *   search: // value for 'search'
  * });
  */
-export function useSearchAllQuery(
-  variables:
-    | SearchAllQueryVariables
-    | VueCompositionApi.Ref<SearchAllQueryVariables>
-    | ReactiveFunction<SearchAllQueryVariables>,
-  options:
-    | VueApolloComposable.UseQueryOptions<
-        SearchAllQuery,
-        SearchAllQueryVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          SearchAllQuery,
-          SearchAllQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          SearchAllQuery,
-          SearchAllQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useQuery<SearchAllQuery, SearchAllQueryVariables>(
-    SearchAllDocument,
-    variables,
-    options,
-  );
+export function useSearchAllQuery(variables: SearchAllQueryVariables | VueCompositionApi.Ref<SearchAllQueryVariables> | ReactiveFunction<SearchAllQueryVariables>, options: VueApolloComposable.UseQueryOptions<SearchAllQuery, SearchAllQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<SearchAllQuery, SearchAllQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<SearchAllQuery, SearchAllQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<SearchAllQuery, SearchAllQueryVariables>(SearchAllDocument, variables, options);
 }
-export function useSearchAllLazyQuery(
-  variables:
-    | SearchAllQueryVariables
-    | VueCompositionApi.Ref<SearchAllQueryVariables>
-    | ReactiveFunction<SearchAllQueryVariables>,
-  options:
-    | VueApolloComposable.UseQueryOptions<
-        SearchAllQuery,
-        SearchAllQueryVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          SearchAllQuery,
-          SearchAllQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          SearchAllQuery,
-          SearchAllQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useLazyQuery<
-    SearchAllQuery,
-    SearchAllQueryVariables
-  >(SearchAllDocument, variables, options);
+export function useSearchAllLazyQuery(variables: SearchAllQueryVariables | VueCompositionApi.Ref<SearchAllQueryVariables> | ReactiveFunction<SearchAllQueryVariables>, options: VueApolloComposable.UseQueryOptions<SearchAllQuery, SearchAllQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<SearchAllQuery, SearchAllQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<SearchAllQuery, SearchAllQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<SearchAllQuery, SearchAllQueryVariables>(SearchAllDocument, variables, options);
 }
-export type SearchAllQueryCompositionFunctionResult =
-  VueApolloComposable.UseQueryReturn<SearchAllQuery, SearchAllQueryVariables>;
+export type SearchAllQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<SearchAllQuery, SearchAllQueryVariables>;
 export const GetCredentialsForCtfIdDocument = gql`
-  query getCredentialsForCtfId($ctfId: Int!) {
-    ctfSecret(id: $ctfId) {
-      ...CtfSecretFragment
-    }
+    query getCredentialsForCtfId($ctfId: Int!) {
+  ctfSecret(id: $ctfId) {
+    ...CtfSecretFragment
   }
-  ${CtfSecretFragmentDoc}
-`;
+}
+    ${CtfSecretFragmentDoc}`;
 
 /**
  * __useGetCredentialsForCtfIdQuery__
@@ -8001,91 +5068,24 @@ export const GetCredentialsForCtfIdDocument = gql`
  *   ctfId: // value for 'ctfId'
  * });
  */
-export function useGetCredentialsForCtfIdQuery(
-  variables:
-    | GetCredentialsForCtfIdQueryVariables
-    | VueCompositionApi.Ref<GetCredentialsForCtfIdQueryVariables>
-    | ReactiveFunction<GetCredentialsForCtfIdQueryVariables>,
-  options:
-    | VueApolloComposable.UseQueryOptions<
-        GetCredentialsForCtfIdQuery,
-        GetCredentialsForCtfIdQueryVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          GetCredentialsForCtfIdQuery,
-          GetCredentialsForCtfIdQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          GetCredentialsForCtfIdQuery,
-          GetCredentialsForCtfIdQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useQuery<
-    GetCredentialsForCtfIdQuery,
-    GetCredentialsForCtfIdQueryVariables
-  >(GetCredentialsForCtfIdDocument, variables, options);
+export function useGetCredentialsForCtfIdQuery(variables: GetCredentialsForCtfIdQueryVariables | VueCompositionApi.Ref<GetCredentialsForCtfIdQueryVariables> | ReactiveFunction<GetCredentialsForCtfIdQueryVariables>, options: VueApolloComposable.UseQueryOptions<GetCredentialsForCtfIdQuery, GetCredentialsForCtfIdQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetCredentialsForCtfIdQuery, GetCredentialsForCtfIdQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetCredentialsForCtfIdQuery, GetCredentialsForCtfIdQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<GetCredentialsForCtfIdQuery, GetCredentialsForCtfIdQueryVariables>(GetCredentialsForCtfIdDocument, variables, options);
 }
-export function useGetCredentialsForCtfIdLazyQuery(
-  variables:
-    | GetCredentialsForCtfIdQueryVariables
-    | VueCompositionApi.Ref<GetCredentialsForCtfIdQueryVariables>
-    | ReactiveFunction<GetCredentialsForCtfIdQueryVariables>,
-  options:
-    | VueApolloComposable.UseQueryOptions<
-        GetCredentialsForCtfIdQuery,
-        GetCredentialsForCtfIdQueryVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          GetCredentialsForCtfIdQuery,
-          GetCredentialsForCtfIdQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          GetCredentialsForCtfIdQuery,
-          GetCredentialsForCtfIdQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useLazyQuery<
-    GetCredentialsForCtfIdQuery,
-    GetCredentialsForCtfIdQueryVariables
-  >(GetCredentialsForCtfIdDocument, variables, options);
+export function useGetCredentialsForCtfIdLazyQuery(variables: GetCredentialsForCtfIdQueryVariables | VueCompositionApi.Ref<GetCredentialsForCtfIdQueryVariables> | ReactiveFunction<GetCredentialsForCtfIdQueryVariables>, options: VueApolloComposable.UseQueryOptions<GetCredentialsForCtfIdQuery, GetCredentialsForCtfIdQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetCredentialsForCtfIdQuery, GetCredentialsForCtfIdQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetCredentialsForCtfIdQuery, GetCredentialsForCtfIdQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<GetCredentialsForCtfIdQuery, GetCredentialsForCtfIdQueryVariables>(GetCredentialsForCtfIdDocument, variables, options);
 }
-export type GetCredentialsForCtfIdQueryCompositionFunctionResult =
-  VueApolloComposable.UseQueryReturn<
-    GetCredentialsForCtfIdQuery,
-    GetCredentialsForCtfIdQueryVariables
-  >;
+export type GetCredentialsForCtfIdQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetCredentialsForCtfIdQuery, GetCredentialsForCtfIdQueryVariables>;
 export const UpdateCredentialsForCtfIdDocument = gql`
-  mutation updateCredentialsForCtfId(
-    $ctfId: Int!
-    $username: String
-    $password: String
-    $scoreboardName: String
+    mutation updateCredentialsForCtfId($ctfId: Int!, $username: String, $password: String, $scoreboardName: String) {
+  updateCtfSecret(
+    input: {id: $ctfId, patch: {username: $username, password: $password, scoreboardName: $scoreboardName}}
   ) {
-    updateCtfSecret(
-      input: {
-        id: $ctfId
-        patch: {
-          username: $username
-          password: $password
-          scoreboardName: $scoreboardName
-        }
-      }
-    ) {
-      ctfSecret {
-        ...CtfSecretFragment
-      }
+    ctfSecret {
+      ...CtfSecretFragment
     }
   }
-  ${CtfSecretFragmentDoc}
-`;
+}
+    ${CtfSecretFragmentDoc}`;
 
 /**
  * __useUpdateCredentialsForCtfIdMutation__
@@ -8107,39 +5107,19 @@ export const UpdateCredentialsForCtfIdDocument = gql`
  *   },
  * });
  */
-export function useUpdateCredentialsForCtfIdMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        UpdateCredentialsForCtfIdMutation,
-        UpdateCredentialsForCtfIdMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          UpdateCredentialsForCtfIdMutation,
-          UpdateCredentialsForCtfIdMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    UpdateCredentialsForCtfIdMutation,
-    UpdateCredentialsForCtfIdMutationVariables
-  >(UpdateCredentialsForCtfIdDocument, options);
+export function useUpdateCredentialsForCtfIdMutation(options: VueApolloComposable.UseMutationOptions<UpdateCredentialsForCtfIdMutation, UpdateCredentialsForCtfIdMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<UpdateCredentialsForCtfIdMutation, UpdateCredentialsForCtfIdMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<UpdateCredentialsForCtfIdMutation, UpdateCredentialsForCtfIdMutationVariables>(UpdateCredentialsForCtfIdDocument, options);
 }
-export type UpdateCredentialsForCtfIdMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    UpdateCredentialsForCtfIdMutation,
-    UpdateCredentialsForCtfIdMutationVariables
-  >;
+export type UpdateCredentialsForCtfIdMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<UpdateCredentialsForCtfIdMutation, UpdateCredentialsForCtfIdMutationVariables>;
 export const GetSettingsDocument = gql`
-  query getSettings {
-    settings {
-      nodes {
-        ...SettingsInfo
-      }
+    query getSettings {
+  settings {
+    nodes {
+      ...SettingsInfo
     }
   }
-  ${SettingsInfoFragmentDoc}
-`;
+}
+    ${SettingsInfoFragmentDoc}`;
 
 /**
  * __useGetSettingsQuery__
@@ -8153,69 +5133,23 @@ export const GetSettingsDocument = gql`
  * @example
  * const { result, loading, error } = useGetSettingsQuery();
  */
-export function useGetSettingsQuery(
-  options:
-    | VueApolloComposable.UseQueryOptions<
-        GetSettingsQuery,
-        GetSettingsQueryVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          GetSettingsQuery,
-          GetSettingsQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          GetSettingsQuery,
-          GetSettingsQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useQuery<
-    GetSettingsQuery,
-    GetSettingsQueryVariables
-  >(GetSettingsDocument, {}, options);
+export function useGetSettingsQuery(options: VueApolloComposable.UseQueryOptions<GetSettingsQuery, GetSettingsQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetSettingsQuery, GetSettingsQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetSettingsQuery, GetSettingsQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<GetSettingsQuery, GetSettingsQueryVariables>(GetSettingsDocument, {}, options);
 }
-export function useGetSettingsLazyQuery(
-  options:
-    | VueApolloComposable.UseQueryOptions<
-        GetSettingsQuery,
-        GetSettingsQueryVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          GetSettingsQuery,
-          GetSettingsQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          GetSettingsQuery,
-          GetSettingsQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useLazyQuery<
-    GetSettingsQuery,
-    GetSettingsQueryVariables
-  >(GetSettingsDocument, {}, options);
+export function useGetSettingsLazyQuery(options: VueApolloComposable.UseQueryOptions<GetSettingsQuery, GetSettingsQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetSettingsQuery, GetSettingsQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetSettingsQuery, GetSettingsQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<GetSettingsQuery, GetSettingsQueryVariables>(GetSettingsDocument, {}, options);
 }
-export type GetSettingsQueryCompositionFunctionResult =
-  VueApolloComposable.UseQueryReturn<
-    GetSettingsQuery,
-    GetSettingsQueryVariables
-  >;
+export type GetSettingsQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetSettingsQuery, GetSettingsQueryVariables>;
 export const GetIcalPasswordDocument = gql`
-  query getIcalPassword {
-    settings {
-      nodes {
-        nodeId
-        icalPassword
-      }
+    query getIcalPassword {
+  settings {
+    nodes {
+      nodeId
+      icalPassword
     }
   }
-`;
+}
+    `;
 
 /**
  * __useGetIcalPasswordQuery__
@@ -8229,69 +5163,22 @@ export const GetIcalPasswordDocument = gql`
  * @example
  * const { result, loading, error } = useGetIcalPasswordQuery();
  */
-export function useGetIcalPasswordQuery(
-  options:
-    | VueApolloComposable.UseQueryOptions<
-        GetIcalPasswordQuery,
-        GetIcalPasswordQueryVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          GetIcalPasswordQuery,
-          GetIcalPasswordQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          GetIcalPasswordQuery,
-          GetIcalPasswordQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useQuery<
-    GetIcalPasswordQuery,
-    GetIcalPasswordQueryVariables
-  >(GetIcalPasswordDocument, {}, options);
+export function useGetIcalPasswordQuery(options: VueApolloComposable.UseQueryOptions<GetIcalPasswordQuery, GetIcalPasswordQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetIcalPasswordQuery, GetIcalPasswordQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetIcalPasswordQuery, GetIcalPasswordQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<GetIcalPasswordQuery, GetIcalPasswordQueryVariables>(GetIcalPasswordDocument, {}, options);
 }
-export function useGetIcalPasswordLazyQuery(
-  options:
-    | VueApolloComposable.UseQueryOptions<
-        GetIcalPasswordQuery,
-        GetIcalPasswordQueryVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          GetIcalPasswordQuery,
-          GetIcalPasswordQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          GetIcalPasswordQuery,
-          GetIcalPasswordQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useLazyQuery<
-    GetIcalPasswordQuery,
-    GetIcalPasswordQueryVariables
-  >(GetIcalPasswordDocument, {}, options);
+export function useGetIcalPasswordLazyQuery(options: VueApolloComposable.UseQueryOptions<GetIcalPasswordQuery, GetIcalPasswordQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetIcalPasswordQuery, GetIcalPasswordQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetIcalPasswordQuery, GetIcalPasswordQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<GetIcalPasswordQuery, GetIcalPasswordQueryVariables>(GetIcalPasswordDocument, {}, options);
 }
-export type GetIcalPasswordQueryCompositionFunctionResult =
-  VueApolloComposable.UseQueryReturn<
-    GetIcalPasswordQuery,
-    GetIcalPasswordQueryVariables
-  >;
+export type GetIcalPasswordQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetIcalPasswordQuery, GetIcalPasswordQueryVariables>;
 export const GetAdminSettingsDocument = gql`
-  query getAdminSettings {
-    settings {
-      nodes {
-        ...AdminSettingsInfo
-      }
+    query getAdminSettings {
+  settings {
+    nodes {
+      ...AdminSettingsInfo
     }
   }
-  ${AdminSettingsInfoFragmentDoc}
-`;
+}
+    ${AdminSettingsInfoFragmentDoc}`;
 
 /**
  * __useGetAdminSettingsQuery__
@@ -8305,69 +5192,22 @@ export const GetAdminSettingsDocument = gql`
  * @example
  * const { result, loading, error } = useGetAdminSettingsQuery();
  */
-export function useGetAdminSettingsQuery(
-  options:
-    | VueApolloComposable.UseQueryOptions<
-        GetAdminSettingsQuery,
-        GetAdminSettingsQueryVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          GetAdminSettingsQuery,
-          GetAdminSettingsQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          GetAdminSettingsQuery,
-          GetAdminSettingsQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useQuery<
-    GetAdminSettingsQuery,
-    GetAdminSettingsQueryVariables
-  >(GetAdminSettingsDocument, {}, options);
+export function useGetAdminSettingsQuery(options: VueApolloComposable.UseQueryOptions<GetAdminSettingsQuery, GetAdminSettingsQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetAdminSettingsQuery, GetAdminSettingsQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetAdminSettingsQuery, GetAdminSettingsQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<GetAdminSettingsQuery, GetAdminSettingsQueryVariables>(GetAdminSettingsDocument, {}, options);
 }
-export function useGetAdminSettingsLazyQuery(
-  options:
-    | VueApolloComposable.UseQueryOptions<
-        GetAdminSettingsQuery,
-        GetAdminSettingsQueryVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          GetAdminSettingsQuery,
-          GetAdminSettingsQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          GetAdminSettingsQuery,
-          GetAdminSettingsQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useLazyQuery<
-    GetAdminSettingsQuery,
-    GetAdminSettingsQueryVariables
-  >(GetAdminSettingsDocument, {}, options);
+export function useGetAdminSettingsLazyQuery(options: VueApolloComposable.UseQueryOptions<GetAdminSettingsQuery, GetAdminSettingsQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetAdminSettingsQuery, GetAdminSettingsQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetAdminSettingsQuery, GetAdminSettingsQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<GetAdminSettingsQuery, GetAdminSettingsQueryVariables>(GetAdminSettingsDocument, {}, options);
 }
-export type GetAdminSettingsQueryCompositionFunctionResult =
-  VueApolloComposable.UseQueryReturn<
-    GetAdminSettingsQuery,
-    GetAdminSettingsQueryVariables
-  >;
+export type GetAdminSettingsQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetAdminSettingsQuery, GetAdminSettingsQueryVariables>;
 export const UpdateSettingsDocument = gql`
-  mutation updateSettings($nodeId: ID!, $patch: SettingPatch!) {
-    updateSettingByNodeId(input: { nodeId: $nodeId, patch: $patch }) {
-      setting {
-        ...AdminSettingsInfo
-      }
+    mutation updateSettings($nodeId: ID!, $patch: SettingPatch!) {
+  updateSettingByNodeId(input: {nodeId: $nodeId, patch: $patch}) {
+    setting {
+      ...AdminSettingsInfo
     }
   }
-  ${AdminSettingsInfoFragmentDoc}
-`;
+}
+    ${AdminSettingsInfoFragmentDoc}`;
 
 /**
  * __useUpdateSettingsMutation__
@@ -8387,39 +5227,19 @@ export const UpdateSettingsDocument = gql`
  *   },
  * });
  */
-export function useUpdateSettingsMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        UpdateSettingsMutation,
-        UpdateSettingsMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          UpdateSettingsMutation,
-          UpdateSettingsMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    UpdateSettingsMutation,
-    UpdateSettingsMutationVariables
-  >(UpdateSettingsDocument, options);
+export function useUpdateSettingsMutation(options: VueApolloComposable.UseMutationOptions<UpdateSettingsMutation, UpdateSettingsMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<UpdateSettingsMutation, UpdateSettingsMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<UpdateSettingsMutation, UpdateSettingsMutationVariables>(UpdateSettingsDocument, options);
 }
-export type UpdateSettingsMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    UpdateSettingsMutation,
-    UpdateSettingsMutationVariables
-  >;
+export type UpdateSettingsMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<UpdateSettingsMutation, UpdateSettingsMutationVariables>;
 export const GetTagsDocument = gql`
-  query getTags {
-    tags {
-      nodes {
-        ...TagFragment
-      }
+    query getTags {
+  tags {
+    nodes {
+      ...TagFragment
     }
   }
-  ${TagFragmentDoc}
-`;
+}
+    ${TagFragmentDoc}`;
 
 /**
  * __useGetTagsQuery__
@@ -8433,48 +5253,21 @@ export const GetTagsDocument = gql`
  * @example
  * const { result, loading, error } = useGetTagsQuery();
  */
-export function useGetTagsQuery(
-  options:
-    | VueApolloComposable.UseQueryOptions<GetTagsQuery, GetTagsQueryVariables>
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<GetTagsQuery, GetTagsQueryVariables>
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<GetTagsQuery, GetTagsQueryVariables>
-      > = {},
-) {
-  return VueApolloComposable.useQuery<GetTagsQuery, GetTagsQueryVariables>(
-    GetTagsDocument,
-    {},
-    options,
-  );
+export function useGetTagsQuery(options: VueApolloComposable.UseQueryOptions<GetTagsQuery, GetTagsQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetTagsQuery, GetTagsQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetTagsQuery, GetTagsQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<GetTagsQuery, GetTagsQueryVariables>(GetTagsDocument, {}, options);
 }
-export function useGetTagsLazyQuery(
-  options:
-    | VueApolloComposable.UseQueryOptions<GetTagsQuery, GetTagsQueryVariables>
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<GetTagsQuery, GetTagsQueryVariables>
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<GetTagsQuery, GetTagsQueryVariables>
-      > = {},
-) {
-  return VueApolloComposable.useLazyQuery<GetTagsQuery, GetTagsQueryVariables>(
-    GetTagsDocument,
-    {},
-    options,
-  );
+export function useGetTagsLazyQuery(options: VueApolloComposable.UseQueryOptions<GetTagsQuery, GetTagsQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetTagsQuery, GetTagsQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetTagsQuery, GetTagsQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<GetTagsQuery, GetTagsQueryVariables>(GetTagsDocument, {}, options);
 }
-export type GetTagsQueryCompositionFunctionResult =
-  VueApolloComposable.UseQueryReturn<GetTagsQuery, GetTagsQueryVariables>;
+export type GetTagsQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetTagsQuery, GetTagsQueryVariables>;
 export const GetTagByIdDocument = gql`
-  query getTagById($id: Int!) {
-    tag(id: $id) {
-      tag
-      id
-    }
+    query getTagById($id: Int!) {
+  tag(id: $id) {
+    tag
+    id
   }
-`;
+}
+    `;
 
 /**
  * __useGetTagByIdQuery__
@@ -8491,71 +5284,20 @@ export const GetTagByIdDocument = gql`
  *   id: // value for 'id'
  * });
  */
-export function useGetTagByIdQuery(
-  variables:
-    | GetTagByIdQueryVariables
-    | VueCompositionApi.Ref<GetTagByIdQueryVariables>
-    | ReactiveFunction<GetTagByIdQueryVariables>,
-  options:
-    | VueApolloComposable.UseQueryOptions<
-        GetTagByIdQuery,
-        GetTagByIdQueryVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          GetTagByIdQuery,
-          GetTagByIdQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          GetTagByIdQuery,
-          GetTagByIdQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useQuery<
-    GetTagByIdQuery,
-    GetTagByIdQueryVariables
-  >(GetTagByIdDocument, variables, options);
+export function useGetTagByIdQuery(variables: GetTagByIdQueryVariables | VueCompositionApi.Ref<GetTagByIdQueryVariables> | ReactiveFunction<GetTagByIdQueryVariables>, options: VueApolloComposable.UseQueryOptions<GetTagByIdQuery, GetTagByIdQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetTagByIdQuery, GetTagByIdQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetTagByIdQuery, GetTagByIdQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<GetTagByIdQuery, GetTagByIdQueryVariables>(GetTagByIdDocument, variables, options);
 }
-export function useGetTagByIdLazyQuery(
-  variables:
-    | GetTagByIdQueryVariables
-    | VueCompositionApi.Ref<GetTagByIdQueryVariables>
-    | ReactiveFunction<GetTagByIdQueryVariables>,
-  options:
-    | VueApolloComposable.UseQueryOptions<
-        GetTagByIdQuery,
-        GetTagByIdQueryVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          GetTagByIdQuery,
-          GetTagByIdQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          GetTagByIdQuery,
-          GetTagByIdQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useLazyQuery<
-    GetTagByIdQuery,
-    GetTagByIdQueryVariables
-  >(GetTagByIdDocument, variables, options);
+export function useGetTagByIdLazyQuery(variables: GetTagByIdQueryVariables | VueCompositionApi.Ref<GetTagByIdQueryVariables> | ReactiveFunction<GetTagByIdQueryVariables>, options: VueApolloComposable.UseQueryOptions<GetTagByIdQuery, GetTagByIdQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetTagByIdQuery, GetTagByIdQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetTagByIdQuery, GetTagByIdQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<GetTagByIdQuery, GetTagByIdQueryVariables>(GetTagByIdDocument, variables, options);
 }
-export type GetTagByIdQueryCompositionFunctionResult =
-  VueApolloComposable.UseQueryReturn<GetTagByIdQuery, GetTagByIdQueryVariables>;
+export type GetTagByIdQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetTagByIdQuery, GetTagByIdQueryVariables>;
 export const AddTagsForTaskDocument = gql`
-  mutation addTagsForTask($tags: [String!], $taskId: Int!) {
-    addTagsForTask(input: { tags: $tags, taskid: $taskId }) {
-      clientMutationId
-    }
+    mutation addTagsForTask($tags: [String!], $taskId: Int!) {
+  addTagsForTask(input: {tags: $tags, taskid: $taskId}) {
+    clientMutationId
   }
-`;
+}
+    `;
 
 /**
  * __useAddTagsForTaskMutation__
@@ -8575,43 +5317,23 @@ export const AddTagsForTaskDocument = gql`
  *   },
  * });
  */
-export function useAddTagsForTaskMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        AddTagsForTaskMutation,
-        AddTagsForTaskMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          AddTagsForTaskMutation,
-          AddTagsForTaskMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    AddTagsForTaskMutation,
-    AddTagsForTaskMutationVariables
-  >(AddTagsForTaskDocument, options);
+export function useAddTagsForTaskMutation(options: VueApolloComposable.UseMutationOptions<AddTagsForTaskMutation, AddTagsForTaskMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<AddTagsForTaskMutation, AddTagsForTaskMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<AddTagsForTaskMutation, AddTagsForTaskMutationVariables>(AddTagsForTaskDocument, options);
 }
-export type AddTagsForTaskMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    AddTagsForTaskMutation,
-    AddTagsForTaskMutationVariables
-  >;
+export type AddTagsForTaskMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<AddTagsForTaskMutation, AddTagsForTaskMutationVariables>;
 export const SubscribeToTagDocument = gql`
-  subscription subscribeToTag {
-    listen(topic: "update:tag") {
-      relatedNodeId
-      relatedNode {
-        nodeId
-        ... on Tag {
-          ...TagFragment
-        }
+    subscription subscribeToTag {
+  listen(topic: "update:tag") {
+    relatedNodeId
+    relatedNode {
+      nodeId
+      ... on Tag {
+        ...TagFragment
       }
     }
   }
-  ${TagFragmentDoc}
-`;
+}
+    ${TagFragmentDoc}`;
 
 /**
  * __useSubscribeToTagSubscription__
@@ -8625,49 +5347,23 @@ export const SubscribeToTagDocument = gql`
  * @example
  * const { result, loading, error } = useSubscribeToTagSubscription();
  */
-export function useSubscribeToTagSubscription(
-  options:
-    | VueApolloComposable.UseSubscriptionOptions<
-        SubscribeToTagSubscription,
-        SubscribeToTagSubscriptionVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseSubscriptionOptions<
-          SubscribeToTagSubscription,
-          SubscribeToTagSubscriptionVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseSubscriptionOptions<
-          SubscribeToTagSubscription,
-          SubscribeToTagSubscriptionVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useSubscription<
-    SubscribeToTagSubscription,
-    SubscribeToTagSubscriptionVariables
-  >(SubscribeToTagDocument, {}, options);
+export function useSubscribeToTagSubscription(options: VueApolloComposable.UseSubscriptionOptions<SubscribeToTagSubscription, SubscribeToTagSubscriptionVariables> | VueCompositionApi.Ref<VueApolloComposable.UseSubscriptionOptions<SubscribeToTagSubscription, SubscribeToTagSubscriptionVariables>> | ReactiveFunction<VueApolloComposable.UseSubscriptionOptions<SubscribeToTagSubscription, SubscribeToTagSubscriptionVariables>> = {}) {
+  return VueApolloComposable.useSubscription<SubscribeToTagSubscription, SubscribeToTagSubscriptionVariables>(SubscribeToTagDocument, {}, options);
 }
-export type SubscribeToTagSubscriptionCompositionFunctionResult =
-  VueApolloComposable.UseSubscriptionReturn<
-    SubscribeToTagSubscription,
-    SubscribeToTagSubscriptionVariables
-  >;
+export type SubscribeToTagSubscriptionCompositionFunctionResult = VueApolloComposable.UseSubscriptionReturn<SubscribeToTagSubscription, SubscribeToTagSubscriptionVariables>;
 export const SubscribeToTagCreatedDocument = gql`
-  subscription subscribeToTagCreated {
-    listen(topic: "created:tag") {
-      relatedNodeId
-      relatedNode {
-        nodeId
-        ... on Tag {
-          ...TagFragment
-        }
+    subscription subscribeToTagCreated {
+  listen(topic: "created:tag") {
+    relatedNodeId
+    relatedNode {
+      nodeId
+      ... on Tag {
+        ...TagFragment
       }
     }
   }
-  ${TagFragmentDoc}
-`;
+}
+    ${TagFragmentDoc}`;
 
 /**
  * __useSubscribeToTagCreatedSubscription__
@@ -8681,49 +5377,23 @@ export const SubscribeToTagCreatedDocument = gql`
  * @example
  * const { result, loading, error } = useSubscribeToTagCreatedSubscription();
  */
-export function useSubscribeToTagCreatedSubscription(
-  options:
-    | VueApolloComposable.UseSubscriptionOptions<
-        SubscribeToTagCreatedSubscription,
-        SubscribeToTagCreatedSubscriptionVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseSubscriptionOptions<
-          SubscribeToTagCreatedSubscription,
-          SubscribeToTagCreatedSubscriptionVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseSubscriptionOptions<
-          SubscribeToTagCreatedSubscription,
-          SubscribeToTagCreatedSubscriptionVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useSubscription<
-    SubscribeToTagCreatedSubscription,
-    SubscribeToTagCreatedSubscriptionVariables
-  >(SubscribeToTagCreatedDocument, {}, options);
+export function useSubscribeToTagCreatedSubscription(options: VueApolloComposable.UseSubscriptionOptions<SubscribeToTagCreatedSubscription, SubscribeToTagCreatedSubscriptionVariables> | VueCompositionApi.Ref<VueApolloComposable.UseSubscriptionOptions<SubscribeToTagCreatedSubscription, SubscribeToTagCreatedSubscriptionVariables>> | ReactiveFunction<VueApolloComposable.UseSubscriptionOptions<SubscribeToTagCreatedSubscription, SubscribeToTagCreatedSubscriptionVariables>> = {}) {
+  return VueApolloComposable.useSubscription<SubscribeToTagCreatedSubscription, SubscribeToTagCreatedSubscriptionVariables>(SubscribeToTagCreatedDocument, {}, options);
 }
-export type SubscribeToTagCreatedSubscriptionCompositionFunctionResult =
-  VueApolloComposable.UseSubscriptionReturn<
-    SubscribeToTagCreatedSubscription,
-    SubscribeToTagCreatedSubscriptionVariables
-  >;
+export type SubscribeToTagCreatedSubscriptionCompositionFunctionResult = VueApolloComposable.UseSubscriptionReturn<SubscribeToTagCreatedSubscription, SubscribeToTagCreatedSubscriptionVariables>;
 export const SubscribeToTagDeletedDocument = gql`
-  subscription subscribeToTagDeleted {
-    listen(topic: "deleted:tag") {
-      relatedNodeId
-      relatedNode {
-        nodeId
-        ... on Tag {
-          ...TagFragment
-        }
+    subscription subscribeToTagDeleted {
+  listen(topic: "deleted:tag") {
+    relatedNodeId
+    relatedNode {
+      nodeId
+      ... on Tag {
+        ...TagFragment
       }
     }
   }
-  ${TagFragmentDoc}
-`;
+}
+    ${TagFragmentDoc}`;
 
 /**
  * __useSubscribeToTagDeletedSubscription__
@@ -8737,45 +5407,19 @@ export const SubscribeToTagDeletedDocument = gql`
  * @example
  * const { result, loading, error } = useSubscribeToTagDeletedSubscription();
  */
-export function useSubscribeToTagDeletedSubscription(
-  options:
-    | VueApolloComposable.UseSubscriptionOptions<
-        SubscribeToTagDeletedSubscription,
-        SubscribeToTagDeletedSubscriptionVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseSubscriptionOptions<
-          SubscribeToTagDeletedSubscription,
-          SubscribeToTagDeletedSubscriptionVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseSubscriptionOptions<
-          SubscribeToTagDeletedSubscription,
-          SubscribeToTagDeletedSubscriptionVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useSubscription<
-    SubscribeToTagDeletedSubscription,
-    SubscribeToTagDeletedSubscriptionVariables
-  >(SubscribeToTagDeletedDocument, {}, options);
+export function useSubscribeToTagDeletedSubscription(options: VueApolloComposable.UseSubscriptionOptions<SubscribeToTagDeletedSubscription, SubscribeToTagDeletedSubscriptionVariables> | VueCompositionApi.Ref<VueApolloComposable.UseSubscriptionOptions<SubscribeToTagDeletedSubscription, SubscribeToTagDeletedSubscriptionVariables>> | ReactiveFunction<VueApolloComposable.UseSubscriptionOptions<SubscribeToTagDeletedSubscription, SubscribeToTagDeletedSubscriptionVariables>> = {}) {
+  return VueApolloComposable.useSubscription<SubscribeToTagDeletedSubscription, SubscribeToTagDeletedSubscriptionVariables>(SubscribeToTagDeletedDocument, {}, options);
 }
-export type SubscribeToTagDeletedSubscriptionCompositionFunctionResult =
-  VueApolloComposable.UseSubscriptionReturn<
-    SubscribeToTagDeletedSubscription,
-    SubscribeToTagDeletedSubscriptionVariables
-  >;
+export type SubscribeToTagDeletedSubscriptionCompositionFunctionResult = VueApolloComposable.UseSubscriptionReturn<SubscribeToTagDeletedSubscription, SubscribeToTagDeletedSubscriptionVariables>;
 export const GetTasksForCtfIdDocument = gql`
-  query getTasksForCtfId($ctfId: Int!) {
-    tasks(condition: { ctfId: $ctfId }) {
-      nodes {
-        ...TaskFragment
-      }
+    query getTasksForCtfId($ctfId: Int!) {
+  tasks(condition: {ctfId: $ctfId}) {
+    nodes {
+      ...TaskFragment
     }
   }
-  ${TaskFragmentDoc}
-`;
+}
+    ${TaskFragmentDoc}`;
 
 /**
  * __useGetTasksForCtfIdQuery__
@@ -8792,75 +5436,20 @@ export const GetTasksForCtfIdDocument = gql`
  *   ctfId: // value for 'ctfId'
  * });
  */
-export function useGetTasksForCtfIdQuery(
-  variables:
-    | GetTasksForCtfIdQueryVariables
-    | VueCompositionApi.Ref<GetTasksForCtfIdQueryVariables>
-    | ReactiveFunction<GetTasksForCtfIdQueryVariables>,
-  options:
-    | VueApolloComposable.UseQueryOptions<
-        GetTasksForCtfIdQuery,
-        GetTasksForCtfIdQueryVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          GetTasksForCtfIdQuery,
-          GetTasksForCtfIdQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          GetTasksForCtfIdQuery,
-          GetTasksForCtfIdQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useQuery<
-    GetTasksForCtfIdQuery,
-    GetTasksForCtfIdQueryVariables
-  >(GetTasksForCtfIdDocument, variables, options);
+export function useGetTasksForCtfIdQuery(variables: GetTasksForCtfIdQueryVariables | VueCompositionApi.Ref<GetTasksForCtfIdQueryVariables> | ReactiveFunction<GetTasksForCtfIdQueryVariables>, options: VueApolloComposable.UseQueryOptions<GetTasksForCtfIdQuery, GetTasksForCtfIdQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetTasksForCtfIdQuery, GetTasksForCtfIdQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetTasksForCtfIdQuery, GetTasksForCtfIdQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<GetTasksForCtfIdQuery, GetTasksForCtfIdQueryVariables>(GetTasksForCtfIdDocument, variables, options);
 }
-export function useGetTasksForCtfIdLazyQuery(
-  variables:
-    | GetTasksForCtfIdQueryVariables
-    | VueCompositionApi.Ref<GetTasksForCtfIdQueryVariables>
-    | ReactiveFunction<GetTasksForCtfIdQueryVariables>,
-  options:
-    | VueApolloComposable.UseQueryOptions<
-        GetTasksForCtfIdQuery,
-        GetTasksForCtfIdQueryVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          GetTasksForCtfIdQuery,
-          GetTasksForCtfIdQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          GetTasksForCtfIdQuery,
-          GetTasksForCtfIdQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useLazyQuery<
-    GetTasksForCtfIdQuery,
-    GetTasksForCtfIdQueryVariables
-  >(GetTasksForCtfIdDocument, variables, options);
+export function useGetTasksForCtfIdLazyQuery(variables: GetTasksForCtfIdQueryVariables | VueCompositionApi.Ref<GetTasksForCtfIdQueryVariables> | ReactiveFunction<GetTasksForCtfIdQueryVariables>, options: VueApolloComposable.UseQueryOptions<GetTasksForCtfIdQuery, GetTasksForCtfIdQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetTasksForCtfIdQuery, GetTasksForCtfIdQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetTasksForCtfIdQuery, GetTasksForCtfIdQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<GetTasksForCtfIdQuery, GetTasksForCtfIdQueryVariables>(GetTasksForCtfIdDocument, variables, options);
 }
-export type GetTasksForCtfIdQueryCompositionFunctionResult =
-  VueApolloComposable.UseQueryReturn<
-    GetTasksForCtfIdQuery,
-    GetTasksForCtfIdQueryVariables
-  >;
+export type GetTasksForCtfIdQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetTasksForCtfIdQuery, GetTasksForCtfIdQueryVariables>;
 export const TaskByIdDocument = gql`
-  query taskById($id: Int!) {
-    task(id: $id) {
-      ...TaskFragment
-    }
+    query taskById($id: Int!) {
+  task(id: $id) {
+    ...TaskFragment
   }
-  ${TaskFragmentDoc}
-`;
+}
+    ${TaskFragmentDoc}`;
 
 /**
  * __useTaskByIdQuery__
@@ -8877,85 +5466,24 @@ export const TaskByIdDocument = gql`
  *   id: // value for 'id'
  * });
  */
-export function useTaskByIdQuery(
-  variables:
-    | TaskByIdQueryVariables
-    | VueCompositionApi.Ref<TaskByIdQueryVariables>
-    | ReactiveFunction<TaskByIdQueryVariables>,
-  options:
-    | VueApolloComposable.UseQueryOptions<TaskByIdQuery, TaskByIdQueryVariables>
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          TaskByIdQuery,
-          TaskByIdQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          TaskByIdQuery,
-          TaskByIdQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useQuery<TaskByIdQuery, TaskByIdQueryVariables>(
-    TaskByIdDocument,
-    variables,
-    options,
-  );
+export function useTaskByIdQuery(variables: TaskByIdQueryVariables | VueCompositionApi.Ref<TaskByIdQueryVariables> | ReactiveFunction<TaskByIdQueryVariables>, options: VueApolloComposable.UseQueryOptions<TaskByIdQuery, TaskByIdQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<TaskByIdQuery, TaskByIdQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<TaskByIdQuery, TaskByIdQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<TaskByIdQuery, TaskByIdQueryVariables>(TaskByIdDocument, variables, options);
 }
-export function useTaskByIdLazyQuery(
-  variables:
-    | TaskByIdQueryVariables
-    | VueCompositionApi.Ref<TaskByIdQueryVariables>
-    | ReactiveFunction<TaskByIdQueryVariables>,
-  options:
-    | VueApolloComposable.UseQueryOptions<TaskByIdQuery, TaskByIdQueryVariables>
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseQueryOptions<
-          TaskByIdQuery,
-          TaskByIdQueryVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseQueryOptions<
-          TaskByIdQuery,
-          TaskByIdQueryVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useLazyQuery<
-    TaskByIdQuery,
-    TaskByIdQueryVariables
-  >(TaskByIdDocument, variables, options);
+export function useTaskByIdLazyQuery(variables: TaskByIdQueryVariables | VueCompositionApi.Ref<TaskByIdQueryVariables> | ReactiveFunction<TaskByIdQueryVariables>, options: VueApolloComposable.UseQueryOptions<TaskByIdQuery, TaskByIdQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<TaskByIdQuery, TaskByIdQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<TaskByIdQuery, TaskByIdQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<TaskByIdQuery, TaskByIdQueryVariables>(TaskByIdDocument, variables, options);
 }
-export type TaskByIdQueryCompositionFunctionResult =
-  VueApolloComposable.UseQueryReturn<TaskByIdQuery, TaskByIdQueryVariables>;
+export type TaskByIdQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<TaskByIdQuery, TaskByIdQueryVariables>;
 export const UpdateTaskDocument = gql`
-  mutation updateTask(
-    $id: Int!
-    $title: String
-    $description: String
-    $files: String
-    $flag: String
+    mutation updateTask($id: Int!, $title: String, $description: String, $files: String, $flag: String) {
+  updateTask(
+    input: {id: $id, patch: {title: $title, description: $description, files: $files, flag: $flag}}
   ) {
-    updateTask(
-      input: {
-        id: $id
-        patch: {
-          title: $title
-          description: $description
-          files: $files
-          flag: $flag
-        }
-      }
-    ) {
-      task {
-        ...TaskFragment
-      }
+    task {
+      ...TaskFragment
     }
   }
-  ${TaskFragmentDoc}
-`;
+}
+    ${TaskFragmentDoc}`;
 
 /**
  * __useUpdateTaskMutation__
@@ -8978,55 +5506,21 @@ export const UpdateTaskDocument = gql`
  *   },
  * });
  */
-export function useUpdateTaskMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        UpdateTaskMutation,
-        UpdateTaskMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          UpdateTaskMutation,
-          UpdateTaskMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    UpdateTaskMutation,
-    UpdateTaskMutationVariables
-  >(UpdateTaskDocument, options);
+export function useUpdateTaskMutation(options: VueApolloComposable.UseMutationOptions<UpdateTaskMutation, UpdateTaskMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<UpdateTaskMutation, UpdateTaskMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<UpdateTaskMutation, UpdateTaskMutationVariables>(UpdateTaskDocument, options);
 }
-export type UpdateTaskMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    UpdateTaskMutation,
-    UpdateTaskMutationVariables
-  >;
+export type UpdateTaskMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<UpdateTaskMutation, UpdateTaskMutationVariables>;
 export const CreateTaskForCtfIdDocument = gql`
-  mutation createTaskForCtfId(
-    $ctfId: Int!
-    $title: String!
-    $tags: [String]
-    $description: String
-    $files: String
-    $flag: String
+    mutation createTaskForCtfId($ctfId: Int!, $title: String!, $tags: [String], $description: String, $files: String, $flag: String) {
+  createTask(
+    input: {ctfId: $ctfId, title: $title, tags: $tags, description: $description, files: $files, flag: $flag}
   ) {
-    createTask(
-      input: {
-        ctfId: $ctfId
-        title: $title
-        tags: $tags
-        description: $description
-        files: $files
-        flag: $flag
-      }
-    ) {
-      task {
-        ...TaskFragment
-      }
+    task {
+      ...TaskFragment
     }
   }
-  ${TaskFragmentDoc}
-`;
+}
+    ${TaskFragmentDoc}`;
 
 /**
  * __useCreateTaskForCtfIdMutation__
@@ -9050,36 +5544,17 @@ export const CreateTaskForCtfIdDocument = gql`
  *   },
  * });
  */
-export function useCreateTaskForCtfIdMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        CreateTaskForCtfIdMutation,
-        CreateTaskForCtfIdMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          CreateTaskForCtfIdMutation,
-          CreateTaskForCtfIdMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    CreateTaskForCtfIdMutation,
-    CreateTaskForCtfIdMutationVariables
-  >(CreateTaskForCtfIdDocument, options);
+export function useCreateTaskForCtfIdMutation(options: VueApolloComposable.UseMutationOptions<CreateTaskForCtfIdMutation, CreateTaskForCtfIdMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<CreateTaskForCtfIdMutation, CreateTaskForCtfIdMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<CreateTaskForCtfIdMutation, CreateTaskForCtfIdMutationVariables>(CreateTaskForCtfIdDocument, options);
 }
-export type CreateTaskForCtfIdMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    CreateTaskForCtfIdMutation,
-    CreateTaskForCtfIdMutationVariables
-  >;
+export type CreateTaskForCtfIdMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<CreateTaskForCtfIdMutation, CreateTaskForCtfIdMutationVariables>;
 export const DeleteTaskDocument = gql`
-  mutation deleteTask($id: Int!) {
-    deleteTask(input: { id: $id }) {
-      deletedTaskNodeId
-    }
+    mutation deleteTask($id: Int!) {
+  deleteTask(input: {id: $id}) {
+    deletedTaskNodeId
   }
-`;
+}
+    `;
 
 /**
  * __useDeleteTaskMutation__
@@ -9098,39 +5573,19 @@ export const DeleteTaskDocument = gql`
  *   },
  * });
  */
-export function useDeleteTaskMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        DeleteTaskMutation,
-        DeleteTaskMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          DeleteTaskMutation,
-          DeleteTaskMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    DeleteTaskMutation,
-    DeleteTaskMutationVariables
-  >(DeleteTaskDocument, options);
+export function useDeleteTaskMutation(options: VueApolloComposable.UseMutationOptions<DeleteTaskMutation, DeleteTaskMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<DeleteTaskMutation, DeleteTaskMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<DeleteTaskMutation, DeleteTaskMutationVariables>(DeleteTaskDocument, options);
 }
-export type DeleteTaskMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    DeleteTaskMutation,
-    DeleteTaskMutationVariables
-  >;
+export type DeleteTaskMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<DeleteTaskMutation, DeleteTaskMutationVariables>;
 export const StartWorkingOnDocument = gql`
-  mutation startWorkingOn($taskId: Int!) {
-    startWorkingOn(input: { taskId: $taskId }) {
-      task {
-        ...TaskFragment
-      }
+    mutation startWorkingOn($taskId: Int!) {
+  startWorkingOn(input: {taskId: $taskId}) {
+    task {
+      ...TaskFragment
     }
   }
-  ${TaskFragmentDoc}
-`;
+}
+    ${TaskFragmentDoc}`;
 
 /**
  * __useStartWorkingOnMutation__
@@ -9149,39 +5604,19 @@ export const StartWorkingOnDocument = gql`
  *   },
  * });
  */
-export function useStartWorkingOnMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        StartWorkingOnMutation,
-        StartWorkingOnMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          StartWorkingOnMutation,
-          StartWorkingOnMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    StartWorkingOnMutation,
-    StartWorkingOnMutationVariables
-  >(StartWorkingOnDocument, options);
+export function useStartWorkingOnMutation(options: VueApolloComposable.UseMutationOptions<StartWorkingOnMutation, StartWorkingOnMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<StartWorkingOnMutation, StartWorkingOnMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<StartWorkingOnMutation, StartWorkingOnMutationVariables>(StartWorkingOnDocument, options);
 }
-export type StartWorkingOnMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    StartWorkingOnMutation,
-    StartWorkingOnMutationVariables
-  >;
+export type StartWorkingOnMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<StartWorkingOnMutation, StartWorkingOnMutationVariables>;
 export const StopWorkingOnDocument = gql`
-  mutation stopWorkingOn($taskId: Int!) {
-    stopWorkingOn(input: { taskId: $taskId }) {
-      task {
-        ...TaskFragment
-      }
+    mutation stopWorkingOn($taskId: Int!) {
+  stopWorkingOn(input: {taskId: $taskId}) {
+    task {
+      ...TaskFragment
     }
   }
-  ${TaskFragmentDoc}
-`;
+}
+    ${TaskFragmentDoc}`;
 
 /**
  * __useStopWorkingOnMutation__
@@ -9200,39 +5635,19 @@ export const StopWorkingOnDocument = gql`
  *   },
  * });
  */
-export function useStopWorkingOnMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        StopWorkingOnMutation,
-        StopWorkingOnMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          StopWorkingOnMutation,
-          StopWorkingOnMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    StopWorkingOnMutation,
-    StopWorkingOnMutationVariables
-  >(StopWorkingOnDocument, options);
+export function useStopWorkingOnMutation(options: VueApolloComposable.UseMutationOptions<StopWorkingOnMutation, StopWorkingOnMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<StopWorkingOnMutation, StopWorkingOnMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<StopWorkingOnMutation, StopWorkingOnMutationVariables>(StopWorkingOnDocument, options);
 }
-export type StopWorkingOnMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    StopWorkingOnMutation,
-    StopWorkingOnMutationVariables
-  >;
+export type StopWorkingOnMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<StopWorkingOnMutation, StopWorkingOnMutationVariables>;
 export const CancelWorkingOnDocument = gql`
-  mutation cancelWorkingOn($taskId: Int!) {
-    cancelWorkingOn(input: { taskId: $taskId }) {
-      task {
-        ...TaskFragment
-      }
+    mutation cancelWorkingOn($taskId: Int!) {
+  cancelWorkingOn(input: {taskId: $taskId}) {
+    task {
+      ...TaskFragment
     }
   }
-  ${TaskFragmentDoc}
-`;
+}
+    ${TaskFragmentDoc}`;
 
 /**
  * __useCancelWorkingOnMutation__
@@ -9251,42 +5666,22 @@ export const CancelWorkingOnDocument = gql`
  *   },
  * });
  */
-export function useCancelWorkingOnMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        CancelWorkingOnMutation,
-        CancelWorkingOnMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          CancelWorkingOnMutation,
-          CancelWorkingOnMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    CancelWorkingOnMutation,
-    CancelWorkingOnMutationVariables
-  >(CancelWorkingOnDocument, options);
+export function useCancelWorkingOnMutation(options: VueApolloComposable.UseMutationOptions<CancelWorkingOnMutation, CancelWorkingOnMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<CancelWorkingOnMutation, CancelWorkingOnMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<CancelWorkingOnMutation, CancelWorkingOnMutationVariables>(CancelWorkingOnDocument, options);
 }
-export type CancelWorkingOnMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    CancelWorkingOnMutation,
-    CancelWorkingOnMutationVariables
-  >;
+export type CancelWorkingOnMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<CancelWorkingOnMutation, CancelWorkingOnMutationVariables>;
 export const SubscribeToTaskDocument = gql`
-  subscription subscribeToTask {
-    listen(topic: "update:tasks") {
-      relatedNode {
-        nodeId
-        ... on Task {
-          ...TaskFragment
-        }
+    subscription subscribeToTask {
+  listen(topic: "update:tasks") {
+    relatedNode {
+      nodeId
+      ... on Task {
+        ...TaskFragment
       }
     }
   }
-  ${TaskFragmentDoc}
-`;
+}
+    ${TaskFragmentDoc}`;
 
 /**
  * __useSubscribeToTaskSubscription__
@@ -9300,40 +5695,15 @@ export const SubscribeToTaskDocument = gql`
  * @example
  * const { result, loading, error } = useSubscribeToTaskSubscription();
  */
-export function useSubscribeToTaskSubscription(
-  options:
-    | VueApolloComposable.UseSubscriptionOptions<
-        SubscribeToTaskSubscription,
-        SubscribeToTaskSubscriptionVariables
-      >
-    | VueCompositionApi.Ref<
-        VueApolloComposable.UseSubscriptionOptions<
-          SubscribeToTaskSubscription,
-          SubscribeToTaskSubscriptionVariables
-        >
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseSubscriptionOptions<
-          SubscribeToTaskSubscription,
-          SubscribeToTaskSubscriptionVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useSubscription<
-    SubscribeToTaskSubscription,
-    SubscribeToTaskSubscriptionVariables
-  >(SubscribeToTaskDocument, {}, options);
+export function useSubscribeToTaskSubscription(options: VueApolloComposable.UseSubscriptionOptions<SubscribeToTaskSubscription, SubscribeToTaskSubscriptionVariables> | VueCompositionApi.Ref<VueApolloComposable.UseSubscriptionOptions<SubscribeToTaskSubscription, SubscribeToTaskSubscriptionVariables>> | ReactiveFunction<VueApolloComposable.UseSubscriptionOptions<SubscribeToTaskSubscription, SubscribeToTaskSubscriptionVariables>> = {}) {
+  return VueApolloComposable.useSubscription<SubscribeToTaskSubscription, SubscribeToTaskSubscriptionVariables>(SubscribeToTaskDocument, {}, options);
 }
-export type SubscribeToTaskSubscriptionCompositionFunctionResult =
-  VueApolloComposable.UseSubscriptionReturn<
-    SubscribeToTaskSubscription,
-    SubscribeToTaskSubscriptionVariables
-  >;
+export type SubscribeToTaskSubscriptionCompositionFunctionResult = VueApolloComposable.UseSubscriptionReturn<SubscribeToTaskSubscription, SubscribeToTaskSubscriptionVariables>;
 export const UploadLogoDocument = gql`
-  mutation uploadLogo($logo: Upload!) {
-    uploadCtfLogo(logo: $logo)
-  }
-`;
+    mutation uploadLogo($logo: Upload!) {
+  uploadCtfLogo(logo: $logo)
+}
+    `;
 
 /**
  * __useUploadLogoMutation__
@@ -9352,992 +5722,821 @@ export const UploadLogoDocument = gql`
  *   },
  * });
  */
-export function useUploadLogoMutation(
-  options:
-    | VueApolloComposable.UseMutationOptions<
-        UploadLogoMutation,
-        UploadLogoMutationVariables
-      >
-    | ReactiveFunction<
-        VueApolloComposable.UseMutationOptions<
-          UploadLogoMutation,
-          UploadLogoMutationVariables
-        >
-      > = {},
-) {
-  return VueApolloComposable.useMutation<
-    UploadLogoMutation,
-    UploadLogoMutationVariables
-  >(UploadLogoDocument, options);
+export function useUploadLogoMutation(options: VueApolloComposable.UseMutationOptions<UploadLogoMutation, UploadLogoMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<UploadLogoMutation, UploadLogoMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<UploadLogoMutation, UploadLogoMutationVariables>(UploadLogoDocument, options);
 }
-export type UploadLogoMutationCompositionFunctionResult =
-  VueApolloComposable.UseMutationReturn<
-    UploadLogoMutation,
-    UploadLogoMutationVariables
-  >;
+export type UploadLogoMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<UploadLogoMutation, UploadLogoMutationVariables>;
 
-export interface PossibleTypesResultData {
-  possibleTypes: {
-    [key: string]: string[];
-  };
-}
-const result: PossibleTypesResultData = {
-  possibleTypes: {
-    Node: [
-      'AssignedTag',
-      'Ctf',
-      'CtfSecret',
-      'Invitation',
-      'Profile',
-      'Query',
-      'Setting',
-      'Tag',
-      'Task',
-      'WorkOnTask',
-    ],
-  },
-};
-export default result;
-
-export const ProfileFragment = gql`
-  fragment ProfileFragment on Profile {
-    id
-    username
-    lastactive
-    color
-    description
-    role
-    discordId
-    nodeId
+      export interface PossibleTypesResultData {
+        possibleTypes: {
+          [key: string]: string[]
+        }
+      }
+      const result: PossibleTypesResultData = {
+  "possibleTypes": {
+    "Node": [
+      "AssignedTag",
+      "Ctf",
+      "CtfSecret",
+      "Invitation",
+      "Profile",
+      "Query",
+      "Setting",
+      "Tag",
+      "Task",
+      "WorkOnTask"
+    ]
   }
-`;
+};
+      export default result;
+    
+export const ProfileFragment = gql`
+    fragment ProfileFragment on Profile {
+  id
+  username
+  lastactive
+  color
+  description
+  role
+  discordId
+  nodeId
+}
+    `;
 export const UserFragment = gql`
-  fragment UserFragment on User {
-    nodeId
-    login
+    fragment UserFragment on User {
+  nodeId
+  login
+  role
+  id
+  profile {
+    ...ProfileFragment
+  }
+}
+    ${ProfileFragment}`;
+export const CtfFragment = gql`
+    fragment CtfFragment on Ctf {
+  nodeId
+  id
+  granted
+  ctfUrl
+  ctfPlatform
+  ctftimeUrl
+  description
+  endTime
+  logoUrl
+  startTime
+  weight
+  title
+  discordEventLink
+}
+    `;
+export const TagFragment = gql`
+    fragment TagFragment on Tag {
+  nodeId
+  id
+  tag
+}
+    `;
+export const AssignedTagsFragment = gql`
+    fragment AssignedTagsFragment on AssignedTag {
+  nodeId
+  taskId
+  tagId
+  tag {
+    ...TagFragment
+  }
+}
+    ${TagFragment}`;
+export const WorkingOnFragment = gql`
+    fragment WorkingOnFragment on WorkOnTask {
+  nodeId
+  profileId
+  active
+  taskId
+}
+    `;
+export const TaskFragment = gql`
+    fragment TaskFragment on Task {
+  nodeId
+  id
+  title
+  ctfId
+  padUrl
+  description
+  files
+  flag
+  solved
+  assignedTags {
+    nodes {
+      ...AssignedTagsFragment
+    }
+  }
+  workOnTasks {
+    nodes {
+      ...WorkingOnFragment
+    }
+  }
+}
+    ${AssignedTagsFragment}
+${WorkingOnFragment}`;
+export const CtfSecretFragment = gql`
+    fragment CtfSecretFragment on CtfSecret {
+  nodeId
+  username
+  password
+  scoreboardName
+}
+    `;
+export const InvitationFragment = gql`
+    fragment InvitationFragment on Invitation {
+  nodeId
+  ctfId
+  profileId
+}
+    `;
+export const FullCtfFragment = gql`
+    fragment FullCtfFragment on Ctf {
+  ...CtfFragment
+  tasks {
+    nodes {
+      ...TaskFragment
+    }
+  }
+  secrets {
+    ...CtfSecretFragment
+  }
+  invitations {
+    nodes {
+      ...InvitationFragment
+    }
+  }
+}
+    ${CtfFragment}
+${TaskFragment}
+${CtfSecretFragment}
+${InvitationFragment}`;
+export const PublicProfileFragment = gql`
+    fragment PublicProfileFragment on PublicProfile {
+  id
+  username
+  color
+  description
+  role
+  nodeId
+}
+    `;
+export const RestrictedProfile = gql`
+    fragment RestrictedProfile on Profile {
+  id
+  username
+  color
+  description
+  role
+  nodeId
+}
+    `;
+export const SettingsInfo = gql`
+    fragment SettingsInfo on Setting {
+  nodeId
+  registrationAllowed
+  registrationPasswordAllowed
+  style
+  discordIntegrationEnabled
+}
+    `;
+export const AdminSettingsInfo = gql`
+    fragment AdminSettingsInfo on Setting {
+  nodeId
+  ...SettingsInfo
+  registrationPassword
+  registrationDefaultRole
+  icalPassword
+}
+    ${SettingsInfo}`;
+export const TaskForTagsFragement = gql`
+    fragment TaskForTagsFragement on AssignedTag {
+  nodeId
+  taskId
+  tagId
+  task {
+    ...TaskFragment
+  }
+}
+    ${TaskFragment}`;
+export const GetUsers = gql`
+    query getUsers {
+  users {
+    nodes {
+      ...UserFragment
+    }
+  }
+}
+    ${UserFragment}`;
+export const CreateInvitationToken = gql`
+    mutation createInvitationToken($role: Role!) {
+  createInvitationLink(input: {role: $role}) {
+    invitationLinkResponse {
+      token
+    }
+  }
+}
+    `;
+export const CreateResetPasswordToken = gql`
+    mutation createResetPasswordToken($userId: Int!) {
+  createResetPasswordLink(input: {userId: $userId}) {
+    resetPasswordLinkResponse {
+      token
+    }
+  }
+}
+    `;
+export const DeleteUserById = gql`
+    mutation deleteUserById($userId: Int!) {
+  deleteUser(input: {userId: $userId}) {
+    userResponse {
+      id
+      login
+      role
+    }
+  }
+}
+    `;
+export const UpdateRoleForUserId = gql`
+    mutation updateRoleForUserId($userId: Int!, $role: Role!) {
+  updateUserRole(input: {userId: $userId, role: $role}) {
     role
-    id
+  }
+}
+    `;
+export const Me = gql`
+    query Me {
+  me {
+    ...ProfileFragment
+  }
+}
+    ${ProfileFragment}`;
+export const NewToken = gql`
+    query newToken {
+  newToken
+}
+    `;
+export const ProfileToken = gql`
+    query profileToken {
+  profileToken
+}
+    `;
+export const ResetProfileToken = gql`
+    mutation resetProfileToken {
+  resetProfileToken(input: {}) {
+    string
+  }
+}
+    `;
+export const ResetDiscordId = gql`
+    mutation resetDiscordId {
+  resetDiscordId(input: {}) {
+    string
+  }
+}
+    `;
+export const Login = gql`
+    mutation Login($login: String!, $password: String!) {
+  login(input: {login: $login, password: $password}) {
+    jwt
+  }
+}
+    `;
+export const Register = gql`
+    mutation Register($login: String!, $password: String!) {
+  register(input: {login: $login, password: $password}) {
+    jwt
+  }
+}
+    `;
+export const RegisterWithToken = gql`
+    mutation RegisterWithToken($login: String!, $password: String!, $token: String!) {
+  registerWithToken(input: {login: $login, password: $password, token: $token}) {
+    jwt
+  }
+}
+    `;
+export const RegisterWithPassword = gql`
+    mutation RegisterWithPassword($login: String!, $password: String!, $ctfnotePassword: String!) {
+  registerWithPassword(
+    input: {login: $login, password: $password, ctfnotePassword: $ctfnotePassword}
+  ) {
+    jwt
+  }
+}
+    `;
+export const ResetPassword = gql`
+    mutation ResetPassword($password: String!, $token: String!) {
+  resetPassword(input: {password: $password, token: $token}) {
+    jwt
+  }
+}
+    `;
+export const Ctfs = gql`
+    query Ctfs {
+  ctfs {
+    nodes {
+      ...CtfFragment
+    }
+  }
+}
+    ${CtfFragment}`;
+export const SubscribeToCtf = gql`
+    subscription subscribeToCtf {
+  listen(topic: "update:ctfs") {
+    relatedNodeId
+    relatedNode {
+      nodeId
+      ... on Ctf {
+        ...FullCtfFragment
+      }
+    }
+  }
+}
+    ${FullCtfFragment}`;
+export const GetFullCtf = gql`
+    query GetFullCtf($id: Int!) {
+  ctf(id: $id) {
+    ...FullCtfFragment
+  }
+}
+    ${FullCtfFragment}`;
+export const IncomingCtfs = gql`
+    query IncomingCtfs {
+  incomingCtf {
+    nodes {
+      ...CtfFragment
+    }
+  }
+}
+    ${CtfFragment}`;
+export const PastCtfs = gql`
+    query PastCtfs($first: Int, $offset: Int) {
+  pastCtf(first: $first, offset: $offset) {
+    nodes {
+      ...CtfFragment
+    }
+    totalCount
+  }
+}
+    ${CtfFragment}`;
+export const CreateCtf = gql`
+    mutation createCtf($title: String!, $startTime: Datetime!, $endTime: Datetime!, $weight: Float, $ctfUrl: String, $ctfPlatform: String!, $ctftimeUrl: String, $logoUrl: String, $description: String) {
+  createCtf(
+    input: {ctf: {title: $title, weight: $weight, ctfUrl: $ctfUrl, ctfPlatform: $ctfPlatform, ctftimeUrl: $ctftimeUrl, logoUrl: $logoUrl, startTime: $startTime, endTime: $endTime, description: $description}}
+  ) {
+    ctf {
+      ...CtfFragment
+    }
+  }
+}
+    ${CtfFragment}`;
+export const DeleteCtfbyId = gql`
+    mutation deleteCtfbyId($id: Int!) {
+  deleteCtf(input: {id: $id}) {
+    deletedCtfNodeId
+  }
+}
+    `;
+export const Importctf = gql`
+    mutation importctf($id: Int!, $ctfPlatform: String!) {
+  importCtf(input: {ctftimeId: $id, ctfPlatform: $ctfPlatform}) {
+    ctf {
+      ...CtfFragment
+    }
+  }
+}
+    ${CtfFragment}`;
+export const UpdateCtfById = gql`
+    mutation updateCtfById($id: Int!, $title: String, $weight: Float, $ctfUrl: String, $ctfPlatform: String, $ctftimeUrl: String, $logoUrl: String, $startTime: Datetime, $endTime: Datetime, $description: String) {
+  updateCtf(
+    input: {id: $id, patch: {title: $title, weight: $weight, ctfUrl: $ctfUrl, ctfPlatform: $ctfPlatform, ctftimeUrl: $ctftimeUrl, logoUrl: $logoUrl, startTime: $startTime, endTime: $endTime, description: $description}}
+  ) {
+    ctf {
+      ...CtfFragment
+    }
+  }
+}
+    ${CtfFragment}`;
+export const SetDiscordEventLink = gql`
+    mutation setDiscordEventLink($id: Int!, $link: String!) {
+  setDiscordEventLink(input: {ctfId: $id, link: $link}) {
+    clientMutationId
+  }
+}
+    `;
+export const SubscribeToCtfCreated = gql`
+    subscription subscribeToCtfCreated {
+  listen(topic: "created:ctfs") {
+    relatedNodeId
+    relatedNode {
+      ... on Ctf {
+        ...CtfFragment
+      }
+    }
+  }
+}
+    ${CtfFragment}`;
+export const SubscribeToCtfDeleted = gql`
+    subscription subscribeToCtfDeleted {
+  listen(topic: "deleted:ctfs") {
+    relatedNodeId
+    relatedNode {
+      ... on Ctf {
+        ...CtfFragment
+      }
+    }
+  }
+}
+    ${CtfFragment}`;
+export const SubscribeToFlag = gql`
+    subscription subscribeToFlag {
+  listen(topic: "task-solved:tasks") {
+    relatedNodeId
+    relatedNode {
+      ... on Task {
+        ...TaskFragment
+      }
+    }
+  }
+}
+    ${TaskFragment}`;
+export const InviteUserToCtf = gql`
+    mutation inviteUserToCtf($ctfId: Int!, $profileId: Int!) {
+  createInvitation(input: {invitation: {ctfId: $ctfId, profileId: $profileId}}) {
+    invitation {
+      ...InvitationFragment
+    }
+  }
+}
+    ${InvitationFragment}`;
+export const UninviteUserToCtf = gql`
+    mutation uninviteUserToCtf($ctfId: Int!, $profileId: Int!) {
+  deleteInvitation(input: {ctfId: $ctfId, profileId: $profileId}) {
+    deletedInvitationNodeId
+  }
+}
+    `;
+export const UpdatePassword = gql`
+    mutation updatePassword($oldPassword: String!, $newPassword: String!) {
+  changePassword(input: {oldpassword: $oldPassword, newpassword: $newPassword}) {
+    changePasswordResponse {
+      ok
+    }
+  }
+}
+    `;
+export const UpdateProfile = gql`
+    mutation updateProfile($id: Int!, $patch: ProfilePatch!) {
+  updateProfile(input: {id: $id, patch: $patch}) {
     profile {
       ...ProfileFragment
     }
   }
-  ${ProfileFragment}
-`;
-export const CtfFragment = gql`
-  fragment CtfFragment on Ctf {
-    nodeId
-    id
-    granted
-    ctfUrl
-    ctfPlatform
-    ctftimeUrl
-    description
-    endTime
-    logoUrl
-    startTime
-    weight
-    title
-    discordEventLink
-  }
-`;
-export const TagFragment = gql`
-  fragment TagFragment on Tag {
-    nodeId
-    id
-    tag
-  }
-`;
-export const AssignedTagsFragment = gql`
-  fragment AssignedTagsFragment on AssignedTag {
-    nodeId
-    taskId
-    tagId
-    tag {
-      ...TagFragment
+}
+    ${ProfileFragment}`;
+export const GetTeam = gql`
+    query getTeam {
+  publicProfiles {
+    nodes {
+      ...PublicProfileFragment
     }
   }
-  ${TagFragment}
-`;
-export const WorkingOnFragment = gql`
-  fragment WorkingOnFragment on WorkOnTask {
-    nodeId
-    profileId
-    active
-    taskId
-  }
-`;
-export const TaskFragment = gql`
-  fragment TaskFragment on Task {
-    nodeId
-    id
-    title
-    ctfId
-    padUrl
-    description
-    files
-    flag
-    solved
-    assignedTags {
-      nodes {
-        ...AssignedTagsFragment
-      }
-    }
-    workOnTasks {
-      nodes {
-        ...WorkingOnFragment
-      }
-    }
-  }
-  ${AssignedTagsFragment}
-  ${WorkingOnFragment}
-`;
-export const CtfSecretFragment = gql`
-  fragment CtfSecretFragment on CtfSecret {
-    nodeId
-    username
-    password
-    scoreboardName
-  }
-`;
-export const InvitationFragment = gql`
-  fragment InvitationFragment on Invitation {
-    nodeId
-    ctfId
-    profileId
-  }
-`;
-export const FullCtfFragment = gql`
-  fragment FullCtfFragment on Ctf {
-    ...CtfFragment
-    tasks {
-      nodes {
-        ...TaskFragment
-      }
-    }
-    secrets {
-      ...CtfSecretFragment
-    }
-    invitations {
-      nodes {
-        ...InvitationFragment
-      }
-    }
-  }
-  ${CtfFragment}
-  ${TaskFragment}
-  ${CtfSecretFragment}
-  ${InvitationFragment}
-`;
-export const PublicProfileFragment = gql`
-  fragment PublicProfileFragment on PublicProfile {
-    id
-    username
-    color
-    description
-    role
-    nodeId
-  }
-`;
-export const RestrictedProfile = gql`
-  fragment RestrictedProfile on Profile {
-    id
-    username
-    color
-    description
-    role
-    nodeId
-  }
-`;
-export const SettingsInfo = gql`
-  fragment SettingsInfo on Setting {
-    nodeId
-    registrationAllowed
-    registrationPasswordAllowed
-    style
-    discordIntegrationEnabled
-  }
-`;
-export const AdminSettingsInfo = gql`
-  fragment AdminSettingsInfo on Setting {
-    nodeId
-    ...SettingsInfo
-    registrationPassword
-    registrationDefaultRole
-    icalPassword
-  }
-  ${SettingsInfo}
-`;
-export const TaskForTagsFragement = gql`
-  fragment TaskForTagsFragement on AssignedTag {
-    nodeId
-    taskId
-    tagId
-    task {
-      ...TaskFragment
-    }
-  }
-  ${TaskFragment}
-`;
-export const GetUsers = gql`
-  query getUsers {
-    users {
-      nodes {
-        ...UserFragment
-      }
-    }
-  }
-  ${UserFragment}
-`;
-export const CreateInvitationToken = gql`
-  mutation createInvitationToken($role: Role!) {
-    createInvitationLink(input: { role: $role }) {
-      invitationLinkResponse {
-        token
-      }
-    }
-  }
-`;
-export const CreateResetPasswordToken = gql`
-  mutation createResetPasswordToken($userId: Int!) {
-    createResetPasswordLink(input: { userId: $userId }) {
-      resetPasswordLinkResponse {
-        token
-      }
-    }
-  }
-`;
-export const DeleteUserById = gql`
-  mutation deleteUserById($userId: Int!) {
-    deleteUser(input: { userId: $userId }) {
-      userResponse {
-        id
-        login
-        role
-      }
-    }
-  }
-`;
-export const UpdateRoleForUserId = gql`
-  mutation updateRoleForUserId($userId: Int!, $role: Role!) {
-    updateUserRole(input: { userId: $userId, role: $role }) {
-      role
-    }
-  }
-`;
-export const Me = gql`
-  query Me {
-    me {
+}
+    ${PublicProfileFragment}`;
+export const GetTeamAdmin = gql`
+    query getTeamAdmin {
+  profiles {
+    nodes {
       ...ProfileFragment
     }
   }
-  ${ProfileFragment}
-`;
-export const NewToken = gql`
-  query newToken {
-    newToken
-  }
-`;
-export const ProfileToken = gql`
-  query profileToken {
-    profileToken
-  }
-`;
-export const ResetProfileToken = gql`
-  mutation resetProfileToken {
-    resetProfileToken(input: {}) {
-      string
-    }
-  }
-`;
-export const ResetDiscordId = gql`
-  mutation resetDiscordId {
-    resetDiscordId(input: {}) {
-      string
-    }
-  }
-`;
-export const Login = gql`
-  mutation Login($login: String!, $password: String!) {
-    login(input: { login: $login, password: $password }) {
-      jwt
-    }
-  }
-`;
-export const Register = gql`
-  mutation Register($login: String!, $password: String!) {
-    register(input: { login: $login, password: $password }) {
-      jwt
-    }
-  }
-`;
-export const RegisterWithToken = gql`
-  mutation RegisterWithToken(
-    $login: String!
-    $password: String!
-    $token: String!
-  ) {
-    registerWithToken(
-      input: { login: $login, password: $password, token: $token }
-    ) {
-      jwt
-    }
-  }
-`;
-export const RegisterWithPassword = gql`
-  mutation RegisterWithPassword(
-    $login: String!
-    $password: String!
-    $ctfnotePassword: String!
-  ) {
-    registerWithPassword(
-      input: {
-        login: $login
-        password: $password
-        ctfnotePassword: $ctfnotePassword
-      }
-    ) {
-      jwt
-    }
-  }
-`;
-export const ResetPassword = gql`
-  mutation ResetPassword($password: String!, $token: String!) {
-    resetPassword(input: { password: $password, token: $token }) {
-      jwt
-    }
-  }
-`;
-export const Ctfs = gql`
-  query Ctfs {
-    ctfs {
-      nodes {
-        ...CtfFragment
-      }
-    }
-  }
-  ${CtfFragment}
-`;
-export const SubscribeToCtf = gql`
-  subscription subscribeToCtf {
-    listen(topic: "update:ctfs") {
-      relatedNodeId
-      relatedNode {
-        nodeId
-        ... on Ctf {
-          ...FullCtfFragment
-        }
-      }
-    }
-  }
-  ${FullCtfFragment}
-`;
-export const GetFullCtf = gql`
-  query GetFullCtf($id: Int!) {
-    ctf(id: $id) {
-      ...FullCtfFragment
-    }
-  }
-  ${FullCtfFragment}
-`;
-export const IncomingCtfs = gql`
-  query IncomingCtfs {
-    incomingCtf {
-      nodes {
-        ...CtfFragment
-      }
-    }
-  }
-  ${CtfFragment}
-`;
-export const PastCtfs = gql`
-  query PastCtfs($first: Int, $offset: Int) {
-    pastCtf(first: $first, offset: $offset) {
-      nodes {
-        ...CtfFragment
-      }
-      totalCount
-    }
-  }
-  ${CtfFragment}
-`;
-export const CreateCtf = gql`
-  mutation createCtf(
-    $title: String!
-    $startTime: Datetime!
-    $endTime: Datetime!
-    $weight: Float
-    $ctfUrl: String
-    $ctfPlatform: String!
-    $ctftimeUrl: String
-    $logoUrl: String
-    $description: String
-  ) {
-    createCtf(
-      input: {
-        ctf: {
-          title: $title
-          weight: $weight
-          ctfUrl: $ctfUrl
-          ctfPlatform: $ctfPlatform
-          ctftimeUrl: $ctftimeUrl
-          logoUrl: $logoUrl
-          startTime: $startTime
-          endTime: $endTime
-          description: $description
-        }
-      }
-    ) {
-      ctf {
-        ...CtfFragment
-      }
-    }
-  }
-  ${CtfFragment}
-`;
-export const DeleteCtfbyId = gql`
-  mutation deleteCtfbyId($id: Int!) {
-    deleteCtf(input: { id: $id }) {
-      deletedCtfNodeId
-    }
-  }
-`;
-export const Importctf = gql`
-  mutation importctf($id: Int!) {
-    importCtf(input: { ctftimeId: $id }) {
-      ctf {
-        ...CtfFragment
-      }
-    }
-  }
-  ${CtfFragment}
-`;
-export const UpdateCtfById = gql`
-  mutation updateCtfById(
-    $id: Int!
-    $title: String
-    $weight: Float
-    $ctfUrl: String
-    $ctfPlatform: String
-    $ctftimeUrl: String
-    $logoUrl: String
-    $startTime: Datetime
-    $endTime: Datetime
-    $description: String
-  ) {
-    updateCtf(
-      input: {
-        id: $id
-        patch: {
-          title: $title
-          weight: $weight
-          ctfUrl: $ctfUrl
-          ctfPlatform: $ctfPlatform
-          ctftimeUrl: $ctftimeUrl
-          logoUrl: $logoUrl
-          startTime: $startTime
-          endTime: $endTime
-          description: $description
-        }
-      }
-    ) {
-      ctf {
-        ...CtfFragment
-      }
-    }
-  }
-  ${CtfFragment}
-`;
-export const SetDiscordEventLink = gql`
-  mutation setDiscordEventLink($id: Int!, $link: String!) {
-    setDiscordEventLink(input: { ctfId: $id, link: $link }) {
-      clientMutationId
-    }
-  }
-`;
-export const SubscribeToCtfCreated = gql`
-  subscription subscribeToCtfCreated {
-    listen(topic: "created:ctfs") {
-      relatedNodeId
-      relatedNode {
-        ... on Ctf {
-          ...CtfFragment
-        }
-      }
-    }
-  }
-  ${CtfFragment}
-`;
-export const SubscribeToCtfDeleted = gql`
-  subscription subscribeToCtfDeleted {
-    listen(topic: "deleted:ctfs") {
-      relatedNodeId
-      relatedNode {
-        ... on Ctf {
-          ...CtfFragment
-        }
-      }
-    }
-  }
-  ${CtfFragment}
-`;
-export const SubscribeToFlag = gql`
-  subscription subscribeToFlag {
-    listen(topic: "task-solved:tasks") {
-      relatedNodeId
-      relatedNode {
-        ... on Task {
-          ...TaskFragment
-        }
-      }
-    }
-  }
-  ${TaskFragment}
-`;
-export const InviteUserToCtf = gql`
-  mutation inviteUserToCtf($ctfId: Int!, $profileId: Int!) {
-    createInvitation(
-      input: { invitation: { ctfId: $ctfId, profileId: $profileId } }
-    ) {
-      invitation {
-        ...InvitationFragment
-      }
-    }
-  }
-  ${InvitationFragment}
-`;
-export const UninviteUserToCtf = gql`
-  mutation uninviteUserToCtf($ctfId: Int!, $profileId: Int!) {
-    deleteInvitation(input: { ctfId: $ctfId, profileId: $profileId }) {
-      deletedInvitationNodeId
-    }
-  }
-`;
-export const UpdatePassword = gql`
-  mutation updatePassword($oldPassword: String!, $newPassword: String!) {
-    changePassword(
-      input: { oldpassword: $oldPassword, newpassword: $newPassword }
-    ) {
-      changePasswordResponse {
-        ok
-      }
-    }
-  }
-`;
-export const UpdateProfile = gql`
-  mutation updateProfile($id: Int!, $patch: ProfilePatch!) {
-    updateProfile(input: { id: $id, patch: $patch }) {
-      profile {
-        ...ProfileFragment
-      }
-    }
-  }
-  ${ProfileFragment}
-`;
-export const GetTeam = gql`
-  query getTeam {
-    publicProfiles {
-      nodes {
-        ...PublicProfileFragment
-      }
-    }
-  }
-  ${PublicProfileFragment}
-`;
-export const GetTeamAdmin = gql`
-  query getTeamAdmin {
-    profiles {
-      nodes {
-        ...ProfileFragment
-      }
-    }
-  }
-  ${ProfileFragment}
-`;
+}
+    ${ProfileFragment}`;
 export const PublicProfileSubscriptionPayload = gql`
-  subscription PublicProfileSubscriptionPayload {
-    currentProfileUpdated {
-      publicProfile {
-        ...PublicProfileFragment
-      }
+    subscription PublicProfileSubscriptionPayload {
+  currentProfileUpdated {
+    publicProfile {
+      ...PublicProfileFragment
     }
   }
-  ${PublicProfileFragment}
-`;
+}
+    ${PublicProfileFragment}`;
 export const SubscribeToProfile = gql`
-  subscription subscribeToProfile {
-    listen(topic: "update:profiles") {
-      relatedNode {
-        nodeId
-        ... on Profile {
-          ...ProfileFragment
-        }
+    subscription subscribeToProfile {
+  listen(topic: "update:profiles") {
+    relatedNode {
+      nodeId
+      ... on Profile {
+        ...ProfileFragment
       }
     }
   }
-  ${ProfileFragment}
-`;
+}
+    ${ProfileFragment}`;
 export const SubscribeToProfileCreated = gql`
-  subscription subscribeToProfileCreated {
-    listen(topic: "created:profiles") {
-      relatedNodeId
-      relatedNode {
-        nodeId
-        ... on Profile {
-          ...ProfileFragment
-        }
+    subscription subscribeToProfileCreated {
+  listen(topic: "created:profiles") {
+    relatedNodeId
+    relatedNode {
+      nodeId
+      ... on Profile {
+        ...ProfileFragment
       }
     }
   }
-  ${ProfileFragment}
-`;
+}
+    ${ProfileFragment}`;
 export const SubscribeToProfileDeleted = gql`
-  subscription subscribeToProfileDeleted {
-    listen(topic: "deleted:profiles") {
-      relatedNodeId
-      relatedNode {
-        nodeId
-        ... on Profile {
-          ...ProfileFragment
-        }
+    subscription subscribeToProfileDeleted {
+  listen(topic: "deleted:profiles") {
+    relatedNodeId
+    relatedNode {
+      nodeId
+      ... on Profile {
+        ...ProfileFragment
       }
     }
   }
-  ${ProfileFragment}
-`;
+}
+    ${ProfileFragment}`;
 export const SearchCtFs = gql`
-  query SearchCTFs($search: String!) {
-    ctfs(filter: { title: { includesInsensitive: $search } }) {
-      nodes {
-        ...CtfFragment
-      }
+    query SearchCTFs($search: String!) {
+  ctfs(filter: {title: {includesInsensitive: $search}}) {
+    nodes {
+      ...CtfFragment
     }
   }
-  ${CtfFragment}
-`;
+}
+    ${CtfFragment}`;
 export const SearchTasks = gql`
-  query SearchTasks($search: String!) {
-    tasks(filter: { title: { includesInsensitive: $search } }) {
-      nodes {
-        ...TaskFragment
-        ctf {
-          ...CtfFragment
-        }
-      }
-    }
-  }
-  ${TaskFragment}
-  ${CtfFragment}
-`;
-export const SearchTags = gql`
-  query SearchTags($search: String!) {
-    tags(filter: { tag: { includesInsensitive: $search } }) {
-      nodes {
-        tasksByAssignedTagTagIdAndTaskId {
-          nodes {
-            ...TaskFragment
-            ctf {
-              ...CtfFragment
-            }
-          }
-        }
-      }
-    }
-  }
-  ${TaskFragment}
-  ${CtfFragment}
-`;
-export const SearchAll = gql`
-  query SearchAll($search: String!) {
-    tags(filter: { tag: { includesInsensitive: $search } }) {
-      nodes {
-        tasksByAssignedTagTagIdAndTaskId {
-          nodes {
-            ...TaskFragment
-            ctf {
-              ...CtfFragment
-            }
-          }
-        }
-      }
-    }
-    tasks(filter: { title: { includesInsensitive: $search } }) {
-      nodes {
-        ...TaskFragment
-        ctf {
-          ...CtfFragment
-        }
-      }
-    }
-    ctfs(filter: { title: { includesInsensitive: $search } }) {
-      nodes {
+    query SearchTasks($search: String!) {
+  tasks(filter: {title: {includesInsensitive: $search}}) {
+    nodes {
+      ...TaskFragment
+      ctf {
         ...CtfFragment
       }
     }
   }
-  ${TaskFragment}
-  ${CtfFragment}
-`;
+}
+    ${TaskFragment}
+${CtfFragment}`;
+export const SearchTags = gql`
+    query SearchTags($search: String!) {
+  tags(filter: {tag: {includesInsensitive: $search}}) {
+    nodes {
+      tasksByAssignedTagTagIdAndTaskId {
+        nodes {
+          ...TaskFragment
+          ctf {
+            ...CtfFragment
+          }
+        }
+      }
+    }
+  }
+}
+    ${TaskFragment}
+${CtfFragment}`;
+export const SearchAll = gql`
+    query SearchAll($search: String!) {
+  tags(filter: {tag: {includesInsensitive: $search}}) {
+    nodes {
+      tasksByAssignedTagTagIdAndTaskId {
+        nodes {
+          ...TaskFragment
+          ctf {
+            ...CtfFragment
+          }
+        }
+      }
+    }
+  }
+  tasks(filter: {title: {includesInsensitive: $search}}) {
+    nodes {
+      ...TaskFragment
+      ctf {
+        ...CtfFragment
+      }
+    }
+  }
+  ctfs(filter: {title: {includesInsensitive: $search}}) {
+    nodes {
+      ...CtfFragment
+    }
+  }
+}
+    ${TaskFragment}
+${CtfFragment}`;
 export const GetCredentialsForCtfId = gql`
-  query getCredentialsForCtfId($ctfId: Int!) {
-    ctfSecret(id: $ctfId) {
+    query getCredentialsForCtfId($ctfId: Int!) {
+  ctfSecret(id: $ctfId) {
+    ...CtfSecretFragment
+  }
+}
+    ${CtfSecretFragment}`;
+export const UpdateCredentialsForCtfId = gql`
+    mutation updateCredentialsForCtfId($ctfId: Int!, $username: String, $password: String, $scoreboardName: String) {
+  updateCtfSecret(
+    input: {id: $ctfId, patch: {username: $username, password: $password, scoreboardName: $scoreboardName}}
+  ) {
+    ctfSecret {
       ...CtfSecretFragment
     }
   }
-  ${CtfSecretFragment}
-`;
-export const UpdateCredentialsForCtfId = gql`
-  mutation updateCredentialsForCtfId(
-    $ctfId: Int!
-    $username: String
-    $password: String
-    $scoreboardName: String
-  ) {
-    updateCtfSecret(
-      input: {
-        id: $ctfId
-        patch: {
-          username: $username
-          password: $password
-          scoreboardName: $scoreboardName
-        }
-      }
-    ) {
-      ctfSecret {
-        ...CtfSecretFragment
-      }
-    }
-  }
-  ${CtfSecretFragment}
-`;
+}
+    ${CtfSecretFragment}`;
 export const GetSettings = gql`
-  query getSettings {
-    settings {
-      nodes {
-        ...SettingsInfo
-      }
+    query getSettings {
+  settings {
+    nodes {
+      ...SettingsInfo
     }
   }
-  ${SettingsInfo}
-`;
+}
+    ${SettingsInfo}`;
 export const GetIcalPassword = gql`
-  query getIcalPassword {
-    settings {
-      nodes {
-        nodeId
-        icalPassword
-      }
+    query getIcalPassword {
+  settings {
+    nodes {
+      nodeId
+      icalPassword
     }
   }
-`;
+}
+    `;
 export const GetAdminSettings = gql`
-  query getAdminSettings {
-    settings {
-      nodes {
-        ...AdminSettingsInfo
-      }
+    query getAdminSettings {
+  settings {
+    nodes {
+      ...AdminSettingsInfo
     }
   }
-  ${AdminSettingsInfo}
-`;
+}
+    ${AdminSettingsInfo}`;
 export const UpdateSettings = gql`
-  mutation updateSettings($nodeId: ID!, $patch: SettingPatch!) {
-    updateSettingByNodeId(input: { nodeId: $nodeId, patch: $patch }) {
-      setting {
-        ...AdminSettingsInfo
-      }
+    mutation updateSettings($nodeId: ID!, $patch: SettingPatch!) {
+  updateSettingByNodeId(input: {nodeId: $nodeId, patch: $patch}) {
+    setting {
+      ...AdminSettingsInfo
     }
   }
-  ${AdminSettingsInfo}
-`;
+}
+    ${AdminSettingsInfo}`;
 export const GetTags = gql`
-  query getTags {
-    tags {
-      nodes {
+    query getTags {
+  tags {
+    nodes {
+      ...TagFragment
+    }
+  }
+}
+    ${TagFragment}`;
+export const GetTagById = gql`
+    query getTagById($id: Int!) {
+  tag(id: $id) {
+    tag
+    id
+  }
+}
+    `;
+export const AddTagsForTask = gql`
+    mutation addTagsForTask($tags: [String!], $taskId: Int!) {
+  addTagsForTask(input: {tags: $tags, taskid: $taskId}) {
+    clientMutationId
+  }
+}
+    `;
+export const SubscribeToTag = gql`
+    subscription subscribeToTag {
+  listen(topic: "update:tag") {
+    relatedNodeId
+    relatedNode {
+      nodeId
+      ... on Tag {
         ...TagFragment
       }
     }
   }
-  ${TagFragment}
-`;
-export const GetTagById = gql`
-  query getTagById($id: Int!) {
-    tag(id: $id) {
-      tag
-      id
-    }
-  }
-`;
-export const AddTagsForTask = gql`
-  mutation addTagsForTask($tags: [String!], $taskId: Int!) {
-    addTagsForTask(input: { tags: $tags, taskid: $taskId }) {
-      clientMutationId
-    }
-  }
-`;
-export const SubscribeToTag = gql`
-  subscription subscribeToTag {
-    listen(topic: "update:tag") {
-      relatedNodeId
-      relatedNode {
-        nodeId
-        ... on Tag {
-          ...TagFragment
-        }
-      }
-    }
-  }
-  ${TagFragment}
-`;
+}
+    ${TagFragment}`;
 export const SubscribeToTagCreated = gql`
-  subscription subscribeToTagCreated {
-    listen(topic: "created:tag") {
-      relatedNodeId
-      relatedNode {
-        nodeId
-        ... on Tag {
-          ...TagFragment
-        }
+    subscription subscribeToTagCreated {
+  listen(topic: "created:tag") {
+    relatedNodeId
+    relatedNode {
+      nodeId
+      ... on Tag {
+        ...TagFragment
       }
     }
   }
-  ${TagFragment}
-`;
+}
+    ${TagFragment}`;
 export const SubscribeToTagDeleted = gql`
-  subscription subscribeToTagDeleted {
-    listen(topic: "deleted:tag") {
-      relatedNodeId
-      relatedNode {
-        nodeId
-        ... on Tag {
-          ...TagFragment
-        }
+    subscription subscribeToTagDeleted {
+  listen(topic: "deleted:tag") {
+    relatedNodeId
+    relatedNode {
+      nodeId
+      ... on Tag {
+        ...TagFragment
       }
     }
   }
-  ${TagFragment}
-`;
+}
+    ${TagFragment}`;
 export const GetTasksForCtfId = gql`
-  query getTasksForCtfId($ctfId: Int!) {
-    tasks(condition: { ctfId: $ctfId }) {
-      nodes {
-        ...TaskFragment
-      }
-    }
-  }
-  ${TaskFragment}
-`;
-export const TaskById = gql`
-  query taskById($id: Int!) {
-    task(id: $id) {
+    query getTasksForCtfId($ctfId: Int!) {
+  tasks(condition: {ctfId: $ctfId}) {
+    nodes {
       ...TaskFragment
     }
   }
-  ${TaskFragment}
-`;
+}
+    ${TaskFragment}`;
+export const TaskById = gql`
+    query taskById($id: Int!) {
+  task(id: $id) {
+    ...TaskFragment
+  }
+}
+    ${TaskFragment}`;
 export const UpdateTask = gql`
-  mutation updateTask(
-    $id: Int!
-    $title: String
-    $description: String
-    $files: String
-    $flag: String
+    mutation updateTask($id: Int!, $title: String, $description: String, $files: String, $flag: String) {
+  updateTask(
+    input: {id: $id, patch: {title: $title, description: $description, files: $files, flag: $flag}}
   ) {
-    updateTask(
-      input: {
-        id: $id
-        patch: {
-          title: $title
-          description: $description
-          files: $files
-          flag: $flag
-        }
-      }
-    ) {
-      task {
-        ...TaskFragment
-      }
+    task {
+      ...TaskFragment
     }
   }
-  ${TaskFragment}
-`;
+}
+    ${TaskFragment}`;
 export const CreateTaskForCtfId = gql`
-  mutation createTaskForCtfId(
-    $ctfId: Int!
-    $title: String!
-    $tags: [String]
-    $description: String
-    $files: String
-    $flag: String
+    mutation createTaskForCtfId($ctfId: Int!, $title: String!, $tags: [String], $description: String, $files: String, $flag: String) {
+  createTask(
+    input: {ctfId: $ctfId, title: $title, tags: $tags, description: $description, files: $files, flag: $flag}
   ) {
-    createTask(
-      input: {
-        ctfId: $ctfId
-        title: $title
-        tags: $tags
-        description: $description
-        files: $files
-        flag: $flag
-      }
-    ) {
-      task {
-        ...TaskFragment
-      }
+    task {
+      ...TaskFragment
     }
   }
-  ${TaskFragment}
-`;
+}
+    ${TaskFragment}`;
 export const DeleteTask = gql`
-  mutation deleteTask($id: Int!) {
-    deleteTask(input: { id: $id }) {
-      deletedTaskNodeId
-    }
+    mutation deleteTask($id: Int!) {
+  deleteTask(input: {id: $id}) {
+    deletedTaskNodeId
   }
-`;
+}
+    `;
 export const StartWorkingOn = gql`
-  mutation startWorkingOn($taskId: Int!) {
-    startWorkingOn(input: { taskId: $taskId }) {
-      task {
-        ...TaskFragment
-      }
+    mutation startWorkingOn($taskId: Int!) {
+  startWorkingOn(input: {taskId: $taskId}) {
+    task {
+      ...TaskFragment
     }
   }
-  ${TaskFragment}
-`;
+}
+    ${TaskFragment}`;
 export const StopWorkingOn = gql`
-  mutation stopWorkingOn($taskId: Int!) {
-    stopWorkingOn(input: { taskId: $taskId }) {
-      task {
-        ...TaskFragment
-      }
+    mutation stopWorkingOn($taskId: Int!) {
+  stopWorkingOn(input: {taskId: $taskId}) {
+    task {
+      ...TaskFragment
     }
   }
-  ${TaskFragment}
-`;
+}
+    ${TaskFragment}`;
 export const CancelWorkingOn = gql`
-  mutation cancelWorkingOn($taskId: Int!) {
-    cancelWorkingOn(input: { taskId: $taskId }) {
-      task {
+    mutation cancelWorkingOn($taskId: Int!) {
+  cancelWorkingOn(input: {taskId: $taskId}) {
+    task {
+      ...TaskFragment
+    }
+  }
+}
+    ${TaskFragment}`;
+export const SubscribeToTask = gql`
+    subscription subscribeToTask {
+  listen(topic: "update:tasks") {
+    relatedNode {
+      nodeId
+      ... on Task {
         ...TaskFragment
       }
     }
   }
-  ${TaskFragment}
-`;
-export const SubscribeToTask = gql`
-  subscription subscribeToTask {
-    listen(topic: "update:tasks") {
-      relatedNode {
-        nodeId
-        ... on Task {
-          ...TaskFragment
-        }
-      }
-    }
-  }
-  ${TaskFragment}
-`;
+}
+    ${TaskFragment}`;
 export const UploadLogo = gql`
-  mutation uploadLogo($logo: Upload!) {
-    uploadCtfLogo(logo: $logo)
-  }
-`;
+    mutation uploadLogo($logo: Upload!) {
+  uploadCtfLogo(logo: $logo)
+}
+    `;

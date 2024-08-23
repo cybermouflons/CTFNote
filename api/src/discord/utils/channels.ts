@@ -23,7 +23,6 @@ import {
   Task,
   getTaskByCtfIdAndNameFromDatabase,
   getTaskFromId,
-  getUserIdsWorkingOnTask,
 } from "../database/tasks";
 import { sendMessageToChannel } from "./messages";
 import {
@@ -141,9 +140,6 @@ async function createTaskChannel(
 ) {
   const taskName = task.title;
 
-  const challsChannel: ForumChannel = getChallsChannelForCtf(guild, ctf);
-
-  // find challs form channel
   let target_tag: null | string = null;
   if (type === CategoryType.NEW) {
     target_tag = "new";
@@ -162,10 +158,13 @@ async function createTaskChannel(
   }
 
   const taskEmbed = new EmbedBuilder()
-    .setTitle(taskName)
+    .setTitle(`${taskName} (CTFNote link)`)
     .setDescription(task.description)
     .setURL(await getTaskLink(task, ctf))
-    .addFields({ name: "Files/instances", value: task.files });
+    .addFields({
+      name: "Files/instances",
+      value: task.files ? task.files : "No description available",
+    });
 
   console.log("Applying tags", tagsToApply);
   const thread = await challsChannel.threads.create({
@@ -313,6 +312,11 @@ export async function createChannelForTaskInCtf(
   if (ctf == null) {
     ctf = await getCtfFromDatabase(task.ctf_id);
     if (ctf == null) return;
+  }
+  let movingType = CategoryType.NEW;
+
+  if (task.flag != "") {
+    movingType = CategoryType.SOLVED;
   }
 
   return handleCreateAndNotify(guild, task, ctf, movingType, announce);
