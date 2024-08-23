@@ -29,7 +29,8 @@ async function credsLogic(client: Client, interaction: CommandInteraction) {
     const ctf = await getCtfFromDatabase(ctfName);
     if (ctf == null) {
       await interaction.editReply({
-        content: "Ρε για να σου έβρω τα creds πρέπει να είσαι σε CTF talk channel!",
+        content:
+          "Ρε για να σου έβρω τα creds πρέπει να είσαι σε CTF talk channel!",
       });
       return;
     }
@@ -37,7 +38,7 @@ async function credsLogic(client: Client, interaction: CommandInteraction) {
     const secrets = await getCtfSecretsFromDatabase(ctf.id);
     if (!secrets) {
       await interaction.editReply({
-        content: "Πού θέλεις να τα έβρω εγώ; 'Εδωκες μου τα ποτέ;"
+        content: "Πού θέλεις να τα έβρω εγώ; 'Εδωκες μου τα ποτέ;",
       });
       return;
     }
@@ -47,7 +48,6 @@ async function credsLogic(client: Client, interaction: CommandInteraction) {
     Password: ${secrets.password ?? "No password found"}
     Scoreboard name: ${secrets.scoreboardName ?? "No scoreboard name found"}
     Extra info: ${secrets.extraInfo ?? "No extra info found"}`;
-
 
     await interaction.editReply({
       content: markdown,

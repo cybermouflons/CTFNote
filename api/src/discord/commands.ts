@@ -19,5 +19,5 @@ export const Commands: Command[] = [
   DeleteCtf,
   Register,
   Creds,
-  AddTask
+  AddTask,
 ];

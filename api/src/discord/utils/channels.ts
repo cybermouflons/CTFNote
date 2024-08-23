@@ -161,7 +161,9 @@ async function createTaskChannel(
 
   const taskEmbed = new EmbedBuilder()
     .setTitle(`${taskName} (CTFNote link)`)
-    .setDescription(task.description ? task.description : "No description available")
+    .setDescription(
+      task.description ? task.description : "No description available"
+    )
     .setURL(await getTaskLink(task, ctf))
     .addFields({
       name: "Files/instances",

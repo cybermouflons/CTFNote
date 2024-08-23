@@ -25,7 +25,11 @@
           :src="'scoreboard name: ' + ctf.scoreboardName"
           class="blur"
         />
-        <q-markdown no-html :src="'extra info: ' + ctf.extraInfo" class="blur" />
+        <q-markdown
+          no-html
+          :src="'extra info: ' + ctf.extraInfo"
+          class="blur"
+        />
       </div>
     </div>
   </div>

@@ -38,7 +38,7 @@ async function solveTaskLogic(interaction: CommandInteraction) {
   const result = await setFlagForChallengeId(task.id, flag);
   if (result) {
     await interaction.editReply({
-      content: `Task solved!`
+      content: `Task solved!`,
     });
     const userIdArray = Array.isArray(solversArray)
       ? solversArray

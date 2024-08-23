@@ -35,7 +35,12 @@ function buildCtf(row: any): CTF {
 export async function getCtfSecretsFromDatabase(
   ctfId: bigint,
   pgClient: PoolClient | null = null
-): Promise<{ username: string; password: string; scoreboardName: string; extraInfo: string }> {
+): Promise<{
+  username: string;
+  password: string;
+  scoreboardName: string;
+  extraInfo: string;
+}> {
   const useRequestClient = pgClient != null;
   if (pgClient == null) pgClient = await connectToDatabase();
 

@@ -146,7 +146,7 @@ export default defineComponent({
       }
     },
     validate() {
-      if (this.form && !this.form.ctftimeUrl && (this.form.ctftimeUrl) === null)
+      if (this.form && !this.form.ctftimeUrl && this.form.ctftimeUrl === null)
         return 'Invalid url or id';
     },
   },
