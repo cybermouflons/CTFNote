@@ -106,6 +106,42 @@ export enum AssignedTagsOrderBy {
   TaskIdDesc = 'TASK_ID_DESC'
 }
 
+/** All input for the `cancelWorkAssign` mutation. */
+export type CancelWorkAssignInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: InputMaybe<Scalars['String']>;
+  profileId?: InputMaybe<Scalars['Int']>;
+  taskId?: InputMaybe<Scalars['Int']>;
+};
+
+/** The output of our `cancelWorkAssign` mutation. */
+export type CancelWorkAssignPayload = {
+  __typename?: 'CancelWorkAssignPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** Reads a single `Profile` that is related to this `WorkOnTask`. */
+  profile?: Maybe<Profile>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Task` that is related to this `WorkOnTask`. */
+  task?: Maybe<Task>;
+  workOnTask?: Maybe<WorkOnTask>;
+  /** An edge for our `WorkOnTask`. May be used by Relay 1. */
+  workOnTaskEdge?: Maybe<WorkOnTasksEdge>;
+};
+
+
+/** The output of our `cancelWorkAssign` mutation. */
+export type CancelWorkAssignPayloadWorkOnTaskEdgeArgs = {
+  orderBy?: InputMaybe<Array<WorkOnTasksOrderBy>>;
+};
+
 /** All input for the `cancelWorkingOn` mutation. */
 export type CancelWorkingOnInput = {
   /**
@@ -1036,6 +1072,7 @@ export type LoginPayload = {
 export type Mutation = {
   __typename?: 'Mutation';
   addTagsForTask?: Maybe<AddTagsForTaskPayload>;
+  cancelWorkAssign?: Maybe<CancelWorkAssignPayload>;
   cancelWorkingOn?: Maybe<CancelWorkingOnPayload>;
   changePassword?: Maybe<ChangePasswordPayload>;
   /** Creates a single `AssignedTag`. */
@@ -1112,12 +1149,20 @@ export type Mutation = {
   /** Updates a single `WorkOnTask` using its globally unique id and a patch. */
   updateWorkOnTaskByNodeId?: Maybe<UpdateWorkOnTaskPayload>;
   uploadCtfLogo: Scalars['String'];
+  workAssign?: Maybe<WorkAssignPayload>;
+  workUnassign?: Maybe<WorkUnassignPayload>;
 };
 
 
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationAddTagsForTaskArgs = {
   input: AddTagsForTaskInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCancelWorkAssignArgs = {
+  input: CancelWorkAssignInput;
 };
 
 
@@ -1406,6 +1451,18 @@ export type MutationUpdateWorkOnTaskByNodeIdArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUploadCtfLogoArgs = {
   logo: Scalars['Upload'];
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationWorkAssignArgs = {
+  input: WorkAssignInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationWorkUnassignArgs = {
+  input: WorkUnassignInput;
 };
 
 /** An object with a globally unique `ID`. */
@@ -3023,6 +3080,42 @@ export enum UsersOrderBy {
   Natural = 'NATURAL'
 }
 
+/** All input for the `workAssign` mutation. */
+export type WorkAssignInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: InputMaybe<Scalars['String']>;
+  profileId?: InputMaybe<Scalars['Int']>;
+  taskId?: InputMaybe<Scalars['Int']>;
+};
+
+/** The output of our `workAssign` mutation. */
+export type WorkAssignPayload = {
+  __typename?: 'WorkAssignPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** Reads a single `Profile` that is related to this `WorkOnTask`. */
+  profile?: Maybe<Profile>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Task` that is related to this `WorkOnTask`. */
+  task?: Maybe<Task>;
+  workOnTask?: Maybe<WorkOnTask>;
+  /** An edge for our `WorkOnTask`. May be used by Relay 1. */
+  workOnTaskEdge?: Maybe<WorkOnTasksEdge>;
+};
+
+
+/** The output of our `workAssign` mutation. */
+export type WorkAssignPayloadWorkOnTaskEdgeArgs = {
+  orderBy?: InputMaybe<Array<WorkOnTasksOrderBy>>;
+};
+
 export type WorkOnTask = Node & {
   __typename?: 'WorkOnTask';
   active: Scalars['Boolean'];
@@ -3093,6 +3186,42 @@ export enum WorkOnTasksOrderBy {
   TaskIdAsc = 'TASK_ID_ASC',
   TaskIdDesc = 'TASK_ID_DESC'
 }
+
+/** All input for the `workUnassign` mutation. */
+export type WorkUnassignInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: InputMaybe<Scalars['String']>;
+  profileId?: InputMaybe<Scalars['Int']>;
+  taskId?: InputMaybe<Scalars['Int']>;
+};
+
+/** The output of our `workUnassign` mutation. */
+export type WorkUnassignPayload = {
+  __typename?: 'WorkUnassignPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** Reads a single `Profile` that is related to this `WorkOnTask`. */
+  profile?: Maybe<Profile>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Task` that is related to this `WorkOnTask`. */
+  task?: Maybe<Task>;
+  workOnTask?: Maybe<WorkOnTask>;
+  /** An edge for our `WorkOnTask`. May be used by Relay 1. */
+  workOnTaskEdge?: Maybe<WorkOnTasksEdge>;
+};
+
+
+/** The output of our `workUnassign` mutation. */
+export type WorkUnassignPayloadWorkOnTaskEdgeArgs = {
+  orderBy?: InputMaybe<Array<WorkOnTasksOrderBy>>;
+};
 
 export type UserFragment = { __typename?: 'User', nodeId?: string | null, login?: string | null, role?: Role | null, id?: number | null, profile?: { __typename?: 'Profile', id: number, username: string, lastactive: string, color?: string | null, description: string, role?: Role | null, discordId?: string | null, nodeId: string } | null };
 
@@ -3554,6 +3683,30 @@ export type CancelWorkingOnMutationVariables = Exact<{
 
 
 export type CancelWorkingOnMutation = { __typename?: 'Mutation', cancelWorkingOn?: { __typename?: 'CancelWorkingOnPayload', task?: { __typename?: 'Task', nodeId: string, id: number, title: string, ctfId: number, padUrl: string, description: string, files: string, flag: string, solved?: boolean | null, assignedTags: { __typename?: 'AssignedTagsConnection', nodes: Array<{ __typename?: 'AssignedTag', nodeId: string, taskId: number, tagId: number, tag?: { __typename?: 'Tag', nodeId: string, id: number, tag: string } | null }> }, workOnTasks: { __typename?: 'WorkOnTasksConnection', nodes: Array<{ __typename?: 'WorkOnTask', nodeId: string, profileId: number, active: boolean, taskId: number }> } } | null } | null };
+
+export type WorkAssignMutationVariables = Exact<{
+  taskId: Scalars['Int'];
+  profileId: Scalars['Int'];
+}>;
+
+
+export type WorkAssignMutation = { __typename?: 'Mutation', workAssign?: { __typename?: 'WorkAssignPayload', task?: { __typename?: 'Task', nodeId: string, id: number, title: string, ctfId: number, padUrl: string, description: string, files: string, flag: string, solved?: boolean | null, assignedTags: { __typename?: 'AssignedTagsConnection', nodes: Array<{ __typename?: 'AssignedTag', nodeId: string, taskId: number, tagId: number, tag?: { __typename?: 'Tag', nodeId: string, id: number, tag: string } | null }> }, workOnTasks: { __typename?: 'WorkOnTasksConnection', nodes: Array<{ __typename?: 'WorkOnTask', nodeId: string, profileId: number, active: boolean, taskId: number }> } } | null } | null };
+
+export type WorkUnassignMutationVariables = Exact<{
+  taskId: Scalars['Int'];
+  profileId: Scalars['Int'];
+}>;
+
+
+export type WorkUnassignMutation = { __typename?: 'Mutation', workUnassign?: { __typename?: 'WorkUnassignPayload', task?: { __typename?: 'Task', nodeId: string, id: number, title: string, ctfId: number, padUrl: string, description: string, files: string, flag: string, solved?: boolean | null, assignedTags: { __typename?: 'AssignedTagsConnection', nodes: Array<{ __typename?: 'AssignedTag', nodeId: string, taskId: number, tagId: number, tag?: { __typename?: 'Tag', nodeId: string, id: number, tag: string } | null }> }, workOnTasks: { __typename?: 'WorkOnTasksConnection', nodes: Array<{ __typename?: 'WorkOnTask', nodeId: string, profileId: number, active: boolean, taskId: number }> } } | null } | null };
+
+export type CancelWorkAssignMutationVariables = Exact<{
+  taskId: Scalars['Int'];
+  profileId: Scalars['Int'];
+}>;
+
+
+export type CancelWorkAssignMutation = { __typename?: 'Mutation', cancelWorkAssign?: { __typename?: 'CancelWorkAssignPayload', task?: { __typename?: 'Task', nodeId: string, id: number, title: string, ctfId: number, padUrl: string, description: string, files: string, flag: string, solved?: boolean | null, assignedTags: { __typename?: 'AssignedTagsConnection', nodes: Array<{ __typename?: 'AssignedTag', nodeId: string, taskId: number, tagId: number, tag?: { __typename?: 'Tag', nodeId: string, id: number, tag: string } | null }> }, workOnTasks: { __typename?: 'WorkOnTasksConnection', nodes: Array<{ __typename?: 'WorkOnTask', nodeId: string, profileId: number, active: boolean, taskId: number }> } } | null } | null };
 
 export type SubscribeToTaskSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
@@ -5675,6 +5828,102 @@ export function useCancelWorkingOnMutation(options: VueApolloComposable.UseMutat
   return VueApolloComposable.useMutation<CancelWorkingOnMutation, CancelWorkingOnMutationVariables>(CancelWorkingOnDocument, options);
 }
 export type CancelWorkingOnMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<CancelWorkingOnMutation, CancelWorkingOnMutationVariables>;
+export const WorkAssignDocument = gql`
+    mutation workAssign($taskId: Int!, $profileId: Int!) {
+  workAssign(input: {taskId: $taskId, profileId: $profileId}) {
+    task {
+      ...TaskFragment
+    }
+  }
+}
+    ${TaskFragmentDoc}`;
+
+/**
+ * __useWorkAssignMutation__
+ *
+ * To run a mutation, you first call `useWorkAssignMutation` within a Vue component and pass it any options that fit your needs.
+ * When your component renders, `useWorkAssignMutation` returns an object that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - Several other properties: https://v4.apollo.vuejs.org/api/use-mutation.html#return
+ *
+ * @param options that will be passed into the mutation, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/mutation.html#options;
+ *
+ * @example
+ * const { mutate, loading, error, onDone } = useWorkAssignMutation({
+ *   variables: {
+ *     taskId: // value for 'taskId'
+ *     profileId: // value for 'profileId'
+ *   },
+ * });
+ */
+export function useWorkAssignMutation(options: VueApolloComposable.UseMutationOptions<WorkAssignMutation, WorkAssignMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<WorkAssignMutation, WorkAssignMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<WorkAssignMutation, WorkAssignMutationVariables>(WorkAssignDocument, options);
+}
+export type WorkAssignMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<WorkAssignMutation, WorkAssignMutationVariables>;
+export const WorkUnassignDocument = gql`
+    mutation workUnassign($taskId: Int!, $profileId: Int!) {
+  workUnassign(input: {taskId: $taskId, profileId: $profileId}) {
+    task {
+      ...TaskFragment
+    }
+  }
+}
+    ${TaskFragmentDoc}`;
+
+/**
+ * __useWorkUnassignMutation__
+ *
+ * To run a mutation, you first call `useWorkUnassignMutation` within a Vue component and pass it any options that fit your needs.
+ * When your component renders, `useWorkUnassignMutation` returns an object that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - Several other properties: https://v4.apollo.vuejs.org/api/use-mutation.html#return
+ *
+ * @param options that will be passed into the mutation, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/mutation.html#options;
+ *
+ * @example
+ * const { mutate, loading, error, onDone } = useWorkUnassignMutation({
+ *   variables: {
+ *     taskId: // value for 'taskId'
+ *     profileId: // value for 'profileId'
+ *   },
+ * });
+ */
+export function useWorkUnassignMutation(options: VueApolloComposable.UseMutationOptions<WorkUnassignMutation, WorkUnassignMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<WorkUnassignMutation, WorkUnassignMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<WorkUnassignMutation, WorkUnassignMutationVariables>(WorkUnassignDocument, options);
+}
+export type WorkUnassignMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<WorkUnassignMutation, WorkUnassignMutationVariables>;
+export const CancelWorkAssignDocument = gql`
+    mutation cancelWorkAssign($taskId: Int!, $profileId: Int!) {
+  cancelWorkAssign(input: {taskId: $taskId, profileId: $profileId}) {
+    task {
+      ...TaskFragment
+    }
+  }
+}
+    ${TaskFragmentDoc}`;
+
+/**
+ * __useCancelWorkAssignMutation__
+ *
+ * To run a mutation, you first call `useCancelWorkAssignMutation` within a Vue component and pass it any options that fit your needs.
+ * When your component renders, `useCancelWorkAssignMutation` returns an object that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - Several other properties: https://v4.apollo.vuejs.org/api/use-mutation.html#return
+ *
+ * @param options that will be passed into the mutation, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/mutation.html#options;
+ *
+ * @example
+ * const { mutate, loading, error, onDone } = useCancelWorkAssignMutation({
+ *   variables: {
+ *     taskId: // value for 'taskId'
+ *     profileId: // value for 'profileId'
+ *   },
+ * });
+ */
+export function useCancelWorkAssignMutation(options: VueApolloComposable.UseMutationOptions<CancelWorkAssignMutation, CancelWorkAssignMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<CancelWorkAssignMutation, CancelWorkAssignMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<CancelWorkAssignMutation, CancelWorkAssignMutationVariables>(CancelWorkAssignDocument, options);
+}
+export type CancelWorkAssignMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<CancelWorkAssignMutation, CancelWorkAssignMutationVariables>;
 export const SubscribeToTaskDocument = gql`
     subscription subscribeToTask {
   listen(topic: "update:tasks") {
@@ -6523,6 +6772,33 @@ export const StopWorkingOn = gql`
 export const CancelWorkingOn = gql`
     mutation cancelWorkingOn($taskId: Int!) {
   cancelWorkingOn(input: {taskId: $taskId}) {
+    task {
+      ...TaskFragment
+    }
+  }
+}
+    ${TaskFragment}`;
+export const WorkAssign = gql`
+    mutation workAssign($taskId: Int!, $profileId: Int!) {
+  workAssign(input: {taskId: $taskId, profileId: $profileId}) {
+    task {
+      ...TaskFragment
+    }
+  }
+}
+    ${TaskFragment}`;
+export const WorkUnassign = gql`
+    mutation workUnassign($taskId: Int!, $profileId: Int!) {
+  workUnassign(input: {taskId: $taskId, profileId: $profileId}) {
+    task {
+      ...TaskFragment
+    }
+  }
+}
+    ${TaskFragment}`;
+export const CancelWorkAssign = gql`
+    mutation cancelWorkAssign($taskId: Int!, $profileId: Int!) {
+  cancelWorkAssign(input: {taskId: $taskId, profileId: $profileId}) {
     task {
       ...TaskFragment
     }
