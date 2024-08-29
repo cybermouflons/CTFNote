@@ -45,6 +45,7 @@ export async function handleArchiveInteraction(
   await createTask(
     `${ctf.title} Discord archive`,
     `Discord archive of ${ctf.title}`,
+    [],
     "",
     "",
     padUrl,

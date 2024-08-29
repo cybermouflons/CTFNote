@@ -1,5 +1,7 @@
 import { connectToDatabase } from "./database";
 import { PoolClient } from "pg";
+import { createPad } from "../../plugins/createTask";
+import { Task } from "./tasks";
 
 export interface CTF {
   id: bigint;
@@ -149,20 +151,64 @@ export async function getNameFromUserId(userId: bigint): Promise<string> {
 export async function createTask(
   title: string,
   description: string,
+  tags: string[],
   files: string,
   flag: string,
   padUrl: string,
   ctfId: bigint
-): Promise<void> {
+): Promise<Task | null> {
   const pgClient = await connectToDatabase();
 
   try {
-    const query = `
-            INSERT INTO ctfnote.task (title, description, files, flag, pad_url, ctf_id)
-            VALUES ($1, $2, $3, $4, $5, $6)
-        `;
-    const values = [title, description, files, flag, padUrl, ctfId];
-    await pgClient.query(query, values);
+    if (!padUrl) {
+      padUrl = await createPad(title, description, tags);
+    }
+    const taskQuery = `
+        INSERT INTO ctfnote.task (title, description, files, flag, pad_url, ctf_id)
+        VALUES ($1, $2, $3, $4, $5, $6)
+        RETURNING id
+    `;
+    const result = await pgClient.query(taskQuery, [
+      title,
+      description,
+      files,
+      flag,
+      padUrl,
+      ctfId,
+    ]);
+    const taskId = result.rows[0].id;
+    const task = {
+      id: taskId,
+      tags,
+      title,
+      description,
+      files,
+      ctf_id: ctfId,
+      flag,
+    };
+    const tagQuery = `
+      WITH insert_tag AS (
+        INSERT INTO ctfnote.tag (tag)
+        VALUES ($1)
+        ON CONFLICT (tag) DO NOTHING
+        RETURNING id
+      )
+      SELECT id FROM insert_tag
+      UNION ALL
+      SELECT id FROM ctfnote.tag WHERE tag = $1
+      LIMIT 1
+    `;
+    const assignedTagsQuery = `
+        INSERT INTO ctfnote.assigned_tags (task_id, tag_id)
+        VALUES ($1, $2)
+    `;
+    const tagValues = tags.map((tag) => [tag]);
+    for (const tagValue of tagValues) {
+      const result = await pgClient.query(tagQuery, tagValue);
+      const tagId = result.rows[0].id;
+      await pgClient.query(assignedTagsQuery, [taskId, tagId]);
+    }
+    return task;
   } catch (error) {
     console.error("Failed to create a task in the database:", error);
     throw error;

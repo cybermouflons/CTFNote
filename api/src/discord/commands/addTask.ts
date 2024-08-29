@@ -8,13 +8,12 @@ import {
 } from "discord.js";
 import { Command } from "../command";
 import { getCtfFromDatabase, createTask } from "../database/ctfs";
-import { createPad } from "../../plugins/createTask";
 import { sendMessageToChannel } from "../utils/messages";
 import {
   createChannelForNewTask,
   getTalkChannelForCtf,
+  applyTaskTags,
 } from "../utils/channels";
-import { getTaskByCtfIdAndNameFromDatabase } from "../database/tasks";
 
 async function addTaskLogic(client: Client, interaction: CommandInteraction) {
   const channel = interaction.channel;
@@ -35,7 +34,7 @@ async function addTaskLogic(client: Client, interaction: CommandInteraction) {
     if (ctf == null) {
       await interaction.editReply({
         content:
-          "Ρε για να μπόρεις να προσθέσεις τσαλ πρέπει να είσαι σε CTF talk channel!",
+          "Κατι επίεν στραβά και εν εκατάφερα να 'εβρω σε 'ιντα CTF είσαι.",
       });
       return;
     }
@@ -43,17 +42,8 @@ async function addTaskLogic(client: Client, interaction: CommandInteraction) {
     const title = interaction.options.get("title", true).value as string;
     const tags = interaction.options.get("tags", true).value as string;
     const tagsArray = tags.split(" ");
-    const padUrl = await createPad(title, "", tagsArray);
-    try {
-      await createTask(title, "", "", "", padUrl, ctf.id);
-    } catch (e) {
-      await interaction.editReply({
-        content: "Κατι επίεν στραβά και εν εκατάφερα να κάμω το τσαλ.",
-      });
-      return;
-    }
+    const task = await createTask(title, "", tagsArray, "", "", "", ctf.id);
 
-    const task = await getTaskByCtfIdAndNameFromDatabase(ctf.id, title);
     if (task == null) {
       await interaction.editReply({
         content: "Κατι επίεν στραβά και εν εκατάφερα να κάμω το τσαλ.",
@@ -64,6 +54,7 @@ async function addTaskLogic(client: Client, interaction: CommandInteraction) {
     if (guild == null) return;
 
     const taskThread = await createChannelForNewTask(guild, task);
+    applyTaskTags(task, guild);
     const talkChannel = getTalkChannelForCtf(guild, ctf);
     await sendMessageToChannel(
       talkChannel,

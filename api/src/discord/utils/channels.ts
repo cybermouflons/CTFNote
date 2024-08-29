@@ -141,6 +141,7 @@ async function createTaskChannel(
   const taskName = task.title;
 
   const challsChannel: ForumChannel = getChallsChannelForCtf(guild, ctf);
+  if (challsChannel === null || challsChannel === undefined) return;
 
   let target_tag: null | string = null;
   if (type === CategoryType.NEW) {
@@ -182,36 +183,18 @@ async function createTaskChannel(
   return thread;
 }
 
-export async function applyTaskTags(task: Task, tags: string[], guild: Guild) {
+export async function applyTaskTags(task: Task, guild: Guild) {
   const ctf = await getCtfFromDatabase(task.ctf_id);
   if (ctf == null) return;
   const challsChannel: ForumChannel = getChallsChannelForCtf(guild, ctf);
-  // Create new tags if they don't exist
   if (challsChannel === null || challsChannel === undefined) return;
-  const newTags: GuildForumTagData[] = challsChannel.availableTags;
-  tags?.forEach(async (tag) => {
-    if (!challsChannel.availableTags.find((t) => t.name === tag)) {
-      newTags.push({ name: tag });
-    }
-  });
-  console.log("Setting available tags to", newTags);
-  await challsChannel.setAvailableTags(newTags);
 
   const tagsToApply: string[] = [];
-  console.log("Task has tags", task.tags);
-  tags?.forEach(async (tag) => {
-    const currTag = challsChannel.availableTags.find((t) => t.name === tag);
-    if (currTag) {
-      tagsToApply.push(currTag.id);
-    }
-  });
-
   const statusTags = [
     await getTagByName("new", challsChannel),
     await getTagByName("started", challsChannel),
     await getTagByName("solved", challsChannel),
   ];
-
   // find task thread
   const taskThread = await getTaskThread(guild, task, ctf);
   taskThread?.appliedTags.forEach(async (tag) => {
@@ -220,7 +203,19 @@ export async function applyTaskTags(task: Task, tags: string[], guild: Guild) {
     }
   });
 
-  console.log("Applying tags", tagsToApply);
+  // Create new tags if they don't exist
+  const newTags: GuildForumTagData[] = challsChannel.availableTags;
+  task.tags?.forEach(async (tag) => {
+    const discordTag = challsChannel.availableTags.find((t) => t.name === tag);
+    if (!discordTag) {
+      newTags.push({ name: tag });
+    } else {
+      tagsToApply.push(discordTag.id);
+    }
+  });
+  await challsChannel.setAvailableTags(newTags);
+
+  console.log("Applying tags", tagsToApply, "to task", task.title);
   return await taskThread?.setAppliedTags(tagsToApply);
 }
 
@@ -357,6 +352,9 @@ async function handleCreateAndNotify(
       `New task created: ${task.title}`,
       false
     );
+
+  // always apply tags on creation
+  applyTaskTags(task, guild);
 
   return taskChannel;
 }
