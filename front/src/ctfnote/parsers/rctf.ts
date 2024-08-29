@@ -1,5 +1,5 @@
 import { ParsedTask, Parser } from '.';
-import { parseJson, parseJsonStrict } from '../utils';
+import { parseJsonStrict } from '../utils';
 
 interface RCTFTags {
   value: string;
@@ -29,10 +29,6 @@ const RCTFParser: Parser = {
       tasks.push({ title: task.name, tags: Array.from(tags.values()) });
     }
     return tasks;
-  },
-  isValid(s) {
-    const data = parseJson<{ data?: unknown }>(s);
-    return Array.isArray(data?.data);
   },
 };
 
