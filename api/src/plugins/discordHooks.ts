@@ -214,7 +214,7 @@ const discordMutationHook = (_build: Build) => (fieldContext: Context<any>) => {
       const task = await getTaskFromId(args.input.taskid);
       console.log("GOT TASK", task);
       if (task) {
-        applyTaskTags(task, guild);
+        applyTaskTags(task, guild, args.input.tags);
       }
     }
 

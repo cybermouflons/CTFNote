@@ -183,7 +183,7 @@ async function createTaskChannel(
   return thread;
 }
 
-export async function applyTaskTags(task: Task, guild: Guild) {
+export async function applyTaskTags(task: Task, guild: Guild, tags: string[]|undefined = undefined) {
   const ctf = await getCtfFromDatabase(task.ctf_id);
   if (ctf == null) return;
   const challsChannel: ForumChannel = getChallsChannelForCtf(guild, ctf);
@@ -203,17 +203,32 @@ export async function applyTaskTags(task: Task, guild: Guild) {
     }
   });
 
+  if (!tags) tags = task.tags;
+  console.log("Got input ", tags);
+
   // Create new tags if they don't exist
   const newTags: GuildForumTagData[] = challsChannel.availableTags;
-  task.tags?.forEach(async (tag) => {
+  let pushed = false;
+  tags?.forEach(async (tag) => {
     const discordTag = challsChannel.availableTags.find((t) => t.name === tag);
     if (!discordTag) {
       newTags.push({ name: tag });
+      pushed = true;
+    }
+  });
+  if(pushed){
+    console.log("Setting available tags to", newTags);
+    await challsChannel.setAvailableTags(newTags);
+  }
+
+  tags?.forEach(async (tag) => {
+    const discordTag = challsChannel.availableTags.find((t) => t.name === tag);
+    if (!discordTag) {
+        console.log("Something's wrong, couldn't find tag")
     } else {
       tagsToApply.push(discordTag.id);
     }
   });
-  await challsChannel.setAvailableTags(newTags);
 
   console.log("Applying tags", tagsToApply, "to task", task.title);
   return await taskThread?.setAppliedTags(tagsToApply);

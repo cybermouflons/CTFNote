@@ -123,7 +123,7 @@ export async function userStartsWorkingOnTask(
 
   try {
     const query = "SELECT ctfnote_private.start_working_on($1, $2)";
-    const values = [userId, taskId];
+    const values = [taskId, userId];
     const result = await pgClient.query(query, values);
     return result.rows[0].start_working_on as boolean;
   } catch (error) {

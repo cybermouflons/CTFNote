@@ -43,7 +43,10 @@ async function workingOnLogic(
   //   }
 
   if (operation === "start") {
-    const result = await userStartsWorkingOnTask(BigInt(userId), task.id);
+    let result = false;
+    if(userExistsOnCtfNote !== null){
+      result = await userStartsWorkingOnTask(userExistsOnCtfNote, task.id);
+    }
     if (userExistsOnCtfNote === null || result) {
       await sendStartWorkingOnMessage(guild, userId, task);
       await interaction.editReply({
@@ -57,7 +60,10 @@ async function workingOnLogic(
       return;
     }
   } else if (operation === "stop") {
-    const result = await userStopsWorkingOnTask(BigInt(userId), task.id);
+    let result = false;
+    if(userExistsOnCtfNote !== null){
+      result = await userStopsWorkingOnTask(userExistsOnCtfNote, task.id);
+    }
     if (result) {
       await interaction.editReply({
         content: `'Ατε έφκαλα σε που δαμέσα πίενε δε κανέναν αλλο τσαλ`,
