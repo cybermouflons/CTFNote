@@ -2,7 +2,7 @@ import {
   CategoryChannel,
   ChannelType,
   Collection,
-  CommandInteraction,
+  ChatInputCommandInteraction,
   ForumChannel,
   Guild,
   GuildForumTagData,
@@ -183,7 +183,11 @@ async function createTaskChannel(
   return thread;
 }
 
-export async function applyTaskTags(task: Task, guild: Guild, tags: string[]|undefined = undefined) {
+export async function applyTaskTags(
+  task: Task,
+  guild: Guild,
+  tags: string[] | undefined = undefined
+) {
   const ctf = await getCtfFromDatabase(task.ctf_id);
   if (ctf == null) return;
   const challsChannel: ForumChannel = getChallsChannelForCtf(guild, ctf);
@@ -216,7 +220,7 @@ export async function applyTaskTags(task: Task, guild: Guild, tags: string[]|und
       pushed = true;
     }
   });
-  if(pushed){
+  if (pushed) {
     console.log("Setting available tags to", newTags);
     await challsChannel.setAvailableTags(newTags);
   }
@@ -224,7 +228,7 @@ export async function applyTaskTags(task: Task, guild: Guild, tags: string[]|und
   tags?.forEach(async (tag) => {
     const discordTag = challsChannel.availableTags.find((t) => t.name === tag);
     if (!discordTag) {
-        console.log("Something's wrong, couldn't find tag")
+      console.log("Something's wrong, couldn't find tag");
     } else {
       tagsToApply.push(discordTag.id);
     }
@@ -428,7 +432,7 @@ export async function getTagByName(name: string, channel: ForumChannel) {
 }
 
 export async function getCurrentTaskChannelFromDiscord(
-  interaction: CommandInteraction
+  interaction: ChatInputCommandInteraction
 ) {
   if (interaction.channel == null) return null;
   console.log(interaction.channel);

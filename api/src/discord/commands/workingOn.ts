@@ -1,4 +1,8 @@
-import { ApplicationCommandType, Client, CommandInteraction } from "discord.js";
+import {
+  ApplicationCommandType,
+  Client,
+  ChatInputCommandInteraction,
+} from "discord.js";
 import { Command } from "../command";
 import {
   userStartsWorkingOnTask,
@@ -11,7 +15,7 @@ import {
 import { getUserByDiscordId } from "../database/users";
 import { getCurrentTaskChannelFromDiscord } from "../utils/channels";
 
-async function accessDenied(interaction: CommandInteraction) {
+async function accessDenied(interaction: ChatInputCommandInteraction) {
   await interaction.editReply({
     content:
       "You are not using a valid channel to start/stop working on the task",
@@ -20,7 +24,7 @@ async function accessDenied(interaction: CommandInteraction) {
 
 async function workingOnLogic(
   _client: Client,
-  interaction: CommandInteraction,
+  interaction: ChatInputCommandInteraction,
   operation: "start" | "stop"
 ) {
   const guild = interaction.guild;
@@ -44,7 +48,7 @@ async function workingOnLogic(
 
   if (operation === "start") {
     let result = false;
-    if(userExistsOnCtfNote !== null){
+    if (userExistsOnCtfNote !== null) {
       result = await userStartsWorkingOnTask(userExistsOnCtfNote, task.id);
     }
     if (userExistsOnCtfNote === null || result) {
@@ -61,7 +65,7 @@ async function workingOnLogic(
     }
   } else if (operation === "stop") {
     let result = false;
-    if(userExistsOnCtfNote !== null){
+    if (userExistsOnCtfNote !== null) {
       result = await userStopsWorkingOnTask(userExistsOnCtfNote, task.id);
     }
     if (result) {
@@ -84,7 +88,11 @@ export const StartWorking: Command = {
   description: "Start working on the task linked to this text channel",
   type: ApplicationCommandType.ChatInput,
   run: async (client, interaction) => {
-    return workingOnLogic(client, interaction, "start").catch((e) => {
+    return workingOnLogic(
+      client,
+      interaction as ChatInputCommandInteraction,
+      "start"
+    ).catch((e) => {
       console.error("Error during start working logic: ", e);
     });
   },
@@ -95,7 +103,11 @@ export const StopWorking: Command = {
   description: "Stop working on the task linked to this text channel",
   type: ApplicationCommandType.ChatInput,
   run: async (client, interaction) => {
-    return workingOnLogic(client, interaction, "stop").catch((e) => {
+    return workingOnLogic(
+      client,
+      interaction as ChatInputCommandInteraction,
+      "stop"
+    ).catch((e) => {
       console.error("Error during stop working logic: ", e);
     });
   },

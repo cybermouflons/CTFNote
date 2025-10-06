@@ -1,6 +1,7 @@
 import {
   Client,
   CommandInteraction,
+  ChatInputCommandInteraction,
   TextChannel,
   ApplicationCommandType,
   ApplicationCommandOptionType,
@@ -15,7 +16,10 @@ import {
   applyTaskTags,
 } from "../utils/channels";
 
-async function addTaskLogic(client: Client, interaction: CommandInteraction) {
+async function addTaskLogic(
+  client: Client,
+  interaction: ChatInputCommandInteraction
+) {
   const channel = interaction.channel;
 
   if (channel && channel instanceof TextChannel && channel.parent) {
@@ -95,7 +99,7 @@ export const AddTask: Command = {
   ],
   run: async (client: Client, interaction: CommandInteraction) => {
     try {
-      await addTaskLogic(client, interaction);
+      await addTaskLogic(client, interaction as ChatInputCommandInteraction);
     } catch (e) {
       console.error("Error during addTask logic: ", e);
       if (!interaction.replied && !interaction.deferred) {

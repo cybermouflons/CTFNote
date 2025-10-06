@@ -1,7 +1,7 @@
 import {
   ApplicationCommandOptionType,
   ApplicationCommandType,
-  CommandInteraction,
+  ChatInputCommandInteraction,
 } from "discord.js";
 import { Command } from "../command";
 import { setFlagForChallengeId } from "../database/tasks";
@@ -12,13 +12,13 @@ import {
 import { getUserByDiscordId } from "../database/users";
 import { getCurrentTaskChannelFromDiscord } from "../utils/channels";
 
-async function accessDenied(interaction: CommandInteraction) {
+async function accessDenied(interaction: ChatInputCommandInteraction) {
   await interaction.editReply({
     content: "You are not using a valid channel to solve the task",
   });
 }
 
-async function solveTaskLogic(interaction: CommandInteraction) {
+async function solveTaskLogic(interaction: ChatInputCommandInteraction) {
   const r = await getCurrentTaskChannelFromDiscord(interaction);
   if (r == null) return accessDenied(interaction);
 
@@ -92,8 +92,10 @@ export const SolveTask: Command = {
     },
   ],
   run: async (_, interaction) => {
-    return solveTaskLogic(interaction).catch((e) => {
-      console.error("Error during solve task logic: ", e);
-    });
+    return solveTaskLogic(interaction as ChatInputCommandInteraction).catch(
+      (e) => {
+        console.error("Error during solve task logic: ", e);
+      }
+    );
   },
 };
