@@ -1,0 +1,13 @@
+[project]
+name = "ctfnote-cli"
+version = "0.1.0"
+description = "Command Line interface for CTFNote"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "argparse>=1.4.0",
+    "gql[requests]>=4.0.0",
+    "requests>=2.32.5",
+    "sgqlc>=17.1",
+    "tabulate>=0.9.0",
+]
