@@ -18,6 +18,7 @@ def tasks_func(args, ctfnote : CTFNote):
             filename = f"{'solved - ' if task.solved else ''}{task.title}.md"
             with open(os.path.join(dump_path, filename), 'w') as f:
                 f.write(ctfnote.getTaskNotes(task))
+                if task.solved: f.write(f"\n> {task.flag}") # print flag at the bottom of the file
 
             print(f"Dumping {task.title}")
 
